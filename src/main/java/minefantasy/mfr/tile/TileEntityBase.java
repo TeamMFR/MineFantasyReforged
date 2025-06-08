@@ -28,7 +28,7 @@ public abstract class TileEntityBase extends TileEntity {
 	public static final String RESULT_STACK_SPECIAL_TAG = "result_stack_special";
 	public static final String RESEARCH_REQUIRED_TAG = "research_required";
 	public static final String QUALITY_TAG = "quality";
-	public static final String RECIPE_NAME_TAG = "recipe";
+	public static final String RECIPE_RESOURCE_LOCATION_TAG = "recipe";
 	public static final String KNOWN_RESEARCHES_TAG = "knownResearches";
 
 	private IRecipeMFR recipe;

@@ -1,0 +1,25 @@
+{
+    "type": "anvil_dynamic_recipe",
+    "skill": "artisanry",
+    "tool_type": "hammer",
+    "is_tool_recipe": false,
+    "anvil_tier": -1,
+    "recipe_time": 2,
+    "recipe_hammer": -1,
+    "skill_xp": 0,
+    "vanilla_xp": 0,
+    "output_hot": true,
+    "modify_output": false,
+    "should_modify_tiers": false,
+    "pattern": [
+        "I"
+    ],
+    "key": {
+        "I": {
+            "item": "#LIST_ALL_INGOTS"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:bar"
+    }
+}

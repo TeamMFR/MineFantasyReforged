@@ -1,0 +1,31 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:ammo_box_basic"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:hinge",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber_cut",
+			"material_type": "wood_material",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber_pane",
+			"material_type": "wood_material",
+			"excluded_materials": ["scrap_wood"],
+			"count": 2
+		}
+	]
+}

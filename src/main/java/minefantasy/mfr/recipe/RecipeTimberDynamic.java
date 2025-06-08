@@ -4,10 +4,11 @@ import com.google.gson.JsonObject;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -16,7 +17,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import javax.annotation.Nonnull;
@@ -50,7 +50,7 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 				} else {
 					if (!matrix.getStackInRowAndColumn(x, y).isEmpty()) {
 						inputItemStack = matrix.getStackInRowAndColumn(x, y);
-						belowInputItemStack = matrix.getStackInRowAndColumn(x, y - 1);
+						belowInputItemStack = matrix.getStackInRowAndColumn(x, Math.max(0, y - 1));
 					}
 				}
 			}
@@ -70,22 +70,19 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 			}
 		}
 		ItemStack outputModified = output.copy();
-		CustomMaterial inputMaterial = CustomMaterial.NONE;
-		for (CustomMaterial material : CustomMaterial.getList("wood")) {
+		CustomMaterial inputMaterial = CustomMaterialRegistry.NONE;
+		for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
 			if (material instanceof WoodMaterial) {
-				Item materialItem = ForgeRegistries.ITEMS.getValue(((WoodMaterial) material).inputItemResourceLocation);
-				if (materialItem != null) {
-					ItemStack materialItemStack = new ItemStack(materialItem, 1, ((WoodMaterial) material).inputItemMeta);
-					if (inputStack.isItemEqual(materialItemStack)) {
-						inputMaterial = material;
-					}
+				Ingredient materialIngredient = material.getMaterialIngredient();
+				if (materialIngredient.apply(inputStack)) {
+					inputMaterial = material;
 				}
 			}
 		}
-		if (inputMaterial == CustomMaterial.NONE) {
-			inputMaterial = CustomMaterial.getMaterial(Constants.SCRAP_WOOD_TAG);
+		if (inputMaterial == CustomMaterialRegistry.NONE) {
+			inputMaterial = CustomMaterialRegistry.getMaterial(Constants.SCRAP_WOOD_TAG);
 		}
-		CustomMaterial.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial.name);
+		CustomMaterialRegistry.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial.getName());
 		return outputModified;
 	}
 

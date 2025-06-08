@@ -169,9 +169,9 @@ component.grip.name=%1$s Grip
 component.brace.name=%1$s Brace
 
 # MATERIAL LIST
-materialtype.wood.name=Tier %1$s Wood
-materialtype.leather.name=Tier %1$s Leather
-materialtype.metal.name=Tier %1$s Metal
+materialtype.wood_material.name=Tier %1$s Wood
+materialtype.leather_material.name=Tier %1$s Leather
+materialtype.metal_material.name=Tier %1$s Metal
 materialtype.workable.name=Workable: %1$s*C - %2$s*C
 
 materialtype.resist.name=%1$s Resistance
@@ -189,60 +189,61 @@ material.dragonskin.name=Dragon Skin
 material.material_name.name=Localized Name
 
 #VANILLA ITEMS PREFIX OVERRIDES
-item.crude_wooden_hoe.name=Crude Wooden Hoe
-item.crude_wooden_axe.name=Crude Wooden Axe
-item.crude_wooden_pickaxe.name=Crude Wooden Pickaxe
-item.crude_wooden_shovel.name=Crude Wooden Shovel
-item.crude_wooden_sword.name=Crude Wooden Sword
-item.crude_wooden_helmet.name=Crude Wooden Helmet
-item.crude_wooden_chestplate.name=Crude Wooden Chestplate
-item.crude_wooden_leggings.name=Crude Wooden Leggings
-item.crude_wooden_boots.name=Crude Wooden Boots
+item.shears.name=Crude Shears
+item.hoeWood.name=Crude Wooden Hoe
+item.hatchetWood.name=Crude Wooden Axe
+item.pickaxeWood.name=Crude Wooden Pickaxe
+item.shovelWood.name=Crude Wooden Shovel
+item.swordWood.name=Crude Wooden Sword
 
-item.crude_stone_hoe.name=Crude Stone Hoe
-item.crude_stone_axe.name=Crude Stone Axe
-item.crude_stone_pickaxe.name=Crude Stone Pickaxe
-item.crude_stone_shovel.name=Crude Stone Shovel
-item.crude_stone_sword.name=Crude Stone Sword
-item.crude_stone_helmet.name=Crude Stone Helmet
-item.crude_stone_chestplate.name=Crude Stone Chestplate
-item.crude_stone_leggings.name=Crude Stone Leggings
-item.crude_stone_boots.name=Crude Stone Boots
+item.hoeStone.name=Crude Stone Hoe
+item.hatchetStone.name=Crude Stone Axe
+item.pickaxeStone.name=Crude Stone Pickaxe
+item.shovelStone.name=Crude Stone Shovel
+item.swordStone.name=Crude Stone Sword
 
-item.crude_iron_hoe.name=Crude Iron Hoe
-item.crude_iron_axe.name=Crude Iron Axe
-item.crude_iron_pickaxe.name=Crude Iron Pickaxe
-item.crude_iron_shovel.name=Crude Iron Shovel
-item.crude_iron_sword.name=Crude Iron Sword
-item.crude_iron_helmet.name=Crude Iron Helmet
-item.crude_iron_chestplate.name=Crude Iron Chestplate
-item.crude_iron_leggings.name=Crude Iron Leggings
-item.crude_iron_boots.name=Crude Iron Boots
+item.hoeIron.name=Crude Iron Hoe
+item.hatchetIron.name=Crude Iron Axe
+item.pickaxeIron.name=Crude Iron Pickaxe
+item.shovelIron.name=Crude Iron Shovel
+item.swordIron.name=Crude Iron Sword
+item.helmetIron.name=Crude Iron Helmet
+item.chestplateIron.name=Crude Iron Chestplate
+item.leggingsIron.name=Crude Iron Leggings
+item.bootsIron.name=Crude Iron Boots
 
-item.crude_golden_hoe.name=Crude Golden Hoe
-item.crude_golden_axe.name=Crude Golden Axe
-item.crude_golden_pickaxe.name=Crude Golden Pickaxe
-item.crude_golden_shovel.name=Crude Golden Shovel
-item.crude_golden_sword.name=Crude Golden Sword
-item.crude_golden_helmet.name=Crude Golden Helmet
-item.crude_golden_chestplate.name=Crude Golden Chestplate
-item.crude_golden_leggings.name=Crude Golden Leggings
-item.crude_golden_boots.name=Crude Golden Boots
+item.hoeGold.name=Crude Golden Hoe
+item.hatchetGold.name=Crude Golden Axe
+item.pickaxeGold.name=Crude Golden Pickaxe
+item.shovelGold.name=Crude Golden Shovel
+item.swordGold.name=Crude Golden Sword
+item.helmetGold.name=Crude Golden Helmet
+item.chestplateGold.name=Crude Golden Chestplate
+item.leggingsGold.name=Crude Golden Leggings
+item.bootsGold.name=Crude Golden Boots
 
-item.crude_diamond_hoe.name=Crude Diamond Hoe
-item.crude_diamond_axe.name=Crude Diamond Axe
-item.crude_diamond_pickaxe.name=Crude Diamond Pickaxe
-item.crude_diamond_shovel.name=Crude Diamond Shovel
-item.crude_diamond_sword.name=Crude Diamond Sword
-item.crude_diamond_helmet.name=Crude Diamond Helmet
-item.crude_diamond_chestplate.name=Crude Diamond Chestplate
-item.crude_diamond_leggings.name=Crude Diamond Leggings
-item.crude_diamond_boots.name=Crude Diamond Boots
+item.hoeDiamond.name=Crude Diamond Hoe
+item.hatchetDiamond.name=Crude Diamond Axe
+item.pickaxeDiamond.name=Crude Diamond Pickaxe
+item.shovelDiamond.name=Crude Diamond Shovel
+item.swordDiamond.name=Crude Diamond Sword
+item.helmetDiamond.name=Crude Diamond Helmet
+item.chestplateDiamond.name=Crude Diamond Chestplate
+item.leggingsDiamond.name=Crude Diamond Leggings
+item.bootsDiamond.name=Crude Diamond Boots
 
-item.crude_leather_cap.name=Crude Leather Cap
-item.crude_leather_tunic.name=Crude Leather Tunic
-item.crude_leather_pants.name=Crude Leather Pants
-item.crude_leather_boots.name=Crude Leather Boots
+item.helmetCloth.name=Crude Leather Cap
+item.chestplateCloth.name=Crude Leather Tunic
+item.leggingsCloth.name=Crude Leather Pants
+item.bootsCloth.name=Crude Leather Boots
+
+item.helmetChain.name=Crude Chain Helmet
+item.chestplateChain.name=Crude Chain Chestplate
+item.leggingsChain.name=Crude Chain Leggings
+item.bootsChain.name=Crude Chain Boots
+
+item.bow.name=Crude Bow
+item.arrow.name=Crude Arrow
 
 # ITEM STATS
 
@@ -337,6 +338,8 @@ integration.jei.category.minefantasyreforged:kitchen_bench=MineFantasy Kitchen B
 integration.jei.category.minefantasyreforged:salvage=MineFantasy Salvage
 integration.jei.category.minefantasyreforged:transformation=MineFantasy Transformation
 integration.jei.category.minefantasyreforged:special=MineFantasy Special Anvil
+integration.jei.tooltip.recipe.any.material=Accepts: %s
+integration.jei.tooltip.recipe.except.material=except %s
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 
 item.bowl_water_salt.desc_extended=Salt Water is used for crafting Salt. You can gather Salt Water by right-clicking a Clay Pot on water that is in an Ocean or Deep Ocean biome.
@@ -942,7 +945,7 @@ item.standard_katana.name=%1$s Katana
 item.standard_greatsword.name=%1$s Greatsword
 item.standard_warhammer.name=%1$s Warhammer
 item.standard_battleaxe.name=%1$s Battleaxe
-item.standard_halbeard.name=%1$s Halbeard
+item.standard_halbeard.name=%1$s Halberd
 item.standard_lance.name=%1$s Lance
 
 item.standard_handpick.name=%1$s Handpick
@@ -1008,7 +1011,7 @@ item.dragonforged_katana.name=Dragonforged %1$s Katana
 item.dragonforged_greatsword.name=Dragonforged %1$s Greatsword
 item.dragonforged_warhammer.name=Dragonforged %1$s Warhammer
 item.dragonforged_battleaxe.name=Dragonforged %1$s Battleaxe
-item.dragonforged_halbeard.name=Dragonforged %1$s Halbeard
+item.dragonforged_halbeard.name=Dragonforged %1$s Halberd
 item.dragonforged_lance.name=Dragonforged %1$s Lance
 
 item.dragonforged_handpick.name=Dragonforged %1$s Handpick
@@ -1067,7 +1070,7 @@ item.ornate_katana.name=Ornate %1$s Katana
 item.ornate_greatsword.name=Ornate %1$s Greatsword
 item.ornate_warhammer.name=Ornate %1$s Warhammer
 item.ornate_battleaxe.name=Ornate %1$s Battleaxe
-item.ornate_halbeard.name=Ornate %1$s Halbeard
+item.ornate_halbeard.name=Ornate %1$s Halberd
 item.ornate_lance.name=Ornate %1$s Lance
 
 item.ornate_handpick.name=Ornate %1$s Handpick
@@ -1587,8 +1590,8 @@ knowledge.craft_ornate.1=With the proper materials and time, it is possible to c
 knowledge.smelt_dragonforged=Dragonforge Style
 knowledge.smelt_dragonforged.desc=Crude and powerful
 
-knowledge.smelt_dragonforged.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
-knowledge.smelt_dragonforged.2=Unlike other designs; dragonforged items require this ritual take place for the craft to work.
+knowledge.smelt_dragonforged.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon with a dragon heart in the output slot. Just before finishing however: increase the temperature of three Forges around the anvil to be extremely hot, using their combined heat to raise the heat massively, then quickly finish the craft.
+knowledge.smelt_dragonforged.2=If all goes well you will have a dragonforge item.^Unlike other designs; dragonforged items require this ritual take place for the craft to work.
 
 knowledge.smelt_blue_steel=Blue Steel Smithing
 knowledge.smelt_blue_steel.desc=Tier %1$s, Common material
@@ -1844,7 +1847,7 @@ knowledge.warhammer.info=$hWarhammer$r^If you ever wanted to hit something acros
 
 knowledge.battleaxe.info=$hBattleaxe$r^For when a waraxe won't cut it (pun not intended). Battleaxes do more damage then waraxes and are heavier(obviously). for an even crazier barbaric type.^Tiring to use though
 
-knowledge.halbeard.info=$hHalbeard$r^Well if a spear is too whimpy! You can put an axe on it. Halbeards do more damage than spears but are heavier.^Halbeards can stab when sprinting.
+knowledge.halbeard.info=$hHalberd$r^Well if a spear is too whimpy! You can put an axe on it. Halberds do more damage than spears but are heavier.^Halberds can stab when sprinting.
 
 knowledge.lance.info=$hLance$r^Lances are pretty useless as a weapon. But when mounted they do more damage based on the speed you're going.^More suited for jousting if you haven't figured that out.
 
@@ -2265,6 +2268,11 @@ knowledge.cheese.1=Cheese is made from refining milk. It has use in some recipes
 knowledge.cheese_roll=Cheese Roll
 knowledge.cheese_roll.desc=Easy snack
 knowledge.cheese_roll.1=Cheese goes well with bread. Put some cheese in a roll to give it some flavour.
+
+knowledge.kitchen_bench=Kitchen Bench
+knowledge.kitchen_bench.desc=Kitchen crafting
+knowledge.kitchen_bench.1=The Kitchen Bench is a dedicated space for mixing, cutting, rolling, and prepping your foodstuffs.^It is essential for any aspiring chef, so make sure to make this in your favorite stone-top style!^It is used similarly to the Carpenter Bench, simply set your recipe up and use tools, like knives, spoons, and your fists, to craft your culinary masterpieces.
+knowledge.kitchen_bench.2=The Kitchen Bench is going to get filthy with all that dough rolling and meat chopping!^If you're not careful, the level of mess will make it impossible to keep cooking.^Make sure to clean it up with a wash cloth! Simply repeatedly right click your kitchen bench with the wash cloth to clean it, and clean off your wash cloth by repeatedly right clicking water.
 
 knowledge.firepit=Firepit and Stoves
 knowledge.firepit.desc=Basic cooking

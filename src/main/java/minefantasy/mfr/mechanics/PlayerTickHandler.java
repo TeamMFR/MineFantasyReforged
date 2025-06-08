@@ -251,12 +251,6 @@ public class PlayerTickHandler {
 			}
 
 			ArmourCalculator.updateWeights(player);
-			float weight = ArmourCalculator.getTotalWeightOfWorn(player, false);
-			if (weight > 100F) {
-				if (event.player.isInWater()) {
-					event.player.motionY -= (weight / 20000F);
-				}
-			}
 		}
 	}
 

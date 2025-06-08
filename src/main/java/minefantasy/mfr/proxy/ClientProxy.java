@@ -16,11 +16,13 @@ import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mfr.client.render.block.TileEntityComponentRenderer;
+import minefantasy.mfr.client.render.block.TileEntityForgeRenderer;
 import minefantasy.mfr.client.render.block.TileEntityKitchenBenchRenderer;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.client.render.block.TileEntityRackRenderer;
 import minefantasy.mfr.client.render.block.TileEntityRoastRenderer;
 import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
+import minefantasy.mfr.client.render.block.TileEntityTroughRenderer;
 import minefantasy.mfr.client.render.entity.RenderArrowMF;
 import minefantasy.mfr.client.render.entity.RenderBomb;
 import minefantasy.mfr.client.render.entity.RenderDragon;
@@ -54,11 +56,13 @@ import minefantasy.mfr.tile.TileEntityBellows;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBombPress;
 import minefantasy.mfr.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityForge;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.tile.TileEntityRoast;
 import minefantasy.mfr.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityTrough;
 import minefantasy.mfr.util.ClientTickHandler;
 import minefantasy.mfr.util.ParticleBuilder;
 import net.minecraft.client.Minecraft;
@@ -162,6 +166,8 @@ public class ClientProxy extends ClientProxyBase {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKitchenBench.class, new TileEntityKitchenBenchRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForge.class, new TileEntityForgeRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrough.class, new TileEntityTroughRenderer<>());
 	}
 
 	public void registerEntityRenderer() {

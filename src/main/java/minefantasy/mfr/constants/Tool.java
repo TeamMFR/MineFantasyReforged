@@ -9,28 +9,34 @@ import net.minecraft.client.resources.I18n;
  */
 public enum Tool {
 
-	HANDS("hands"),
-	OTHER("other"),
-	BRUSH("brush"),
-	HAMMER("hammer"),
-	HEAVY_HAMMER("heavy_hammer"),
-	NEEDLE("needle"),
-	KNIFE("knife"),
-	MALLET("mallet"),
-	SHEARS("shears"),
-	SAW("saw"),
-	SPANNER("spanner"),
-	SPOON("spoon"),
-	WASH("wash");
+	HANDS("hands", false),
+	OTHER("other", false),
+	BRUSH("brush", false),
+	HAMMER("hammer", true),
+	HEAVY_HAMMER("heavy_hammer", true),
+	NEEDLE("needle", true),
+	KNIFE("knife", true),
+	MALLET("mallet", true),
+	SHEARS("shears", true),
+	SAW("saw", true),
+	SPANNER("spanner", true),
+	SPOON("spoon", true),
+	WASH("wash", false);
 
 	private final String unlocalizedName;
+	private final boolean hasTiers;
 
-	Tool(String name) {
+	Tool(String name, boolean hasTiers) {
 		this.unlocalizedName = name;
+		this.hasTiers = hasTiers;
 	}
 
 	public String getName() {
 		return unlocalizedName;
+	}
+
+	public boolean hasTiers() {
+		return hasTiers;
 	}
 
 	/**

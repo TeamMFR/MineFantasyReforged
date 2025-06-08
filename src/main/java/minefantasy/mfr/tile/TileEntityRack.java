@@ -4,7 +4,7 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBlockToolRack;
 import minefantasy.mfr.item.ItemCrossbow;
-import minefantasy.mfr.util.BlockPositionHelper;
+import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -22,7 +22,6 @@ import javax.annotation.Nullable;
 
 public class TileEntityRack extends TileEntityWoodDecor {
 	public ItemStackHandler inventory = createInventory();
-	private int ticksExisted;
 	public int colorInt;
 
 	public TileEntityRack() {
@@ -47,14 +46,6 @@ public class TileEntityRack extends TileEntityWoodDecor {
 	@Override
 	protected int getGuiId() {
 		return 0;
-	}
-
-	@Override
-	public void markDirty() {
-		++ticksExisted;
-		if (ticksExisted == 10 || ticksExisted % 50 == 0) {
-			sendUpdates();
-		}
 	}
 
 	@Override
@@ -96,7 +87,7 @@ public class TileEntityRack extends TileEntityWoodDecor {
 			y1 = 0.0F + offset;
 			y2 = 1.0F - offset;
 		}
-		int[] coord = BlockPositionHelper.getCoordsFor(x, y, x1, x2, y1, y2, 4, 4, facing);
+		int[] coord = BlockUtils.getCoordsFor(x, y, x1, x2, y1, y2, 4, 4, facing);
 
 		if (coord == null) {
 			return -1;

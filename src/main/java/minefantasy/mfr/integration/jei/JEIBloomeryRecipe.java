@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JEIBloomeryRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final BloomeryRecipeBase recipe;
+	private final BloomeryRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 	private final List<ItemStack> fuelItemStacks;
 
@@ -39,5 +39,9 @@ public class JEIBloomeryRecipe implements IRecipeWrapper {
 
 	public List<ItemStack> getFuelItemStacks() {
 		return fuelItemStacks;
+	}
+
+	public BloomeryRecipeBase getRecipe() {
+		return recipe;
 	}
 }

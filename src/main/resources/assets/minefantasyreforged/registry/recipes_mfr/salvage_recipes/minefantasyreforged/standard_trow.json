@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_trow"
+	},
+	"outputs": [
+		{
+			"item": "#ALL_TIMBERS"
+		},
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"item": "#ALL_BARS"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_trow"
+		},
+		{
+			"item": "minefantasyreforged:ornate_trow"
+		}
+	]
+}

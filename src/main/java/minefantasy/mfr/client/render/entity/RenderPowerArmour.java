@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.entity.ModelCogwork;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -143,7 +144,7 @@ public class RenderPowerArmour extends RenderLivingBase<EntityLivingBase> {
 			this.renderModel(0, entity, limbSwing, limbSwingAmount, ageInTicks, f1 - f, f7, f14);
 
 			CustomMaterial plating = getPlating(entity);
-			if (plating != CustomMaterial.NONE) {
+			if (plating != CustomMaterialRegistry.NONE) {
 				colourPlating(plating);
 				this.renderModel(1, entity, limbSwing, limbSwingAmount, ageInTicks, f1 - f, f7, f14);
 			}
@@ -203,7 +204,7 @@ public class RenderPowerArmour extends RenderLivingBase<EntityLivingBase> {
 		if (suit != null) {
 			return suit.getPlating();
 		}
-		return CustomMaterial.NONE;
+		return CustomMaterialRegistry.NONE;
 	}
 
 	private EntityCogwork getCogwork(EntityLivingBase base) {
@@ -217,7 +218,7 @@ public class RenderPowerArmour extends RenderLivingBase<EntityLivingBase> {
 	}
 
 	private void colourPlating(CustomMaterial material) {
-		GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
+		GlStateManager.color(material.getColourRGB()[0] / 255F, material.getColourRGB()[1] / 255F, material.getColourRGB()[2] / 255F);
 	}
 
 	@Override

@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_needle"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:metal_hunk",
+			"material_type": "metal_material",
+			"count": 4
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_needle"
+		},
+		{
+			"item": "minefantasyreforged:ornate_needle"
+		}
+	]
+}

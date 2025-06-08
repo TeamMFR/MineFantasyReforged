@@ -1,0 +1,294 @@
+{
+    "_comment": [
+        "Author: -toErIpNid-"
+    ],
+    "mod": "pvj",
+    "wood_material": [
+        {
+            "name": "willow_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_willow"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 98,
+                "green": 98,
+                "blue": 69
+            }
+        },
+        {
+            "name": "mangrove_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_mangrove"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 104,
+                "green": 104,
+                "blue": 104
+            }
+        },
+        {
+            "name": "palm_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_palm"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 117,
+                "green": 106,
+                "blue": 111
+            }
+        },
+        {
+            "name": "redwood_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_redwood"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 102,
+                "green": 50,
+                "blue": 50
+            }
+        },
+        {
+            "name": "fir_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_fir"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 70,
+                "green": 56,
+                "blue": 41
+            }
+        },
+        {
+            "name": "pine_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_pine"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 108,
+                "green": 86,
+                "blue": 64
+            }
+        },
+        {
+            "name": "aspen_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_aspen"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 201,
+                "green": 193,
+                "blue": 163
+            }
+        },
+        {
+            "name": "maple_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_maple"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 193,
+                "green": 157,
+                "blue": 130
+            }
+        },
+        {
+            "name": "baobab_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_baobab"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 193,
+                "green": 187,
+                "blue": 182
+            }
+        },
+        {
+            "name": "cottonwood_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_cottonwood"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 162,
+                "green": 157,
+                "blue": 153
+            }
+        },
+        {
+            "name": "pale_juniper_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_juniper"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 162,
+                "green": 156,
+                "blue": 162
+            }
+        },
+        {
+            "name": "pale_cherry_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_cherry_blossom"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 178,
+                "green": 172,
+                "blue": 163
+            }
+        },
+        {
+            "name": "jacaranda_wood",
+            "materialIngredient": {
+                "item": "pvj:planks_jacaranda"
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.5,
+                "durability": 0.5,
+                "flexibility": 1.0,
+                "resistance": 75,
+                "density": 1.2,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 3.0
+            },
+            "color": {
+                "red": 101,
+                "green": 48,
+                "blue": 48
+            }
+        }
+    ]
+}

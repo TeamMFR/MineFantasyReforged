@@ -36,8 +36,8 @@ public class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase>
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerTanner.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	public ItemStack getTannerRecipeOutput() {

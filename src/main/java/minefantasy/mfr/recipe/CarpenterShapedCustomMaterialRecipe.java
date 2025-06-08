@@ -1,28 +1,32 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
-import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class CarpenterShapedCustomMaterialRecipe extends CarpenterRecipeBase {
 	protected int width;
 	protected int height;
+	protected boolean tierModifyOutputCount;
 
 	public CarpenterShapedCustomMaterialRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed,
+			String research, Skill skillUsed, boolean tierModifyOutputCount,
 			int width, int height) {
 		super(output, inputs, toolTier, carpenterTier, craftTime,
 				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);
 		this.width = width;
 		this.height = height;
+		this.tierModifyOutputCount = tierModifyOutputCount;
 	}
 
 	/**
@@ -66,8 +70,8 @@ public class CarpenterShapedCustomMaterialRecipe extends CarpenterRecipeBase {
 				ItemStack inputItem = matrix.getStackInRowAndColumn(matrixX, matrixY);
 
 				if (!inputItem.isEmpty() || !ingredient.apply(ItemStack.EMPTY)) {
-					String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
-					String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+					String component_wood = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.WOOD_MATERIAL);
+					String component_metal = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.METAL_MATERIAL);
 
 					if (component_metal != null)// CHECK CUSTOM METAL
 					{
@@ -124,27 +128,43 @@ public class CarpenterShapedCustomMaterialRecipe extends CarpenterRecipeBase {
 		String metal = null;
 		for (int i = 0; i < matrix.getSizeInventory(); i++) {
 			ItemStack item = matrix.getStackInSlot(i);
-			String component_wood = CustomToolHelper.getComponentMaterial(item, "wood");
-			String component_metal = CustomToolHelper.getComponentMaterial(item, "metal");
-			if (wood == null && component_wood != null) {
-				wood = component_wood;
-			}
-			if (metal == null && component_metal != null) {
-				metal = component_metal;
+			if (!item.isEmpty()) {
+				String component_wood = CustomToolHelper.getComponentMaterial(item, CustomMaterialType.WOOD_MATERIAL);
+				String component_metal = CustomToolHelper.getComponentMaterial(item, CustomMaterialType.METAL_MATERIAL);
+				if (wood == null && component_wood != null) {
+					wood = component_wood;
+				}
+				if (metal == null && component_metal != null) {
+					metal = component_metal;
+				}
 			}
 		}
-		if (metal != null) {
-			CustomMaterial.addMaterial(result, CustomToolHelper.slot_main, metal);
+		if (metal != null && !tierModifyOutputCount) {
+			CustomMaterialRegistry.addMaterial(result, CustomToolHelper.slot_main, metal);
 		}
-		if (wood != null) {
-			CustomMaterial.addMaterial(result, metal == null ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft,
+		if (wood != null && !tierModifyOutputCount) {
+			CustomMaterialRegistry.addMaterial(result, metal == null ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft,
 					wood);
 		}
+
+		if (tierModifyOutputCount) {
+			int modifiedCount = MathHelper.clamp(
+					CustomMaterialRegistry.getMaterial(wood).getTier() * result.getCount(),
+					1,
+					result.getMaxStackSize());
+			result.setCount(modifiedCount);
+		}
+
 		return result;
 	}
 
 	public boolean useCustomTiers() {
 		return true;
+	}
+
+	@Override
+	public boolean isTierModifyOutputCount() {
+		return tierModifyOutputCount;
 	}
 
 	/**

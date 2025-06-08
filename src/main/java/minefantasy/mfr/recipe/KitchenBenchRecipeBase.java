@@ -55,8 +55,8 @@ public abstract class KitchenBenchRecipeBase extends IForgeRegistryEntry.Impl<Ki
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerKitchenBench.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	/**

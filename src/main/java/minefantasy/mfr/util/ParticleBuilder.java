@@ -2,13 +2,13 @@ package minefantasy.mfr.util;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.particle.CustomParticle;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-
 import java.util.Random;
 
 /**
@@ -523,7 +523,7 @@ public final class ParticleBuilder {
 		this.target = target;
 		return this;
 	}
-	
+
 	/**
 	 * Spawns the particle that has been built and resets the particle builder.
 	 * @param world The world in which to spawn the particle
@@ -570,9 +570,8 @@ public final class ParticleBuilder {
 		particle.setEntity(entity);
 		particle.setTargetPosition(tx, ty, tz);
 		particle.setTargetEntity(target);
-		
-		net.minecraft.client.Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-		
+
+		Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 		reset();
 	}
 	

@@ -82,8 +82,8 @@ public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> i
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerRoast.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	@Override

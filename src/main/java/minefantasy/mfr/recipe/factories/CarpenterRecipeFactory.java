@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
 import minefantasy.mfr.recipe.CarpenterRecipeBase;
@@ -21,7 +22,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class CarpenterRecipeFactory {
+public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipeBase> {
 	public CarpenterRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		CarpenterRecipeType recipeType = CarpenterRecipeType.deserialize(type);
@@ -53,6 +54,9 @@ public class CarpenterRecipeFactory {
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
 
+		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+		handleSoundError(sound, soundEvent, recipe.getRecipeOutput());
+
 		return new CarpenterDynamicRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
@@ -79,13 +83,17 @@ public class CarpenterRecipeFactory {
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+
+		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+		handleSoundError(sound, soundEvent, result);
 
 		return new CarpenterShapelessCustomMaterialRecipe(
 				result, ingredients, tool_tier, block_tier, craft_time,
 				skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill);
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount);
 	}
 
 	private CarpenterRecipeBase parseShapedCustomMaterial(JsonContext context, JsonObject json) {
@@ -99,11 +107,15 @@ public class CarpenterRecipeFactory {
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
+
+		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+		handleSoundError(sound, soundEvent, recipe.getRecipeOutput());
 
 		return new CarpenterShapedCustomMaterialRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 
@@ -129,6 +141,9 @@ public class CarpenterRecipeFactory {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
+		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+		handleSoundError(sound, soundEvent, result);
+
 		return new CarpenterShapelessRecipe(
 				result, ingredients,
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
@@ -149,6 +164,9 @@ public class CarpenterRecipeFactory {
 
 		boolean shouldMirror = JsonUtils.getBoolean(json, "shouldMirror", true);
 
+		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+		handleSoundError(sound, soundEvent, recipe.getRecipeOutput());
+
 		return new CarpenterShapedRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
@@ -156,4 +174,11 @@ public class CarpenterRecipeFactory {
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 
+	private static void handleSoundError(String sound, SoundEvent soundEvent, ItemStack recipeOutput) {
+		if (soundEvent == null) {
+			MineFantasyReforged.LOG.error(
+					"[MFR RECIPE PARSE ERROR] Sound for recipe output, {}, could not be found. Invalid sound resource: {}",
+					recipeOutput.getDisplayName(), sound);
+		}
+	}
 }

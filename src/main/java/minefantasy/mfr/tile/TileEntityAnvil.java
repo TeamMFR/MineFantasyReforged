@@ -13,6 +13,7 @@ import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
@@ -22,6 +23,7 @@ import minefantasy.mfr.recipe.CraftingManagerSpecial;
 import minefantasy.mfr.recipe.IAnvil;
 import minefantasy.mfr.recipe.SpecialRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -38,6 +40,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -45,6 +48,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -252,7 +256,13 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
-		return requiredResearch.isEmpty() || ResearchLogic.hasInfoUnlocked(user, requiredResearch);
+		if (StringUtils.isNotBlank(requiredResearch) && !requiredResearch.equalsIgnoreCase("none")) {
+			InformationBase research = ResearchLogic.getResearch(requiredResearch);
+			return requiredResearch.isEmpty() || ResearchLogic.getResearchCheck(user, research);
+		}
+		else {
+			return true;
+		}
 	}
 
 	private void craftItem(EntityPlayer lastHit, AnvilRecipeBase anvilRecipe) {
@@ -267,7 +277,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 
 			if (result.getMaxStackSize() == 1 && lastHit != null) {
-				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
+				NbtUtils.getOrCreateNBT((result)).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
 			int temp = this.calcAverageTemp();
@@ -355,7 +365,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			String design = recipe.getDesign();
 
 			if (design.equals("dragonforged") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
 
 				// DRAGONFORGE
 				float totalTemp = 0;
@@ -365,7 +375,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 							TileEntity tile = world.getTileEntity(pos.add(x, y, z));
 							if (tile instanceof TileEntityForge) {
 								if (((TileEntityForge) tile).getBlockTemperature() > 0) {
-									totalTemp += ((TileEntityForge) tile).temperature;
+									totalTemp += ((TileEntityForge) tile).getBlockTemperature();
 									world.createExplosion(null, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 1F, false);
 								}
 							}
@@ -394,7 +404,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 
 			if (design.equals("ornate") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
 
 				// Ornate
 				NBTBase nbt = !(recipeResultStack.hasTagCompound())
@@ -464,13 +474,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			return (int) (totalTemp / itemCount);
 		}
 		return 0;
-	}
-
-	private NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	public void consumeResources(EntityPlayer player) {
@@ -700,7 +703,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			return;
 		}
 
-		NBTTagCompound nbt = this.getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setBoolean(trait, flag);
 	}
 
@@ -764,7 +767,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			resultStackSpecial.getDisplayName();
 		}
 
-		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR)
+				? I18n.format("gui.no_project_set")
+				: resultStack.getDisplayName();
 	}
 
 	public int getToolTierNeeded() {
@@ -807,9 +812,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		requiredAnvilTier = nbt.getInteger(REQUIRED_ANVIL_TIER_TAG);
 		requiredToolTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
 		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerAnvil.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
-		}
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerAnvil.getRecipeByResourceLocation(resourceLocation));
 		textureName = nbt.getString(TEXTURE_NAME_TAG);
 		qualityBalance = nbt.getFloat(QUALITY_TAG);
 		leftHit = nbt.getFloat(LEFT_HIT_TAG);
@@ -829,7 +833,10 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredToolTier);
 		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
+		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 		nbt.setString(TEXTURE_NAME_TAG, textureName);
 		nbt.setFloat(QUALITY_TAG, qualityBalance);

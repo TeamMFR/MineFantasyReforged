@@ -1,16 +1,16 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.crafting.ITieredComponent;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
@@ -18,6 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,30 +27,31 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
+public class ItemComponentMFR extends ItemBaseMFR implements IMaterialSingleComponent {
 	protected String name;
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	// STORAGE
 	String blockTexture;
 	String storageType;
 
 	private float unitCount = 1;
 	private boolean isCustom = false;
-	String materialType = CustomMaterial.NONE.name;
+	private final CustomMaterialType materialType;
 
 	public ItemComponentMFR(String name) {
-		this(name, 0);
+		this(name, Rarity.COMMON, CustomMaterialType.NONE);
 	}
 
-	public ItemComponentMFR(String name, int rarity) {
+	public ItemComponentMFR(String name, CustomMaterialType type) {
+		this(name, Rarity.COMMON, type);
+	}
+
+	public ItemComponentMFR(String name, Rarity rarity, CustomMaterialType type) {
 		super(name);
 		itemRarity = rarity;
 		this.name = name;
 		this.setCreativeTab(MineFantasyTabs.tabMaterials);
-	}
-
-	private void add(List<ItemStack> list, Item item) {
-		list.add(new ItemStack(item));
+		this.materialType = type;
 	}
 
 	@Override
@@ -58,15 +60,14 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 
 		super.addInformation(item, world, list, flag);
 		if (isCustom) {
-			CustomToolHelper.addComponentString(list, CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
+			CustomToolHelper.addComponentString(list, CustomMaterialRegistry.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
 		}
 	}
 
-	public ItemComponentMFR setCustom(float units, String type) {
+	public ItemComponentMFR setCustom(float units) {
 		canRepair = false;
 		this.unitCount = units;
 		isCustom = true;
-		this.materialType = type;
 		return this;
 	}
 
@@ -81,16 +82,8 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
-	}
-
-	public ItemStack construct(String main) {
-		return construct(main, 1);
-	}
-
-	public ItemStack construct(String main, int stackSize) {
-		return CustomToolHelper.constructSingleColoredLayer(this, main, stackSize);
 	}
 
 	@Override
@@ -103,7 +96,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
-	public String getMaterialType(ItemStack item) {
+	public CustomMaterialType getMaterialType() {
 		return materialType;
 	}
 

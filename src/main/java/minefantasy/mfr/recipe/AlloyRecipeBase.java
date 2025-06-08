@@ -49,8 +49,8 @@ public abstract class AlloyRecipeBase extends IForgeRegistryEntry.Impl<AlloyReci
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerAlloy.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	@Override

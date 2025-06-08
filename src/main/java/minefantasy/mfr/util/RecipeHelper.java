@@ -96,6 +96,16 @@ public class RecipeHelper {
 		return duplicateList;
 	}
 
+	public static List<ItemStack> convertNonNullList(List<ItemStack> nonNullList) {
+		List<ItemStack> list = new ArrayList<>();
+
+		for (ItemStack object : nonNullList) {
+			list.add(object);
+		}
+
+		return list;
+	}
+
 	/**
 	 * Expands a small pattern (e.g. 3x2 size) to the given width and height by adding ItemStack.EMPTY stacks to the new, empty slots (e.g. 5x5 size)
 	 *

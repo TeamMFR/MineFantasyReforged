@@ -1,0 +1,39 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 15,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "K S",
+    "TRT",
+    "T T"
+  ],
+  "key": {
+    "K": {
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_knife",
+      "material_type": "metal_material"
+    },
+    "S": {
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_spoon",
+      "material_type": "wood_material",
+      "excluded_materials": ["scrap_wood"]
+    },
+    "R": {
+      "item": "minecraft:stone",
+      "data": 4
+    },
+    "T": {
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:kitchen_bench_diorite"
+  }
+}

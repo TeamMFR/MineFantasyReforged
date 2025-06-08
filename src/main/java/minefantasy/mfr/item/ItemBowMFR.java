@@ -5,15 +5,20 @@ import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -29,11 +34,11 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -43,6 +48,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -52,10 +58,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IRackItem, IClientRegister {
+public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IRackItem, IClientRegister, IMaterialDoubleComponent {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	private final EnumBowType model;
-	private final int itemRarity;
+	private final Rarity itemRarity;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
@@ -63,14 +69,14 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	private String designType = "standard";
 
 	public ItemBowMFR(String name, EnumBowType type) {
-		this(name, ToolMaterial.WOOD, type, 0);
+		this(name, ToolMaterial.WOOD, type, Rarity.COMMON);
 	}
 
-	public ItemBowMFR(String name, ToolMaterial mat, EnumBowType type, int rarity) {
+	public ItemBowMFR(String name, ToolMaterial mat, EnumBowType type, Rarity rarity) {
 		this(name, (int) (mat.getMaxUses() * type.durabilityModifier), type, mat.getAttackDamage(), rarity);
 	}
 
-	private ItemBowMFR(String name, int dura, EnumBowType type, float damage, int rarity) {
+	private ItemBowMFR(String name, int dura, EnumBowType type, float damage, Rarity rarity) {
 		this.baseDamage = damage;
 		model = type;
 		this.maxStackSize = 1;
@@ -272,20 +278,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity;
-
-		EnumRarity[] rarity = new EnumRarity[] {EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= rarity.length) {
-			lvl = rarity.length - 1;
-		}
-		return rarity[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, itemRarity);
 	}
 
 	@Override
@@ -315,10 +309,6 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		return this;
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
@@ -336,10 +326,10 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+			ArrayList<CustomMaterial> wood = CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL);
 			for (CustomMaterial customMat : wood) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct("iron", customMat.name));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.construct(this, MineFantasyMaterials.Names.IRON, customMat.getName()));
 				}
 			}
 		}
@@ -367,7 +357,17 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 
 	// ====================================================== CUSTOM END
@@ -375,7 +375,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	@Override
 	public float getMaxCharge(ItemStack bow) {
 		return (((ItemBowMFR)bow.getItem()).model.chargeTime
-				+ (5 * (CustomToolHelper.getCustomPrimaryMaterial(bow).resistance / 25)));
+				+ (5 * (CustomToolHelper.getCustomPrimaryMaterial(bow).getResistance() / 25)));
 	}
 
 	@Override

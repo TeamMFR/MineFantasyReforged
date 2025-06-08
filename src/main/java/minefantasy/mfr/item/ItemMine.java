@@ -3,28 +3,33 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityMine;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.BombDispenser;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
+import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -42,7 +47,16 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 		this.maxStackSize = 16;
 
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
-		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
+		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorDefaultDispenseItem() {
+			@Override
+			protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+				EnumFacing facing = source.getBlockState().getValue(BlockDispenser.FACING);
+				IPosition iposition = BlockDispenser.getDispensePosition(source);
+				ItemStack itemstack = stack.splitStack(1);
+				ItemMine.doDispense(source.getWorld(), itemstack, 2, facing, iposition);
+				return stack;
+			}
+		});
 
 		this.addPropertyOverride(new ResourceLocation("casing"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
@@ -79,13 +93,36 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 		});
 	}
 
+	public static void doDispense(World world, ItemStack stack, int speed, EnumFacing facing, IPosition position) {
+		double posX = position.getX() + (facing.getXOffset() / 2F);
+		double posY = position.getY() + (facing.getYOffset() / 2F);
+		double posZ = position.getZ() + (facing.getZOffset() / 2F);
+
+		double xVelocity = facing.getXOffset();
+		double yVelocity = facing.getYOffset();
+		double zVelocity = facing.getZOffset();
+
+		EntityMine bomb = new EntityMine(world).setType(
+				ItemBomb.getFilling(stack),
+				ItemBomb.getCasing(stack),
+				ItemBomb.getFuse(stack),
+				ItemBomb.getPowder(stack));
+		bomb.setPosition(posX, posY, posZ);
+		bomb.setThrowableHeading(xVelocity, yVelocity, zVelocity, 1.0F, speed);
+		world.spawnEntity(bomb);
+		if (stack.hasTagCompound() && stack.getTagCompound().hasKey("stickyBomb")) {
+			bomb.getEntityData().setBoolean("stickyBomb", true);
+		}
+		world.spawnEntity(bomb);
+	}
+
 	public static void setFuse(ItemStack item, String fuse) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(fuseNBT, fuse);
 	}
 
 	public static String getFuse(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(fuseNBT)) {
 			return nbt.getString(fuseNBT);
 		}
@@ -93,12 +130,12 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	public static void setPowder(ItemStack item, String powder) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(powderNBT, powder);
 	}
 
 	public static String getPowder(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(powderNBT)) {
 			return nbt.getString(powderNBT);
 		}
@@ -109,12 +146,12 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	 * 0 = Basic 1 = Shrapnel 2 = Fire
 	 */
 	public static void setFilling(ItemStack item, String filling) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(fillingNBT, filling);
 	}
 
 	public static String getFilling(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(fillingNBT)) {
 			return nbt.getString(fillingNBT);
 		}
@@ -125,22 +162,16 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	 * 0 = Ceramic 1 = Iron
 	 */
 	public static void setCasing(ItemStack item, String casing) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(casingNBT, casing);
 	}
 
 	public static String getCasing(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(casingNBT)) {
 			return nbt.getString(casingNBT);
 		}
 		return "ceramic";
-	}
-
-	public static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
 	}
 
 	@Override
@@ -237,11 +268,11 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
-			return EnumRarity.UNCOMMON;
+			return Rarity.UNCOMMON;
 		}
-		return EnumRarity.COMMON;
+		return Rarity.COMMON;
 	}
 
 	@Override

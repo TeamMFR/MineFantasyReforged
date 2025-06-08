@@ -35,8 +35,8 @@ public abstract class SalvageRecipeBase extends IForgeRegistryEntry.Impl<Salvage
 	}
 
 	@Override
-	public String getName() {
-		return this.getRegistryName().toString();
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	@Override

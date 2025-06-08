@@ -1,0 +1,25 @@
+{
+	"type": "quern_recipe",
+	"consume_pot": true,
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minecraft:coal",
+			"data": 0
+		},
+		{
+			"item": "minecraft:coal",
+			"data": 1
+		}
+	],
+	"pot_ingredients": [
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:coal_dust"
+	}
+}

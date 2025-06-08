@@ -77,4 +77,7 @@ public class JEIKitchenBenchRecipe implements IRecipeWrapper {
 		return false;
 	}
 
+	public KitchenBenchRecipeBase getRecipe() {
+		return recipe;
+	}
 }

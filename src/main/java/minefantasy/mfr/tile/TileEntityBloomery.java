@@ -7,11 +7,9 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.entity.EntityItemHeated;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.RPGElements;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
@@ -23,14 +21,13 @@ import minefantasy.mfr.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -45,7 +42,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class TileEntityBloomery extends TileEntityBase implements ITickable {
-	private int ticksExisted;
 	private float progress;
 	private float progressMax;
 	private boolean hasBloom;
@@ -89,6 +85,27 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		return oldState.getBlock() != newState.getBlock();
 	}
 
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean active) {
+		isActive = active;
+	}
+
+	public void setProgressMax(float newMax) {
+		progressMax = newMax;
+	}
+
+	public float getSmeltTime() {
+		float smeltTime = getInventory().getStackInSlot(0).getCount() * getTime(getInventory().getStackInSlot(0));// 15s per item
+		return smeltTime;
+	}
+
+	private int getTime(ItemStack itemStack) {
+		return 300;
+	}
+
 	public boolean isInput(ItemStack input) {
 		return !getResult(input).isEmpty();
 	}
@@ -112,7 +129,6 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 			return ItemStack.EMPTY;// Cannot smelt if a bloom exists
 		if (input.isEmpty() || coal.isEmpty())
 			return ItemStack.EMPTY;// Needs input
-
 		if (!hasEnoughCarbon(input, coal)) {
 			return ItemStack.EMPTY;
 		}
@@ -140,7 +156,6 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 				isActive = false;
 				return;
 			}
-			ticksExisted++;
 			if (!world.isRemote) {
 				++progress;
 				if (progress >= progressMax) {
@@ -149,37 +164,10 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 				if (rand.nextInt(4) == 0) {
 					SmokeMechanics.spawnSmoke(world, pos, 1);
 				}
-				if (ticksExisted % 20 == 0) {
-					sendUpdates();
-				}
 			}
+		} else if (isActive) {
+			isActive = false;
 		}
-	}
-
-	/**
-	 * Light the bloomery, starting the process.
-	 *
-	 * @return true if it can smelt
-	 */
-	public boolean light(EntityPlayer user) {
-		ItemStack res = getResult();
-		if (world.canBlockSeeSky(pos.add(0, 1, 0)) && res != null && !isActive) {
-			if (!world.isRemote) {
-				if (res.getItem() == Items.IRON_INGOT && !ResearchLogic.getResearchCheck(user, MineFantasyKnowledgeList.smelt_iron)) {
-					return false;
-				}
-				isActive = true;
-				progressMax = getInventory().getStackInSlot(0).getCount() * getTime(getInventory().getStackInSlot(0));// 15s per item
-				world.playSound(user, pos.add(0.5D, 0.5D, +0.5D), SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
-			}
-
-			return true;
-		}
-		return false;
-	}
-
-	private int getTime(ItemStack itemStack) {
-		return 300;
 	}
 
 	/**
@@ -261,10 +249,6 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		this.knownResearches = knownResearches;
 	}
 
-	public boolean isActive() {
-		return isActive;
-	}
-
 	public boolean hasBloom() {
 		if (world.isRemote) {
 			return hasBloom;
@@ -300,9 +284,8 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerBloomery.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
-		}
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerBloomery.getRecipeByResourceLocation(resourceLocation));
 
 		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 
@@ -320,7 +303,10 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		nbt.setTag("inventory", inventory.serializeNBT());
 
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
+		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
 		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));

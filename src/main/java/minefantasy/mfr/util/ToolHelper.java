@@ -58,6 +58,10 @@ public class ToolHelper {
 		return CustomCrafterEntry.getEntryTier(tool);
 	}
 
+	public static boolean isStackValidWashTool(ItemStack stack) {
+		return ToolHelper.getToolTypeFromStack(stack) == Tool.WASH && stack.getItemDamage() != ToolHelper.getWashMaxUses(stack);
+	}
+
 	public static int getWashMaxUses(ItemStack stack) {
 		if (stack.isEmpty()) {
 			return 0;
@@ -70,7 +74,7 @@ public class ToolHelper {
 
 	/**
 	 * Conduct Block Transformation on {@link Item#onItemUse(EntityPlayer, World, BlockPos, EnumHand, EnumFacing, float, float, float)}
-	 * @param user The Player using the item
+	 * @param player The Player using the item
 	 * @param world The World
 	 * @param pos The Block Position of the block being transformed
 	 * @param hand The hand the Player is using the item with
@@ -78,13 +82,13 @@ public class ToolHelper {
 	 * @return The {@link EnumActionResult} which represents the result of the transformation
 	 */
 	public static EnumActionResult performBlockTransformation(
-			EntityPlayer user,
+			EntityPlayer player,
 			World world,
 			BlockPos pos,
 			EnumHand hand,
 			EnumFacing facing) {
 
-		ItemStack item = user.getHeldItem(hand);
+		ItemStack tool = player.getHeldItem(hand);
 		IBlockState oldState = world.getBlockState(pos);
 
 		// Find Recipe
@@ -92,18 +96,21 @@ public class ToolHelper {
 		if (input.getItem().getHasSubtypes()) {
 			input = new ItemStack(oldState.getBlock(), 1, oldState.getBlock().getMetaFromState(oldState));
 		}
-		TransformationRecipeBase recipe = CraftingManagerTransformation.findMatchingRecipe(item, input, oldState);
+		TransformationRecipeBase recipe = CraftingManagerTransformation
+				.findMatchingRecipe(tool, input, oldState, pos, player, facing);
+
 		if (recipe == null) {
 			return EnumActionResult.FAIL;
 		}
 
 		if (!world.isRemote) {
-			return recipe.onUsedWithBlock(world, pos, oldState, item, user, facing);
+			//We assume the recipe's transformation is valid
+			return recipe.onUsedWithBlock(world, pos, oldState, tool, player, facing);
 		}
 		else {
-			user.swingArm(hand);
+			player.swingArm(hand);
 			if (recipe.getSound() != null) {
-				world.playSound(user, pos, recipe.getSound(), SoundCategory.BLOCKS, 1F, 1F);
+				world.playSound(player, pos, recipe.getSound(), SoundCategory.BLOCKS, 1F, 1F);
 			}
 		}
 		return EnumActionResult.FAIL;
@@ -156,7 +163,7 @@ public class ToolHelper {
 		if (item.getMaxStackSize() > 0)
 			return item;
 
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setFloat("MFCraftQuality", qualityLvl);
 
 		return item;
@@ -255,14 +262,6 @@ public class ToolHelper {
 		return rating;
 	}
 
-	private static NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-
-		return item.getTagCompound();
-	}
-
 	public static boolean hasCustomQualityTag(ItemStack item) {
 		return item.hasTagCompound() && item.getTagCompound().hasKey("MFCraftQuality");
 	}
@@ -286,7 +285,7 @@ public class ToolHelper {
 	}
 
 	public static void setToolSharpness(ItemStack item, float level) {
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		float currentLevel = getSharpnessLevel(item);
 		float maxLevel = getMaxSharpness(item);
 		nbt.setFloat(sharpnessLevelNBT, Math.min(maxLevel, currentLevel + level));
@@ -362,15 +361,6 @@ public class ToolHelper {
 			stringList[i] = entries.get(i);
 		}
 		return stringList;
-	}
-
-	@Deprecated
-	public static boolean isToolSufficient(ItemStack heldItem, String toolNeeded, int toolTierNeeded) {
-		Tool tool = getToolTypeFromStack(heldItem);
-
-		int tier = getCrafterTier(heldItem);
-
-		return tool.getName().equals(toolNeeded) && tier >= toolTierNeeded;
 	}
 
 	public static boolean isToolSufficient(ItemStack heldItem, Tool toolNeeded, int toolTierNeeded) {

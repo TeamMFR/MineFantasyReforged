@@ -1,0 +1,38 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_lumber"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bar",
+			"material_type": "metal_material",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 3
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_lumber"
+		},
+		{
+			"item": "minefantasyreforged:ornate_lumber"
+		}
+	]
+}

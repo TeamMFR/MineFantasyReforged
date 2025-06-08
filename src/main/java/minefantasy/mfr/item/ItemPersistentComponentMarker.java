@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityComponent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,5 +73,10 @@ public class ItemPersistentComponentMarker extends ItemComponentMFR {
 		}
 
 		return EnumActionResult.FAIL;
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.NONE;
 	}
 }

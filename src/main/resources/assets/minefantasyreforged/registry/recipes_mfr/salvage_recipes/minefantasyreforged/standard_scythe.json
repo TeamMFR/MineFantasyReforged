@@ -1,0 +1,36 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_scythe"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bar",
+			"material_type": "metal_material",
+			"count": 3
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_scythe"
+		},
+		{
+			"item": "minefantasyreforged:ornate_scythe"
+		}
+	]
+}

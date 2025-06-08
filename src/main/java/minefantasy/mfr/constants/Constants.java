@@ -5,7 +5,7 @@ package minefantasy.mfr.constants;
  */
 public final class Constants {
 
-	public static final String ASSET_DIRECTORY = "minefantasyreforged";
+	public static final String ASSET_DIRECTORY = "assets/%s/registry";//use with String.format() to insert the modId
 	public static final String CONFIG_DIRECTORY = "MineFantasyReforged";
 	public static final String JSON_FILE_EXT = "json";
 	public static final String CRAFTED_BY_NAME_TAG = "mfr_crafted_by_name";

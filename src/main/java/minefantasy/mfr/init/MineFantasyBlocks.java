@@ -51,6 +51,7 @@ import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.block.BlockTrough;
 import minefantasy.mfr.block.BlockWorldGenMarker;
 import minefantasy.mfr.block.ConstructionBlockMF;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.item.ItemBlockAmmoBox;
 import minefantasy.mfr.item.ItemBlockAnvil;
 import minefantasy.mfr.item.ItemBlockBase;
@@ -267,6 +268,7 @@ public class MineFantasyBlocks {
 
 	public static Block RESEARCH = Utils.nullValue();
 	public static Block TROUGH_WOOD = Utils.nullValue();
+	public static ItemBlockTrough TROUGH_WOOD_ITEM = Utils.nullValue();
 
 	public static BlockTileEntity<TileEntityBombPress> BOMB_PRESS = Utils.nullValue();
 
@@ -311,10 +313,14 @@ public class MineFantasyBlocks {
 	public static BlockTileEntity<TileEntityBigFurnace> FURNACE_STONE = Utils.nullValue();
 
 	public static Block TOOL_RACK_WOOD = Utils.nullValue();
+	public static ItemBlockToolRack TOOL_RACK_WOOD_ITEM = Utils.nullValue();
 
 	public static BlockAmmoBox FOOD_BOX_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox FOOD_BOX_BASIC_ITEM = Utils.nullValue();
 	public static BlockAmmoBox AMMO_BOX_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox AMMO_BOX_BASIC_ITEM = Utils.nullValue();
 	public static BlockAmmoBox CRATE_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox CRATE_BASIC_ITEM = Utils.nullValue();
 
 	public static Block BLOCK_COGWORK_HELM = Utils.nullValue();
 	public static Block BLOCK_COGWORK_LEGS = Utils.nullValue();
@@ -342,18 +348,18 @@ public class MineFantasyBlocks {
 
 	public static void init() {
 
-		COPPER_ORE = new BlockOreMF("copper_ore", 0, -1).setHardness(2.0F).setResistance(3.0F);
+		COPPER_ORE = new BlockOreMF("copper_ore", 0, Rarity.POOR).setHardness(2.0F).setResistance(3.0F);
 		TIN_ORE = new BlockOreMF("tin_ore", 0).setHardness(2.5F).setResistance(4.0F);
 		SILVER_ORE = new BlockOreMF("silver_ore", 2).setHardness(3.0F).setResistance(5.0F);
 		MYTHIC_ORE = new BlockMythicOre("mythic_ore", false).setHardness(10.0F).setResistance(100.0F);
 
-		KAOLINITE_ORE = new BlockOreMF("kaolinite_ore", 1, 0, MineFantasyItems.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
-		NITRE_ORE = new BlockOreMF("nitre_ore", 2, 0, MineFantasyItems.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
-		SULFUR_ORE = new BlockOreMF("sulfur_ore", 2, 0, MineFantasyItems.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
-		BORAX_ORE = new BlockOreMF("borax_ore", 2, 1, MineFantasyItems.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
-		TUNGSTEN_ORE = new BlockOreMF("tungsten_ore", 3, 1, MineFantasyItems.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
-		CLAY_ORE = new BlockOreMF("clay_ore", 0, 0, Items.CLAY_BALL, 1, 4, 1, Material.GROUND).setBlockSoundType(SoundType.GROUND).setHardness(0.5F);
-		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
+		KAOLINITE_ORE = new BlockOreMF("kaolinite_ore", 1, Rarity.COMMON, MineFantasyItems.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
+		NITRE_ORE = new BlockOreMF("nitre_ore", 2, Rarity.COMMON, MineFantasyItems.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
+		SULFUR_ORE = new BlockOreMF("sulfur_ore", 2, Rarity.COMMON, MineFantasyItems.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
+		BORAX_ORE = new BlockOreMF("borax_ore", 2, Rarity.UNCOMMON, MineFantasyItems.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
+		TUNGSTEN_ORE = new BlockOreMF("tungsten_ore", 3, Rarity.UNCOMMON, MineFantasyItems.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
+		CLAY_ORE = new BlockOreMF("clay_ore", 0, Rarity.COMMON, Items.CLAY_BALL, 1, 4, 1, Material.GROUND).setBlockSoundType(SoundType.GROUND).setHardness(0.5F);
+		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, Rarity.UNCOMMON, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 
 		MUD_BRICK = new BasicBlockMF("mud_brick", Material.GROUND).setHardness(1.0F).setResistance(0.5F);
 		MUD_BRICK_SLAB = new BlockSlab("mud_brick_slab", Material.GROUND, SoundType.STONE).setHardness(1.0F).setResistance(0.5F);
@@ -362,7 +368,7 @@ public class MineFantasyBlocks {
 		MUD_ROAD_BLOCK_SLAB = new BlockSlab("mud_road_block_slab", Material.GROUND, SoundType.GROUND).setHardness(0.5F);
 
 		COBBLE_BRICK = new BasicBlockMF("cobble_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(12.0F);
-		COBBLE_BRICK_SLAB = new BlockSlab("cobble_brick_slab", Material.GROUND, SoundType.GROUND).setHardness(2.5F).setResistance(12.0F);
+		COBBLE_BRICK_SLAB = new BlockSlab("cobble_brick_slab", Material.ROCK, SoundType.STONE).setHardness(2.5F).setResistance(12.0F);
 		COBBLESTONE_ROAD = new BlockRoad("cobblestone_road", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
 		COBBLESTONE_ROAD_BLOCK = new BasicBlockMF("cobblestone_road_block", Material.ROCK).setHardness(2.0F).setResistance(10.0F);
 		COBBLESTONE_ROAD_BLOCK_SLAB = new BlockSlab("cobblestone_road_block_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
@@ -504,6 +510,7 @@ public class MineFantasyBlocks {
 
 		RESEARCH = new BlockResearchBench();
 		TROUGH_WOOD = new BlockTrough("trough_wood");
+		TROUGH_WOOD_ITEM = new ItemBlockTrough(TROUGH_WOOD);
 
 		BOMB_PRESS = new BlockBombPress();
 
@@ -549,10 +556,14 @@ public class MineFantasyBlocks {
 		FURNACE_STONE = new BlockBigFurnace("furnace_stone", false, 0);
 
 		TOOL_RACK_WOOD = new BlockRack("rack_wood");
+		TOOL_RACK_WOOD_ITEM = new ItemBlockToolRack(TOOL_RACK_WOOD);
 
 		FOOD_BOX_BASIC = new BlockAmmoBox("food_box_basic", (byte) 0);
+		FOOD_BOX_BASIC_ITEM = new ItemBlockAmmoBox(FOOD_BOX_BASIC);
 		AMMO_BOX_BASIC = new BlockAmmoBox("ammo_box_basic", (byte) 1);
+		AMMO_BOX_BASIC_ITEM = new ItemBlockAmmoBox(AMMO_BOX_BASIC);
 		CRATE_BASIC = new BlockAmmoBox("crate_basic", (byte) 2);
+		CRATE_BASIC_ITEM = new ItemBlockAmmoBox(CRATE_BASIC);
 
 		BLOCK_COGWORK_HELM = new BlockCogwork("block_cogwork_helm", false);
 		BLOCK_COGWORK_LEGS = new BlockCogwork("block_cogwork_legs", false);
@@ -1003,7 +1014,7 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 
 		registry.register(new ItemBlockBase(RESEARCH));
-		registry.register(new ItemBlockTrough(TROUGH_WOOD));
+		registry.register(TROUGH_WOOD_ITEM);
 
 		registry.register(new ItemBlockSpecialRender(BOMB_PRESS));
 
@@ -1048,11 +1059,11 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockSpecialRender(FURNACE_HEATER));
 		registry.register(new ItemBlockSpecialRender(FURNACE_STONE));
 
-		registry.register(new ItemBlockToolRack(TOOL_RACK_WOOD));
+		registry.register(TOOL_RACK_WOOD_ITEM);
 
-		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(CRATE_BASIC));
+		registry.register(FOOD_BOX_BASIC_ITEM);
+		registry.register(AMMO_BOX_BASIC_ITEM);
+		registry.register(CRATE_BASIC_ITEM);
 
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_HELM));
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_LEGS));

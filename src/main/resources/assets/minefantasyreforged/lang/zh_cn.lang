@@ -163,9 +163,9 @@ component.grip.name=%1$s握把
 component.brace.name=%1$s支架
 
 # MATERIAL LIST
-materialtype.wood.name=木材等级：%1$s
-materialtype.leather.name=皮革等级：%1$s
-materialtype.metal.name=金属等级：%1$s
+materialtype.wood_material.name=木材等级：%1$s
+materialtype.leather_material.name=皮革等级：%1$s
+materialtype.metal_material.name=金属等级：%1$s
 materialtype.workable.name=锻造温度：%1$s*C - %2$s*C
 
 materialtype.resist.name=%1$s 抗性

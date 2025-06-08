@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 
 public interface IRecipeMFR {
-	String getName();
+	String getResourceLocation();
 	String getRequiredResearch();
 
 	Skill getSkill();

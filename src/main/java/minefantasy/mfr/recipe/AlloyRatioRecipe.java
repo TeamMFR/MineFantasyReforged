@@ -76,7 +76,7 @@ public class AlloyRatioRecipe extends AlloyRecipeBase {
 			}
 		}
 		Long gcd = Utils.gcd(new ArrayList<>(inputsRatioMap.values()));
-		output.setCount(Math.toIntExact(gcd));
+		output.setCount(output.getCount() * Math.toIntExact(gcd));
 		return output;
 	}
 

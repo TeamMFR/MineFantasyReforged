@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_plate_boots"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:plate",
+			"material_type": "metal_material",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:padded_boots"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_plate_boots"
+		},
+		{
+			"item": "minefantasyreforged:ornate_plate_boots"
+		}
+	]
+}

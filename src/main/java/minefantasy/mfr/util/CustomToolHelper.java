@@ -1,68 +1,291 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.api.crafting.ITieredComponent;
+import minefantasy.mfr.api.crafting.IMaterialComponent;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
-import net.minecraft.item.EnumRarity;
+import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CustomToolHelper {
 	public static final String slot_main = "main_material";
 	public static final String slot_haft = "haft_material";
-	public static EnumRarity poor = EnumHelper.addRarity("poor", TextFormatting.DARK_GRAY, "poor");
-	public static EnumRarity[] rarity = new EnumRarity[] {poor, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
 	/**
 	 * A bit of the new system, gets custom materials for the head
 	 */
 	public static CustomMaterial getCustomPrimaryMaterial(ItemStack item) {
 		if (item.isEmpty())
-			return CustomMaterial.NONE;
+			return CustomMaterialRegistry.NONE;
 
-		return CustomMaterial.getMaterialFor(item, slot_main);
+		return CustomMaterialRegistry.getMaterialFor(item, slot_main);
 	}
 
 	public static CustomMaterial getCustomSecondaryMaterial(ItemStack item) {
-		if (item.isEmpty())
-			return CustomMaterial.NONE;
+		if (item.isEmpty()) {
+			return CustomMaterialRegistry.NONE;
+		}
 
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
-		return material;
+		return CustomMaterialRegistry.getMaterialFor(item, slot_haft);
 	}
 
-	public static ItemStack construct(Item base, String main) {
+	public static ItemStack constructWithDefaultWood(Item base, String main) {
 		return construct(base, main, MineFantasyMaterials.Names.OAK_WOOD);
 	}
 
 	public static ItemStack construct(Item base, String main, String haft) {
-		ItemStack item = new ItemStack(base);
-		CustomMaterial.addMaterial(item, slot_main, main.toLowerCase());
+		ItemStack stack = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.toLowerCase());
 		if (haft != null) {
-			CustomMaterial.addMaterial(item, slot_haft, haft.toLowerCase());
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.toLowerCase());
 		}
+		return stack;
+	}
+
+	public static ItemStack construct(Item base, CustomMaterial main, CustomMaterial haft) {
+		ItemStack stack = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.getName().toLowerCase());
+		if (haft != CustomMaterialRegistry.NONE) {
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.getName().toLowerCase());
+		}
+		return stack;
+	}
+
+	public static ItemStack construct(ItemStack stack, CustomMaterial main, CustomMaterial haft) {
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.getName().toLowerCase());
+		if (haft != CustomMaterialRegistry.NONE) {
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.getName().toLowerCase());
+		}
+		return stack;
+	}
+
+	public static ItemStack constructMainSlot(Item base, String main) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_main, main.toLowerCase());
 		return item;
 	}
 
-	public static ItemStack constructSingleColoredLayer(Item base, String main) {
-		return constructSingleColoredLayer(base, main, 1);
+	public static ItemStack constructMainSlot(Item base, CustomMaterial main) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_main, main);
+		return item;
 	}
 
-	public static ItemStack constructSingleColoredLayer(Item base, String main, int stacksize) {
-		ItemStack item = new ItemStack(base, stacksize);
-		CustomMaterial.addMaterial(item, slot_main, main.toLowerCase());
+	public static ItemStack constructMainSlot(ItemStack inputStack, String main) {
+		ItemStack stack = inputStack.copy();
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.toLowerCase());
+		return stack;
+	}
+
+	public static ItemStack constructMainSlot(ItemStack inputStack, CustomMaterial main) {
+		ItemStack stack = inputStack.copy();
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main);
+		return stack;
+	}
+
+	public static ItemStack constructSecondarySlot(Item base, String secondary) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_haft, secondary.toLowerCase());
 		return item;
+	}
+
+	public static ItemStack constructSecondarySlot(Item base, CustomMaterial secondary) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_haft, secondary);
+		return item;
+	}
+
+	public static List<ItemStack> constructAllVariants(Item item) {
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent) {
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						allVariants.add(constructMainSlot(item, metalMaterial));
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						allVariants.add(constructMainSlot(item, woodMaterial));
+					}
+				}
+			}
+			else {
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+					}
+				}
+			}
+		}
+
+
+		return allVariants;
+	}
+
+	public static List<ItemStack> constructAllVariants(ItemStack inputStack) {
+		ItemStack stack = inputStack.copy();
+		Item item = stack.getItem();
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent
+					&& ((IMaterialSingleComponent) item).getMaterialType() != CustomMaterialType.NONE) {
+
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						allVariants.add(constructMainSlot(stack, metalMaterial));
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						allVariants.add(constructMainSlot(stack, woodMaterial));
+					}
+				}
+			}
+			else if (item instanceof IMaterialDoubleComponent &&
+					((IMaterialDoubleComponent) item).getPrimaryMaterialType() != CustomMaterialType.NONE
+					&& ((IMaterialDoubleComponent) item).getSecondaryMaterialType() != CustomMaterialType.NONE ) {
+
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+					}
+				}
+			}
+			else {
+				allVariants.add(inputStack);
+			}
+		}
+
+
+		return allVariants;
+	}
+
+	public static List<ItemStack> constructAllVariants(
+			ItemStack inputStack,
+			Map<CustomMaterialType, List<IngredientMaterial>> ingredientMaterialsByType) {
+
+		ItemStack stack = inputStack.copy();
+		Item item = stack.getItem();
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent) {
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				List<CustomMaterial> excludedMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(type))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						if (!excludedMaterials.contains(metalMaterial)) {
+							allVariants.add(constructMainSlot(stack, metalMaterial));
+						}
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						if (!excludedMaterials.contains(woodMaterial)) {
+							allVariants.add(constructMainSlot(stack, woodMaterial));
+						}
+					}
+				}
+			}
+			else if (((IMaterialDoubleComponent) item).getPrimaryMaterialType() != CustomMaterialType.NONE
+					&& ((IMaterialDoubleComponent) item).getSecondaryMaterialType() != CustomMaterialType.NONE ) {
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+				List<CustomMaterial> excludedPrimaryMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(primaryMaterialType))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				List<CustomMaterial> excludedSecondaryMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(secondaryMaterialType))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						if (!excludedPrimaryMaterials.contains(primaryMaterial)
+								&& !excludedSecondaryMaterials.contains(secondaryMaterial)) {
+							allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+						}
+					}
+				}
+			}
+			else {
+				allVariants.add(inputStack);
+			}
+		}
+
+
+		return allVariants;
+	}
+
+	public static List<ItemStack> constructModifiedCounts(ItemStack stack, CustomMaterialType fallbackType) {
+		List<ItemStack> stacks = new ArrayList<>();
+		CustomMaterialType type;
+		if (stack.getItem() instanceof IMaterialComponent) {
+			if (stack.getItem() instanceof IMaterialDoubleComponent) {
+				type = ((IMaterialDoubleComponent) stack.getItem()).getPrimaryMaterialType();
+			}
+			else {
+				type = ((IMaterialSingleComponent) stack.getItem()).getMaterialType();
+			}
+		}
+		else {
+			type = fallbackType;
+		}
+
+		for (CustomMaterial material : CustomMaterialRegistry.getList(type)) {
+			ItemStack copy = stack.copy();
+			int modifiedCount = MathHelper.clamp(
+					material.getTier() * copy.getCount(),
+					1,
+					copy.getMaxStackSize());
+			copy.setCount(modifiedCount);
+			stacks.add(copy);
+		}
+		return stacks;
+	}
+
+	public static void modifyCounts(List<ItemStack> stacks) {
+		for (ItemStack stackToModify : stacks) {
+			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stackToModify);
+			int modifiedCount = MathHelper.clamp(
+					material.getTier() * stackToModify.getCount(),
+					1,
+					stackToModify.getMaxStackSize());
+			stackToModify.setCount(modifiedCount);
+		}
 	}
 
 	/**
@@ -70,11 +293,11 @@ public class CustomToolHelper {
 	 *
 	 * @param itemRarity is the default id
 	 */
-	public static EnumRarity getRarity(ItemStack item, int itemRarity) {
-		int lvl = itemRarity + 1;
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
+	public static IRarity getRarity(ItemStack item, Rarity itemRarity) {
+		int lvl = itemRarity.getRarityValue();
+		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, slot_main);
 		if (material != null) {
-			lvl = material.rarityID + 1;
+			lvl = material.getRarity().getRarityValue();
 		}
 
 		if (item.isItemEnchanted()) {
@@ -83,10 +306,10 @@ public class CustomToolHelper {
 			}
 			lvl++;
 		}
-		if (lvl >= rarity.length) {
-			lvl = rarity.length - 1;
+		if (lvl >= Rarity.values().length) {
+			lvl = Rarity.values().length - 1;
 		}
-		return rarity[lvl];
+		return Rarity.getRarityByValue(lvl);
 	}
 
 	/**
@@ -97,11 +320,11 @@ public class CustomToolHelper {
 	public static int getMaxDamage(ItemStack stack, int dura) {
 		CustomMaterial head = getCustomPrimaryMaterial(stack);
 		CustomMaterial haft = getCustomSecondaryMaterial(stack);
-		if (head != null && head != CustomMaterial.NONE) {
-			dura = (int) (head.durability * 100);
+		if (head != null && head != CustomMaterialRegistry.NONE) {
+			dura = (int) (head.getDurability() * 100);
 		}
-		if (haft != null && haft != CustomMaterial.NONE) {
-			dura += (int) (haft.durability * 100);// Hafts add 50% to the durability
+		if (haft != null && haft != CustomMaterialRegistry.NONE) {
+			dura += (int) (haft.getDurability() * 100);// Hafts add 50% to the durability
 		}
 		return ToolHelper.setDuraOnQuality(stack, dura);
 	}
@@ -113,29 +336,29 @@ public class CustomToolHelper {
 	 */
 	public static int getColourFromItemStack(ItemStack item, int layer) {
 		if (layer == 0) {
-			CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
-			if (material != null && material != CustomMaterial.NONE) {
+			CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, slot_main);
+			if (material != null && material != CustomMaterialRegistry.NONE) {
 				return material.getColourInt();
 			}
 		}
 		if (layer == 1) {
-			CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
-			if (material != null && material != CustomMaterial.NONE) {
+			CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, slot_haft);
+			if (material != null && material != CustomMaterialRegistry.NONE) {
 				return material.getColourInt();
 			}
 		}
-		return CustomMaterial.NONE.getColourInt();
+		return CustomMaterialRegistry.NONE.getColourInt();
 	}
 
 	public static float getWeightModifier(ItemStack item, float base) {
 		CustomMaterial metal = getCustomPrimaryMaterial(item);
 		CustomMaterial wood = getCustomSecondaryMaterial(item);
 
-		if (metal != CustomMaterial.NONE) {
-			base = (metal.density / 2.5F) * base;
+		if (metal != CustomMaterialRegistry.NONE) {
+			base = (metal.getDensity() / 2.5F) * base;
 		}
-		if (wood != CustomMaterial.NONE) {
-			base += (wood.density / 2.5F);
+		if (wood != CustomMaterialRegistry.NONE) {
+			base += (wood.getDensity() / 2.5F);
 		}
 		return base;
 	}
@@ -147,8 +370,8 @@ public class CustomToolHelper {
 	 */
 	public static float getMeleeDamage(ItemStack item, float defaultModifier) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			return custom.sharpness;
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			return custom.getSharpness();
 		}
 		return defaultModifier;
 	}
@@ -157,11 +380,11 @@ public class CustomToolHelper {
 		CustomMaterial base = getCustomSecondaryMaterial(item);
 		CustomMaterial joints = getCustomPrimaryMaterial(item);
 
-		if (base != null && base != CustomMaterial.NONE) {
-			defaultModifier = base.flexibility;
+		if (base != null && base != CustomMaterialRegistry.NONE) {
+			defaultModifier = base.getFlexibility();
 		}
-		if (joints != null && joints != CustomMaterial.NONE) {
-			defaultModifier *= joints.flexibility;
+		if (joints != null && joints != CustomMaterialRegistry.NONE) {
+			defaultModifier *= joints.getFlexibility();
 		}
 		return defaultModifier;
 	}
@@ -171,8 +394,8 @@ public class CustomToolHelper {
 	 */
 	public static float getBaseDamages(ItemStack item, float defaultModifier) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			return getBaseDamage(custom.sharpness * custom.flexibility);
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			return getBaseDamage(custom.getSharpness() * custom.getFlexibility());
 		}
 		return getBaseDamage(defaultModifier);
 	}
@@ -186,24 +409,24 @@ public class CustomToolHelper {
 
 	public static float getEfficiencyForHds(ItemStack item, float value, float mod) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			value = 2.0F + (custom.hardness * 4F);// Efficiency starts at 2 and each point of sharpness adds 2
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			value = 2.0F + (custom.getHardness() * 4F);// Efficiency starts at 2 and each point of sharpness adds 2
 		}
 		return ToolHelper.modifyDigOnQuality(item, value) * mod;
 	}
 
 	public static float getEfficiency(ItemStack item, float value, float mod) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			value = 2.0F + (custom.sharpness * 2F);// Efficiency starts at 2 and each point of sharpness adds 2
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			value = 2.0F + (custom.getSharpness() * 2F);// Efficiency starts at 2 and each point of sharpness adds 2
 		}
 		return ToolHelper.modifyDigOnQuality(item, value) * mod;
 	}
 
 	public static int getCrafterTier(ItemStack item, int value) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			return custom.crafterTier;
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			return custom.getCrafterTier();
 		}
 		return value;
 	}
@@ -214,12 +437,12 @@ public class CustomToolHelper {
 		}
 
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null && custom != CustomMaterial.NONE) {
-			if (custom.tier == 0)
+		if (custom != null && custom != CustomMaterialRegistry.NONE) {
+			if (custom.getTier() == 0)
 				return 1;
-			if (custom.tier <= 2)
+			if (custom.getTier() <= 2)
 				return 2;
-			return Math.max(custom.tier, 2);
+			return Math.max(custom.getTier(), 2);
 		}
 		return value;
 	}
@@ -230,13 +453,13 @@ public class CustomToolHelper {
 
 		if (materialOnTooltip()) {
 			CustomMaterial mainMaterial = getCustomPrimaryMaterial(item);
-			if (mainMaterial != null && mainMaterial != CustomMaterial.NONE) {
+			if (mainMaterial != null && mainMaterial != CustomMaterialRegistry.NONE) {
 				String matName = I18n.translateToLocal(I18n.translateToLocal(Utils.convertSnakeCaseToSplitCapitalized(mainMaterial.getName())));
 				list.add(TextFormatting.GOLD + matName);
 			}
 		}
 
-		if (secondaryMaterial != null && secondaryMaterial != CustomMaterial.NONE) {
+		if (secondaryMaterial != null && secondaryMaterial != CustomMaterialRegistry.NONE) {
 			String name;
 			String localized_material;
 			name = secondaryMaterial.getName();
@@ -260,11 +483,16 @@ public class CustomToolHelper {
 		return cfg.equalsIgnoreCase("true");
 	}
 
+	public static String getMaterialNameForTooltip(CustomMaterial customMaterial) {
+		return I18n.translateToLocal(I18n.translateToLocal(Utils
+				.convertSnakeCaseToSplitCapitalized(customMaterial.getName())));
+	}
+
 	@SideOnly(Side.CLIENT)
 	public static void addBowInformation(ItemStack item, List<String> list) {
 
 		CustomMaterial material = getCustomPrimaryMaterial(item);
-		if (material != null && material != CustomMaterial.NONE) {
+		if (material != null && material != CustomMaterialRegistry.NONE) {
 			String name;
 			String localized_material;
 			name = material.getName();
@@ -288,7 +516,7 @@ public class CustomToolHelper {
 		CustomMaterial material = getCustomSecondaryMaterial(item);
 		String name = "any";
 		String localized_material = null;
-		if (material != null && material != CustomMaterial.NONE) {
+		if (material != null && material != CustomMaterialRegistry.NONE) {
 			name = material.getName();
 			localized_material = I18n.translateToLocal("material." + name + ".name");
 		}
@@ -308,7 +536,7 @@ public class CustomToolHelper {
 		CustomMaterial material = getCustomPrimaryMaterial(item);
 		String name = "any";
 		String localized_material = null;
-		if (material != null && material != CustomMaterial.NONE) {
+		if (material != null && material != CustomMaterialRegistry.NONE) {
 			name = material.getName();
 			localized_material = I18n.translateToLocal("material." + name + ".name");
 		}
@@ -350,11 +578,11 @@ public class CustomToolHelper {
 		CustomMaterial recipeMat = CustomToolHelper.getCustomPrimaryMaterial(recipeItem);
 		CustomMaterial inputMat = CustomToolHelper.getCustomPrimaryMaterial(inputItem);
 
-		if (recipeMat == null || recipeMat == CustomMaterial.NONE) {
+		if (recipeMat == null || recipeMat == CustomMaterialRegistry.NONE) {
 			return true;
 		}
 
-		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
+		if ((inputMat == null || inputMat == CustomMaterialRegistry.NONE) && recipeMat != null) {
 			return false;
 		}
 		return recipeMat == inputMat;
@@ -364,11 +592,11 @@ public class CustomToolHelper {
 		CustomMaterial recipeMat = CustomToolHelper.getCustomSecondaryMaterial(recipeItem);
 		CustomMaterial inputMat = CustomToolHelper.getCustomSecondaryMaterial(inputItem);
 
-		if (recipeMat == null || recipeMat == CustomMaterial.NONE) {
+		if (recipeMat == null || recipeMat == CustomMaterialRegistry.NONE) {
 			return true;
 		}
 
-		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
+		if ((inputMat == null || inputMat == CustomMaterialRegistry.NONE) && recipeMat != null) {
 			return false;
 		}
 		return recipeMat == inputMat;
@@ -382,12 +610,12 @@ public class CustomToolHelper {
 	@SideOnly(Side.CLIENT)
 	public static void addComponentString(List<String> list, CustomMaterial base, float units) {
 		if (base != null ) {
-			float mass = base.density * units;
-			if (base != CustomMaterial.NONE) {
+			float mass = base.getDensity() * units;
+			if (base != CustomMaterialRegistry.NONE) {
 				list.add(TextFormatting.GOLD + base.getMaterialString());
 			}
 			if (mass > 0) {
-				list.add(CustomMaterial.getWeightString(mass));
+				list.add(CustomMaterialRegistry.getWeightString(mass));
 			}
 
 			if (base.isHeatable()) {
@@ -399,9 +627,9 @@ public class CustomToolHelper {
 	}
 
 	public static float getBurnModifier(ItemStack fuel) {
-		CustomMaterial mat = CustomMaterial.getMaterialFor(fuel, slot_main);
-		if (mat != null && mat != CustomMaterial.NONE && mat.type.equalsIgnoreCase("wood")) {
-			return (2 * mat.density) + 0.5F;
+		CustomMaterial mat = CustomMaterialRegistry.getMaterialFor(fuel, slot_main);
+		if (mat != null && mat != CustomMaterialRegistry.NONE && mat.getType() == CustomMaterialType.WOOD_MATERIAL) {
+			return (2 * mat.getDensity()) + 0.5F;
 		}
 		return 1.0F;
 	}
@@ -427,10 +655,10 @@ public class CustomToolHelper {
 			CustomMaterial base = getCustomPrimaryMaterial(item);
 			CustomMaterial haft = getCustomSecondaryMaterial(item);
 
-			if (base != null && base != CustomMaterial.NONE) {
+			if (base != null && base != CustomMaterialRegistry.NONE) {
 				reference += "_" + base.getName();
 			}
-			if (haft != null && haft != CustomMaterial.NONE) {
+			if (haft != null && haft != CustomMaterialRegistry.NONE) {
 				reference += "_" + haft.getName();
 			}
 		}
@@ -455,9 +683,9 @@ public class CustomToolHelper {
 		CustomMaterial secondaryMaterial1 = getCustomSecondaryMaterial(item2);
 		CustomMaterial mainMaterial2 = getCustomPrimaryMaterial(item1);
 		CustomMaterial secondaryMaterial2 = getCustomSecondaryMaterial(item2);
-		if (((mainMaterial1 == null || mainMaterial1 == CustomMaterial.NONE) && secondaryMaterial1 != null && secondaryMaterial1 != CustomMaterial.NONE) || ((secondaryMaterial1 == null || secondaryMaterial1 == CustomMaterial.NONE) && mainMaterial1 != null && mainMaterial1 != CustomMaterial.NONE))
+		if (((mainMaterial1 == null || mainMaterial1 == CustomMaterialRegistry.NONE) && secondaryMaterial1 != null && secondaryMaterial1 != CustomMaterialRegistry.NONE) || ((secondaryMaterial1 == null || secondaryMaterial1 == CustomMaterialRegistry.NONE) && mainMaterial1 != null && mainMaterial1 != CustomMaterialRegistry.NONE))
 			return false;
-		if (((mainMaterial2 == null || mainMaterial2 == CustomMaterial.NONE) && secondaryMaterial2 != null && secondaryMaterial2 != CustomMaterial.NONE) || ((secondaryMaterial2 == null || secondaryMaterial2 == CustomMaterial.NONE) && mainMaterial2 != null && mainMaterial2 != CustomMaterial.NONE))
+		if (((mainMaterial2 == null || mainMaterial2 == CustomMaterialRegistry.NONE) && secondaryMaterial2 != null && secondaryMaterial2 != CustomMaterialRegistry.NONE) || ((secondaryMaterial2 == null || secondaryMaterial2 == CustomMaterialRegistry.NONE) && mainMaterial2 != null && mainMaterial2 != CustomMaterialRegistry.NONE))
 			return false;
 
 		if (mainMaterial1 != null && secondaryMaterial1 != null && mainMaterial1 != secondaryMaterial1)
@@ -468,13 +696,13 @@ public class CustomToolHelper {
 	public static boolean isMythic(ItemStack result) {
 		CustomMaterial main1 = getCustomPrimaryMaterial(result);
 		CustomMaterial haft1 = getCustomPrimaryMaterial(result);
-		if (main1 != null  && main1 != CustomMaterial.NONE && main1.isUnbrekable()) {
+		if (main1 != null  && main1 != CustomMaterialRegistry.NONE && main1.isUnbreakable()) {
 			return true;
 		}
-		return haft1 != null && haft1 != CustomMaterial.NONE && haft1.isUnbrekable();
+		return haft1 != null && haft1 != CustomMaterialRegistry.NONE && haft1.isUnbreakable();
 	}
 
-	public static String getComponentMaterial(ItemStack item, String type) {
+	public static String getComponentMaterial(ItemStack item, CustomMaterialType type) {
 		if (item.isEmpty() || type == null)
 			return null;
 
@@ -483,31 +711,31 @@ public class CustomToolHelper {
 		}
 
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-		if (material != null && material != CustomMaterial.NONE) {
-			return material.type.equalsIgnoreCase(type) ? material.name : null;
+		if (material != null && material != CustomMaterialRegistry.NONE) {
+			return material.getType() == type ? material.getName() : null;
 		}
 		return null;
 	}
 
 	public static boolean hasAnyMaterial(ItemStack item) {
-		return (getCustomPrimaryMaterial(item) != null && getCustomPrimaryMaterial(item) != CustomMaterial.NONE) || (getCustomSecondaryMaterial(item) != null && getCustomSecondaryMaterial(item) != CustomMaterial.NONE);
+		return (getCustomPrimaryMaterial(item) != null && getCustomPrimaryMaterial(item) != CustomMaterialRegistry.NONE) || (getCustomSecondaryMaterial(item) != null && getCustomSecondaryMaterial(item) != CustomMaterialRegistry.NONE);
 	}
 
 	public static void tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
-		String type = null;
-		if (!newitem.isEmpty() && newitem.getItem() instanceof ITieredComponent) {
-			type = ((ITieredComponent) newitem.getItem()).getMaterialType(newitem);
+		CustomMaterialType type = null;
+		if (!newitem.isEmpty() && newitem.getItem() instanceof IMaterialSingleComponent) {
+			type = ((IMaterialSingleComponent) newitem.getItem()).getMaterialType();
 		}
 
 		if (type != null) {
 			CustomMaterial primary = CustomToolHelper.getCustomPrimaryMaterial(mainItem);
 			CustomMaterial secondary = CustomToolHelper.getCustomSecondaryMaterial(mainItem);
 
-			if (primary != null && primary != CustomMaterial.NONE && primary.type.equalsIgnoreCase(type)) {
-				CustomMaterial.addMaterial(newitem, slot_main, primary.name);
+			if (primary != null && primary != CustomMaterialRegistry.NONE && primary.getType() == type) {
+				CustomMaterialRegistry.addMaterial(newitem, slot_main, primary.getName());
 			} else {
-				if (secondary != null && secondary != CustomMaterial.NONE && secondary.type.equalsIgnoreCase(type)) {
-					CustomMaterial.addMaterial(newitem, slot_main, secondary.name);
+				if (secondary != null && secondary != CustomMaterialRegistry.NONE && secondary.getType() == type) {
+					CustomMaterialRegistry.addMaterial(newitem, slot_main, secondary.getName());
 				}
 			}
 		}

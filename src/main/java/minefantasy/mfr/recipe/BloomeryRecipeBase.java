@@ -29,8 +29,8 @@ public class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeB
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerBloomery.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	public ItemStack getBloomeryRecipeOutput(){

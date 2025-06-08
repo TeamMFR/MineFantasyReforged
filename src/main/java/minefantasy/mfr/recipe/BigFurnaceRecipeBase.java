@@ -31,8 +31,8 @@ public class BigFurnaceRecipeBase extends IForgeRegistryEntry.Impl<BigFurnaceRec
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerBigFurnace.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	public ItemStack getBigFurnaceRecipeOutput(){

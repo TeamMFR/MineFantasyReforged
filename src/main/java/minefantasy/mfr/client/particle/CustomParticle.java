@@ -123,7 +123,7 @@ public abstract class CustomParticle extends Particle {
 		if(textures.length > 0){
 			
 			sprites = Arrays.stream(textures).map(t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(
-					t.toString())).collect(Collectors.toList()).toArray(new TextureAtlasSprite[0]);
+					t.toString())).toArray(TextureAtlasSprite[]::new);
 			
 			this.setParticleTexture(sprites[0]);
 					
@@ -408,7 +408,7 @@ public abstract class CustomParticle extends Particle {
 			
 			// Spin
 			if(radius > 0){
-				angle += speed;
+				angle += (float) speed;
 				// If the particle has spin, x/z relative position is used as centre and coords are changed each tick
 				x += radius * -MathHelper.cos(angle);
 				z += radius * MathHelper.sin(angle);

@@ -4,7 +4,7 @@ import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.container.slots.SlotReload;
 import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.mechanics.AmmoMechanics;
-import minefantasy.mfr.util.Utils;
+import minefantasy.mfr.util.ArrowUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -25,7 +25,7 @@ public class ContainerReload extends Container {
 		weaponInv = new ItemStackHandler(1) {
 			@Override
 			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-				if (Utils.isVanillaArrow(stack)) {
+				if (ArrowUtils.isVanillaArrow(stack)) {
 					return ConfigWeapon.vanillaArrowStackLimit;
 				}
 				else {
@@ -127,7 +127,7 @@ public class ContainerReload extends Container {
 	}
 
 	public boolean canAccept(ItemStack ammo) {
-		return Utils.canAcceptArrow(ammo, weapon);
+		return ArrowUtils.canAcceptArrow(ammo, weapon);
 	}
 
 	@Override

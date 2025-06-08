@@ -21,6 +21,7 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	public static boolean HCCRemoveTalismansCraft = false;
 	public static boolean hunterKnife;
 	public static boolean lessHunt;
+	public static boolean dropRawhide;
 	public static boolean preventCook;
 	public static boolean preventCeramic;
 	public static boolean enableOverheat = true;
@@ -48,7 +49,7 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 		Heatable.HCCquenchRuin = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hardcore Quench", true,
 				"Hot items can be damaged if a trough is not used.").getString());
 		HCCWeakItems = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Weaken Basic items", true,
-				"This will significantly reduce the durability of basic items (made on basic crafting table), they can still be crafted but are practically useless.").getString());
+				"This will significantly reduce the durability of vanilla items, they can still be crafted but are practically useless.").getString());
 		HCCallowRocks = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Allow Stone-Age", true,
 				"Allows punching stone for sharp rocks, and using them on leaves for sticks/vines: These make primitive stone tools").getString());
 		HCCRemoveCraftBread = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Remove Bread Recipes", true,
@@ -76,6 +77,8 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 				"This option means animals ONLY drop meat and hide when killed with a hunting weapon such as a knife, only the killing blow counts").getString());
 		lessHunt = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Reduce Meat Drops", false,
 				"This will alter the stack size of animal meat drops, meaning they only drop 1 every time").getString());
+		dropRawhide = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Drop Leather or Rawhide", true,
+				"This will force rawhide drops from animals, rather than leather from leather-based animals, like cows").getString());
 		preventCook = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace food", false,
 				"Stop food from being cooked in a furnace").getString());
 		preventCeramic = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace ceramic", false,

@@ -1,5 +1,7 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.api.crafting.IIgnitable;
+import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
@@ -14,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -27,7 +30,7 @@ import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
+public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> implements IIgnitable {
 	public static final PropertyBool BLOOM = PropertyBool.create("bloom");
 
 	public BlockBloomery() {
@@ -116,15 +119,17 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 			if (!player.isSwingInProgress && tile.tryHammer(player)) {
 				return true;
 			}
-			// Light
-			int l = ItemLighter.tryUse(held, player);
-			if (!tile.isActive() && !tile.hasBloom()) {
-				if (!held.isEmpty() && l != 0) {
-					player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
-					if (world.isRemote)
-						return true;
-					if (l == 1 && tile.light(player)) {
-						held.damageItem(1, player);
+			// Ignition
+			if (held.getItem() instanceof ItemFlintAndSteel || held.getItem() instanceof ILighter) {
+				if (!tile.isActive() && tile.getResult() != ItemStack.EMPTY) {
+					// 1 for ignition, -1 for a failed attempt, 0 for a null input or for an item that needs to bypass normal ignition
+					int uses = ItemLighter.tryUse(held, player);
+					if (uses != 0) {
+						player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+						if (uses == 1 && !world.isRemote) {
+							held.damageItem(1, player);
+							igniteBlock(world, pos, state);
+						}
 					}
 					return true;
 				}
@@ -140,6 +145,31 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 		return true;
 	}
 
+	/**
+	 * Standardized function to handle block ignition
+	 * @param world World
+	 * @param pos BlockPos
+	 * @param state IBlockState
+	 */
+	@Override
+	public void igniteBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityBloomery bloomery = (TileEntityBloomery) getTile(world, pos);
+		if (bloomery != null) {
+			boolean sky = world.canBlockSeeSky(pos.add(0, 1, 0));
+			ItemStack result = bloomery.getResult();
+			if (!bloomery.isActive() && sky && !state.getValue(BLOOM) && result != ItemStack.EMPTY) {
+				IIgnitable.playIgnitionSound(world, pos);
+				bloomery.setIsActive(true);
+				bloomery.setProgressMax(bloomery.getSmeltTime());
+			}
+		}
+	}
+
+	public boolean doesPlayerHaveResearch() {
+		// Empty function for TPK to populate with a proper check to see if the igniting player has the right research
+		return true;
+	}
+
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
 		TileEntityBloomery tile = (TileEntityBloomery) getTile(world, pos);
@@ -149,5 +179,4 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 			}
 		}
 	}
-
 }

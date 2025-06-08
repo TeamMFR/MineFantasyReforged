@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_arrow_bodkin"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:fletching"
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bodkin_head",
+			"material_type": "metal_material"
+		}
+	]
+}

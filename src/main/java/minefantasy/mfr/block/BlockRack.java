@@ -5,8 +5,6 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RackCommandPacket;
 import minefantasy.mfr.tile.TileEntityRack;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,8 +31,6 @@ import java.util.Random;
  * code, or methods can be used in your own creations.
  */
 public class BlockRack extends BlockWoodDecor {
-
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
 			EnumFacing.NORTH, new AxisAlignedBB(0.0F, 0.0F, 0.75F, 1.0F, 1.0F, 1.0F),

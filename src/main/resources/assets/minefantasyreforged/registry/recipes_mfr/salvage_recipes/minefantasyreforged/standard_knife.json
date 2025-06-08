@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_knife"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"item": "#ALL_BARS"
+		},
+		{
+			"item": "#ALL_TIMBERS"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_knife"
+		},
+		{
+			"item": "minefantasyreforged:ornate_knife"
+		}
+	]
+}

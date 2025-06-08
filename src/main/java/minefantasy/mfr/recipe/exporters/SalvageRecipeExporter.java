@@ -9,6 +9,7 @@ import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.recipe.SalvageRecipeBase;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.item.ItemStack;
@@ -108,8 +109,8 @@ public class SalvageRecipeExporter {
 
 			if (result.hasTagCompound()) {
 				if (result.getTagCompound().hasKey("mf_custom_materials")) {
-					String metalName = CustomToolHelper.getComponentMaterial(result, "metal");
-					String woodName = CustomToolHelper.getComponentMaterial(result, "wood");
+					String metalName = CustomToolHelper.getComponentMaterial(result, CustomMaterialType.METAL_MATERIAL);
+					String woodName = CustomToolHelper.getComponentMaterial(result, CustomMaterialType.WOOD_MATERIAL);
 					if (metalName != null) {
 						trimmedName = trimmedName + "_" + metalName;
 					}

@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_scale_leggings"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:strong_leather_leggings"
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:scale_mesh",
+			"material_type": "metal_material",
+			"count": 4
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_scale_leggings"
+		},
+		{
+			"item": "minefantasyreforged:ornate_scale_leggings"
+		}
+	]
+}

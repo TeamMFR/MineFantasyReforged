@@ -1,23 +1,25 @@
 package minefantasy.mfr.item;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.block.BlockRack;
 import minefantasy.mfr.block.BlockRepairKit;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
-import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButton;
@@ -31,10 +33,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -42,6 +44,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -55,8 +58,8 @@ import java.util.Set;
  * @author Anonymous Productions
  */
 
-public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
-	protected int itemRarity;
+public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister, IMaterialDoubleComponent {
+	protected Rarity itemRarity;
 	private final ToolMaterial material;
 	private final int tier;
 	private float baseDamage;
@@ -66,7 +69,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	private final Set<Class<? extends Block>> shiftRotations = new HashSet<Class<? extends Block>>();
 	private final Set<Class<? extends Block>> blacklistedRotations = new HashSet<Class<? extends Block>>();
 
-	public ItemSpanner(String name, int rarity, int tier) {
+	public ItemSpanner(String name, Rarity rarity, int tier) {
 		super(2.0F, 1.0F, ToolMaterial.IRON, Sets.newHashSet(new Block[] {}));
 		this.material = ToolMaterial.IRON;
 		itemRarity = rarity;
@@ -103,7 +106,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 			return EnumActionResult.FAIL;
 		}
 
-		if (block instanceof BlockChest && Utils.getOtherDoubleChest(world.getTileEntity(pos)) != null) {
+		if (block instanceof BlockChest && BlockUtils.getOtherDoubleChest(world.getTileEntity(pos)) != null) {
 			return EnumActionResult.FAIL;
 		}
 
@@ -183,10 +186,12 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 			return super.getAttributeModifiers(slot, stack);
 		}
 
-		Multimap<String, AttributeModifier> map = HashMultimap.create();
-		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
-		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 1F, 0));
-		return map;
+		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
+		multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+				new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
+		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+				new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", 1F, 0));
+		return multimap;
 	}
 
 	/**
@@ -205,12 +210,8 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -251,7 +252,17 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 
 	@Override
@@ -260,10 +271,10 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

@@ -1,0 +1,30 @@
+{
+    "_comment": [
+        "Author: TheOddlySeagull"
+    ],
+    "mod": "growthcraft_bamboo",
+    "wood_material": [
+        {
+            "name": "thick_bamboo_wood",
+            "materialIngredient": {
+                "item": "growthcraft_bamboo:bamboo_plank"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.7,
+                "durability": 1.00,
+                "flexibility": 1.8,
+                "resistance": 40,
+                "density": 1.0,
+                "rarity": "COMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 192,
+                "green": 186,
+                "blue": 130
+            }
+        }
+    ]
+}

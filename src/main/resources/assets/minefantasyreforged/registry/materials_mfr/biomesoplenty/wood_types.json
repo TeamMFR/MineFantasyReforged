@@ -1,0 +1,376 @@
+{
+    "_comment": [
+        "Author: TheOddlySeagull"
+    ],
+    "mod": "biomesoplenty",
+    "wood_material": [
+        {
+            "name": "sacred_oak_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 0
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 0.7,
+                "durability": 2.00,
+                "flexibility": 1.0,
+                "resistance": 40,
+                "density": 0.8,
+                "rarity": "RARE",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 136,
+                "green": 144,
+                "blue": 90
+            }
+        },
+        {
+            "name": "cherry_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 1
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.7,
+                "durability": 1.00,
+                "flexibility": 1.1,
+                "resistance": 40,
+                "density": 0.8,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 136,
+                "green": 43,
+                "blue": 41
+            }
+        },
+        {
+            "name": "umbran_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 2
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.2,
+                "durability": 1.2,
+                "flexibility": 1.0,
+                "resistance": 20,
+                "density": 0.4,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 115,
+                "green": 97,
+                "blue": 132
+            }
+        },
+        {
+            "name": "fir_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 3
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.2,
+                "durability": 0.90,
+                "flexibility": 1.3,
+                "resistance": 20,
+                "density": 0.4,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 167,
+                "green": 154,
+                "blue": 130
+            }
+        },
+        {
+            "name": "magic_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 5
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 0.2,
+                "durability": 2.50,
+                "flexibility": 1.3,
+                "resistance": 20,
+                "density": 0.6,
+                "rarity": "UNCOMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 78,
+                "green": 117,
+                "blue": 187
+            }
+        },
+        {
+            "name": "mangrove_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 6
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.7,
+                "durability": 0.7,
+                "flexibility": 0.7,
+                "resistance": 40,
+                "density": 0.7,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 238,
+                "green": 225,
+                "blue": 204
+            }
+        },
+        {
+            "name": "palm_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 7
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.4,
+                "durability": 0.80,
+                "flexibility": 1.4,
+                "resistance": 50,
+                "density": 0.6,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 195,
+                "green": 135,
+                "blue": 64
+            }
+        },
+        {
+            "name": "redwood_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 8
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.2,
+                "durability": 1.1,
+                "flexibility": 1.0,
+                "resistance": 20,
+                "density": 0.5,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 162,
+                "green": 81,
+                "blue": 53
+            }
+        },
+        {
+            "name": "willow_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 9
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.7,
+                "durability": 0.8,
+                "flexibility": 0.7,
+                "resistance": 40,
+                "density": 0.8,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 151,
+                "green": 163,
+                "blue": 122
+            }
+        },
+        {
+            "name": "pine_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 10
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.2,
+                "durability": 0.70,
+                "flexibility": 1.0,
+                "resistance": 20,
+                "density": 0.3,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 175,
+                "green": 131,
+                "blue": 100
+            }
+        },
+        {
+            "name": "hellbark_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 11
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 0.9,
+                "durability": 3.50,
+                "flexibility": 1.1,
+                "resistance": 50,
+                "density": 1.2,
+                "rarity": "RARE",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 189,
+                "green": 134,
+                "blue": 73
+            }
+        },
+        {
+            "name": "jacaranda_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 12
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.7,
+                "durability": 1.00,
+                "flexibility": 1.3,
+                "resistance": 40,
+                "density": 0.8,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 202,
+                "green": 175,
+                "blue": 166
+            }
+        },
+        {
+            "name": "mahogany_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 13
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.4,
+                "durability": 0.80,
+                "flexibility": 1.2,
+                "resistance": 50,
+                "density": 0.6,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 191,
+                "green": 125,
+                "blue": 124
+            }
+        },
+        {
+            "name": "eucalyptus_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:planks_0",
+                "data": 15
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 0.5,
+                "durability": 1.20,
+                "flexibility": 1.3,
+                "resistance": 20,
+                "density": 0.6,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 171,
+                "green": 145,
+                "blue": 107
+            }
+        },
+        {
+            "name": "dead_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:log_4",
+                "data": 5
+            },
+            "properties": {
+                "tier": 0,
+                "hardness": 0.1,
+                "durability": 0.20,
+                "flexibility": 0.20,
+                "resistance": 10,
+                "density": 0.2,
+                "rarity": "COMMON",
+                "craft_tier": 0,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 175,
+                "green": 157,
+                "blue": 127
+            }
+        },
+        {
+            "name": "thin_bamboo_wood",
+            "materialIngredient": {
+                "item": "biomesoplenty:bamboo_thatching",
+                "data": 0
+            },
+            "properties": {
+                "tier": 1,
+                "hardness": 1.3,
+                "durability": 0.70,
+                "flexibility": 1.5,
+                "resistance": 40,
+                "density": 0.6,
+                "rarity": "COMMON",
+                "craft_tier": 1,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 156,
+                "green": 210,
+                "blue": 128
+            }
+        }
+    ]
+}

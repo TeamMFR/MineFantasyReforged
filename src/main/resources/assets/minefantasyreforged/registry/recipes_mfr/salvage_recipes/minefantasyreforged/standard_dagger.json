@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_dagger"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bar",
+			"material_type": "metal_material",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"item": "#ALL_TIMBERS"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_dagger"
+		},
+		{
+			"item": "minefantasyreforged:ornate_dagger"
+		}
+	]
+}

@@ -1,0 +1,25 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 0,
+    "repeat_amount": 3,
+    "research": "smelt_bronze",
+    "skill": "artisanry",
+    "skill_xp": 1,
+    "vanilla_xp": 0.3,
+    "ingredients": [
+        {
+            "item": "#BAR_COPPER"
+        },
+        {
+            "item": "#BAR_COPPER"
+        },
+        {
+            "item": "#BAR_TIN"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}",
+        "count": 3
+    }
+}

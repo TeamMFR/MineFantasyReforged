@@ -7,11 +7,11 @@ import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.BlockCrops;
@@ -150,7 +150,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 	public void setLoadout() {
 		String tier = getMinotaur().weaponTier;
 		if (tier != null) {
-			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, CustomToolHelper.constructWithDefaultWood(getRandomWeapon(), tier));
 		}
 	}
 

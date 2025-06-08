@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_hammer"
+	},
+	"outputs": [
+		{
+			"item": "#ALL_TIMBERS"
+		},
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"item": "#ALL_BARS"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_hammer"
+		},
+		{
+			"item": "minefantasyreforged:ornate_hammer"
+		}
+	]
+}

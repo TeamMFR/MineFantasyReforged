@@ -293,6 +293,14 @@ public class TacticalManager {
 			if (totalSpeed <= ConfigArmour.minWeightSpeed) {
 				totalSpeed = ConfigArmour.minWeightSpeed;
 			}
+
+			//Apply sink in water
+			float weight = ArmourCalculator.getTotalWeightOfWorn(player, false);
+			if (weight > 100F) {
+				if (player.isInWater()) {
+					player.motionY -= (weight / 20000F);
+				}
+			}
 		}
 		// apply speed mod
 		if (totalSpeed != 100F && player.onGround) {

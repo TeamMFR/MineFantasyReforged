@@ -1,0 +1,52 @@
+{
+    "_comment": [
+        "Author: Team MFR"
+    ],
+    "mod": "thaumcraft",
+    "wood_material": [
+        {
+            "name": "silverwood_wood",
+            "materialIngredient": {
+                "item": "thaumcraft:plank_silverwood"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.0,
+                "durability": 3.50,
+                "flexibility": 2.2,
+                "resistance": 75,
+                "density": 0.8,
+                "rarity": "COMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 1.0
+            },
+            "color": {
+                "red": 224,
+                "green": 220,
+                "blue": 208
+            }
+        },
+        {
+            "name": "greatwood_wood",
+            "materialIngredient": {
+                "item": "thaumcraft:plank_greatwood"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.2,
+                "durability": 1.50,
+                "flexibility": 1.0,
+                "resistance": 50,
+                "density": 1.5,
+                "rarity": "COMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 1.0
+            },
+            "color": {
+                "red": 37,
+                "green": 25,
+                "blue": 23
+            }
+        }
+    ]
+}

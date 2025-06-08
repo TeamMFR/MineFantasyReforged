@@ -44,8 +44,8 @@ public class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> i
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerQuern.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	public ItemStack getQuernRecipeOutput() {

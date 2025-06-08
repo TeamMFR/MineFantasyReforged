@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:cogwork_armour"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:plate_huge",
+			"material_type": "metal_material",
+			"count": 6
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:plate",
+			"material_type": "metal_material",
+			"count": 6
+		}
+	]
+}

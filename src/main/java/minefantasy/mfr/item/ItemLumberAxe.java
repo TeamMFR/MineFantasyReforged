@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -25,10 +26,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,19 +39,23 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-import static minefantasy.mfr.material.CustomMaterial.decimal_format;
+import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
 
 public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	private final Random rand = new Random();
 
-	public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
+	public ItemLumberAxe(String name, Item.ToolMaterial material, Rarity rarity) {
 		super(name, material, rarity);
 		this.setMaxDamage(getMaxDamage() * 5);
 	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
-		if (!user.world.isRemote && user instanceof EntityPlayer && StaminaMechanics.canAcceptCost(user)) {
+		if (!user.world.isRemote
+				&& user instanceof EntityPlayer
+				&& StaminaMechanics.canAcceptCost(user)
+				&& !user.isSneaking()
+				&& Arrays.stream(ConfigTools.lumberAxeIncompatibleModList).noneMatch(Loader::isModLoaded)) {
 			breakTree(world, pos, item, user, ConfigTools.lumberAxeMaxLogs);
 		}
 		return super.onBlockDestroyed(item, world, state, pos, user);
@@ -118,7 +125,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
-		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		float efficiency = material.getHardness() > 0 ? material.getHardness() : this.efficiency;
 		return !state.getBlock().isToolEffective("axe", state)
 				? super.getDestroySpeed(stack, state)
 				: CustomToolHelper.getEfficiency(stack, efficiency, efficiencyMod / 8F);
@@ -132,7 +139,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
 	}
 
 	@Override
@@ -142,9 +149,9 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 		}
 
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		float efficiency = material.getHardness() > 0 ? material.getHardness() : this.efficiency;
 		list.add(TextFormatting.GREEN + I18n.format("attribute.tool.digEfficiency.name",
-				decimal_format.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 8F))));
+				DECIMAL_FORMAT.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 8F))));
 	}
 
 	@Override

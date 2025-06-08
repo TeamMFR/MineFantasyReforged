@@ -23,7 +23,7 @@ public class ItemBowl extends ItemComponentMFR {
 	private Random rand = new Random();
 
 	public ItemBowl(String name) {
-		super(name, 0);
+		super(name);
 	}
 
 	@Override

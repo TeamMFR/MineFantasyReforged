@@ -5,10 +5,12 @@ import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.IToolMFR;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.XSTRandom;
@@ -23,9 +25,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -34,6 +35,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.common.IShearable;
 
 import javax.annotation.Nullable;
@@ -44,7 +46,7 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private final int tier;
 	private float baseDamage;
 	private boolean isCustom = false;
@@ -53,9 +55,10 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	/**
 	 * Knives are weapons used for hunting, and tools used for processing
 	 */
-	public ItemKnife(String name, Item.ToolMaterial material, int rarity, float weight, int tier) {
+	public ItemKnife(String name, ToolMaterial material, Rarity rarity, float weight, int tier) {
 		super(material, name, rarity, weight);
 		this.tier = tier;
+		this.itemRarity = Rarity.COMMON;
 	}
 
 	@Override
@@ -180,12 +183,8 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -214,10 +213,10 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

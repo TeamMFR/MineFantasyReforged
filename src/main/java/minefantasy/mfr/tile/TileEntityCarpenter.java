@@ -17,12 +17,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.capabilities.Capability;
@@ -47,6 +50,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	public float progress;
 	private ContainerCarpenter syncCarpenter;
 	private CarpenterCraftMatrix craftMatrix;
+	private ItemStack resultStack = ItemStack.EMPTY;
 	private String lastPlayerHit = "";
 	private int requiredToolTier;
 	private int requiredCarpenterTier;
@@ -102,7 +106,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
 		Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
 		int toolTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
-		if (!(tool == Tool.OTHER)) {
+		if (tool != Tool.OTHER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
 				user.getHeldItemMainhand().damageItem(1, user);
 				if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
@@ -143,16 +147,12 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	}
 
 	private SoundEvent getUseSound(CarpenterRecipeBase recipe) {
-		if (recipe.getSound().toString().equalsIgnoreCase("engineering")) {
-			if (world.rand.nextInt(5) == 0) {
-				return SoundEvents.UI_BUTTON_CLICK;
-			}
-			if (world.rand.nextInt(20) == 0) {
-				return SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
-			}
-			return SoundEvents.BLOCK_WOOD_STEP;
+		if (recipe.getSound() != null) {
+			return recipe.getSound();
 		}
-		return recipe.getSound();
+		else {
+			return SoundEvents.BLOCK_WOOD_HIT;
+		}
 	}
 
 	private void craftItem(EntityPlayer user, CarpenterRecipeBase carpenterRecipe) {
@@ -294,17 +294,19 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		return CraftingManagerCarpenter.findMatchingRecipe(this, craftMatrix, world);
+		CarpenterRecipeBase recipe = CraftingManagerCarpenter.findMatchingRecipe(this, craftMatrix, world);
+
+		resultStack = recipe != null
+				? recipe.getCraftingResult(craftMatrix)
+				: ItemStack.EMPTY;
+
+		return recipe;
 	}
 
 	public String getResultName() {
-		if (!(getRecipe() instanceof CarpenterRecipeBase)) {
-			return I18n.format("gui.no_project_set");
-		}
-		else {
-			CarpenterRecipeBase carpenterRecipe = (CarpenterRecipeBase) getRecipe();
-			return carpenterRecipe.getCraftingResult(craftMatrix).getDisplayName();
-		}
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR)
+				? I18n.format("gui.no_project_set")
+				: resultStack.getDisplayName();
 	}
 
 	public void updateCraftingData() {
@@ -381,7 +383,9 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		progress = nbt.getFloat(PROGRESS_TAG);
 		progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
 		requiredToolTier = nbt.getInteger(TOOL_TIER_REQUIRED_TAG);
-		this.setRecipe(CraftingManagerCarpenter.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerCarpenter.getRecipeByResourceLocation(resourceLocation));
+		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
 	}
 
 	@Override
@@ -393,8 +397,12 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
 		nbt.setInteger(TOOL_TIER_REQUIRED_TAG, requiredToolTier);
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
 		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
+		}
+		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
 		return nbt;
 	}
 

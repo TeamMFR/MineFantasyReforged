@@ -1,0 +1,24 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crate_basic"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:hinge",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber_pane",
+			"material_type": "wood_material",
+			"count": 6
+		}
+	]
+}

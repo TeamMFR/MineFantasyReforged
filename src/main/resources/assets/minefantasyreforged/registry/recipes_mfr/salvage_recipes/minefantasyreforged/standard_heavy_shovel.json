@@ -1,0 +1,38 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_heavy_shovel"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bar",
+			"material_type": "metal_material",
+			"count": 6
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_heavy_shovel"
+		},
+		{
+			"item": "minefantasyreforged:ornate_heavy_shovel"
+		}
+	]
+}

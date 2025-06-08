@@ -41,21 +41,21 @@ public class ContainerCrucible extends ContainerBase {
 
 		super.detectAndSendChanges();
 
-		for (IContainerListener icontainerlistener : this.listeners) {
-			if (this.lastProgress != (int) tile.getProgress()) {
-				icontainerlistener.sendWindowProperty(this, 0, (int) tile.getProgress());
+		for (IContainerListener listener : this.listeners) {
+			if (this.lastProgress !=  tile.getProgress()) {
+				listener.sendWindowProperty(this, 0,  tile.getProgress());
 			}
-			if (this.lastProgressMax != (int) tile.getProgressMax()) {
-				icontainerlistener.sendWindowProperty(this, 1, (int) tile.getProgressMax());
+			if (this.lastProgressMax !=  tile.getProgressMax()) {
+				listener.sendWindowProperty(this, 1,  tile.getProgressMax());
 			}
-			if (this.lastTemp != (int) tile.getTemperature()) {
-				icontainerlistener.sendWindowProperty(this, 2, (int) tile.getTemperature());
+			if (this.lastTemp !=  tile.getTemperature()) {
+				listener.sendWindowProperty(this, 2,  tile.getTemperature());
 			}
 		}
 
-		this.lastProgress = (int) tile.getProgress();
-		this.lastProgressMax = (int) tile.getProgressMax();
-		this.lastTemp = (int) tile.getTemperature();
+		this.lastProgress = tile.getProgress();
+		this.lastProgressMax = tile.getProgressMax();
+		this.lastTemp = tile.getTemperature();
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i) {
 			ItemStack itemstack = this.inventorySlots.get(i).getStack();
@@ -70,6 +70,19 @@ public class ContainerCrucible extends ContainerBase {
 					(listener).sendSlotContents(this, i, itemstack1);
 				}
 			}
+		}
+	}
+
+	@Override
+	public void addListener(IContainerListener listener) {
+		if (this.lastProgress != tile.getProgress()) {
+			listener.sendWindowProperty(this, 0, tile.getProgress());
+		}
+		if (this.lastProgressMax != tile.getProgressMax()) {
+			listener.sendWindowProperty(this, 1, tile.getProgressMax());
+		}
+		if (this.lastTemp != tile.getTemperature()) {
+			listener.sendWindowProperty(this, 2, tile.getTemperature());
 		}
 	}
 

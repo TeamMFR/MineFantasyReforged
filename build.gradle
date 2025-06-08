@@ -22,7 +22,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:6.+'
         classpath 'org.ajoberstar.grgit:grgit-gradle:3.1.1'
-        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.3-0'
+        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.+'
         classpath 'org.spongepowered:mixingradle:0.7.+'
 
     }
@@ -95,7 +95,7 @@ minecraft {
         }
 
         server {
-
+            workingDirectory project.file('run\\server')
             // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
@@ -107,6 +107,10 @@ minecraft {
             jvmArg "-Dmixin.checks.interfaces=true"
         }
     }
+}
+
+sourceSets.all {
+    it.output.resourcesDir = it.output.classesDirs.getFiles().iterator().next()
 }
 
 repositories {
@@ -148,6 +152,9 @@ repositories {
         dirs 'build/libs'
     }
     flatDir {
+        dirs 'build/libs'
+    }
+    flatDir {
         // location for sources
         dirs 'libs'
     }
@@ -184,6 +191,7 @@ dependencies {
     //// Dependencies ////
 
     implementation fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
+
     implementation fg.deobf("codechicken:CodeChickenLib:${mc_version}-${ccl_version}:universal")
 //    implementation fg.deobf("curse_maven:code_chicken_lib_242818:2779848")
 
@@ -382,13 +390,12 @@ if (System.getenv('USE_ALPHAS').equals('true')) {
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", version.toString()
+    inputs.property "mod_version", project.mod_version
     inputs.property "mc_version", project.mc_version.toString()
 
 
     // replace tokens in mcmod.info, and pack.mcmeta
-    from(sourceSets.main.resources.srcDirs) {
-        include 'pack.mcmeta'
-        include 'mcmod.info'
+    filesMatching('mcmod.info') {
         // replace tokens in mcmod.info
         expand 'version': version.toString(),
                 'mc_version': project.mc_version.toString(),
@@ -398,8 +405,6 @@ processResources {
                 'url': project.url,
                 'update_url': project.update_url
     }
-
-    duplicatesStrategy = 'include'
 }
 
 // replace @TOKENS@ in main file

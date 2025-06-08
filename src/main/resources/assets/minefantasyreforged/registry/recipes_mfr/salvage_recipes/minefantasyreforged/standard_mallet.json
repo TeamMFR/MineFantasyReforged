@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_mallet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
+			"count": 2
+		},
+		{
+			"item": "minecraft:stick"
+		}
+	]
+}

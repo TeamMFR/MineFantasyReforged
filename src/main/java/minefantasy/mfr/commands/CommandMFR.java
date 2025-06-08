@@ -1,6 +1,8 @@
 package minefantasy.mfr.commands;
 
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
@@ -26,8 +28,8 @@ public class CommandMFR extends CommandBase {
 
 	private List setupMaterialsList() {
 		List materials = new ArrayList<String>();
-		for (CustomMaterial material : CustomMaterial.materialList.values()) {
-			if (material.type.equalsIgnoreCase("wood") || material.type.equalsIgnoreCase("metal")) {
+		for (CustomMaterial material : CustomMaterialRegistry.getValues()) {
+			if (material.getType() == CustomMaterialType.WOOD_MATERIAL || material.getType() == CustomMaterialType.METAL_MATERIAL) {
 				materials.add(material);
 			}
 		}
@@ -68,14 +70,14 @@ public class CommandMFR extends CommandBase {
 			return;
 		}
 
-		CustomMaterial material = CustomMaterial.getMaterial(strings[2]);
-		if (material == CustomMaterial.NONE) {
+		CustomMaterial material = CustomMaterialRegistry.getMaterial(strings[2]);
+		if (material == CustomMaterialRegistry.NONE) {
 			player.sendMessage(new TextComponentString(I18n.format("command.edit.invalid.material")));
 			return;
 		}
 
-		String slot = material.type.equalsIgnoreCase("metal") ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft;
-		CustomMaterial.addMaterial(equippedItem, slot, material.getName());
+		String slot = material.getType() == CustomMaterialType.METAL_MATERIAL ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft;
+		CustomMaterialRegistry.addMaterial(equippedItem, slot, material.getName());
 		onSuccess(player);
 	}
 

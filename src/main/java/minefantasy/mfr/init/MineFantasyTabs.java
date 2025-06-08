@@ -1,5 +1,6 @@
 package minefantasy.mfr.init;
 
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,23 +40,23 @@ public final class MineFantasyTabs extends CreativeTabs {
 	public ItemStack getIcon() {
 		switch (type) {
 			case 1:
-				return MineFantasyItems.STANDARD_AXE.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_AXE, MineFantasyMaterials.Names.STEEL);
 			case 2:
-				return (MineFantasyItems.STANDARD_SWORD).construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_SWORD, MineFantasyMaterials.Names.STEEL);
 			case 3:
-				return MineFantasyItems.STANDARD_PLATE_HELMET.construct(MineFantasyMaterials.Names.STEEL);
+				return CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_HELMET, MineFantasyMaterials.Names.STEEL);
 			case 4:
-				return MineFantasyItems.STANDARD_BOW.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_BOW, MineFantasyMaterials.Names.STEEL);
 			case 5:
 				return new ItemStack(MineFantasyBlocks.ANVIL_IRON);
 			case 6:
 				return MineFantasyItems.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
 			case 7:
-				return MineFantasyItems.TIMBER.construct(MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructMainSlot(MineFantasyItems.TIMBER, MineFantasyMaterials.Names.OAK_WOOD);
 			case 8:
-				return MineFantasyItems.STANDARD_HANDPICK.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_HANDPICK, MineFantasyMaterials.Names.STEEL);
 			case 9:
-				return MineFantasyItems.STANDARD_HAMMER.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_HAMMER, MineFantasyMaterials.Names.STEEL);
 			case 10:
 				return new ItemStack(MineFantasyBlocks.COPPER_ORE);
 			case 11:

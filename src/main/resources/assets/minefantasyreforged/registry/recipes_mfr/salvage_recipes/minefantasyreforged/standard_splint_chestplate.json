@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_splint_chestplate"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:padded_chestplate"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 6
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:splint_mesh",
+			"material_type": "metal_material",
+			"count": 6
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_splint_chestplate"
+		},
+		{
+			"item": "minefantasyreforged:ornate_splint_chestplate"
+		}
+	]
+}

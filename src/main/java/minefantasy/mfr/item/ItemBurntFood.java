@@ -16,7 +16,7 @@ public class ItemBurntFood extends ItemComponentMFR {
 	private Random rand = new Random();
 
 	public ItemBurntFood(String name) {
-		super(name, -1);
+		super(name);
 	}
 
 	@Override

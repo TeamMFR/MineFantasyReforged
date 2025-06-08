@@ -22,8 +22,8 @@ public class MineFantasyOreDict {
 		OreDictionary.registerOre("oreClay", MineFantasyBlocks.CLAY_ORE);
 		OreDictionary.registerOre("oreRichCoal", MineFantasyBlocks.COAL_RICH_ORE);
 
-		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 1));
-		OreDictionary.registerOre("stone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 0));
+		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.LIMESTONE_COBBLE, 1));
+		OreDictionary.registerOre("stone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1));
 		OreDictionary.registerOre("limestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("stoneLimestone", new ItemStack(MineFantasyBlocks.LIMESTONE_COBBLE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("stoneLimestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
@@ -82,11 +82,28 @@ public class MineFantasyOreDict {
 		OreDictionary.registerOre("ingotObsidian", MineFantasyItems.OBSIDIAN_INGOT);
 		OreDictionary.registerOre("ingotCompositeAlloy", MineFantasyItems.COMPOSITE_ALLOY_INGOT);
 
+		OreDictionary.registerOre("blockCopper", MineFantasyBlocks.COPPER_STORAGE);
+		OreDictionary.registerOre("blockTin", MineFantasyBlocks.TIN_STORAGE);
+		OreDictionary.registerOre("blockBronze", MineFantasyBlocks.BRONZE_STORAGE);
+		OreDictionary.registerOre("blockPigIron", MineFantasyBlocks.PIG_IRON_STORAGE);
+		OreDictionary.registerOre("blockSteel", MineFantasyBlocks.STEEL_STORAGE);
+		OreDictionary.registerOre("blockSilver", MineFantasyBlocks.SILVER_STORAGE);
+		OreDictionary.registerOre("blockBlackSteel", MineFantasyBlocks.BLACK_STEEL_STORAGE);
+		OreDictionary.registerOre("blockBlueSteel", MineFantasyBlocks.BLUE_STEEL_STORAGE);
+		OreDictionary.registerOre("blockRedSteel", MineFantasyBlocks.RED_STEEL_STORAGE);
+		OreDictionary.registerOre("blockAdamantium", MineFantasyBlocks.ADAMANTIUM_STORAGE);
+		OreDictionary.registerOre("blockMithril", MineFantasyBlocks.MITHRIL_STORAGE);
+		OreDictionary.registerOre("blockMithium", MineFantasyBlocks.MITHIUM_STORAGE);
+		OreDictionary.registerOre("blockIgnotumite", MineFantasyBlocks.IGNOTUMITE_STORAGE);
+		OreDictionary.registerOre("blockEnder", MineFantasyBlocks.ENDER_STORAGE);
+
 		String meatRaw = "raw_meat";
 		String cookedMeat = "cooked_meat";
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_BEEF);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_CHICKEN);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_PORKCHOP);
+		OreDictionary.registerOre(cookedMeat, Items.COOKED_MUTTON);
+		OreDictionary.registerOre(cookedMeat, Items.COOKED_RABBIT);
 		OreDictionary.registerOre(cookedMeat, MineFantasyItems.WOLF_COOKED);
 		OreDictionary.registerOre(cookedMeat, MineFantasyItems.HORSE_COOKED);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_FISH);
@@ -101,6 +118,8 @@ public class MineFantasyOreDict {
 		OreDictionary.registerOre(meatRaw, Items.BEEF);
 		OreDictionary.registerOre(meatRaw, Items.CHICKEN);
 		OreDictionary.registerOre(meatRaw, Items.PORKCHOP);
+		OreDictionary.registerOre(meatRaw, Items.MUTTON);
+		OreDictionary.registerOre(meatRaw, Items.RABBIT);
 		OreDictionary.registerOre(meatRaw, MineFantasyItems.WOLF_RAW);
 		OreDictionary.registerOre(meatRaw, MineFantasyItems.HORSE_RAW);
 		OreDictionary.registerOre(meatRaw, Items.FISH);

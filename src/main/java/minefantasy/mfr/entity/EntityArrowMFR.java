@@ -1,5 +1,7 @@
 package minefantasy.mfr.entity;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
@@ -12,9 +14,11 @@ import minefantasy.mfr.item.EnumFillingType;
 import minefantasy.mfr.item.EnumPowderType;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,17 +37,20 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageType, IArrowRetrieve {
@@ -69,6 +76,10 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		if (shooter instanceof EntityPlayer) {
 			this.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
 		}
+	}
+
+	public EntityArrowMFR(World world, IPosition position) {
+		super(world, position.getX(), position.getY(), position.getZ());
 	}
 
 	public static DamageSource causeBombDamage(Entity bomb, Entity user) {
@@ -241,6 +252,34 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			this.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0F, 1.0F);
 			setDead();
 		}
+	}
+
+	@Nullable
+	protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
+		//Minecraft doesn't let us add to this list normally, so I need to override the whole method just to make it not collide
+		// with shrapnel entities from bomb arrows
+		Predicate<Entity> arrowTargets = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, entity -> !(entity instanceof EntityShrapnel), Entity::canBeCollidedWith);
+		Entity entity = null;
+		List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), arrowTargets);
+		double d0 = 0.0D;
+
+		for (Entity entity1 : list) {
+			if (entity1 != this.shootingEntity || this.ticksInAir >= 5) {
+				AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(0.30000001192092896D);
+				RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(start, end);
+
+				if (raytraceresult != null) {
+					double d1 = start.squareDistanceTo(raytraceresult.hitVec);
+
+					if (d1 < d0 || d0 == 0.0D) {
+						entity = entity1;
+						d0 = d1;
+					}
+				}
+			}
+		}
+
+		return entity;
 	}
 
 	private float getDamageModifier(Entity target) {
@@ -451,7 +490,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
-			AxisAlignedBB entityBoundBox = this.getEntityBoundingBox().expand(area, area / 2, area);
+			AxisAlignedBB entityBoundBox = this.getEntityBoundingBox().grow(area, area / 2, area);
 			List<Entity> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, entityBoundBox);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
@@ -527,6 +566,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
 	public boolean isMagicArrow() {
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(getArrowStack());
-		return material != CustomMaterial.NONE && material.type.equalsIgnoreCase("magic");
+		return material != CustomMaterialRegistry.NONE && material.getType().getName().equalsIgnoreCase("magic");
 	}
 }

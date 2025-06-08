@@ -29,8 +29,8 @@ public class BlastFurnaceRecipeBase extends IForgeRegistryEntry.Impl<BlastFurnac
 	}
 
 	@Override
-	public String getName() {
-		return CraftingManagerBlastFurnace.getRecipeName(this);
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
 	}
 
 	public ItemStack getBlastFurnaceRecipeOutput() {

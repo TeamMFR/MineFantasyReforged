@@ -30,8 +30,9 @@ import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.DodgeCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ParryPacket;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.ArmourCalculator;
-import minefantasy.mfr.util.ArrowEffectsMF;
+import minefantasy.mfr.util.ArrowUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.PowerArmour;
@@ -303,8 +304,8 @@ public class CombatMechanics {
 			}
 		}
 
-		if (material != CustomMaterial.NONE) {
-			if (isSilverishMaterial(material.name) && hit_entity instanceof EntityLivingBase) {
+		if (material != CustomMaterialRegistry.NONE) {
+			if (isSilverishMaterial(material.getName()) && hit_entity instanceof EntityLivingBase) {
 				if (hit_entity.getClass().getName().contains("Werewolf")) {
 					modifier *= specialWerewolfModifier;
 					applyUndeadBane((EntityLivingBase) hit_entity);
@@ -401,7 +402,7 @@ public class CombatMechanics {
 		if (ConfigSpecials.stickArrows && event.getSource().getImmediateSource() != null
 				&& event.getSource().getImmediateSource() instanceof EntityArrow) {
 			if (!event.getEntity().world.isRemote) {
-				ArrowEffectsMF.stickArrowIn(event.getEntity(), ArrowEffectsMF.getDroppedArrow(event.getSource().getImmediateSource()), event.getSource().getImmediateSource());
+				ArrowUtils.stickArrowIn(event.getEntity(), ArrowUtils.getDroppedArrow(event.getSource().getImmediateSource()), event.getSource().getImmediateSource());
 			}
 		}
 		if (damage > 0) {

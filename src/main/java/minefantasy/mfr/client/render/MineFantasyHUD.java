@@ -17,7 +17,6 @@ import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.item.ItemFoodMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
@@ -25,6 +24,7 @@ import minefantasy.mfr.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
 import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.recipe.TransformationRecipeBase;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
@@ -271,7 +271,7 @@ public class MineFantasyHUD extends Gui {
 			weight += ArmourCalculator.getPieceWeight(stack, EntityLiving.getSlotForItemStack(stack));
 		}
 
-		String massString = CustomMaterial.getWeightString(weight);
+		String massString = CustomMaterialRegistry.getWeightString(weight);
 		mc.fontRenderer.drawStringWithShadow(massString, xPosAR, yPosAR + y, Color.WHITE.getRGB());
 	}
 

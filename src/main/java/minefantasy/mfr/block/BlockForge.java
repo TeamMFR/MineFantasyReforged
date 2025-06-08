@@ -1,9 +1,12 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.api.crafting.IIgnitable;
 import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
+import minefantasy.mfr.api.tool.ILighter;
+import minefantasy.mfr.client.render.block.TileEntityForgeRenderer;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
@@ -14,7 +17,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,12 +24,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -39,10 +43,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockForge extends BlockTileEntity<TileEntityForge> {
+public class BlockForge extends BlockTileEntity<TileEntityForge> implements IIgnitable {
 	private static final PropertyBool BURNING = PropertyBool.create("burning");
 	public static final PropertyBool UNDER = PropertyBool.create("under");
-	private static final PropertyInteger FUEL_COUNT = PropertyInteger.create("fuel_count", 0, 3);
+	private static final PropertyBool FRONT_WALL = PropertyBool.create("front_wall");
+	private static final PropertyBool BACK_WALL = PropertyBool.create("back_wall");
+	private static final PropertyBool RIGHT_WALL = PropertyBool.create("right_wall");
+	private static final PropertyBool LEFT_WALL = PropertyBool.create("left_wall");
+	private static final PropertyBool FRONT_RIGHT_CORNER = PropertyBool.create("front_right_corner");
+	private static final PropertyBool BACK_RIGHT_CORNER = PropertyBool.create("back_right_corner");
+	private static final PropertyBool FRONT_LEFT_CORNER = PropertyBool.create("front_left_corner");
+	private static final PropertyBool BACK_LEFT_CORNER = PropertyBool.create("back_left_corner");
 
 	public int tier;
 	public String type;
@@ -60,13 +71,24 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		this.setHardness(5F);
 		this.setResistance(8F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		setDefaultState(blockState.getBaseState().withProperty(BURNING,false).withProperty(FUEL_COUNT, 0).withProperty(UNDER, false));
+		setDefaultState(blockState.getBaseState()
+				.withProperty(BURNING,false)
+				.withProperty(UNDER, false)
+				.withProperty(FRONT_WALL, true)
+				.withProperty(BACK_WALL, true)
+				.withProperty(RIGHT_WALL, true)
+				.withProperty(LEFT_WALL, true)
+				.withProperty(FRONT_RIGHT_CORNER, true)
+				.withProperty(FRONT_LEFT_CORNER, true)
+				.withProperty(BACK_RIGHT_CORNER, true)
+				.withProperty(BACK_LEFT_CORNER, true));
 	}
 
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, BURNING, FUEL_COUNT, UNDER);
+		return new BlockStateContainer(this, BURNING, UNDER, FRONT_WALL, BACK_WALL, RIGHT_WALL, LEFT_WALL,
+				FRONT_RIGHT_CORNER, FRONT_LEFT_CORNER, BACK_RIGHT_CORNER, BACK_LEFT_CORNER);
 	}
 
 	@Override
@@ -77,55 +99,67 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		return state.withProperty(BURNING, tile.getIsLit()).withProperty(FUEL_COUNT, tile.getFuelCount()).withProperty(UNDER, tile.hasBlockAbove());
+
+		WallPositions wallPositions = getWallPositions(world, pos);
+
+		return state
+				.withProperty(BURNING, tile.isLit())
+				.withProperty(UNDER, tile.hasBlockAbove())
+				.withProperty(FRONT_WALL, wallPositions.frontWall)
+				.withProperty(BACK_WALL, wallPositions.backWall)
+				.withProperty(RIGHT_WALL, wallPositions.rightWall)
+				.withProperty(LEFT_WALL, wallPositions.leftWall)
+				.withProperty(FRONT_RIGHT_CORNER, wallPositions.frontRightCorner)
+				.withProperty(FRONT_LEFT_CORNER, wallPositions.frontLeftCorner)
+				.withProperty(BACK_RIGHT_CORNER, wallPositions.backRightCorner)
+				.withProperty(BACK_LEFT_CORNER, wallPositions.backLeftCorner);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int i = 0;
 
-		if (state.getValue(FUEL_COUNT) == 1) {
+		if (state.getValue(BURNING)) {
 			i |= 1;
 		}
 
-		if (state.getValue(FUEL_COUNT) == 2) {
-			i |= 2;
-		}
-
-		if (state.getValue(FUEL_COUNT) == 3) {
-			i |= 3;
-		}
-
-		if (state.getValue(BURNING)) {
-			i |= 4;
-		}
-
 		if (state.getValue(UNDER)) {
-			i |= 8;
+			i |= 4;
 		}
 
 		return i;
 	}
 
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FUEL_COUNT, (meta & 3)).withProperty(BURNING, (meta & 4) > 0).withProperty(UNDER, (meta & 8) > 0);
+		return this.getDefaultState().withProperty(BURNING, (meta & 1) > 0).withProperty(UNDER, (meta & 4) > 0);
 	}
 
-	public static void setActiveState(boolean burning, int fuelCount, boolean under, World world, BlockPos pos) {
-		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(FUEL_COUNT, fuelCount).withProperty(UNDER, under), 2);
+	public static void setActiveState(boolean burning, boolean under, World world, BlockPos pos) {
+		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(UNDER, under), 2);
 	}
 
 	@Nonnull
 	@Override
 	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY, final float hitZ, final int meta, final EntityLivingBase placer, final EnumHand hand) {
-		return getDefaultState().withProperty(BURNING, false).withProperty(FUEL_COUNT, 0).withProperty(UNDER, false);
+		return getDefaultState()
+				.withProperty(BURNING, false)
+				.withProperty(UNDER, false)
+				.withProperty(FRONT_WALL, true)
+				.withProperty(BACK_WALL, true)
+				.withProperty(RIGHT_WALL, true)
+				.withProperty(LEFT_WALL, true)
+				.withProperty(FRONT_RIGHT_CORNER, true)
+				.withProperty(FRONT_LEFT_CORNER, true)
+				.withProperty(BACK_RIGHT_CORNER, true)
+				.withProperty(BACK_LEFT_CORNER, true);
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tile != null) {
-			setActiveState(false, 0, tile.hasBlockAbove(), world, pos);
+			setActiveState(false, tile.hasBlockAbove(), world, pos);
+			tile.setTextureAngle(TileEntityForgeRenderer.ANGLES.get(tile.getRand().nextInt(4)));
 		}
 	}
 
@@ -166,15 +200,16 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public boolean isBurning(IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		return tile != null && tile.getIsLit();
+		return tile != null && tile.isLit();
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack held = player.getHeldItemMainhand();
-		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		if (tile != null) {
-			if (tile.getIsLit() && !ItemApron.isUserProtected(player)) {
+		TileEntityForge forge = (TileEntityForge) world.getTileEntity(pos);
+		if (forge != null) {
+			// Burn unprotected players
+			if (forge.isLit() && !ItemApron.isUserProtected(player)) {
 				player.setFire(5);
 				player.attackEntityFrom(DamageSource.ON_FIRE, player.isWet() ? 3 : 1);
 				if (!player.world.isRemote) {
@@ -182,19 +217,27 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 				}
 			}
 			if (!held.isEmpty()) {
-				if (facing == EnumFacing.UP && held.getItem() instanceof ItemTongs && onUsedTongs(player, held, tile)) {
+				// Tong use
+				if (facing == EnumFacing.UP && held.getItem() instanceof ItemTongs && onUsedTongs(player, held, forge)) {
 					return true;
 				}
-				int uses = ItemLighter.tryUse(held, player);
-				if (!tile.getIsLit() && uses != 0) {
-					player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
-					if (uses == 1) {
-						tile.fireUpForge();
-						held.damageItem(1, player);
+				// Ignition
+				if (held.getItem() instanceof ItemFlintAndSteel || held.getItem() instanceof ILighter) {
+					if (!forge.isLit() && forge.getFuel() > 0 && forge.getTier() != 1) {
+						// 1 for ignition, -1 for a failed attempt, 0 for a null input or for an item that needs to bypass normal ignition
+						int uses = ItemLighter.tryUse(held, player);
+						if (uses != 0) {
+							player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+							if (uses == 1 && !world.isRemote) {
+								held.damageItem(1, player);
+								igniteBlock(world, pos, state);
+							}
+						}
+						return true;
 					}
-					return true;
 				}
-				if (Heatable.canHeatItem(held) && tile.tryAddHeatable(held)) {
+				// Adding heatable items
+				if (Heatable.canHeatItem(held) && forge.tryAddHeatable(held)) {
 					held.shrink(1);
 					if (held.getCount() <= 0) {
 						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
@@ -202,8 +245,9 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					return true;
 				}
 
+				// Adding fuel
 				ForgeFuel stats = ForgeItemHandler.getStats(held);
-				if (stats != null && tile.addFuel(stats, true)) {
+				if (stats != null && forge.addFuel(stats, true)) {
 					if (player.capabilities.isCreativeMode) {
 						return true;
 					}
@@ -227,7 +271,8 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					return true;
 				}
 			}
-			if (!world.isRemote && !tile.hasBlockAbove()) {
+			// Open GUI
+			if (!world.isRemote && !forge.hasBlockAbove()) {
 				TileEntityForge tileEntity = (TileEntityForge) getTile(world, pos);
 				if (tileEntity != null) {
 					tileEntity.openGUI(world, player);
@@ -235,6 +280,27 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Standardized function to handle block ignition
+	 * @param world World
+	 * @param pos BlockPos
+	 * @param state IBlockState
+	 */
+	@Override
+	public void igniteBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityForge forge = (TileEntityForge) getTile(world, pos);
+		if (forge != null) {
+			if (world.isRainingAt(pos.add(0, 1, 0)) && forge.getFuel() > 0) {
+				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.5F, 1.0F);
+				//world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0.1F, 0F);
+			} else if (!state.getValue(BURNING) && forge.getFuel() > 0) {
+				IIgnitable.playIgnitionSound(world, pos);
+				forge.setIsLit(true);
+				setActiveState(true, forge.hasBlockAbove(), world, pos);
+			}
+		}
 	}
 
 	private boolean onUsedTongs(EntityPlayer user, ItemStack held, TileEntityForge tile) {
@@ -282,12 +348,13 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tier == 1 && !world.isRemote) {
-			if (tile.getIsLit() && !world.isBlockPowered(pos)) {
-				setActiveState(false, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+			if (tile.isLit() && !world.isBlockPowered(pos)) {
+				setActiveState(false, tile.hasBlockAbove(), world, pos);
 				tile.setIsLit(false);
-			} else if (!tile.getIsLit() && world.isBlockPowered(pos)) {
-				setActiveState(true, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
-				tile.setIsLit(true);
+				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.5F, 1.0F);
+			} else if (!tile.isLit() && world.isBlockPowered(pos)) {
+				igniteBlock(world, pos, state);
+				world.playSound(null, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
 			}
 		}
 	}
@@ -298,9 +365,50 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		if (tier == 1 && !world.isRemote && tile.getIsLit() && !world.isBlockPowered(pos)) {
-			setActiveState(tile.getIsLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+		if (tier == 1 && !world.isRemote && tile.isLit() && !world.isBlockPowered(pos)) {
+			setActiveState(tile.isLit(), tile.hasBlockAbove(), world, pos);
 		}
 	}
 
+	private WallPositions getWallPositions(IBlockAccess world, BlockPos pos) {
+		boolean frontWall = isNotForge(0, 1, pos, world);
+		boolean backWall = isNotForge(0, -1, pos, world);
+		boolean rightWall = isNotForge(-1, 0, pos, world);
+		boolean leftWall = isNotForge(1, 0, pos, world);
+		boolean frontRightCorner = frontWall || rightWall;
+		boolean frontLeftCorner = frontWall || leftWall;
+		boolean backRightCorner = backWall || rightWall;
+		boolean backLeftCorner = backWall || leftWall;
+
+		return new WallPositions(frontWall, backWall, rightWall, leftWall,
+				frontRightCorner, frontLeftCorner, backRightCorner, backLeftCorner);
+	}
+
+	private boolean isNotForge(int x, int z, BlockPos pos, IBlockAccess world) {
+		BlockPos newPos = new BlockPos(pos).add(x, 0, z);
+		return !(world.getBlockState(newPos).getBlock() instanceof BlockForge);
+	}
+
+	private static class WallPositions {
+		public final boolean frontWall;
+		public final boolean backWall;
+		public final boolean rightWall;
+		public final boolean leftWall;
+		public final boolean frontRightCorner;
+		public final boolean frontLeftCorner;
+		public final boolean backRightCorner;
+		public final boolean backLeftCorner;
+
+		public WallPositions(boolean frontWall, boolean backWall, boolean rightWall, boolean leftWall,
+				boolean frontRightCorner, boolean frontLeftCorner, boolean backRightCorner, boolean backLeftCorner) {
+			this.frontWall = frontWall;
+			this.backWall = backWall;
+			this.rightWall = rightWall;
+			this.leftWall = leftWall;
+			this.frontRightCorner = frontRightCorner;
+			this.frontLeftCorner = frontLeftCorner;
+			this.backRightCorner = backRightCorner;
+			this.backLeftCorner = backLeftCorner;
+		}
+	}
 }

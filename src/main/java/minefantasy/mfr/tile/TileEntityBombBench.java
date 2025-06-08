@@ -92,10 +92,13 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 	}
 
 	public boolean tryCraft(EntityPlayer player, boolean pressUsed) {
-		boolean sticky = !pressUsed && ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.sticky_bomb) && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == Items.SLIME_BALL;
-		if (world.isRemote && sticky && applySlime()) {
-			int slot = player.inventory.getSlotFor(new ItemStack(Items.SLIME_BALL));
-			player.inventory.removeStackFromSlot(slot);
+		boolean sticky = !pressUsed
+				&& ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.sticky_bomb)
+				&& !player.getHeldItemMainhand().isEmpty()
+				&& player.getHeldItemMainhand().getItem() == Items.SLIME_BALL;
+		if (!world.isRemote && sticky && applySlime()) {
+			ItemStack stack = player.getHeldItemMainhand();
+			stack.shrink(1);
 			return true;
 		}
 		ItemStack result = findResult();

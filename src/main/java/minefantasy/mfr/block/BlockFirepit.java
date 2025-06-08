@@ -1,7 +1,9 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.api.crafting.IIgnitable;
 import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.tile.TileEntityFirepit;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -32,7 +34,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
+public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> implements IIgnitable {
 	private static final PropertyBool BURNING = PropertyBool.create("burning");
 	private static final PropertyBool PLANKS = PropertyBool.create("planks");
 	private static final PropertyBool UNDER = PropertyBool.create("under");
@@ -123,6 +125,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 			boolean burning = firepit.isBurning();
 
 			if (!held.isEmpty()) {
+				// Adding fuel
 				if (firepit.addFuel(held) && !player.capabilities.isCreativeMode) {
 					if (!world.isRemote) {
 						if (held.getCount() == 1) {
@@ -143,6 +146,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 					return true;
 				}
 
+				// Cooking
 				if (burning) {
 					if (firepit.tryCook(player, held) && !player.capabilities.isCreativeMode) {
 						ItemStack contain = held.getItem().getContainerItem(held);
@@ -157,29 +161,18 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 						}
 					}
 					return true;
-				} else if (firepit.fuel > 0) {
-					if (held.getItem() instanceof ILighter) {
-						world.playSound(player, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, rand.nextFloat() * 0.4F + 0.8F);
-						world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0.1F, 0F);
-
-						ILighter lighter = (ILighter) held.getItem();
-						if (lighter.canLight()) {
-							if (rand.nextDouble() < lighter.getChance()) {
-								if (!world.isRemote) {
-									firepit.setLit(true);
-									held.damageItem(1, player);
-								}
+				// Ignition
+				} else {
+					if (held.getItem() instanceof ItemFlintAndSteel || held.getItem() instanceof ILighter) {
+						int uses = ItemLighter.tryUse(held, player);
+						// 1 for ignition, -1 for a failed attempt, 0 for a null input or for an item that needs to bypass normal ignition
+						if (uses != 0 && firepit.fuel > 0) {
+							player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0F, 0F);
+							if (uses == 1 && !world.isRemote) {
+								held.damageItem(1, player);
+								igniteBlock(world, pos, state);
 							}
-							return true;
-						}
-					}
-					if (held.getItem() instanceof ItemFlintAndSteel) {
-						world.playSound(player, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, rand.nextFloat() * 0.4F + 0.8F);
-						world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0F, 0F);
-
-						if (!world.isRemote) {
-							firepit.setLit(true);
-							held.damageItem(1, player);
 						}
 						return true;
 					}
@@ -187,6 +180,26 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 			}
 		}
 		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
+	}
+
+	/**
+	 * Standardized function to handle block ignition
+	 * @param world World
+	 * @param pos BlockPos
+	 * @param state IBlockState
+	 */
+	@Override
+	public void igniteBlock(World world, BlockPos pos, IBlockState state) {
+		TileEntityFirepit firepit = (TileEntityFirepit) getTile(world, pos);
+		if (firepit != null) {
+			if (firepit.isWet()  && firepit.fuel > 0) {
+				world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.5F, 1.0F);
+			} else if (!state.getValue(BURNING) && firepit.fuel > 0) {
+				IIgnitable.playIgnitionSound(world, pos);
+				firepit.setIsLit(true);
+				setActiveState(true, true, firepit.hasBlockAbove(), world, pos);
+			}
+		}
 	}
 
 	@Override
@@ -226,7 +239,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
-		if (world.getTileEntity(pos) instanceof TileEntityFirepit && !(((TileEntityFirepit) world.getTileEntity(pos)).isLit())) {
+		if (world.getTileEntity(pos) instanceof TileEntityFirepit && !(((TileEntityFirepit) world.getTileEntity(pos)).getIsLit())) {
 			return;
 		}
 		if (rand.nextInt(10) == 0) {

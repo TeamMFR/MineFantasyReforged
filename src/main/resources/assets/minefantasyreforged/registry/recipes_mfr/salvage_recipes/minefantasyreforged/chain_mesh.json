@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:chain_mesh"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:metal_hunk",
+			"material_type": "metal_material",
+			"count": 4
+		}
+	]
+}

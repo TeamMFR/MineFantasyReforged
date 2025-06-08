@@ -65,6 +65,7 @@ public class EntryPageCrucible extends EntryPage {
 			return;
 		}
 		ItemStack output = recipe.getAlloyRecipeOutput().copy();
+		int outputCount = output.getCount();
 		drawGrid:
 		{
 			if (recipe instanceof AlloyRatioRecipe) {
@@ -84,7 +85,7 @@ public class EntryPageCrucible extends EntryPage {
 						List<Ingredient> inputs = RecipeHelper.expandPattern(inputsDuped, recipe.getWidth(), recipe.getHeight(), AlloyRecipeBase.MAX_WIDTH, AlloyRecipeBase.MAX_HEIGHT);
 						ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(inputs.get(index).getMatchingStacks()));
 						renderItemAtGridPos(parent, 1 + x, (3 - y), stack, true, posX, posY, mx, my);
-						output.setCount(currentRepeatAmount == null ? 0 : currentRepeatAmount);
+						output.setCount(currentRepeatAmount == null ? 0 : currentRepeatAmount * outputCount);
 					}
 				}
 			}

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JEITannerRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final TannerRecipeBase recipe;
+	private final TannerRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEITannerRecipe(TannerRecipeBase recipe, IStackHelper stackHelper) {
@@ -59,5 +59,9 @@ public class JEITannerRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
+	}
+
+	public TannerRecipeBase getRecipe() {
+		return recipe;
 	}
 }

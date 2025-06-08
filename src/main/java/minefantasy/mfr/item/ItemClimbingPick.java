@@ -3,11 +3,12 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,6 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,9 +36,9 @@ import java.util.Random;
  */
 public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
 	private final Random rand = new Random();
-	private final int itemRarity;
+	private final Rarity itemRarity;
 
-	public ItemClimbingPick(String name, ToolMaterial material, int rarity) {
+	public ItemClimbingPick(String name, ToolMaterial material, Rarity rarity) {
 		super(material);
 		itemRarity = rarity;
 		setRegistryName(name);
@@ -63,19 +64,8 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
-
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
-		}
-		return MineFantasyItems.RARITY[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, itemRarity);
 	}
 
 	@Override
@@ -101,7 +91,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 				BlockPos pos = rayTraceResult.getBlockPos();
 
-				NBTTagCompound nbt = getOrCreateNBT(player.getHeldItemMainhand());
+				NBTTagCompound nbt = NbtUtils.getOrCreateNBT(player.getHeldItemMainhand());
 				if (init) {
 					nbt.setInteger("MF_HeldPosX", pos.getX());
 					nbt.setInteger("MF_HeldPosY", pos.getY());
@@ -127,13 +117,6 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 			}
 		}
 		return false;
-	}
-
-	private NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	@Override

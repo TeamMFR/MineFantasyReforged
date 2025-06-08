@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_plate_leggings"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:plate",
+			"material_type": "metal_material",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:padded_leggings"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_plate_leggings"
+		},
+		{
+			"item": "minefantasyreforged:ornate_plate_leggings"
+		}
+	]
+}

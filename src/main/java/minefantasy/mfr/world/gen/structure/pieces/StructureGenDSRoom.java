@@ -10,7 +10,7 @@ import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemMine;
-import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import minefantasy.mfr.world.gen.structure.WorldGenDwarvenStronghold;
@@ -475,7 +475,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             LootContext.Builder lootContext = new LootContext.Builder((WorldServer)this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(loot).generateLootForPools(this.random, lootContext.build());
             ItemStack ammo = result.get(random.nextInt(result.size()));
-            ammoBox.setMaterial(WoodMaterial.getMaterial(MineFantasyMaterials.Names.REFINED_WOOD));
+            ammoBox.setMaterial(CustomMaterialRegistry.getMaterial(MineFantasyMaterials.Names.REFINED_WOOD));
             ammoBox.inventoryStack = ammo;
             ammoBox.stock = ammo.getMaxStackSize() * (random.nextInt(2) + 1)
                     + (ammo.getCount() > 1 ? random.nextInt(ammo.getCount()) : 0);

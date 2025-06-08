@@ -11,9 +11,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.util.NonNullList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -27,10 +30,10 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 	private final List<ItemStack> inputs;
 	private final TransformationRecipeBase recipe;
 
-	private final List<ItemStack> outputs;
-	private final List<ItemStack> consumableStacks;
-	private final ItemStack offhandStack;
-	private final ItemStack dropStack;
+	private final List<List<ItemStack>> outputs;
+	private final NonNullList<Ingredient> consumableStacks;
+	private final Ingredient offhandStack;
+	private final Ingredient dropStack;
 
 
 	public JEITransformationRecipe(TransformationRecipeBase recipe) {
@@ -57,8 +60,9 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 					inputStack);
 		}
 
+		outputs = new ArrayList<>();
 		if (recipe instanceof TransformationRecipeStandard) {
-			outputs = Collections.singletonList(((TransformationRecipeStandard) recipe).getOutput());
+			outputs.add(Collections.singletonList(((TransformationRecipeStandard) recipe).getOutput()));
 		}
 		else {
 			IBlockState output = ((TransformationRecipeBlockState) recipe).getOutput();
@@ -66,8 +70,12 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 			if (outputStack.getHasSubtypes()) {
 				outputStack = new ItemStack(output.getBlock(), 1, output.getBlock().getMetaFromState(output));
 			}
-			outputs = Collections.singletonList(
-					outputStack);
+			outputs.add(Collections.singletonList(
+					outputStack));
+		}
+
+		if (recipe.getDropStack() != Ingredient.EMPTY) {
+			outputs.add(Arrays.asList(recipe.getDropStack().getMatchingStacks()));
 		}
 
 		consumableStacks = recipe.getConsumableStacks();
@@ -78,7 +86,7 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ingredients.setInputLists(VanillaTypes.ITEM, Collections.singletonList(this.inputs));
-		ingredients.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(this.outputs));
+		ingredients.setOutputLists(VanillaTypes.ITEM, this.outputs);
 	}
 
 	@Override
@@ -120,18 +128,18 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 	}
 
 	public List<ItemStack> getOutputs() {
-		return outputs;
+		return outputs.get(0);
 	}
 
-	public List<ItemStack> getConsumableStacks() {
+	public NonNullList<Ingredient> getConsumableStacks() {
 		return consumableStacks;
 	}
 
-	public ItemStack getOffhandStack() {
+	public Ingredient getOffhandStack() {
 		return offhandStack;
 	}
 
-	public ItemStack getDropStack() {
+	public Ingredient getDropStack() {
 		return dropStack;
 	}
 }

@@ -45,8 +45,10 @@ import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
-import minefantasy.mfr.util.ArrowEffectsMF;
+import minefantasy.mfr.util.ArrowUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.TacticalManager;
@@ -290,18 +292,18 @@ public final class MFREventHandler {
 					if (s != null) {
 						if (!hasInfo && s.startsWith("ingot")) {
 							String s2 = s.substring(5, s.length());
-							CustomMaterial material = CustomMaterial.getMaterial(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, s2));
-							if (material != CustomMaterial.NONE){
+							CustomMaterial material = CustomMaterialRegistry.getMaterial(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, s2));
+							if (material != CustomMaterialRegistry.NONE){
 								hasInfo = true;
 							}
 							else {
 								if (!s.contains("Brick")){
-									ArrayList<CustomMaterial> metalMaterials = CustomMaterial.getList("metal");
+									ArrayList<CustomMaterial> metalMaterials = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 									for (CustomMaterial metal : metalMaterials){
 										if (metal instanceof MetalMaterial) {
-											if (((MetalMaterial) metal).oreDictList.equals(s)){
+											if (metal.getMaterialIngredient().apply(event.getItemStack())){
 												material = metal;
-												if (material != CustomMaterial.NONE){
+												if (material != CustomMaterialRegistry.NONE){
 													break;
 												}
 											}
@@ -475,13 +477,13 @@ public final class MFREventHandler {
 			for (EntityItem entItem : event.getDrops()) {
 				ItemStack drop = entItem.getItem();
 
-				if (drop.getItem() == Items.LEATHER) {
+				if (ConfigHardcore.dropRawhide && drop.getItem() == Items.LEATHER) {
 					entItem.setDead();
 					dropHide = true;
 				}
 			}
 		}
-		if (dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey(Constants.HUNTER_KILL_TAG))) {
+		if (ConfigHardcore.dropRawhide && dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey(Constants.HUNTER_KILL_TAG))) {
 			mob.entityDropItem(new ItemStack(hide), 0.0F);
 		}
 	}
@@ -583,7 +585,7 @@ public final class MFREventHandler {
 			useArrows = false;
 		}
 		if (dropper != null && useArrows && ConfigSpecials.stickArrows && !dropper.world.isRemote) {
-			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
+			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowUtils.getStuckArrows(dropper);
 			if (!stuckArrows.isEmpty()) {
 
 				for (ItemStack arrow : stuckArrows) {

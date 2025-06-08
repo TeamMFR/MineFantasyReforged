@@ -1,6 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.tile.TileEntityWoodDecor;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.BlockHorizontal;
@@ -69,7 +70,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 		TileEntityWoodDecor tile = getTile(world, pos);
 		if (tile != null) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
-			if (material != CustomMaterial.NONE) {
+			if (material != CustomMaterialRegistry.NONE) {
 				tile.setMaterial(material);
 			}
 		}
@@ -107,7 +108,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 
 	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
 		if (tile != null && !item.isEmpty()) {
-			CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, tile.getMaterialName());
+			CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, tile.getMaterialName());
 		}
 		return item;
 	}
@@ -130,7 +131,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 
 	public ItemStack construct(String name, int stacksize) {
 		ItemStack item = new ItemStack(this, stacksize);
-		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, name.toLowerCase());
+		CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, name.toLowerCase());
 
 		return item;
 	}

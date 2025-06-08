@@ -4,14 +4,14 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -49,8 +49,8 @@ public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
 			for (int j = 0; j < ingredients.size(); j++) {
 				boolean passesChecks = true;
 
-				String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
-				String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+				String component_wood = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.WOOD_MATERIAL);
+				String component_metal = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.METAL_MATERIAL);
 
 				// CHECK CUSTOM METAL
 				if (component_metal != null) {
@@ -117,35 +117,35 @@ public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
 		String metal = null;
 		for (int i = 0; i < matrix.getSizeInventory(); i++) {
 			ItemStack inputItem = matrix.getStackInSlot(i);
-			String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
-			String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+			if (!inputItem.isEmpty()) {
+				String component_wood = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.WOOD_MATERIAL);
+				String component_metal = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.METAL_MATERIAL);
 
-			for (CustomMaterial material : CustomMaterial.getList("metal")){
-				NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-				for (ItemStack materialOreDictStack : materialOreDictStacks){
-					if (OreDictionary.itemMatches(ItemHeated.getStack(inputItem), materialOreDictStack, true)){
-						component_metal = material.name;
+				for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
+					Ingredient materialIngredient = material.getMaterialIngredient();
+					if (materialIngredient.apply(ItemHeated.getStack(inputItem))) {
+						component_metal = material.getName();
 					}
 				}
-			}
 
-			if (wood == null && component_wood != null) {
-				wood = component_wood;
-			}
-			if (metal == null && component_metal != null) {
-				metal = component_metal;
+				if (wood == null && component_wood != null) {
+					wood = component_wood;
+				}
+				if (metal == null && component_metal != null) {
+					metal = component_metal;
+				}
 			}
 		}
 		if (metal != null && !tierModifyOutputCount) {
-			CustomMaterial.addMaterial(result, CustomToolHelper.slot_main, metal);
+			CustomMaterialRegistry.addMaterial(result, CustomToolHelper.slot_main, metal);
 		}
 		if (wood != null && !tierModifyOutputCount) {
-			CustomMaterial.addMaterial(result, CustomToolHelper.slot_haft, wood);
+			CustomMaterialRegistry.addMaterial(result, CustomToolHelper.slot_haft, wood);
 		}
 
 		if (tierModifyOutputCount) {
 			int modifiedCount = MathHelper.clamp(
-					MetalMaterial.getMaterial(metal).tier * result.getCount(),
+					CustomMaterialRegistry.getMaterial(metal).getTier() * result.getCount(),
 					1,
 					result.getMaxStackSize());
 			result.setCount(modifiedCount);

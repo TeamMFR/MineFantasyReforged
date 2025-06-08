@@ -12,6 +12,7 @@ import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.network.CogworkControlPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.ClientProxy;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.PowerArmour;
@@ -87,8 +88,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
 	@SideOnly(Side.CLIENT)
 	public static int getArmourRating(CustomMaterial base) {
-		if (base != CustomMaterial.NONE) {
-			float ratio = base.hardness * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
+		if (base != CustomMaterialRegistry.NONE) {
+			float ratio = base.getHardness() * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
 			return (int) (ratio * ArmourCalculator.armourRatingScale);
 		}
 		return 0;
@@ -287,7 +288,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	}
 
 	public CustomMaterial getPlating() {
-		return CustomMaterial.getMaterial(getCustomMaterial());
+		return CustomMaterialRegistry.getMaterial(getCustomMaterial());
 	}
 
 	public void updateRider() {
@@ -463,9 +464,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 				return false;
 			}
 			if (this.isUnderRepairFrame()) {
-				if (getPlating() == CustomMaterial.NONE && item.getItem() == MineFantasyItems.COGWORK_ARMOUR) {
+				if (getPlating() == CustomMaterialRegistry.NONE && item.getItem() == MineFantasyItems.COGWORK_ARMOUR) {
 					CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-					if (material != CustomMaterial.NONE) {
+					if (material != CustomMaterialRegistry.NONE) {
 
 						int boltCount = this.getBolts();
 						if (boltCount < maxBolts) {
@@ -489,7 +490,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 							user.swingArm(hand);
 							return true;
 						}
-						this.setCustomMaterial(material.name);
+						this.setCustomMaterial(material.getName());
 						float damagePercent = 1F - ((float) item.getItemDamage() / (float) item.getMaxDamage());
 						this.setHealth(getMaxHealth() * damagePercent);
 						if (!user.capabilities.isCreativeMode) {
@@ -502,7 +503,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 						return true;
 					}
 				}
-				if (this.getPlating() != CustomMaterial.NONE && ToolHelper.getToolTypeFromStack(item) == Tool.SPANNER) {
+				if (this.getPlating() != CustomMaterialRegistry.NONE && ToolHelper.getToolTypeFromStack(item) == Tool.SPANNER) {
 					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 1.2F, 1.0F);
 					user.swingArm(hand);
 					int boltCount = this.getBolts();
@@ -517,7 +518,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 					}
 					float damagePercent = 1F - (getHealth() / getMaxHealth());
 					if (!world.isRemote) {
-						ItemStack armour = ((ItemMetalComponent) MineFantasyItems.COGWORK_ARMOUR).createComponentItemStack(getPlating().name, 1, damagePercent);
+						ItemStack armour = ((ItemMetalComponent) MineFantasyItems.COGWORK_ARMOUR).createComponentItemStack(getPlating().getName(), 1, damagePercent);
 						if (!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(armour)) {
 							this.entityDropItem(armour, 0.0F);
 						}
@@ -822,7 +823,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
 	@Override
 	public boolean isFullyArmoured() {
-		return getPlating() != CustomMaterial.NONE;
+		return getPlating() != CustomMaterialRegistry.NONE;
 	}
 
 	@Override
@@ -848,7 +849,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	}
 
 	public boolean shouldBlockPoisonOrMagic() {
-		return getPlating() != CustomMaterial.NONE;
+		return getPlating() != CustomMaterialRegistry.NONE;
 	}
 
 	@Override
@@ -867,8 +868,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		float AC = 2.0F;
 		float fResist = 0.0F;
 		CustomMaterial plating = getPlating();
-		if (plating != CustomMaterial.NONE) {
-			AC = plating.hardness * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
+		if (plating != CustomMaterialRegistry.NONE) {
+			AC = plating.getHardness() * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
 			fResist = plating.getFireResistance() / 100F;
 		}
 
@@ -897,7 +898,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	protected void damageEntity(DamageSource source, float dam) {
 		CustomMaterial plating = this.getPlating();
 		boolean canDestroy = false;// Only spanner or fire can destroy frames
-		boolean isFrame = plating == CustomMaterial.NONE;
+		boolean isFrame = plating == CustomMaterialRegistry.NONE;
 
 		if (source.getTrueSource() != null && source.getTrueSource() instanceof EntityLivingBase) {
 			canDestroy = ToolHelper.getToolTypeFromStack(((EntityLivingBase) source.getTrueSource()).getHeldItemMainhand()) == Tool.SPANNER;
@@ -913,8 +914,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 				setHealth(getMaxHealth());
 			}
 		} else if (dam != 0.0F) {
-			if (plating != CustomMaterial.NONE) {
-				float HP = plating.durability * ArmourDesign.COGWORK.getDurability() * 20F * ConfigArmour.health_modifier;
+			if (plating != CustomMaterialRegistry.NONE) {
+				float HP = plating.getDurability() * ArmourDesign.COGWORK.getDurability() * 20F * ConfigArmour.health_modifier;
 				dam *= (this.getMaxHealth() / HP);
 			}
 			dam = this.applyPotionDamageCalculations(source, dam);
@@ -1008,8 +1009,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	public float getWeight() {
 		float weight = base_frame_weight;// Weight of frame
 		CustomMaterial plating = getPlating();
-		if (plating != CustomMaterial.NONE) {
-			weight += plating.density * base_armour_units;
+		if (plating != CustomMaterialRegistry.NONE) {
+			weight += plating.getDensity() * base_armour_units;
 		}
 		return weight;
 	}

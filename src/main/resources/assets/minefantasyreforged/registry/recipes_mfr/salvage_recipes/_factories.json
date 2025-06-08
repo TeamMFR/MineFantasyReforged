@@ -1,0 +1,5 @@
+{
+    "conditions": {
+        "remove_craft_flint_and_steel": "minefantasy.mfr.recipe.factories.HCCremoveCraftFlintAndSteel"
+    }
+}

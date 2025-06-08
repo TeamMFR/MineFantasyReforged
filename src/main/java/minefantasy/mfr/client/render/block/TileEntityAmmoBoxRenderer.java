@@ -59,7 +59,7 @@ public class TileEntityAmmoBoxRenderer<T extends TileEntity> extends TileEntityS
 		GlStateManager.pushMatrix();
 
 		CustomMaterial material = tile.getMaterial();
-		GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
+		GlStateManager.color(material.getColourRGB()[0] / 255F, material.getColourRGB()[1] / 255F, material.getColourRGB()[2] / 255F);
 
 		this.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tile.getTexName() + "_base.png")); // texture
 		baseMdl.renderModel(0.0625F);
@@ -88,7 +88,7 @@ public class TileEntityAmmoBoxRenderer<T extends TileEntity> extends TileEntityS
 		GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
 		GlStateManager.pushMatrix();
 
-		GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
+		GlStateManager.color(material.getColourRGB()[0] / 255F, material.getColourRGB()[1] / 255F, material.getColourRGB()[2] / 255F);
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tex + "_base.png"));
 		baseMdl.renderModel(0.0625F);

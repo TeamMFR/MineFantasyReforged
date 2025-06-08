@@ -4,12 +4,12 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -171,6 +171,7 @@ public class MineFantasyKnowledgeList {
 	public static InformationBase bed_roll;
 
 	//PROVISIONING
+	public static InformationBase kitchen_bench;
 	public static InformationBase cooking_utensils;
 	public static InformationBase firepit;
 	public static InformationBase generic_meat;
@@ -468,26 +469,28 @@ public class MineFantasyKnowledgeList {
 				.setPage(construction).addSkill(Skill.CONSTRUCTION, 25);
 
 		// COOKING -The Cheapest
-		cooking_utensils = (new InformationBase("cooking_utensils", -1, 0, 0, MineFantasyItems.PIE_TRAY, null))
+		kitchen_bench = (new InformationBase("kitchen_bench", 0, -1, 0, MineFantasyBlocks.KITCHEN_BENCH_GRANITE, null))
 				.registerStat().setPage(provisioning).setUnlocked();
-		firepit = (new InformationBase("firepit", 0, 0, 0, MineFantasyBlocks.FIREPIT, null)).registerStat()
+		cooking_utensils = (new InformationBase("cooking_utensils", -1, -1, 0, MineFantasyItems.PIE_TRAY, null))
+				.registerStat().setPage(provisioning).setUnlocked();
+		firepit = (new InformationBase("firepit", 1, -1, 0, MineFantasyBlocks.FIREPIT, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
 
-		generic_meat = (new InformationBase("generic_meat", 0, -1, 0, MineFantasyItems.GENERIC_MEAT_UNCOOKED,
+		generic_meat = (new InformationBase("generic_meat", 0, -2, 0, MineFantasyItems.GENERIC_MEAT_UNCOOKED,
 				null)).registerStat().setPage(provisioning).setUnlocked();
-		wild_meat = (new InformationBase("wild_meat", -1, -1,  0, MineFantasyItems.HORSE_RAW, null)
+		wild_meat = (new InformationBase("wild_meat", -1, -2,  0, MineFantasyItems.HORSE_RAW, null)
 				.registerStat().setPage(provisioning).setUnlocked());
-		stew = (new InformationBase("stew", 0, -3, 0, MineFantasyItems.STEW, generic_meat)).registerStat()
+		stew = (new InformationBase("stew", 0, -4, 0, MineFantasyItems.STEW, generic_meat)).registerStat()
 				.setPage(provisioning).setUnlocked();
-		jerky = (new InformationBase("jerky", 0, -5, 1, MineFantasyItems.JERKY, stew)).registerStat().setPage(provisioning)
+		jerky = (new InformationBase("jerky", 0, -6, 1, MineFantasyItems.JERKY, stew)).registerStat().setPage(provisioning)
 				.addSkill(Skill.PROVISIONING, 10);
-		sausage = (new InformationBase("sausage", 2, -5, 2, MineFantasyItems.SAUSAGE_COOKED, jerky)).registerStat()
+		sausage = (new InformationBase("sausage", 2, -6, 2, MineFantasyItems.SAUSAGE_COOKED, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 35);
-		sandwitch = (new InformationBase("sandwitch", 1, -7, 3, MineFantasyItems.SANDWITCH_MEAT, jerky)).registerStat()
+		sandwitch = (new InformationBase("sandwitch", 1, -8, 3, MineFantasyItems.SANDWITCH_MEAT, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 15);
-		sandwitch_big = (new InformationBase("sandwitch_big", 3, -7, 3, MineFantasyItems.SANDWITCH_BIG, sandwitch))
+		sandwitch_big = (new InformationBase("sandwitch_big", 3, -8, 3, MineFantasyItems.SANDWITCH_BIG, sandwitch))
 				.registerStat().setPage(provisioning).addSkill(Skill.PROVISIONING, 25);
-		meatpie = (new InformationBase("meatpie", -1, -7, 2, MineFantasyBlocks.PIE_MEAT, jerky)).registerStat()
+		meatpie = (new InformationBase("meatpie", -1, -8, 2, MineFantasyBlocks.PIE_MEAT, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 35);
 		shepard_pie = (new InformationBase("shepard_pie", -2, -9, 3, MineFantasyBlocks.PIE_SHEPARDS, meatpie)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 80);
@@ -496,9 +499,9 @@ public class MineFantasyKnowledgeList {
 		oats = (new InformationBase("oats", 3, 0, 0, MineFantasyItems.OATS, bread)).registerStat().setPage(provisioning)
 				.setUnlocked();
 
-		salt = (new InformationBase("salt", -2, -2, 0, MineFantasyItems.SALT, null)).registerStat()
+		salt = (new InformationBase("salt", -2, -3, 0, MineFantasyItems.SALT, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
-		jug = (new InformationBase("jug", -1, -2, 0, MineFantasyItems.JUG_WATER, null)).registerStat()
+		jug = (new InformationBase("jug", -1, -3, 0, MineFantasyItems.JUG_WATER, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
 		berry = (new InformationBase("berry", 0, 1, 0, MineFantasyItems.BERRIES, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
@@ -521,9 +524,9 @@ public class MineFantasyKnowledgeList {
 		apple_pie = (new InformationBase("apple_pie", 4, 1, 2, MineFantasyBlocks.PIE_APPLE, berry_pie)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 30);
 
-		cheese = (new InformationBase("cheese", 1, -1, 0, MineFantasyBlocks.CHEESE_WHEEL, null))
+		cheese = (new InformationBase("cheese", 1, -2, 0, MineFantasyBlocks.CHEESE_WHEEL, null))
 				.registerStat().setPage(provisioning).setUnlocked();
-		cheese_roll = (new InformationBase("cheese_roll", 3, -1, 2, MineFantasyItems.CHEESE_ROLL, cheese)).registerStat()
+		cheese_roll = (new InformationBase("cheese_roll", 3, -2, 2, MineFantasyItems.CHEESE_ROLL, cheese)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 15);
 
 		bandage = (new InformationBase("bandage", -3, 0, 0, MineFantasyItems.BANDAGE_WOOL, null))
@@ -554,9 +557,9 @@ public class MineFantasyKnowledgeList {
 	}
 
 	private static Object getMetalTier(String string) {
-		CustomMaterial mat = MetalMaterial.getMaterial(string);
-		if (mat != CustomMaterial.NONE){
-			return mat.crafterTier;
+		CustomMaterial mat = CustomMaterialRegistry.getMaterial(string);
+		if (mat != CustomMaterialRegistry.NONE){
+			return mat.getCrafterTier();
 		}
 		return "?";
 	}

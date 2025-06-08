@@ -80,11 +80,11 @@ public class ContainerBigFurnace extends ContainerBase {
 			}
 
 			if (this.lastHeat != this.smelter.heat) {
-				listener.sendWindowProperty(this, 3, (int) this.smelter.heat);
+				listener.sendWindowProperty(this, 3, this.smelter.heat);
 			}
 
 			if (this.lastMaxHeat != this.smelter.maxHeat) {
-				listener.sendWindowProperty(this, 4, (int) this.smelter.maxHeat);
+				listener.sendWindowProperty(this, 4, this.smelter.maxHeat);
 			}
 
 		}

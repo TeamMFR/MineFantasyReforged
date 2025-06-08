@@ -1,0 +1,76 @@
+{
+    "_comment": [
+        "Author: Lenvill"
+    ],
+    "mod": "witchery",
+    "wood_material": [
+        {
+            "name": "rowan_wood",
+            "materialIngredient": {
+                "item": "witchery:rowan_planks"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.2,
+                "durability": 2.50,
+                "flexibility": 0.8,
+                "resistance": 50,
+                "density": 1.5,
+                "rarity": "UNCOMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 213,
+                "green": 180,
+                "blue": 94
+            }
+        },
+        {
+            "name": "alder_wood",
+            "inputItem": "",
+            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "witchery:alder_planks"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.2,
+                "durability": 2.25,
+                "flexibility": 0.9,
+                "resistance": 50,
+                "density": 1.3,
+                "rarity": "UNCOMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 231,
+                "green": 155,
+                "blue": 88
+            }
+        },
+        {
+            "name": "hawthorn_wood",
+            "materialIngredient": {
+                "item": "witchery:hawthorn_planks"
+            },
+            "properties": {
+                "tier": 2,
+                "hardness": 1.5,
+                "durability": 2.25,
+                "flexibility": 0.9,
+                "resistance": 50,
+                "density": 1.2,
+                "rarity": "UNCOMMON",
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 159,
+                "green": 143,
+                "blue": 130
+            }
+        }
+    ]
+}

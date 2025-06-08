@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JEIBlastFurnaceRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final BlastFurnaceRecipeBase recipe;
+	private final BlastFurnaceRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 	private final List<ItemStack> fuelItemStacks;
 
@@ -48,5 +48,9 @@ public class JEIBlastFurnaceRecipe implements IRecipeWrapper {
 
 	public List<ItemStack> getFuelItemStacks() {
 		return fuelItemStacks;
+	}
+
+	public BlastFurnaceRecipeBase getRecipe() {
+		return recipe;
 	}
 }

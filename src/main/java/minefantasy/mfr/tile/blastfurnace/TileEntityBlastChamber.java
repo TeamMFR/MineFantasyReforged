@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -236,7 +237,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		nbt.setTag("inventory", inventory.serializeNBT());
 
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
 		}
 
 		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
@@ -255,8 +256,9 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerBlastFurnace.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		if (!nbt.getString(RECIPE_RESOURCE_LOCATION_TAG).isEmpty()) {
+			ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+			this.setRecipe(CraftingManagerBlastFurnace.getRecipeByResourceLocation(resourceLocation));
 		}
 
 		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));

@@ -2,15 +2,18 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -24,9 +27,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -34,6 +37,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,8 +47,8 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister {
-	protected int itemRarity;
+public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister, IMaterialDoubleComponent {
+	protected Rarity itemRarity;
 	private final float hitDamage;
 	private float baseDamage;
 	private final String name;
@@ -57,7 +61,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	/**
 	 *
 	 */
-	public ItemSaw(String name, ToolMaterial material, int rarity, int tier) {
+	public ItemSaw(String name, ToolMaterial material, Rarity rarity, int tier) {
 		super(material, material.getAttackDamage(), 1.0F);
 		this.tier = tier;
 		itemRarity = rarity;
@@ -84,8 +88,10 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 		}
 
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
-		multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
-		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3F, 0));
+		multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+				new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
+		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+				new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3F, 0));
 		return multimap;
 	}
 
@@ -151,12 +157,8 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -187,7 +189,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
 	}
 
 	@Override
@@ -196,10 +198,10 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {
@@ -219,6 +221,16 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
 		return CustomToolHelper.getLocalisedName(item, unlocalName);
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 	// ====================================================== CUSTOM END
 	// ==============================================================\\

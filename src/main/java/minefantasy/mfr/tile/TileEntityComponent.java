@@ -7,6 +7,7 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemPersistentComponentMarker;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -26,7 +27,6 @@ public class TileEntityComponent extends TileEntityBase {
 	public String type = "bar";
 	public String tex = "bar";
 	public CustomMaterial material;
-	private int ticksExisted;
 
 	public ItemStackHandler inventory = createInventory();
 
@@ -92,7 +92,6 @@ public class TileEntityComponent extends TileEntityBase {
 		this.type = type;
 		this.tex = tex;
 		this.material = CustomToolHelper.getCustomPrimaryMaterial(item);
-		this.ticksExisted = 19;
 	}
 
 	public void interact(EntityPlayer user, ItemStack held, boolean leftClick) {
@@ -170,15 +169,6 @@ public class TileEntityComponent extends TileEntityBase {
 					Constants.StorageTextures.PERSIST_FLAG,
 					Constants.StorageTextures.PERSIST_FLAG,
 					0);
-		}
-	}
-
-	@Override
-	public void markDirty() {
-		++ticksExisted;
-
-		if (ticksExisted == 20 || ticksExisted % 120 == 0) {
-			sendUpdates();
 		}
 	}
 
@@ -263,9 +253,9 @@ public class TileEntityComponent extends TileEntityBase {
 		tex = nbt.getString("tex");
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 		if (nbt.hasKey("material_name")) {
-			this.material = CustomMaterial.getMaterial(nbt.getString("material_name"));
+			this.material = CustomMaterialRegistry.getMaterial(nbt.getString("material_name"));
 		} else {
-			this.material = CustomMaterial.NONE;
+			this.material = CustomMaterialRegistry.NONE;
 		}
 	}
 
@@ -280,7 +270,7 @@ public class TileEntityComponent extends TileEntityBase {
 		if (!getInventory().getStackInSlot(0).isEmpty()) {
 			nbt.setTag("inventory", inventory.serializeNBT());
 		}
-		if (material != CustomMaterial.NONE) {
+		if (material != CustomMaterialRegistry.NONE) {
 			nbt.setString("material_name", material.getName());
 		}
 		return nbt;

@@ -9,6 +9,7 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.TannerRecipeBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.Utils;
@@ -21,6 +22,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -38,7 +40,6 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	public String tex = "";
 	public float acTime;
 	private final Random rand = new Random();
-	private int ticksExisted;
 	private Set<String> knownResearches = new HashSet<>();
 
 	public TileEntityTanningRack() {
@@ -85,17 +86,10 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
 	@Override
 	public void update() {
-		++ticksExisted;
-
-		if (ticksExisted == 20 || ticksExisted % 120 == 0) {
-			sendUpdates();
-		}
-
 		if (isAutomated()) {
 			if (acTime > 0) {
 				acTime -= (1F / 20);
 			}
-			// syncAnimations();
 		}
 	}
 
@@ -151,7 +145,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 						updateRecipe();
 						if (isShabbyRack() && rand.nextInt(10) == 0 && !world.isRemote) {
 							for (int a = 0; a < rand.nextInt(10); a++) {
-								ItemStack plank = MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG);
+								ItemStack plank = CustomToolHelper.constructMainSlot(MineFantasyItems.TIMBER, Constants.SCRAP_WOOD_TAG);
 								world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.ENTITY_ZOMBIE_BREAK_DOOR_WOOD, SoundCategory.AMBIENT, 1.0F, 1.0F);
 								player.dropItem(plank, false);
 							}
@@ -296,9 +290,8 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		inputInventory.deserializeNBT(nbt.getCompoundTag("inputInventory"));
 		recipeInventory.deserializeNBT(nbt.getCompoundTag("outputInventory"));
 
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerTanner.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
-		}
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerTanner.getRecipeByResourceLocation(resourceLocation));
 
 		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 	}
@@ -314,7 +307,10 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		nbt.setTag("inputInventory", inputInventory.serializeNBT());
 		nbt.setTag("outputInventory", recipeInventory.serializeNBT());
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
+		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
 		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));

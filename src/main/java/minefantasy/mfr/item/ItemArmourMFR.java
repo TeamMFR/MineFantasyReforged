@@ -5,11 +5,13 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.LeatherArmourListMFR;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -21,11 +23,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -35,9 +37,10 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@SideOnly(Side.CLIENT)
 	private static Object fullplate;
 	protected BaseMaterial baseMaterial;
-	private final int itemRarity;
+	private final Rarity itemRarity;
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot,
+			String tex, Rarity rarity) {
 		super(name, material.getArmourConversion(), armourDesign, slot, tex);
 		baseMaterial = material;
 		setRegistryName(name);
@@ -48,7 +51,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		itemRarity = rarity;
 	}
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot,
+			String tex, Rarity rarity, float customBulk) {
 		this(name, material, armourDesign, slot, tex, rarity);
 		this.suitBulk = customBulk;
 	}
@@ -70,8 +74,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	public float getMagicResistance(ItemStack item, DamageSource source) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != CustomMaterial.NONE) {
-			return custom.resistance;
+		if (custom != CustomMaterialRegistry.NONE) {
+			return custom.getResistance();
 		}
 		return material.magicResistanceModifier;
 	}
@@ -79,7 +83,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	public float getFireResistance(ItemStack item, DamageSource source) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != CustomMaterial.NONE) {
+		if (custom != CustomMaterialRegistry.NONE) {
 			MFRLogUtil.logDebug("Fire Resist: " + custom.getFireResistance());
 			return custom.getFireResistance() * design.getRating();
 		}
@@ -101,12 +105,12 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
+	public IRarity getForgeRarity(ItemStack item) {
+		int lvl = itemRarity.getRarityValue();
 
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, "main_material");
+		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, "main_material");
 		if (material != null) {
-			lvl = material.rarityID + 1;
+			lvl = material.getRarity().getRarityValue();
 		}
 
 		if (item.isItemEnchanted()) {
@@ -118,10 +122,10 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		if (design == ArmourDesign.PLATE) {
 			lvl++;
 		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
+		if (lvl >= Rarity.values().length) {
+			lvl = Rarity.values().length - 1;
 		}
-		return MineFantasyItems.RARITY[lvl];
+		return Rarity.getRarityByValue(lvl);
 	}
 
 	@Override
@@ -235,18 +239,12 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		return super.getSuitWeightType(item);
 	}
 
-	public ItemStack construct(String plate) {
-		ItemStack item = new ItemStack(this);
-		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, plate.toLowerCase());
-		return item;
-	}
-
 	/**
 	 * A bit of the new system, gets custom materials for armour Only used on
 	 * cogwork armour though
 	 */
 	public CustomMaterial getCustomMaterial(ItemStack item) {
-		return CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
+		return CustomMaterialRegistry.getMaterialFor(item, CustomToolHelper.slot_main);
 	}
 
 	@Override
@@ -264,8 +262,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	protected float getProtectionRatio(ItemStack item) {
 		CustomMaterial main = getCustomMaterial(item);
-		if (main != CustomMaterial.NONE) {
-			return main.hardness * design.getRating();
+		if (main != CustomMaterialRegistry.NONE) {
+			return main.getHardness() * design.getRating();
 		}
 		return super.getProtectionRatio(item);
 	}
@@ -281,7 +279,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		float blunt = 1.0F;
 
 		CustomMaterial material = getCustomMaterial(item);
-		if (material != CustomMaterial.NONE) {
+		if (material != CustomMaterialRegistry.NONE) {
 			cutting = material.getArmourProtection(0);
 			blunt = material.getArmourProtection(1);
 			piercing = material.getArmourProtection(2);
@@ -304,8 +302,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
 	public float getResistanceModifier(ItemStack item, String hazard) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != CustomMaterial.NONE) {
-			return custom.resistance;
+		if (custom != CustomMaterialRegistry.NONE) {
+			return custom.getResistance();
 		}
 		return super.getResistanceModifier(item, hazard);
 	}
@@ -315,12 +313,17 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.NONE;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List list, ITooltipFlag full) {
 		CustomToolHelper.addInformation(item, list);
 		float mass = getPieceWeight(item, EntityLiving.getSlotForItemStack(item));
 
-		list.add(CustomMaterial.getWeightString(mass));
+		list.add(CustomMaterialRegistry.getWeightString(mass));
 		super.addInformation(item, world, list, full);
 	}
 

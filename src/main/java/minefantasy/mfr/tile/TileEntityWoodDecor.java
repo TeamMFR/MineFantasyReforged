@@ -3,6 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -12,7 +13,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
 	public TileEntityWoodDecor(String texture) {
 		this.texture = texture;
-		this.material = CustomMaterial.NONE;
+		this.material = CustomMaterialRegistry.NONE;
 	}
 
 	public TileEntityWoodDecor(String tex, CustomMaterial material) {
@@ -25,7 +26,9 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public CustomMaterial getMaterial() {
-		return this.material != CustomMaterial.NONE ? this.material : trySetMaterial(MineFantasyMaterials.Names.SCRAP_WOOD);
+		return this.material != CustomMaterialRegistry.NONE
+				? this.material
+				: trySetMaterial(MineFantasyMaterials.Names.SCRAP_WOOD);
 	}
 
 	public void setMaterial(CustomMaterial material) {
@@ -33,12 +36,14 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public String getMaterialName() {
-		return this.material != CustomMaterial.NONE ? material.getName() : MineFantasyMaterials.Names.SCRAP_WOOD;
+		return this.material != CustomMaterialRegistry.NONE
+				? material.getName()
+				: MineFantasyMaterials.Names.SCRAP_WOOD;
 	}
 
 	public CustomMaterial trySetMaterial(String materialName) {
-		CustomMaterial material = CustomMaterial.getMaterial(materialName);
-		if (material != CustomMaterial.NONE) {
+		CustomMaterial material = CustomMaterialRegistry.getMaterial(materialName);
+		if (material != CustomMaterialRegistry.NONE) {
 			this.material = material;
 		}
 		return this.material;
@@ -59,8 +64,8 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
 	public int getCapacity() {
 		CustomMaterial material = getMaterial();
-		if (material != CustomMaterial.NONE) {
-			return getCapacity(material.tier);
+		if (material != CustomMaterialRegistry.NONE) {
+			return getCapacity(material.getTier());
 		}
 		return getCapacity(0);
 	}

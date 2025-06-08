@@ -6,6 +6,7 @@ import minefantasy.mfr.block.BlockRoast;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.item.ItemBurntFood;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.RoastRecipeBase;
 import net.minecraft.block.Block;
@@ -18,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -30,7 +32,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITickable {
-	public static final String LAST_RECIPE_NAME_TAG = "lastRecipe";
+	public static final String LAST_RECIPE_RESOURCE_LOCATION_TAG = "lastRecipe";
 	/**
 	 * Enable high temperatures ruin cooking
 	 */
@@ -184,16 +186,20 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	}
 
 	public void updateRecipe() {
-		RoastRecipeBase roastRecipe = CraftingManagerRoast.findMatchingRecipe(getInventory().getStackInSlot(0), isOven(), knownResearches);
-		setRecipe(roastRecipe);
+		ItemStack stack = getInventory().getStackInSlot(0);
+		if (stack.isEmpty() || stack.getItem() instanceof ItemBurntFood) {
+			setRecipe(null);
+			lastRecipe = null;
+			progress = 0;
+			return;
+		}
+
+		RoastRecipeBase roastRecipe = CraftingManagerRoast.findMatchingRecipe(stack, isOven(), knownResearches);
 
 		if (roastRecipe != null) {
 			maxProgress = roastRecipe.getCookTime();
-			lastRecipe = roastRecipe;
-		}
-		if (getInventory().getStackInSlot(0).isEmpty()) {
-			lastRecipe = null;
-			progress = 0;
+			lastRecipe = (RoastRecipeBase) getRecipe();
+			setRecipe(roastRecipe);
 		}
 	}
 
@@ -221,12 +227,10 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		progress = nbt.getFloat("Progress");
 		maxProgress = nbt.getFloat("maxProgress");
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerRoast.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
-		}
-		if (!nbt.getString(LAST_RECIPE_NAME_TAG).isEmpty()) {
-			this.lastRecipe = CraftingManagerRoast.getRecipeByName(LAST_RECIPE_NAME_TAG, true);
-		}
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerRoast.getRecipeByResourceLocation(resourceLocation));
+		ResourceLocation lastRecipeResourceLocation = new ResourceLocation(nbt.getString(LAST_RECIPE_RESOURCE_LOCATION_TAG));
+		this.lastRecipe = CraftingManagerRoast.getRecipeByResourceLocation(lastRecipeResourceLocation);
 	}
 
 	@Override
@@ -236,10 +240,16 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		nbt.setFloat("maxProgress", maxProgress);
 		nbt.setTag("inventory", inventory.serializeNBT());
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
+		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 		if (lastRecipe != null) {
-			nbt.setString(LAST_RECIPE_NAME_TAG, lastRecipe.getName());
+			nbt.setString(LAST_RECIPE_RESOURCE_LOCATION_TAG, lastRecipe.getResourceLocation());
+		}
+		else {
+			nbt.setString(LAST_RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 		return nbt;
 	}

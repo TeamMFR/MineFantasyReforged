@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
@@ -20,6 +21,7 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -31,10 +33,13 @@ import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -49,10 +54,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -66,6 +71,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -77,7 +83,8 @@ import java.util.Random;
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
 		IKnockbackWeapon, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
-		IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
+		IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass,
+		IRackItem, IClientRegister, IMaterialDoubleComponent {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public static float axeAPModifier = -0.1F;
 	protected static float speedModHeavy = -0.4F;
@@ -122,7 +129,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	protected float maceStaminaCost = 1.50F;
 	protected float spearStaminaCost = 1.40F;
 	protected float heavyStaminaCost = 2.50F;
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	/**
 	 * The damage of the weapon without material modifiers
 	 */
@@ -146,7 +153,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 * Polearm: Ranged Defensive, Good against Heavy Armour
 	 * Lightblade: Fast Offensive, Better against Unarmoured
 	 */
-	public ItemWeaponMFR(ToolMaterial material, String named, int rarity, float weight) {
+	public ItemWeaponMFR(ToolMaterial material, String named, Rarity rarity, float weight) {
 		super(material);
 		materialWeight = weight;
 		itemRarity = rarity;
@@ -177,16 +184,9 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	public static void setParry(ItemStack item, int i) {
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 
 		nbt.setInteger("ParryAnimation", i);
-	}
-
-	public static NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	public static boolean canPerformAbility(EntityLivingBase user, float points) {
@@ -284,10 +284,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	@Override
 	public void addInformation(ItemStack weapon, World world, List<String> list, ITooltipFlag flag) {
 		super.addInformation(weapon, world, list, flag);
-
-		if (material == ToolMaterial.WOOD) {
-			return;
-		}
 
 		if (isCustom) {
 			CustomToolHelper.addInformation(weapon, list);
@@ -526,7 +522,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	protected void hurtInRange(EntityLivingBase user, double range) {
-		AxisAlignedBB bb = user.getEntityBoundingBox().expand(range, range, range);
+		AxisAlignedBB bb = user.getEntityBoundingBox().grow(range, range, range);
 		List<Entity> hurt = user.world.getEntitiesWithinAABBExcludingEntity(user, bb);
 		for (Entity hit : hurt) {
 			if (user.canEntityBeSeen(hit)) {
@@ -591,10 +587,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 			return;
@@ -744,12 +740,8 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -761,7 +753,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
 	}
 
 	// ====================================================== CUSTOM END
@@ -773,6 +765,28 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			return true;
 		}
 		return super.canContinueUsing(oldStack, newStack);
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.WOOD_MATERIAL;
+
+		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	@Override

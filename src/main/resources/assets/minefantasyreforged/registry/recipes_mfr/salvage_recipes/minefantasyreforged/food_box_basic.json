@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:food_box_basic"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:timber_cut",
+			"material_type": "wood_material",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:hinge"
+		}
+	]
+}

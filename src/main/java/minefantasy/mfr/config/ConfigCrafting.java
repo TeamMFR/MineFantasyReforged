@@ -1,15 +1,14 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.MineFantasyReforged;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigCrafting extends ConfigurationBaseMF {
-	public static final String CATEGORY_REFINING = "01 Refining";
-	public static final String CATEGORY_COOKING = "02 Cooking";
-	public static final String ANVIL_RECIPE_SETTINGS = "03 Anvil Recipe Settings";
-	public static final String CARPENTER_RECIPE_SETTINGS = "04 Carpenter Recipe Settings";
+	private static final String CATEGORY_REFINING = "01 Refining";
+	private static final String CATEGORY_COOKING = "02 Cooking";
+	private static final String ANVIL_RECIPE_SETTINGS = "03 Anvil Recipe Settings";
+	private static final String CARPENTER_RECIPE_SETTINGS = "04 Carpenter Recipe Settings";
 	private static final String BIG_FURNACE_RECIPE_SETTINGS = "05 Big Furnace Recipe Settings";
 	private static final String ALLOY_RECIPE_SETTINGS = "06 Alloy Recipe Settings";
 	private static final String BLOOMERY_RECIPE_SETTINGS = "07 Bloomery Recipe Settings";
@@ -24,7 +23,6 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
-	public static boolean shouldSalvagePickFromList = false;
 	public static float minimumDragonforgedTemperature = 12250;
 
 	public ConfigCrafting(String name) {
@@ -66,11 +64,6 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 				"Cook non-mf food on cooktop",
 				true,
 				"This means non-mf food cooked in a furnace can work on a cooking plate").getString());
-		shouldSalvagePickFromList = Boolean.parseBoolean(config.get(SALVAGE_RECIPE_SETTINGS,
-				"Salvage OreDict Setting",
-				false,
-				"If true, this means that the Salvage recipe will pick one ItemStack from the OreDict List at random. "
-						+ "\nIf false, it will add all stacks. This is NOT recommended for OreDicted Recipes.").getString());
 		minimumDragonforgedTemperature = Float.parseFloat(config.get(SPECIAL_RECIPE_SETTINGS,
 				"Dragonforged Minimum Temperature",
 				12250,
@@ -78,121 +71,98 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 						+ "\nValues above 5000 require multiple Forges.").getString());
 	}
 
-	public static boolean isAnvilItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the anvil.
+	public static boolean isAnvilRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the anvil.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, ANVIL_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isCarpenterItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the carpenter.
+	public static boolean isCarpenterRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the carpenter.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, CARPENTER_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isBigFurnaceItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the big furnace.
+	public static boolean isBigFurnaceRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the big furnace.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, BIG_FURNACE_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isAlloyItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the crucible.
+	public static boolean isAlloyRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the crucible.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, ALLOY_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isBloomeryItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the bloomery.
+	public static boolean isBloomeryRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the bloomery.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, BLOOMERY_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isBlastFurnaceItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the blast furnace.
+	public static boolean isBlastFurnaceRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the blast furnace.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, BLAST_FURNACE_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isQuernItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the quern.
+	public static boolean isQuernRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the quern.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, QUERN_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isTannerItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the tanner.
+	public static boolean isTannerRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the tanner.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, TANNER_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isRoastItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the roast blocks.
+	public static boolean isRoastRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the roast blocks.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, ROAST_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isKitchenBenchItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the kitchen bench.
+	public static boolean isKitchenBenchRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the kitchen bench.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, KITCHEN_BENCH_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isItemSalvageable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for generating salvage.
+	public static boolean isSalvageRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for generating salvage.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, SALVAGE_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isItemTransformable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for being transformable.
+	public static boolean isTransformationRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for being transformable.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, TRANSFORMATION_RECIPE_SETTINGS, true, "");
 	}
 
-	public static boolean isBlockStateTransformable(IBlockState state) {
-		//Checks if the given BlockState should load default recipes for being transformable.
+	public static boolean isSpecialRecipeEnabled(ResourceLocation key) {
+		//Checks if the given Recipe should load default recipes for the special crafting recipes.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = state.toString();
-		return get().getBoolean(name, TRANSFORMATION_RECIPE_SETTINGS, true, "");
-	}
-
-	public static boolean isSpecialItemCraftable(ItemStack itemStack) {
-		//Checks if the given Item should load default recipes for the special crafting recipes.
-		//If an entry for it does not exist, it will be added when queried, defaulting to try
-		String name = generateNameFromItemAndNBT(itemStack);
+		String name = String.valueOf(key);
 		return get().getBoolean(name, SPECIAL_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {
 		return MineFantasyReforged.configCrafting.getConfig();
-	}
-
-
-	public static String generateNameFromItemAndNBT(ItemStack itemStack) {
-		String name;
-		if (itemStack.getTagCompound() != null) {
-			name = itemStack.getItem().getRegistryName().toString() + "|" + itemStack.getTagCompound().toString();
-		}
-		else {
-			name = itemStack.getItem().getRegistryName().toString();
-		}
-		if (itemStack.getCount() > 1) {
-			name = name + "|" + itemStack.getCount();
-		}
-
-		return name.replaceAll("[{}'\"]", "");
 	}
 }

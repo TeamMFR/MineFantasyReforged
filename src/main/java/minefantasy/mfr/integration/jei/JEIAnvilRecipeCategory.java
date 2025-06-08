@@ -6,21 +6,28 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
+import mezz.jei.gui.Focus;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.recipe.AnvilDynamicRecipe;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -94,14 +101,68 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 		// Init output slot
 		slots.init(24, false, 143, 28);
 
-		// Assign ingredients to slots
-		for (int j = 0; j < inputs.size(); j++) {
-			slots.set(j, inputs.get(j));
+		Focus<ItemStack> outputFocus = JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT);
+
+		if (AnvilRecipeBase.isCustomRecipe(recipeWrapper.getRecipe())){
+			// Assign ingredients to slots
+			for (int j = 0; j < inputs.size(); j++) {
+				List<ItemStack> slotStacks = inputs.get(j);
+				if (outputFocus != null && CustomToolHelper.hasAnyMaterial(outputFocus.getValue())) {
+					if (!slotStacks.isEmpty()) {
+						ItemStack slotStack = slotStacks.get(0).copy();
+						CustomToolHelper.tryDeconstruct(slotStack, outputFocus.getValue());
+						slots.set(j, slotStack);
+					}
+				}
+				else {
+					slots.set(j, slotStacks);
+				}
+			}
+		} else if (recipeWrapper.getRecipe() instanceof AnvilDynamicRecipe) {
+			for (int j = 0; j < inputs.size(); j++) {
+				List<ItemStack> slotStacks = inputs.get(j);
+				if (outputFocus != null) {
+					//Bar to Ingot
+					if (((AnvilDynamicRecipe) recipeWrapper.getRecipe()).modifyOutput) {
+						if (!slotStacks.isEmpty()) {
+							for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+								if (material.getMaterialIngredient().apply(outputFocus.getValue())) {
+									for (ItemStack slotStack : slotStacks) {
+										CustomMaterialRegistry.addMaterial(slotStack, CustomToolHelper.slot_main, material);
+									}
+								}
+							}
+							slots.set(j, slotStacks);
+						}
+
+					}
+					//Ingot to Bar
+					else {
+						CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(outputFocus.getValue());
+						if (material != CustomMaterialRegistry.NONE) {
+							if (!slotStacks.isEmpty()) {
+								slots.set(j, Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
+							}
+						}
+					}
+				}
+				else {
+					slots.set(j, slotStacks);
+				}
+			}
+		} else {
+			// Assign ingredients to slots
+			for (int j = 0; j < inputs.size(); j++) {
+				slots.set(j, inputs.get(j));
+			}
 		}
+
 		// Assign outputs to slot
-		for (List<ItemStack> stacks : outputList) {
-			slots.set(24, stacks);
-		}
+		slots.set(24, outputList.get(0));
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getIngredients(),
+						slotStack, tooltip, outputFocus, recipeWrapper.getRecipe().getAnvilRecipeOutput()));
 	}
 
 	/**

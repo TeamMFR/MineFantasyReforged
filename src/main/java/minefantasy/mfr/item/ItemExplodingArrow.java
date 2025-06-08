@@ -2,9 +2,11 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +23,7 @@ import java.util.List;
 public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage {
 
 	public ItemExplodingArrow() {
-		super("exploding_arrow", 1, ArrowType.EXPLOSIVE);
+		super("exploding_arrow", Rarity.UNCOMMON, ArrowType.EXPLOSIVE);
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setMaxStackSize(16);
 	}
@@ -92,5 +94,10 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 				new ItemStack(MineFantasyItems.BOMB_CASING_ARROW),
 				ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
 				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)));
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.NONE;
 	}
 }

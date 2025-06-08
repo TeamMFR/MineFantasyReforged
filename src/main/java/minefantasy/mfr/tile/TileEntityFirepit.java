@@ -10,6 +10,7 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Functions;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -97,13 +98,13 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	/**
 	 * Gets the burn time
 	 * <p>
-	 * Wood tools and plank item are 1 minute sticks and saplings are 30seconds
+	 * Wood tools and plank item are 1-minute sticks and saplings are 30seconds
 	 */
 	public static int getItemBurnTime(ItemStack input) {
 		if (!input.isEmpty()) {
 			Item i = input.getItem();
 			if (i == Items.STICK)
-				return 600;// 30Sec
+				return 150;// 15Sec
 			if (i == MineFantasyItems.TIMBER || i == MineFantasyItems.TIMBER_CUT) {
 				return (int) (200 * CustomToolHelper.getBurnModifier(input));
 			}
@@ -135,7 +136,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 				}
 			}
 		}
-		if (isLit()) {
+		if (getIsLit()) {
 			if (isWet()) {
 				extinguish();
 				return;
@@ -147,14 +148,14 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 			}
 
 			if (fuel <= 0) {
-				setLit(false);
+				setIsLit(false);
 			}
 		} else if (fuel > 0 && ticksExisted % 10 == 0) {
 			tryLight();
 		}
 	}
 
-	private boolean isWet() {
+	public boolean isWet() {
 		if (isWater(-1, 0, 0) || isWater(1, 0, 0) || isWater(0, 0, -1) || isWater(0, 0, 1) || isWater(0, 1, 0)) {
 			return true;
 		}
@@ -163,22 +164,22 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	}
 
 	public boolean isBurning() {
-		return isLit() && fuel > 0;
+		return getIsLit() && fuel > 0;
 	}
 
-	public boolean isLit() {
+	public boolean getIsLit() {
 		return isLit;
 	}
 
-	public void setLit(boolean lit) {
-		BlockFirepit.setActiveState(lit, fuel > 0, hasBlockAbove(), world, pos);
+	public void setIsLit(boolean lit) {
 		isLit = lit;
 		ticksExisted = 0;
 	}
 
 	private void tryLight() {
 		if (isFire(-1, 0, 0) || isFire(1, 0, 0) || isFire(0, 0, -1) || isFire(0, 0, 1) || isFire(0, -1, 0) || isFire(0, 1, 0)) {
-			setLit(true);
+			Block block = world.getBlockState(pos).getBlock();
+			((BlockFirepit) block).igniteBlock(world, pos, world.getBlockState(pos));
 		}
 	}
 
@@ -248,7 +249,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 		world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 		world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 
-		setLit(false);
+		setIsLit(false);
 		BlockFirepit.setActiveState(isBurning(), fuel > 0, hasBlockAbove(), world, pos);
 	}
 

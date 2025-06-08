@@ -1,10 +1,9 @@
 package minefantasy.mfr.block;
 
+import com.google.common.collect.ImmutableMap;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityTrough;
 import minefantasy.mfr.tile.TileEntityWoodDecor;
-import minefantasy.mfr.util.WorldUtils;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,12 +20,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 
 public class BlockTrough extends BlockWoodDecor {
-	private static final PropertyInteger FILL_COUNT = PropertyInteger.create("fill_count", 0, 6);
 	public static final String FILL_LEVEL = "fill_level";
 
-	private static AxisAlignedBB AABB = new AxisAlignedBB(0, 0F, 2 / 16F, 1.0F, (7F / 16F), 14 / 16F);
+	private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
+			EnumFacing.WEST, new AxisAlignedBB(14F / 16F, 0.0F, 1.0F, 2 / 16F, 7F / 16F, 0F),
+			EnumFacing.EAST, new AxisAlignedBB(14F / 16F, 0.0F, 1.0F, 2 / 16F, 7F / 16F, 0F),
+			EnumFacing.SOUTH, new AxisAlignedBB(0, 0F, 2 / 16F, 1.0F, 7F / 16F, 14F / 16F),
+			EnumFacing.NORTH, new AxisAlignedBB(0, 0F, 2 / 16F, 1.0F, 7F / 16F, 14F / 16F));
 
 	public BlockTrough(String name) {
 		super(name);
@@ -46,27 +50,27 @@ public class BlockTrough extends BlockWoodDecor {
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FILL_COUNT);
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return state.withProperty(FILL_COUNT, WorldUtils.getTile(world, pos, TileEntityTrough.class).map(TileEntityTrough::getFillCount).orElse(0));
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FILL_COUNT);
-	}
-
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FILL_COUNT, Integer.valueOf(meta));
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
+
+		return this.getDefaultState().withProperty(FACING, enumfacing);
 	}
 
-	@Nonnull
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
+
 	@Override
-	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY, final float hitZ, final int meta, final EntityLivingBase placer, final EnumHand hand) {
-		return getDefaultState().withProperty(FILL_COUNT, 0);
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
 	@Override
@@ -79,9 +83,15 @@ public class BlockTrough extends BlockWoodDecor {
 		return false;
 	}
 
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABBS.get(state.getValue(FACING));
+	}
+
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return AABB;
+		return AABBS.get(state.getValue(FACING));
 	}
 
 	@Override
@@ -90,7 +100,7 @@ public class BlockTrough extends BlockWoodDecor {
 		TileEntityTrough tile = (TileEntityTrough) getTile(world, pos);
 		if (tile != null) {
 			if (stack.hasTagCompound() && stack.getTagCompound().hasKey(FILL_LEVEL)) {
-				tile.fill = stack.getTagCompound().getInteger(FILL_LEVEL);
+				tile.setFill(stack.getTagCompound().getInteger(FILL_LEVEL));
 			}
 			tile.setColorInt(stack);
 		}
@@ -117,7 +127,7 @@ public class BlockTrough extends BlockWoodDecor {
 
 	private ItemStack modifyFill(TileEntityTrough tile, ItemStack item) {
 		if (tile != null && !item.isEmpty()) {
-			item.getTagCompound().setInteger(FILL_LEVEL, tile.fill);
+			item.getTagCompound().setInteger(FILL_LEVEL, tile.getFill());
 		}
 		return item;
 	}

@@ -1,49 +1,41 @@
 package minefantasy.mfr.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.SalvageRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.SalvageRecipeType;
-import minefantasy.mfr.util.FileUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CraftingManagerSalvage {
+public class CraftingManagerSalvage extends CraftingManagerBase<SalvageRecipeBase> {
 
-	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/salvage_recipes/";
-
-	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/salvage_recipes/";
+	private static final IForgeRegistry<SalvageRecipeBase> SALVAGE_RECIPES =
+			new RegistryBuilder<SalvageRecipeBase>()
+					.setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "salvage_recipes"))
+					.setType(SalvageRecipeBase.class)
+					.setMaxID(Integer.MAX_VALUE >> 5)
+					.disableSaving()
+					.allowModification()
+					.create();
 
 	public CraftingManagerSalvage() {
+		super(new SalvageRecipeFactory(),
+				SalvageRecipeType.NONE,
+				Constants.ASSET_DIRECTORY + "/recipes_mfr/salvage_recipes/",
+				"config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/salvage_recipes/");
 	}
 
-	private static final IForgeRegistry<SalvageRecipeBase> SALVAGE_RECIPES = (new RegistryBuilder<SalvageRecipeBase>()).setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "salvage_recipes")).setType(SalvageRecipeBase.class).setMaxID(Integer.MAX_VALUE >> 5).disableSaving().allowModification().create();
 	public static void init() {
 		//call this so that the static final gets initialized at proper time
 	}
@@ -52,84 +44,9 @@ public class CraftingManagerSalvage {
 		return SALVAGE_RECIPES.getValuesCollection();
 	}
 
-	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-	private static final SalvageRecipeFactory factory = new SalvageRecipeFactory();
-
-	public static void loadRecipes() {
-		ModContainer modContainer = Loader.instance().activeModContainer();
-
-		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
-				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
-		//noinspection ConstantConditions
-		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m ->
-				loadRecipes(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
-
-		Loader.instance().setActiveModContainer(modContainer);
-	}
-
-	private static void loadRecipes(ModContainer mod, File source, String base) {
-		JsonContext ctx = new JsonContext(mod.getModId());
-
-		FileUtils.findFiles(source, base, root -> FileUtils.loadConstants(source, base, ctx), (root, file) -> {
-			Path relative = root.relativize(file);
-			if (relative.getNameCount() > 1) {
-				String extension = FilenameUtils.getExtension(file.toString());
-
-				if (!extension.equals(Constants.JSON_FILE_EXT)) {
-					return;
-				}
-
-				String modName = relative.getName(relative.getNameCount() - 2).toString();
-				String fileName = FilenameUtils.removeExtension(relative.getFileName().toString());
-
-				if (!Loader.isModLoaded(modName) || fileName.startsWith("_")) {
-					return;
-				}
-				Loader.instance().setActiveModContainer(mod);
-
-				if (!"json".equals(FilenameUtils.getExtension(file.toString())) || relative.startsWith("_"))
-					return;
-
-				ResourceLocation key = new ResourceLocation(ctx.getModId(), fileName);
-
-				BufferedReader reader = null;
-				try {
-					reader = Files.newBufferedReader(file);
-					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
-
-					String type = ctx.appendModId(JsonUtils.getString(json, "type"));
-					if (Loader.isModLoaded(mod.getModId())) {
-						if (SalvageRecipeType.getByNameWithModId(type, mod.getModId()) != SalvageRecipeType.NONE) {
-							SalvageRecipeBase recipe = factory.parse(ctx, json);
-							if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-								addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
-							}
-						} else {
-							MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Salvage recipe", key, type);
-						}
-					}
-					else {
-						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it the mod it depends on is not loaded", key, type);
-					}
-				}
-				catch (JsonParseException e) {
-					MineFantasyReforged.LOG.error("Parsing error loading recipe {}", key, e);
-				}
-				catch (IOException e) {
-					MineFantasyReforged.LOG.error("Couldn't read recipe {} from {}", key, file, e);
-				}
-				finally {
-					IOUtils.closeQuietly(reader);
-				}
-			}
-		});
-	}
-
-	public static void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
+	public void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getInput();
-		if (ConfigCrafting.isItemSalvageable(itemStack)) {
+		if (ConfigCrafting.isSalvageRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.SALVAGE_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);
@@ -156,19 +73,23 @@ public class CraftingManagerSalvage {
 		return null;
 	}
 
-	public static SalvageRecipeBase getRecipeByName(String name) {
-		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
+	public static SalvageRecipeBase getRecipeByName(String modId, String name) {
+		ResourceLocation resourceLocation = new ResourceLocation(modId, name);
 		if (!SALVAGE_RECIPES.containsKey(resourceLocation)) {
 			MineFantasyReforged.LOG.error("Salvage Recipe Registry does not contain recipe: {}", name);
 		}
 		return SALVAGE_RECIPES.getValue(resourceLocation);
 	}
 
-	public static List<SalvageRecipeBase> getRecipesByName(String... names) {
+	public static List<SalvageRecipeBase> getRecipesByName(String modId, String... names) {
 		List<SalvageRecipeBase> recipes = new ArrayList<>();
 		for (String name : names) {
-			recipes.add(getRecipeByName(name));
+			recipes.add(getRecipeByName(modId, name));
 		}
 		return recipes;
+	}
+
+	public static SalvageRecipeBase getRecipeByResourceLocation(ResourceLocation resourceLocation) {
+		return SALVAGE_RECIPES.getValue(resourceLocation);
 	}
 }

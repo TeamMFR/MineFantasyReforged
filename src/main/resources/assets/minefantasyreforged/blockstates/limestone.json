@@ -7,7 +7,6 @@
         "model": "cube_all"
     },
     "variants": {
-        "normal": [{}],
-        "inventory": [{}]
+        "normal": [{}]
     }
 }

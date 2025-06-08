@@ -4,14 +4,14 @@ import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
@@ -83,22 +83,19 @@ public class CarpenterDynamicRecipe extends CarpenterRecipeBase {
 			}
 		}
 		ItemStack outputModified = output.copy();
-		CustomMaterial inputMaterial = CustomMaterial.NONE;
-		for (CustomMaterial material : CustomMaterial.getList("wood")) {
+		CustomMaterial inputMaterial = CustomMaterialRegistry.NONE;
+		for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
 			if (material instanceof WoodMaterial) {
-				Item materialItem = ForgeRegistries.ITEMS.getValue(((WoodMaterial) material).inputItemResourceLocation);
-				if (materialItem != null) {
-					ItemStack materialItemStack = new ItemStack(materialItem, 1, ((WoodMaterial) material).inputItemMeta);
-					if (inputStack.isItemEqual(materialItemStack)) {
-						inputMaterial = material;
-					}
+				Ingredient materialIngredient = material.getMaterialIngredient();
+				if (materialIngredient.apply(inputStack)) {
+					inputMaterial = material;
 				}
 			}
 		}
-		if (inputMaterial == CustomMaterial.NONE) {
-			inputMaterial = CustomMaterial.getMaterial(Constants.SCRAP_WOOD_TAG);
+		if (inputMaterial == CustomMaterialRegistry.NONE) {
+			inputMaterial = CustomMaterialRegistry.getMaterial(Constants.SCRAP_WOOD_TAG);
 		}
-		CustomMaterial.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial.name);
+		CustomMaterialRegistry.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial);
 		return outputModified;
 	}
 

@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:plate_huge"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:plate",
+			"material_type": "metal_material",
+			"count": 2
+		}
+	]
+}

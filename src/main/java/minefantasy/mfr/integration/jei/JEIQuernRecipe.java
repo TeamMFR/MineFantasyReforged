@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JEIQuernRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final QuernRecipeBase recipe;
+	private final QuernRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 	private final List<List<ItemStack>> potInputs;
 
@@ -39,5 +39,9 @@ public class JEIQuernRecipe implements IRecipeWrapper {
 
 	public List<List<ItemStack>> getPotInputs() {
 		return potInputs;
+	}
+
+	public QuernRecipeBase getRecipe() {
+		return recipe;
 	}
 }

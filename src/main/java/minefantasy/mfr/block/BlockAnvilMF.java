@@ -8,8 +8,9 @@ import minefantasy.mfr.item.ItemHammer;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.network.SparkParticlePacket;
 import minefantasy.mfr.tile.TileEntityAnvil;
-import minefantasy.mfr.util.ParticleBuilder;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,9 +27,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -160,9 +161,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 				tile.openGUI(world, player);
 			}
 			if (held.getItem() instanceof ItemHammer) {
-				if (world.isRemote) {
-					generateSparks(world, pos.getX() + hitX, pos.getY(), pos.getZ() + hitZ);
-				}
+				generateSparks(world, pos.getX() + hitX, pos.getY(), pos.getZ() + hitZ, player.dimension);
 				tile.setHit(true);
 			}
 		}
@@ -198,53 +197,18 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	}
 
 	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
 		TileEntityAnvil tile = (TileEntityAnvil) getTile(world, pos);
 		if (tile != null) {
-			if (user.isSneaking()) {
-				tile.upset(user);
+			if (player.isSneaking()) {
+				tile.upset(player);
 			} else {
-				tile.tryCraft(user, false);
-				if (user.getHeldItemMainhand().getItem() instanceof ItemHammer) {
-					if (world.isRemote) {
-						generateSparks(world, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F);
-					}
+				tile.tryCraft(player, false);
+				if (player.getHeldItemMainhand().getItem() instanceof ItemHammer) {
+					generateSparks(world, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, player.dimension);
 					tile.setHit(true);
 				}
 			}
-		}
-	}
-
-	private void generateSparks(World world, double x, double y, double z) {
-		for(int i = 0; i < (int) MathHelper.nextDouble(world.rand, 50, 100); i++){
-			double randVelX = MathHelper.nextDouble(world.rand, -0.5, 0.5);
-			double randVelZ = MathHelper.nextDouble(world.rand, -0.5, 0.5);
-
-			float yaw = calcAngleFromVelocity(randVelX, randVelZ);
-			ParticleBuilder.create(ParticleBuilder.Type.SPARK)
-					.pos(x, y + 0.86F, z)
-					.time((int) MathHelper.nextDouble(world.rand, 10, 35))
-					.scale(0.075F)
-					.face(yaw, 90)
-					.clr(255, 125, 0)
-					.fade(255,0,0)
-					.vel(randVelX, 0, randVelZ)
-					.gravity(true)
-					.spawn(world);
-		}
-	}
-
-	private float calcAngleFromVelocity(double randVelX, double randVelZ) {
-		if ((randVelX > 0.05 && randVelZ < -0.05) || (randVelX < -0.05 && randVelZ > 0.05)){
-			return  45;
-		}
-		else if ((randVelX > 0.05 && randVelZ > 0.05) || (randVelX < -0.05 && randVelZ < -0.05)) {
-			return -45;
-		}
-		else if (randVelX >= 0.05 || randVelX <= -0.05) {
-			return 90;
-		} else {
-			return 0;
 		}
 	}
 
@@ -252,4 +216,11 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 		return tier;
 	}
 
+	private void generateSparks(World world, double x, double y, double z, int dimensionId) {
+		if (!world.isRemote) {
+			TargetPoint targetPoint = new TargetPoint(dimensionId, x, y, z, 0);
+			SparkParticlePacket packet = new SparkParticlePacket(x, y, z);
+			NetworkHandler.sendToAllTrackingBlock(targetPoint, packet);
+		}
+	}
 }

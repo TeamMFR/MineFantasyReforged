@@ -117,6 +117,9 @@ public class ResearchLogic {
 		if (player.capabilities.isCreativeMode){
 			return true;
 		}
+		if (research == null) {
+			return true;
+		}
 
 		return ResearchLogic.hasInfoUnlocked(player, research);
 	}

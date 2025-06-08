@@ -3,6 +3,8 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -21,13 +23,12 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	private final float mass;
 	private boolean canDamage = false;
 
-	public ItemMetalComponent(String name, float mass, String type) {
-		super(name);
+	public ItemMetalComponent(String name, float mass) {
+		super(name, CustomMaterialType.METAL_MATERIAL);
 		this.name = name;
 
 		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.mass = mass;
-		this.materialType = type;
 	}
 
 	public ItemMetalComponent setCanDamage() {
@@ -50,17 +51,17 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 
-			ArrayList<CustomMaterial> metals = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metals = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial metal : metals) {
-				items.add(this.createComponentItemStack(metal.name));
+				items.add(this.createComponentItemStack(metal.getName()));
 			}
 		}
 	}
 
 	public float getWeightInKg(ItemStack tool) {
 		CustomMaterial base = getBase(tool);
-		if (base != CustomMaterial.NONE) {
-			return base.density * mass;
+		if (base != CustomMaterialRegistry.NONE) {
+			return base.getDensity() * mass;
 		}
 		return mass;
 	}
@@ -76,7 +77,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 			int AR = EntityCogwork.getArmourRating(getBase(tool));
 			list.add(I18n.format("attribute.armour.protection") + " " + AR);
 			if (mass > 0)
-				list.add(CustomMaterial.getWeightString(getWeightInKg(tool)));
+				list.add(CustomMaterialRegistry.getWeightString(getWeightInKg(tool)));
 		}
 	}
 
@@ -99,7 +100,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 
 	public ItemStack createComponentItemStack(String base, int stack, float damage) {
 		ItemStack item = new ItemStack(this, stack);
-		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
+		CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, base);
 		int maxdam = this.getMaxDamage(item);
 
 		item.setItemDamage((int) (maxdam * damage));
@@ -116,12 +117,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 
 	public ItemStack createComponentItemStack(String base, int stack, int damage) {
 		ItemStack item = new ItemStack(this, stack, damage);
-		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
+		CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, base);
 		return item;
-	}
-
-	@Override
-	public String getMaterialType(ItemStack item) {
-		return materialType;
 	}
 }

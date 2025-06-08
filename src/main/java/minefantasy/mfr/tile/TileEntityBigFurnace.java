@@ -56,8 +56,8 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	private float doorAngle = 0;
 	private float prevDoorAngle = 0;
 	// HEATER
-	public float heat;
-	public float maxHeat;
+	public int heat;
+	public int maxHeat;
 	public int justShared;
 	// FURNACE
 	public int progress;
@@ -149,7 +149,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 			if (fuel > 0) {
 				int max = (int) (maxHeat * 1.5F);
 				if (heat < max) {
-					heat += 50 * powerLevel;
+					heat += (int) (50 * powerLevel);
 				}
 
 				for (int a = 0; a < 10; a++) {
@@ -343,7 +343,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		}
 	}
 
-	private float getItemHeat(ItemStack itemStack) {
+	private int getItemHeat(ItemStack itemStack) {
 		return ForgeItemHandler.getForgeHeat(itemStack);
 	}
 
@@ -393,7 +393,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int getHeatScaled(int height) {
 		if (heat <= 0)
 			return 0;
-		int size = (int) (height / TileEntityForge.maxTemperature * this.heat);
+		int size = (int) (height / TileEntityForge.getMaxTemperature() * this.heat);
 
 		return Math.min(size, height);
 	}
@@ -402,7 +402,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int getItemHeatScaled(int height) {
 		if (maxHeat <= 0)
 			return 0;
-		int size = (int) (height / TileEntityForge.maxTemperature * this.maxHeat);
+		int size = (int) (height / TileEntityForge.getMaxTemperature() * this.maxHeat);
 
 		return Math.min(size, height);
 	}
@@ -536,6 +536,9 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		}
 
 		IBlockState state = world.getBlockState(pos);
+		if (!(world.getTileEntity(pos) instanceof TileEntityBigFurnace)) {
+			return false;
+		}
 		EnumFacing facing = state.getValue(BlockBigFurnace.FACING);
 		if (isSolid(facing)) {
 			return false;
@@ -569,9 +572,8 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
-		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
-			this.setRecipe(CraftingManagerBigFurnace.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
-		}
+		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
+		this.setRecipe(CraftingManagerBigFurnace.getRecipeByResourceLocation(resourceLocation));
 
 		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 
@@ -583,8 +585,8 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		fuel = nbt.getInteger("fuel");
 		maxFuel = nbt.getInteger("MaxFuel");
 
-		heat = nbt.getFloat("heat");
-		maxHeat = nbt.getFloat("maxHeat");
+		heat = nbt.getInteger("heat");
+		maxHeat = nbt.getInteger("maxHeat");
 
 		progress = nbt.getInteger("progress");
 		aboveType = nbt.getInteger("Level");
@@ -602,15 +604,18 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		nbt.setInteger("fuel", fuel);
 		nbt.setInteger("maxFuel", maxFuel);
 
-		nbt.setFloat("heat", heat);
-		nbt.setFloat("maxHeat", maxHeat);
+		nbt.setInteger("heat", heat);
+		nbt.setInteger("maxHeat", maxHeat);
 
 		nbt.setInteger("progress", progress);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
 
 		if (getRecipe() != null) {
-			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
+		}
+		else {
+			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
 		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));

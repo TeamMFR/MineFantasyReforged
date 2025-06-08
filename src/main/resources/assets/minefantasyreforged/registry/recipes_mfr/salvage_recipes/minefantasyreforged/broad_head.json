@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:broad_head"
+	},
+	"outputs": [
+		{
+			"item": "#ALL_HUNKS"
+		}
+	]
+}

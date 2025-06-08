@@ -1,7 +1,9 @@
 package minefantasy.mfr.api.heating;
 
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -99,7 +101,7 @@ public class Heatable {
 		if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
 			return 0;
 		}
-		NBTTagCompound tag = getNBT(item);
+		NBTTagCompound tag = NbtUtils.getOrCreateNBT(item);
 
 		if (tag.hasKey(NBT_WorkableTemp))
 			return tag.getInteger(NBT_WorkableTemp);
@@ -111,7 +113,7 @@ public class Heatable {
 		if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
 			return 0;
 		}
-		NBTTagCompound tag = getNBT(item);
+		NBTTagCompound tag = NbtUtils.getOrCreateNBT(item);
 
 		if (tag.hasKey(NBT_UnstableTemp))
 			return tag.getInteger(NBT_UnstableTemp);
@@ -123,7 +125,7 @@ public class Heatable {
 		if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
 			return 0;
 		}
-		NBTTagCompound tag = getNBT(item);
+		NBTTagCompound tag = NbtUtils.getOrCreateNBT(item);
 
 		if (tag.hasKey(NBT_CurrentTemp))
 			return tag.getInteger(NBT_CurrentTemp);
@@ -153,19 +155,13 @@ public class Heatable {
 		if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
 			return ItemStack.EMPTY;
 		}
-		NBTTagCompound tag = getNBT(item);
+		NBTTagCompound tag = NbtUtils.getOrCreateNBT(item);
 
 		if (tag.hasKey(NBT_Item)) {
 			return new ItemStack(tag.getCompoundTag(NBT_Item));
 		}
 
 		return ItemStack.EMPTY;
-	}
-
-	private static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
 	}
 
 	public static boolean isWorkable(ItemStack inputItem) {
@@ -200,7 +196,7 @@ public class Heatable {
 	public int getWorkableStat(ItemStack item) {
 		if (this.minTemperature == -1) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-			if (material != CustomMaterial.NONE)
+			if (material != CustomMaterialRegistry.NONE)
 				return material.getHeatableStats()[0];
 		}
 		return this.minTemperature;
@@ -209,7 +205,7 @@ public class Heatable {
 	public int getUnstableStat(ItemStack item) {
 		if (this.unstableTemperature == -1) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-			if (material != CustomMaterial.NONE)
+			if (material != CustomMaterialRegistry.NONE)
 				return material.getHeatableStats()[1];
 		}
 		return this.unstableTemperature;

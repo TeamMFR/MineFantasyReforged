@@ -162,9 +162,9 @@ component.grip.name=%1$s Grip
 component.brace.name=%1$s Brace
 
 # MATERIAL LIST
-materialtype.wood.name=Дерево (lvl %1$s)
-materialtype.leather.name=Кожа (lvl %1$s)
-materialtype.metal.name=Металл (lvl %1$s)
+materialtype.wood_material.name=Дерево (lvl %1$s)
+materialtype.leather_material.name=Кожа (lvl %1$s)
+materialtype.metal_material.name=Металл (lvl %1$s)
 materialtype.workable.name=Темп. ковки: %1$s°C - %2$s°C
 
 materialtype.resist.name=Сопротивление %1$s

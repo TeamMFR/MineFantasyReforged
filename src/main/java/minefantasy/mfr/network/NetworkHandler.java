@@ -44,6 +44,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nullable;
@@ -53,7 +54,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final NetworkHandler INSTANCE = new NetworkHandler();
 	public static final String CHANNEL_NAME = "MFR";
 
-	//unused: 16, 18, 20, 25
+	//unused: 12, 14, 16, 18, 20, 25
 	private static final int PLAYER_SYNC_PACKET = 1;
 	private static final int STAMINA_PACKET = 2;
 	private static final int PARRY_PACKET = 3;
@@ -65,10 +66,9 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int REMOVE_OFFHAND_PACKET = 9;
 	private static final int OPEN_RELOAD_GUI_PACKET = 10;
 	private static final int LEVEL_UP_PACKET = 11;
-	private static final int FORGE_PACKET = 12;
 	private static final int RESEARCH_TABLE_PACKET = 13;
-	private static final int TROUGH_PACKET = 14;
 	private static final int BOMB_BENCH_PACKET = 15;
+	private static final int BELLOW_PACKET = 16;
 	private static final int ROAD_PACKET = 17;
 	private static final int CROSSBOW_BENCH_PACKET = 19;
 	private static final int BIG_FURNACE_PACKET = 21;
@@ -76,6 +76,7 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int RACK_COMMAND_PACKET = 23;
 	private static final int AMMO_BOX_COMMAND_PACKET = 24;
 	private static final int COGWORK_CONTROL_PACKET = 26;
+	private static final int SPARK_PARTICLE_PACKET = 27;
 
 	//unused:
 	public static final int GUI_CRUCIBLE = 1;
@@ -113,9 +114,8 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(OPEN_RELOAD_GUI_PACKET, OpenReloadGUIPacket.class, OpenReloadGUIPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);
 		PacketMF.registerPacket(RESEARCH_TABLE_PACKET, ResearchTablePacket.class, ResearchTablePacket::new);
-		PacketMF.registerPacket(TROUGH_PACKET, TroughPacket.class, TroughPacket::new);
-		PacketMF.registerPacket(FORGE_PACKET, ForgePacket.class, ForgePacket::new);
 		PacketMF.registerPacket(BOMB_BENCH_PACKET, BombBenchPacket.class, BombBenchPacket::new);
+		PacketMF.registerPacket(BELLOW_PACKET, BellowsPacket.class, BellowsPacket::new);
 		PacketMF.registerPacket(ROAD_PACKET, RoadPacket.class, RoadPacket::new);
 		PacketMF.registerPacket(CROSSBOW_BENCH_PACKET, CrossbowBenchPacket.class, CrossbowBenchPacket::new);
 		PacketMF.registerPacket(BIG_FURNACE_PACKET, BigFurnacePacket.class, BigFurnacePacket::new);
@@ -123,6 +123,7 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(RACK_COMMAND_PACKET, RackCommandPacket.class, RackCommandPacket::new);
 		PacketMF.registerPacket(AMMO_BOX_COMMAND_PACKET, AmmoBoxCommandPacket.class, AmmoBoxCommandPacket::new);
 		PacketMF.registerPacket(COGWORK_CONTROL_PACKET, CogworkControlPacket.class, CogworkControlPacket::new);
+		PacketMF.registerPacket(SPARK_PARTICLE_PACKET, SparkParticlePacket.class, SparkParticlePacket::new);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(MineFantasyReforged.INSTANCE, this);
 
@@ -146,6 +147,10 @@ public class NetworkHandler implements IGuiHandler {
 	public static void sendToAllTracking(Entity e, PacketMF pkt) {
 		WorldServer server = (WorldServer) e.world;
 		server.getEntityTracker().sendToTracking(e, pkt.getFMLPacket());
+	}
+
+	public static void sendToAllTrackingBlock(TargetPoint targetPoint, PacketMF pkt) {
+		INSTANCE.channel.sendToAllTracking(pkt.getFMLPacket(), targetPoint);
 	}
 
 	public static void sendToAllTrackingChunk(World world, int cx, int cz, PacketMF packet) {

@@ -1,0 +1,21 @@
+{
+	"type": "quern_recipe",
+	"consume_pot": true,
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minecraft:dye",
+			"data": 3
+		}
+	],
+	"pot_ingredients": [
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:coca_powder"
+	}
+}

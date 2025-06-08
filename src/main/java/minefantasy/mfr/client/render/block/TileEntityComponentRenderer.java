@@ -10,6 +10,7 @@ import minefantasy.mfr.client.model.block.ModelSheetStack;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.block.state.IBlockState;
@@ -60,8 +61,8 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntit
 			GlStateManager.pushMatrix();
 
 			CustomMaterial material = tile.material;
-			if (material != CustomMaterial.NONE) {
-				GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
+			if (material != CustomMaterialRegistry.NONE) {
+				GlStateManager.color(material.getColourRGB()[0] / 255F, material.getColourRGB()[1] / 255F, material.getColourRGB()[2] / 255F);
 			}
 
 			bindTextureByName("textures/models/object/component/placed_" + tile.tex + ".png"); // texture

@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_arrow_broad"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:broad_head",
+			"material_type": "metal_material"
+		},
+		{
+			"item": "minefantasyreforged:fletching"
+		}
+	]
+}

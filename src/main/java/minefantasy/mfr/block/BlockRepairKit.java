@@ -2,8 +2,8 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -111,7 +111,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 		if (!held.isItemDamaged()) {
 			return false;
 		}
-		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != CustomMaterial.NONE)// Custom Tool
+		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != CustomMaterialRegistry.NONE)// Custom Tool
 		{
 			return held.isItemDamaged();
 		}

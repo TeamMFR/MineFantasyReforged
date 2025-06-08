@@ -1,22 +1,27 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,15 +32,15 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegister {
-	protected int itemRarity;
+public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegister, IMaterialDoubleComponent {
+	protected Rarity itemRarity;
 	private final ToolMaterial toolMaterial;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
-	public ItemHoeMFR(String name, ToolMaterial material, int rarity) {
+	public ItemHoeMFR(String name, ToolMaterial material, Rarity rarity) {
 		super(material);
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
@@ -67,12 +72,8 @@ public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegiste
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -93,7 +94,29 @@ public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegiste
 	 */
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).getEnchantability();
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.WOOD_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	@Override
@@ -102,10 +125,10 @@ public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegiste
 			return;
 		}
 		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

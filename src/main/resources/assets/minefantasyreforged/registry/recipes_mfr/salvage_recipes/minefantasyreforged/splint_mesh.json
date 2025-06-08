@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:splint_mesh"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:metal_hunk",
+			"material_type": "metal_material",
+			"count": 4
+		}
+	]
+}
