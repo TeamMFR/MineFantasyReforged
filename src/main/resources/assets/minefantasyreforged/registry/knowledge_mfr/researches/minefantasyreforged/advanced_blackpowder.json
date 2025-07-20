@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "advanced_blackpowder",
+  "parent_researches": [
+    "minefantasyreforged:blackpowder"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 50
+    }
+  ]
+}

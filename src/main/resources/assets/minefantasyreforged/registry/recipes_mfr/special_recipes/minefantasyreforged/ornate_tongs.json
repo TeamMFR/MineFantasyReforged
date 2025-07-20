@@ -1,6 +1,6 @@
 {
 	"type": "special_recipe_ornate",
-	"research": "craft_ornate",
+	"research": "minefantasyreforged:craft_ornate",
 	"input": {
 		"item": "minefantasyreforged:standard_tongs"
 	},

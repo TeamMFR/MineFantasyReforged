@@ -5,7 +5,6 @@
 	"cook_time": 10,
 	"can_burn": false,
 	"is_oven_recipe": true,
-	"research": "cooking_utensils",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.2,

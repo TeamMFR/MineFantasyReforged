@@ -6,9 +6,11 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.RPGElements;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.recipe.SalvageRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -56,7 +58,9 @@ public class BlockSalvage extends BasicBlockMF{
 				rate += ((lvl - 10) * 0.01F);
 			}
 		}
-		if (ResearchLogic.hasInfoUnlocked(user, "scrapper")) {
+		ResearchBase scrapperPerkResearch = KnowledgeManagerResearch
+				.getResearchByKey("minefantasyreforged:scrapper", true);
+		if (ResearchLogic.hasResearchUnlocked(user, scrapperPerkResearch)) {
 			rate += 0.5F;
 		}
 

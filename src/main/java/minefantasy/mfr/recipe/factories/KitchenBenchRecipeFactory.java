@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
 import minefantasy.mfr.recipe.KitchenBenchShapedRecipe;
 import minefantasy.mfr.recipe.KitchenBenchShapelessRecipe;
@@ -43,7 +45,8 @@ public class KitchenBenchRecipeFactory implements IRecipeMFRFactory<KitchenBench
 		}
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
@@ -59,14 +62,15 @@ public class KitchenBenchRecipeFactory implements IRecipeMFRFactory<KitchenBench
 				result, ingredients,
 				tool_tier, block_tier, craft_time, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)),
-				research, skill, skillXp, vanillaXp,
+				requiredResearch, skill, skillXp, vanillaXp,
 				dirty_progress_amount);
 	}
 
 	private KitchenBenchRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
@@ -82,7 +86,7 @@ public class KitchenBenchRecipeFactory implements IRecipeMFRFactory<KitchenBench
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)),
-				research, skill, skillXp, vanillaXp,
+				requiredResearch, skill, skillXp, vanillaXp,
 				dirty_progress_amount,
 				shouldMirror, recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}

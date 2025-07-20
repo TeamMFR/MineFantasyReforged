@@ -1,0 +1,23 @@
+{
+  "type": "artifact_research",
+  "name": "coal_flux",
+  "parent_researches": [
+    "minefantasyreforged:smelt_iron"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:flux"
+    },
+    {
+      "item": "minecraft:coal",
+      "data": 0
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 15
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "spyglass",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "minefantasyreforged:bronze_gears"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 5
+    }
+  ]
+}

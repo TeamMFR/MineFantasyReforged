@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_steel",
+  "parent_researches": [
+    "minefantasyreforged:blast_furnace"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "#PIG_IRON_ARTIFACTS"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 25
+    }
+  ]
+}

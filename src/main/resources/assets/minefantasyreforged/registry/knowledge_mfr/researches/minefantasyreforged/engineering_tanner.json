@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "engineering_tanner",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:bronze_gears"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 40
+    },
+    {
+      "skill": "artisanry",
+      "required_skill_level": 25
+    }
+  ]
+}

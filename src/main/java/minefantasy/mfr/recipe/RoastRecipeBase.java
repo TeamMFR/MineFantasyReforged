@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -16,7 +17,7 @@ public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> i
 	protected int burnTime;
 	protected boolean canBurn;
 	protected boolean isOvenRecipe;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
@@ -25,7 +26,7 @@ public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> i
 			ItemStack output, NonNullList<Ingredient> inputs,
 			ItemStack burntOutput, int minTemperature, int maxTemperature,
 			int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.burntOutput = burntOutput;
@@ -87,7 +88,7 @@ public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> i
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

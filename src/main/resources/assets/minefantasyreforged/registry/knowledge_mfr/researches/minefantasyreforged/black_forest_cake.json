@@ -1,0 +1,29 @@
+{
+  "type": "artifact_research",
+  "name": "black_forest_cake",
+  "parent_researches": [
+    "minefantasyreforged:chocolate_cake"
+  ],
+  "required_artifact_count": 4,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:flour"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 3
+    },
+    {
+      "item": "minefantasyreforged:berries_juicy"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 90
+    }
+  ]
+}

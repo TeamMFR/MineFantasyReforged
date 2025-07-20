@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "construction",
-  "research": "smelt_red_steel",
+  "research": "minefantasyreforged:smelt_red_steel",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 5,

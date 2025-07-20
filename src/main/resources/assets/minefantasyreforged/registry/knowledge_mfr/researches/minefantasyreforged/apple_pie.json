@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "apple_pie",
+  "parent_researches": [
+    "minefantasyreforged:berry_pie"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minefantasyreforged:pastry"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 30
+    }
+  ]
+}

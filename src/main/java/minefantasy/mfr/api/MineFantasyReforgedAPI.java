@@ -6,6 +6,9 @@ import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.SkillRequirement;
 import minefantasy.mfr.recipe.AlloyRatioRecipe;
 import minefantasy.mfr.recipe.AlloyShapedRecipe;
 import minefantasy.mfr.recipe.AnvilDynamicRecipe;
@@ -85,7 +88,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addAlloyRatioRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp,
 			int repeatAmount, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ALLOY.addRecipe(new AlloyRatioRecipe(out, inputs, tier,
 				requiredResearch, skill, skillXp, vanillaXp,
@@ -108,7 +111,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addAlloyShapedRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp,
 			int height, int width, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ALLOY.addRecipe(new AlloyShapedRecipe(out, inputs, tier,
 				requiredResearch, skill, skillXp, vanillaXp,
@@ -135,7 +138,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				  The name of this recipe
 	 */
 	public static void addShapedAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, ResearchBase requiredResearch,
 			Skill skill, int skillXp, float vanillaXp,
 			int width, int height, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ANVIL.addRecipe(new AnvilShapedRecipe(inputs, output, tool.getName(),
@@ -162,7 +165,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				  The name of this recipe
 	 */
 	public static void addShapelessAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, ResearchBase requiredResearch,
 			Skill requiredSkill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ANVIL.addRecipe(new AnvilShapelessRecipe(inputs, output, tool.getName(),
 				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, skillXp, vanillaXp),
@@ -190,7 +193,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				  		The name of this recipe
 	 */
 	public static void addShapedCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			int width, int height, boolean tierModifyOutputCount, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ANVIL.addRecipe(new AnvilShapedCustomMaterialRecipe(inputs, output, tool.getName(),
@@ -218,7 +221,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				  		The name of this recipe
 	 */
 	public static void addShapelessCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, ResearchBase requiredResearch,
 			Skill requiredSkill, int skillXp, float vanillaXp,
 			boolean tierModifyOutputCount, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ANVIL.addRecipe(new AnvilShapelessCustomMaterialRecipe(inputs, output, tool.getName(),
@@ -250,7 +253,7 @@ public class MineFantasyReforgedAPI {
 	 */
 	public static void addDynamicAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill,
+			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp, boolean modifyOutput, boolean shouldModifyTiers,
 			int width, int height, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ANVIL.addRecipe(new AnvilDynamicRecipe(inputs, output, toolType, craftTime,
@@ -272,7 +275,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_BIG_FURNACE.addRecipe(new BigFurnaceRecipeBase(output, input, tier,
 				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -290,7 +293,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addBlastFurnaceRecipe(NonNullList<Ingredient> inputs, ItemStack output,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_BLAST_FURNACE.addRecipe(new BlastFurnaceRecipeBase(output, inputs, requiredResearch,
 				skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -308,7 +311,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addBloomeryRecipe(ItemStack output, NonNullList<Ingredient> inputs,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_BLOOMERY.addRecipe(new BloomeryRecipeBase(output, inputs, requiredResearch,
 				skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -337,7 +340,7 @@ public class MineFantasyReforgedAPI {
 	public static void addShapedCarpenterRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, boolean shouldMirror,
+			ResearchBase research, Skill skillUsed, boolean shouldMirror,
 			int width, int height,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapedRecipe(output, inputs,
@@ -365,7 +368,7 @@ public class MineFantasyReforgedAPI {
 	public static void addShapelessCarpenterRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType,
-			SoundEvent soundOfCraft, String research, Skill skillUsed,
+			SoundEvent soundOfCraft, ResearchBase research, Skill skillUsed,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapelessRecipe(output, inputs,
 				toolTier, carpenterTier, craftTime,
@@ -396,7 +399,7 @@ public class MineFantasyReforgedAPI {
 	public static void addShapedCustomMaterialCarpenterRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, boolean tierModifyOutputCount,
+			ResearchBase research, Skill skillUsed, boolean tierModifyOutputCount,
 			int width, int height,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapedCustomMaterialRecipe(output, inputs,
@@ -427,7 +430,7 @@ public class MineFantasyReforgedAPI {
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp,
-			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed,
+			String toolType, SoundEvent soundOfCraft, ResearchBase research, Skill skillUsed,
 			boolean tierModifyOutputCount,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapelessCustomMaterialRecipe(
@@ -459,7 +462,7 @@ public class MineFantasyReforgedAPI {
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed,
+			ResearchBase research, Skill skillUsed,
 			int width, int height,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterDynamicRecipe(output, inputs,
@@ -491,7 +494,7 @@ public class MineFantasyReforgedAPI {
 	public static void addKitchenBenchShapedRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int kitchenBenchTier, int craftTime,
 			String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount,
+			ResearchBase research, Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount,
 			boolean shouldMirror, int width, int height,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_KITCHEN_BENCH.addRecipe(new KitchenBenchShapedRecipe(
@@ -521,7 +524,7 @@ public class MineFantasyReforgedAPI {
 	public static void addKitchenBenchShapelessRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int kitchenBenchTier, int craftTime,
 			String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, int skillXp, float vanillaXp,
+			ResearchBase research, Skill skillUsed, int skillXp, float vanillaXp,
 			int dirtyProgressAmount, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_KITCHEN_BENCH.addRecipe(new KitchenBenchShapelessRecipe(output, inputs,
 				toolTier, kitchenBenchTier, craftTime, toolType, soundOfCraft, research, skillUsed, skillXp, vanillaXp,
@@ -543,7 +546,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots,
-			ItemStack output, boolean consumePot, String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			ItemStack output, boolean consumePot, ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_QUERN.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot,
 				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
@@ -570,7 +573,7 @@ public class MineFantasyReforgedAPI {
 	 */
 	public static void addRoastRecipe(ItemStack output, NonNullList<Ingredient> inputs, ItemStack burntOutput, int minTemp, int maxTemp,
 			int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_ROAST.addRecipe(new RoastRecipeBase(output, inputs, burntOutput, minTemp, maxTemp,
 				cookTime, burnTime, canBurn, isOvenRecipe,
 				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
@@ -589,7 +592,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name					The name of this recipe
 	 */
 	public static void addSalvageRecipeStandard(ItemStack input, NonNullList<Ingredient> outputs,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_SALVAGE.addRecipe(new SalvageRecipeStandard(input, outputs, requiredResearch,
 				skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -609,7 +612,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name					The name of this recipe
 	 */
 	public static void addSalvageRecipeShared(ItemStack input, NonNullList<Ingredient> outputs, NonNullList<ItemStack> shared,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_SALVAGE.addRecipe(new SalvageRecipeShared(input, outputs, shared,
 				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -627,7 +630,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name				The name of this recipe
 	 */
 	public static void addSpecialRecipe(Ingredient input, Ingredient specialInput, ItemStack output,
-			String research, String design, String modId, String name) {
+			ResearchBase research, String design, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_SPECIAL.addRecipe(new SpecialRecipeBase(input, specialInput, output,
 				research, design), true, new ResourceLocation(modId, name));
 	}
@@ -648,7 +651,7 @@ public class MineFantasyReforgedAPI {
 	 * @param name					The name of this recipe
 	 */
 	public static void addTannerRecipe(ItemStack output, NonNullList<Ingredient> inputs, String toolType, int tannerTier,
-			int craftTime, String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+			int craftTime, ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_TANNER.addRecipe(new TannerRecipeBase(output, inputs, toolType, tannerTier,
 				craftTime, requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
@@ -676,7 +679,7 @@ public class MineFantasyReforgedAPI {
 	public static void addStandardTransformationRecipe(
 			Tool tool, NonNullList<Ingredient> inputs, ItemStack output, NonNullList<Ingredient> consumableStacks,
 			boolean shouldDropOnProgress, Ingredient dropStack,
-			Ingredient offhandStack, Skill skill, String research, int skillXp, float vanillaXp, int maxProgress, String soundName,
+			Ingredient offhandStack, Skill skill, ResearchBase research, int skillXp, float vanillaXp, int maxProgress, String soundName,
 			List<String> blockStateProperties, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_TRANSFORMATION.addRecipe(new TransformationRecipeStandard(tool, inputs, output,
 				consumableStacks, dropStack, shouldDropOnProgress,  offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName,
@@ -704,7 +707,7 @@ public class MineFantasyReforgedAPI {
 	 */
 	public static void addBlockStateTransformationRecipe(
 			IBlockState input, IBlockState output, Tool tool, NonNullList<Ingredient> consumableStacks,
-			Ingredient dropStack, boolean shouldDropOnProgress, Ingredient offhandStack, Skill skill, String research,
+			Ingredient dropStack, boolean shouldDropOnProgress, Ingredient offhandStack, Skill skill, ResearchBase research,
 			int skillXp, float vanillaXp, int progressMax,
 			String soundName, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_TRANSFORMATION.addRecipe(new TransformationRecipeBlockState(input, output, tool,
@@ -720,6 +723,42 @@ public class MineFantasyReforgedAPI {
 	 */
 	public static void addBlockedRecipeEntry(RecipeType recipeType, ResourceLocation recipe) {
 		MineFantasyReforged.BLOCKED_RECIPE_MANAGER.addBlockedRecipeToType(recipeType, recipe);
+	}
+
+	/**
+	 * Adds a Research with Parent Researches
+	 * @param modId						The modId for the mod this Research should be registered under
+	 * @param name						The Name of the research
+	 * @param parentResearchKeys		The List of Parent Research keys for the Research
+	 * @param artifacts					The List of Ingredients that represent the Artifacts that need to be researched for this Research to unlock
+	 * @param requiredArtifactCount		The count of artifacts that need to be researched for the Research to unlock
+	 * @param skillRequirements			The List of Skill Requirements that the player must have to unlock the Research
+	 * @param isPerk					Sets if the Research is a perk or not
+	 */
+	public static void addResearch(
+			String modId, String name, List<ResourceLocation> parentResearchKeys, List<Ingredient> artifacts,
+			int requiredArtifactCount, List<SkillRequirement> skillRequirements, boolean isPerk) {
+		List<ResearchBase> parentResearches = KnowledgeManagerResearch.getResearchesByKeys(true, parentResearchKeys.toArray(new ResourceLocation[0]));
+		MineFantasyReforged.KNOWLEDGE_MANAGER_RESEARCH.addResearch(new ResearchBase(name, parentResearches,
+						artifacts, requiredArtifactCount, skillRequirements, isPerk),
+				new ResourceLocation(modId, name), true);
+	}
+
+	/**
+	 * Adds a Research without Parent Researches
+	 * @param modId						The modId for the mod this Research should be registered under
+	 * @param name						The Name of the research
+	 * @param artifacts					The List of Ingredients that represent the Artifacts that need to be researched for this Research to unlock
+	 * @param requiredArtifactCount		The count of artifacts that need to be researched for the Research to unlock
+	 * @param skillRequirements			The List of Skill Requirements that the player must have to unlock the Research
+	 * @param isPerk					Sets if the Research is a perk or not
+	 */
+	public static void addResearch(
+			String modId, String name, List<Ingredient> artifacts,
+			int requiredArtifactCount, List<SkillRequirement> skillRequirements, boolean isPerk) {
+		MineFantasyReforged.KNOWLEDGE_MANAGER_RESEARCH.addResearch(new ResearchBase(name, artifacts,
+						requiredArtifactCount, skillRequirements, isPerk),
+				new ResourceLocation(modId, name), true);
 	}
 
 	public static void registerFuelHandler(IFuelHandler handler) {

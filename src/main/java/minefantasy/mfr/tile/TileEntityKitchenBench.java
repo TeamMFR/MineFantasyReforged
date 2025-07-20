@@ -5,8 +5,9 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerKitchenBench;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.RPGElements;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
 import minefantasy.mfr.recipe.IKitchenBench;
@@ -354,10 +355,10 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
 		IRecipeMFR recipe = getRecipe();
 		if (!(recipe instanceof KitchenBenchRecipeBase)
-				|| (recipe.getRequiredResearch().equals("none"))) {
+				|| (recipe.getRequiredResearch() == KnowledgeManagerResearch.NONE)) {
 			return true;
 		}
-		return ResearchLogic.getResearchCheck(user, ResearchLogic.getResearch(recipe.getRequiredResearch()));
+		return ResearchLogic.getResearchCheck(user, recipe.getRequiredResearch());
 	}
 
 	private void addXP(EntityPlayer smith, KitchenBenchRecipeBase kitchenBenchRecipe) {

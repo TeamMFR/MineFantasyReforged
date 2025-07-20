@@ -1,6 +1,5 @@
 package minefantasy.mfr;
 
-import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.farming.FarmingHelper;
@@ -13,7 +12,6 @@ import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.config.ConfigArmour;
-import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
@@ -35,18 +33,18 @@ import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.StaminaMechanics;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
-import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ArrowUtils;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -129,7 +127,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -282,80 +279,52 @@ public final class MFREventHandler {
 			return;
 		}
 
-		if (!event.getItemStack().isEmpty()) {
-			boolean saidArtefact = false;
-			int[] ids = OreDictionary.getOreIDs(event.getItemStack());
-			boolean hasInfo = false;
-			if (ids != null && event.getEntityPlayer() != null) {
-				for (int id : ids) {
-					String s = OreDictionary.getOreName(id);
-					if (s != null) {
-						if (!hasInfo && s.startsWith("ingot")) {
-							String s2 = s.substring(5, s.length());
-							CustomMaterial material = CustomMaterialRegistry.getMaterial(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, s2));
-							if (material != CustomMaterialRegistry.NONE){
-								hasInfo = true;
-							}
-							else {
-								if (!s.contains("Brick")){
-									ArrayList<CustomMaterial> metalMaterials = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
-									for (CustomMaterial metal : metalMaterials){
-										if (metal instanceof MetalMaterial) {
-											if (metal.getMaterialIngredient().apply(event.getItemStack())){
-												material = metal;
-												if (material != CustomMaterialRegistry.NONE){
-													break;
-												}
-											}
-										}
-									}
-								}
-							}
+		ItemStack eventItemStack = event.getItemStack();
+		EntityPlayer eventPlayer = event.getEntityPlayer();
+		if (!eventItemStack.isEmpty() && eventPlayer != null) {
 
-							CustomToolHelper.addComponentString(event.getToolTip(), material);
-						}
-						if (s.startsWith("Artefact-")) {
-							if (!saidArtefact) {
-								String knowledge = s.substring(9).toLowerCase();
+			List<CustomMaterial> possibleMaterials = CustomMaterialRegistry.getMaterialsForItemStack(eventItemStack);
+			if (!possibleMaterials.isEmpty()) {
+				possibleMaterials.forEach(material -> CustomToolHelper.addComponentString(event.getToolTip(), material));
+			}
 
-								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge) && !ResearchLogic.alreadyUsedArtefact(event.getEntityPlayer(), ResearchLogic.getResearch(knowledge), event.getItemStack())) {
-									saidArtefact = true;
-									event.getToolTip().add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
-								}
-							}
-						} else if (ConfigClient.displayOreDict) {
-							event.getToolTip().add("oreDict: " + s);
-						}
-					}
+			List<ResearchBase> possibleResearches = KnowledgeManagerResearch.getResearchesByItemStack(eventItemStack);
+			if (!possibleResearches.isEmpty()) {
+				boolean isArtifactActive = possibleResearches
+						.stream()
+						.anyMatch(research -> !ResearchLogic.hasResearchUnlocked(eventPlayer, research)
+								&& !ResearchLogic.alreadyUsedArtifact(eventPlayer, research, eventItemStack));
+				if (isArtifactActive) {
+					event.getToolTip().add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
 				}
 			}
 
-			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_Inferior")) {
-				if (event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
+			if (eventItemStack.hasTagCompound() && eventItemStack.getTagCompound().hasKey("MF_Inferior")) {
+				if (eventItemStack.getTagCompound().getBoolean("MF_Inferior")) {
 					event.getToolTip().add(TextFormatting.RED + I18n.format("attribute.inferior.name"));
 				}
-				if (!event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
+				if (!eventItemStack.getTagCompound().getBoolean("MF_Inferior")) {
 					event.getToolTip().add(TextFormatting.GREEN + I18n.format("attribute.superior.name"));
 				}
 			}
-			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
-				if (event.getItemStack().getItem() instanceof ItemArmor
-						&& (!(event.getItemStack().getItem() instanceof ItemArmourBaseMFR)
+			if (event.getToolTip() != null && event.getFlags() != null) {
+				if (eventItemStack.getItem() instanceof ItemArmor
+						&& (!(eventItemStack.getItem() instanceof ItemArmourBaseMFR)
 						|| ClientItemsMFR.showSpecials(event.getToolTip()))) {
-					addArmorDamageReductionTooltip(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
+					addArmorDamageReductionTooltip(eventItemStack, eventPlayer, event.getToolTip(), event.getFlags().isAdvanced());
 				}
 			}
-			if (ConfigArmour.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
-				displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
+			if (ConfigArmour.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(eventItemStack) != null) {
+				displayWeaponTraits(ArmourCalculator.getRatioForWeapon(eventItemStack), event.getToolTip());
 			}
-			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
-				showCrafterTooltip(event.getItemStack(), event.getToolTip());
+			if (ToolHelper.shouldShowTooltip(eventItemStack)) {
+				showCrafterTooltip(eventItemStack, event.getToolTip());
 			}
-			if (CustomFoodEntry.getEntry(event.getItemStack()) != null) {
-				showFoodTooltip(event.getItemStack(), event.getToolTip());
+			if (CustomFoodEntry.getEntry(eventItemStack) != null) {
+				showFoodTooltip(eventItemStack, event.getToolTip());
 			}
-			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey(CRAFTED_BY_NAME_TAG)) {
-				String name = event.getItemStack().getTagCompound().getString(CRAFTED_BY_NAME_TAG);
+			if (eventItemStack.hasTagCompound() && eventItemStack.getTagCompound().hasKey(CRAFTED_BY_NAME_TAG)) {
+				String name = eventItemStack.getTagCompound().getString(CRAFTED_BY_NAME_TAG);
 				boolean special = MineFantasyReforged.isNameModder(name);// Mod creators have highlights
 
 				event.getToolTip().add((special ? TextFormatting.GREEN : "")
@@ -363,10 +332,10 @@ public final class MFREventHandler {
 						+ ": " + name
 						+ TextFormatting.GRAY);
 			}
-			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
+			WeaponClass WC = WeaponClass.findClassForAny(eventItemStack);
 			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != Skill.NONE) {
 				event.getToolTip().add(I18n.format("weaponclass." + WC.name.toLowerCase()));
-				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
+				float skillMod = RPGElements.getWeaponModifier(eventPlayer, WC.parentSkill) * 100F;
 				if (skillMod > 100)
 					event.getToolTip().add(I18n.format("rpg.skillmod") + ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
 			}

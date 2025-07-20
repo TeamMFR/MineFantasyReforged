@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "sandwitch",
+  "parent_researches": [
+    "minefantasyreforged:jerky"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#GENERIC_MEAT_UNCOOKED"
+    },
+    {
+      "item": "minecraft:bread"
+    },
+    {
+      "item": "minefantasyreforged:cheese_slice"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 15
+    }
+  ]
+}

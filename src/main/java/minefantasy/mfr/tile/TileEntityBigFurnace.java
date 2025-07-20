@@ -9,12 +9,13 @@ import minefantasy.mfr.container.ContainerBigFurnace;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.util.CustomToolHelper;
-import minefantasy.mfr.util.Utils;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -49,7 +50,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int fuel;
 	public int maxFuel;
 	public boolean built = false;
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 	// ANIMATE
 	private boolean opening = false;
 	public int numUsers;
@@ -376,7 +377,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		return CraftingManagerBigFurnace.findRecipeByOutput(stack);
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 	}
 
@@ -575,7 +576,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerBigFurnace.getRecipeByResourceLocation(resourceLocation));
 
-		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+		knownResearches = NbtUtils.deserializeResearches(nbt);
 
 		justShared = nbt.getInteger("Shared");
 		built = nbt.getBoolean("Built");
@@ -618,7 +619,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
-		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
 
 		return nbt;
 	}

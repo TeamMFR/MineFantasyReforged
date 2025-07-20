@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.TransformationRecipeBase;
 import minefantasy.mfr.recipe.TransformationRecipeBlockState;
 import minefantasy.mfr.recipe.TransformationRecipeProgressive;
@@ -99,7 +101,8 @@ public class TransformationRecipeFactory implements IRecipeMFRFactory<Transforma
 			throw new JsonParseException("The output BlockState for this transformation recipe is invalid!");
 		}
 
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
@@ -149,7 +152,8 @@ public class TransformationRecipeFactory implements IRecipeMFRFactory<Transforma
 			throw new JsonParseException("The output BlockState for this transformation recipe is invalid!");
 		}
 
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
@@ -242,7 +246,8 @@ public class TransformationRecipeFactory implements IRecipeMFRFactory<Transforma
 		int maxProgress = JsonUtils.getInt(json, "maxProgress", 1);
 		String soundName = JsonUtils.getString(json, "soundName", "");
 
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);

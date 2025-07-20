@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "artisanry",
-  "research": "smelt_iron",
+  "research": "minefantasyreforged:smelt_iron",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": -1,

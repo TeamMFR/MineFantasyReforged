@@ -1,8 +1,13 @@
 package minefantasy.mfr.mechanics.knowledge;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.knowledge.EntryPage;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.SkillRequirement;
 import minefantasy.mfr.mechanics.RPGElements;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -39,10 +44,10 @@ public class InformationBase {
 	@SideOnly(Side.CLIENT)
 	private IStatType statStringFormatter;
 	private boolean isSpecial;
-	private boolean isPerk;
-	private ArrayList<SkillRequirement> skills = new ArrayList<>();
-	private int artefactCount;
-	private ArrayList<EntryPage> pages = new ArrayList<>();
+
+	private final ResearchBase research;
+
+	private final ArrayList<EntryPage> pages = new ArrayList<>();
 
 	public InformationBase(String name, int x, int y, int artefacts, Item icon, InformationBase parent) {
 		this(name, x, y, artefacts, new ItemStack(icon), parent);
@@ -75,13 +80,10 @@ public class InformationBase {
 			InformationList.maxDisplayRow = y;
 		}
 		this.parentInfo = parent;
-		this.artefactCount = Math.max(0, artefacts);
+		this.research = KnowledgeManagerResearch.getResearchByName(MineFantasyReforged.MOD_ID, name, false);
 	}
 
 	public InformationBase addSkill(Skill skill, int level) {
-		if (RPGElements.isSystemActive) {
-			skills.add(new SkillRequirement(skill, level));
-		}
 		return this;
 	}
 
@@ -116,7 +118,6 @@ public class InformationBase {
 	}
 
 	public InformationBase setPerk() {
-		this.isPerk = true;
 		return this;
 	}
 
@@ -163,9 +164,9 @@ public class InformationBase {
 
 		if (!easyResearch) {
 			EntityPlayer player = Minecraft.getMinecraft().player;
-			if (player != null && !ResearchLogic.hasInfoUnlocked(player, this)) {
-				int artefacts = ResearchLogic.getArtefactCount(this.idName, player);
-				int max = this.getArtefactCount();
+			if (player != null && research != KnowledgeManagerResearch.NONE && !ResearchLogic.hasResearchUnlocked(player, research)) {
+				int artefacts = ResearchLogic.getResearchedArtifactCount(player, research);
+				int max = research.getRequiredArtifactCount();
 				name += I18n.format("research.cluecount", artefacts, max);
 			}
 		}
@@ -182,15 +183,23 @@ public class InformationBase {
 	}
 
 	public boolean getPerk() {
-		return this.isPerk;
+		return this.research.isPerk();
+	}
+
+	public ResearchBase getResearch() {
+		return research;
 	}
 
 	public boolean onPurchase(EntityPlayer user) {
-		if (!hasSkillsUnlocked(user)) {
+		if (research == KnowledgeManagerResearch.NONE) {
 			return false;
 		}
 
-		boolean success = ResearchLogic.canPurchase(user, this);
+		if (!research.hasSkillsUnlocked(user)) {
+			return false;
+		}
+
+		boolean success = ResearchLogic.canUnlockResearch(user, research);
 		if (success && !user.world.isRemote) {
 			user.playSound(MineFantasySounds.UPDATE_RESEARCH, 1.0F, 1.0F);
 			if (getPerk()) {
@@ -199,19 +208,8 @@ public class InformationBase {
 		}
 
 		if (isEasy()) {
-			ResearchLogic.tryUnlock(user, this);
+			ResearchLogic.tryUnlock(user, research);
 		} else {
-		}
-		return true;
-	}
-
-	public boolean hasSkillsUnlocked(EntityPlayer player) {
-		if (skills == null)
-			return true;
-		for (SkillRequirement requirement : skills) {
-			if (!requirement.isAvailable(player)) {
-				return false;
-			}
 		}
 		return true;
 	}
@@ -229,19 +227,19 @@ public class InformationBase {
 	}
 
 	public boolean isUnlocked(int id, EntityPlayer player) {
-		if (this.skills != null) {
-			return skills.get(id) != null && skills.get(id).isAvailable(player);
+		if (!this.research.getSkillRequirements().isEmpty()) {
+			return research.getSkillRequirements().get(id) != null && research.getSkillRequirements().get(id).isAvailable(player);
 		}
 		return true;
 	}
 
 	public String[] getRequiredSkills() {
 		if (this.requirements == null) {
-			requirements = new String[skills.size()];
-			for (int id = 0; id < skills.size(); id++) {
-				SkillRequirement requirement = skills.get(id);
-				requirements[id] = I18n.format("rpg.required", requirement.level,
-						requirement.skill.getDisplayName());
+			requirements = new String[research.getSkillRequirements().size()];
+			for (int id = 0; id < research.getSkillRequirements().size(); id++) {
+				SkillRequirement requirement = research.getSkillRequirements().get(id);
+				requirements[id] = I18n.format("rpg.required", requirement.getLevel(),
+						requirement.getSkill().getDisplayName());
 			}
 		}
 		return requirements;
@@ -251,25 +249,23 @@ public class InformationBase {
 		return !getPerk() && (unlockAll || startedUnlocked);
 	}
 
-	public int getArtefactCount() {
-		return artefactCount;
-	}
-
 	public boolean isEasy() {
-		return getPerk() || this.getArtefactCount() == 0 || easyResearch;
-	}
-}
-
-class SkillRequirement {
-	protected Skill skill;
-	protected int level;
-
-	SkillRequirement(Skill skill, int level) {
-		this.skill = skill;
-		this.level = level;
+		return getPerk() || this.research.getArtifacts().isEmpty() || easyResearch;
 	}
 
-	public boolean isAvailable(EntityPlayer player) {
-		return RPGElements.hasLevel(player, skill, level);
+	@SideOnly(Side.CLIENT)
+	public static int getResearchVisibility(EntityPlayer player, InformationBase base) {
+		if (ResearchLogic.hasResearchUnlocked(player, base.getResearch())) {
+			return 0;
+		}
+		else {
+			int i = 0;
+
+			for (InformationBase knowledge1 = base.parentInfo; knowledge1 != null
+					&& !ResearchLogic.hasResearchUnlocked(player, knowledge1.getResearch()); ++i) {
+				knowledge1 = knowledge1.parentInfo;
+			}
+			return i;
+		}
 	}
 }

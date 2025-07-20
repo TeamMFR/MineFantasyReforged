@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "bomb_arrow",
+  "parent_researches": [
+    "minefantasyreforged:bombs"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:blackpowder"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 40
+    }
+  ]
+}

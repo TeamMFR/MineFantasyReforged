@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -22,7 +23,7 @@ public class CarpenterShapelessCustomMaterialRecipe extends CarpenterRecipeBase 
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp,
-			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed,
+			String toolType, SoundEvent soundOfCraft, ResearchBase research, Skill skillUsed,
 			boolean tierModifyOutputCount) {
 		super(output, inputs, toolTier, carpenterTier, craftTime,
 				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);

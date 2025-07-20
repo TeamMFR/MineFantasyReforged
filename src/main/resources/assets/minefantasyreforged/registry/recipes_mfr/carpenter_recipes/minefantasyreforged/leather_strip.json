@@ -1,6 +1,5 @@
 {
   "type": "carpenter_shaped_recipe",
-  "research": "commodities",
   "tool_type": "shears",
   "block_tier": -1,
   "craft_time": 10,

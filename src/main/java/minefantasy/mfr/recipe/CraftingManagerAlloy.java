@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.AlloyRecipeFactory;
 import minefantasy.mfr.recipe.types.AlloyRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -31,7 +33,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> ALLOY_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> ALLOY_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerAlloy() {
 		super(new AlloyRecipeFactory(),
@@ -58,8 +60,8 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 			if (subItems.stream().anyMatch(s -> recipe.getAlloyRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !ALLOY_RECIPES.containsKey(recipe.getRegistryName()))) {
 				ALLOY_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					ALLOY_RESEARCHES.add(requiredResearch);
 				}
 			}
@@ -69,7 +71,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 	public static AlloyRecipeBase findMatchingRecipe(
 			TileEntityCrucible crucible,
 			CrucibleCraftMatrix matrix,
-			Set<String> knownResearches) {
+			Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 		Iterator<AlloyRecipeBase> recipeIterator = getRecipes().iterator();
 		AlloyRecipeBase alloyRecipeBase = null;
@@ -85,7 +87,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 
 		if (alloyRecipeBase != null) {
 			if (alloyRecipeBase.getTier() <= crucible.getTier()) {
-				if (alloyRecipeBase.getRequiredResearch().equals("none")
+				if (alloyRecipeBase.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(alloyRecipeBase.getRequiredResearch())) {
 					return alloyRecipeBase;
 				}
@@ -123,7 +125,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 		return ALLOY_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getAlloyResearches() {
+	public static Set<ResearchBase> getAlloyResearches() {
 		return ALLOY_RESEARCHES;
 	}
 }

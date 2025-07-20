@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "repair_basic",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:nail"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 10
+    }
+  ]
+}

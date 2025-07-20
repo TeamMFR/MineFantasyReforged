@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "parachute",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 10
+    }
+  ]
+}

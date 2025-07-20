@@ -10,10 +10,12 @@ import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityWitch;
@@ -104,7 +106,9 @@ public class TacticalManager {
 		}
 		if (user instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) user;
-			autoParry = ResearchLogic.hasInfoUnlocked(player, "auto_parry") && !player.isHandActive();
+			ResearchBase autoParryResearch = KnowledgeManagerResearch
+					.getResearchByKey("minefantasyreforged:auto_parry", true);
+			autoParry = ResearchLogic.getResearchCheck(player, autoParryResearch) && !player.isHandActive();
 
 			if (!player.isHandActive() && !autoParry) {
 				return false;

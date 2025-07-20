@@ -1,6 +1,6 @@
 {
 	"type": "bloomery_recipe",
-	"research": "smelt_iron",
+	"research": "minefantasyreforged:smelt_iron",
 	"skill": "artisanry",
 	"skill_xp": 1,
 	"vanilla_xp": 0.3,

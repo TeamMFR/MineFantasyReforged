@@ -1,0 +1,26 @@
+{
+  "type": "artifact_research",
+  "name": "eclair",
+  "parent_researches": [
+    "minefantasyreforged:sweetroll"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:pastry"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 3
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 75
+    }
+  ]
+}

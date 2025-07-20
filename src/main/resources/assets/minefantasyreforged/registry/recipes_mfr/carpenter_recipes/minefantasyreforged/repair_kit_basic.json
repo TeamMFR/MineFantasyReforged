@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
-  "research": "repair_basic",
+  "research": "minefantasyreforged:repair_basic",
   "tool_type": "needle",
   "block_tier": -1,
   "craft_time": 20,

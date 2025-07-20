@@ -1,0 +1,13 @@
+{
+  "type": "perk_research",
+  "name": "parry_pro",
+  "parent_researches": [
+    "minefantasyreforged:toughness"
+  ],
+  "skill_requirements": [
+    {
+      "skill": "combat",
+      "required_skill_level": 20
+    }
+  ]
+}

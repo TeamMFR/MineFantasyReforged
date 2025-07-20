@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "sausage",
+  "parent_researches": [
+    "minefantasyreforged:jerky"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "#GENERIC_MEAT_UNCOOKED"
+    },
+    {
+      "item": "minefantasyreforged:guts"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 35
+    }
+  ]
+}

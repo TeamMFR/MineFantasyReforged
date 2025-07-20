@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "construction",
-  "research": "paint_brush",
+  "research": "minefantasyreforged:paint_brush",
   "tool_type": "brush",
   "block_tier": -1,
   "craft_time": 3,

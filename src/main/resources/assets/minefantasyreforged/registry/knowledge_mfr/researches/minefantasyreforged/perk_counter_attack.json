@@ -1,0 +1,13 @@
+{
+  "type": "perk_research",
+  "name": "counter_attack",
+  "parent_researches": [
+    "minefantasyreforged:parry_pro"
+  ],
+  "skill_requirements": [
+    {
+      "skill": "combat",
+      "required_skill_level": 25
+    }
+  ]
+}

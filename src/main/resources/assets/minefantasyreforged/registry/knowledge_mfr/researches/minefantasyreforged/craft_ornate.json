@@ -1,0 +1,17 @@
+{
+  "type": "artifact_research",
+  "name": "craft_ornate",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 35
+    }
+  ]
+}

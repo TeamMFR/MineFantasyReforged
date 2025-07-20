@@ -1,0 +1,16 @@
+{
+  "type": "artifact_research",
+  "name": "crossbow",
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minecraft:string"
+    },
+    {
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
+    },
+    {
+      "item": "minecraft:lever"
+    }
+  ]
+}

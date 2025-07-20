@@ -6,10 +6,10 @@ import minefantasy.mfr.container.ContainerResearchBench;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
-import minefantasy.mfr.mechanics.knowledge.InformationBase;
-import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchTablePacket;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,14 +27,15 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class TileEntityResearchBench extends TileEntityBase implements IBasicMetre {
 	public float progress;
 	public float maxProgress;
 	public int researchID = -1;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	private int ticksExisted;
 
 	public final ItemStackHandler inventory = createInventory();
@@ -59,17 +60,18 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 		return NetworkHandler.GUI_RESEARCH_BENCH;
 	}
 
-	public static ArrayList<String> getInfo(ItemStack item) {
-		if (item.isEmpty()) {
-			return null;
+	public static List<ResearchBase> getResearches(ItemStack stack) {
+		if (stack.isEmpty()) {
+			return Collections.emptyList();
 		}
 
-		return ResearchArtefacts.getResearchNames(item);
+		List<ResearchBase> researches = KnowledgeManagerResearch.getResearchesByItemStack(stack);
+		return !researches.isEmpty() ? researches : Collections.emptyList();
 	}
 
-	public static boolean canAccept(ItemStack item) {
-		ArrayList<String> info = getInfo(item);
-		return info != null && info.size() > 0;
+	public static boolean canAccept(ItemStack stack) {
+		List<ResearchBase> info = getResearches(stack);
+		return !info.isEmpty();
 	}
 
 	public boolean interact(EntityPlayer user) {
@@ -77,64 +79,64 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 			return true;
 		}
 		syncData();
-		ArrayList<String> research = getInfo(getInventory().getStackInSlot(0));
-		int result = canResearch(user, research);
 
-		if (research != null && research.size() > 0 && result != 0) {
-			if (result == -1) {
-				if (!user.world.isRemote){
-					user.sendMessage(new TextComponentTranslation("research.noskill"));
-				}
+		ItemStack stackInSlot = getInventory().getStackInSlot(0);
 
-				return true;
-			}
-			if (result == -2) {
-				if (!user.world.isRemote){
-					user.sendMessage(new TextComponentTranslation("research.noresearch"));
-				}
-
-				return true;
-			}
-			maxProgress = getMaxTime();
-			if (maxProgress > 0) {
-				addProgress(user);
-
-				if (progress >= maxProgress) {
-					addResearch(research, user);
-					progress = 0;
-				}
-
-				return true;
-			}
-		} else {
-			if (result == 0) {
-				if (!user.world.isRemote){
-					user.sendMessage(new TextComponentTranslation("research.null"));
-				}
-
-			}
-			progress = 0;
+		if (stackInSlot.isEmpty()) {
+			return false;
 		}
 
-		return !getInventory().getStackInSlot(0).isEmpty();
+		List<ResearchBase> researches = getResearches(stackInSlot);
+		int result = canResearch(user, researches);
+
+		if (!researches.isEmpty()) {
+			switch (result) {
+				case -1:
+					if (!user.world.isRemote){
+						user.sendMessage(new TextComponentTranslation("research.noskill"));
+					}
+					return true;
+				case -2:
+					if (!user.world.isRemote){
+						user.sendMessage(new TextComponentTranslation("research.noresearch"));
+					}
+					return true;
+				case 1:
+					maxProgress = getMaxTime();
+					if (maxProgress > 0) {
+						addProgress(user);
+						if (progress >= maxProgress) {
+							addResearch(researches, user);
+							progress = 0;
+						}
+						return true;
+					}
+				default:
+					if (!user.world.isRemote){
+						user.sendMessage(new TextComponentTranslation("research.null"));
+					}
+					progress = 0;
+			}
+		}
+
+		return !stackInSlot.isEmpty();
 	}
 
-	private void addResearch(ArrayList<String> research, EntityPlayer user) {
-		for (String s : research) {
-			InformationBase base = ResearchLogic.getResearch(s);
-			if (base != null && !ResearchLogic.alreadyUsedArtefact(user, base, getInventory().getStackInSlot(0))
-					&& ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user)) {
-				int artefacts = ResearchArtefacts.useArtefact(getInventory().getStackInSlot(0), base, user);
+	private void addResearch(List<ResearchBase> researches, EntityPlayer user) {
+		for (ResearchBase research: researches) {
+			if (research != null && !ResearchLogic.alreadyUsedArtifact(user, research, getInventory().getStackInSlot(0))
+					&& ResearchLogic.canResearch(user, research) && research.hasSkillsUnlocked(user)) {
+				int researchedArtifactCount = ResearchLogic.useArtifact(getInventory().getStackInSlot(0), research, user);
 				if (user instanceof EntityPlayerMP) {
 					PlayerData.get(user).sync();
 				}
 				world.playSound(null, pos, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				if (!user.world.isRemote) {
-					TextComponentTranslation name = new TextComponentTranslation("knowledge." + s);
-					if (artefacts == -1) {
+					TextComponentTranslation name = new TextComponentTranslation("knowledge." + research.getName());
+					if (researchedArtifactCount == -1) {
 						user.sendMessage(new TextComponentTranslation("research.finishResearch", name));
 					} else {
-						user.sendMessage(new TextComponentTranslation("research.addArtefact", name, artefacts, base.getArtefactCount()));
+						user.sendMessage(new TextComponentTranslation("research.addArtefact", name, researchedArtifactCount, research.getArtifacts().size()));
 					}
 				}
 				return;
@@ -143,21 +145,20 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 		}
 	}
 
-	// 0 nothing, -1 for no skill, 1 for yes
-	private int canResearch(EntityPlayer user, ArrayList<String> research) {
-		if (research == null) {
+	// 0 nothing, -1 for no skill, -2 for missing parent research, 1 for yes
+	private int canResearch(EntityPlayer user, List<ResearchBase> researches) {
+		if (researches.isEmpty()) {
 			return 0;
 		}
 		int result = 0;
 
-		for (String s : research) {
-			InformationBase base = ResearchLogic.getResearch(s);
-			if (base != null && !ResearchLogic.alreadyUsedArtefact(user, base, getInventory().getStackInSlot(0))) {
-				if (ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user)) {
+		for (ResearchBase research : researches) {
+			if (research != null && !ResearchLogic.alreadyUsedArtifact(user, research, getInventory().getStackInSlot(0))) {
+				if (ResearchLogic.canResearch(user, research) && research.hasSkillsUnlocked(user)) {
 					return 1;
-				} else if (!ResearchLogic.hasInfoUnlocked(user, base) && !base.hasSkillsUnlocked(user)) {
+				} else if (!ResearchLogic.hasResearchUnlocked(user, research) && !research.hasSkillsUnlocked(user)) {
 					result = -1;
-				} else if (!ResearchLogic.hasInfoUnlocked(user, base) && base.hasSkillsUnlocked(user)) {
+				} else if (!ResearchLogic.hasResearchUnlocked(user, research) && research.hasSkillsUnlocked(user)) {
 					result = -2;
 				}
 			}
@@ -166,11 +167,11 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 	}
 
 	private float getMaxTime() {
-		int t = 10;
+		int time = 10;
 		if (!getInventory().getStackInSlot(0).isEmpty() && getInventory().getStackInSlot(0).getItem() instanceof IArtefact) {
 			return ((IArtefact) getInventory().getStackInSlot(0).getItem()).getStudyTime(getInventory().getStackInSlot(0));
 		}
-		return getInfo(getInventory().getStackInSlot(0)) != null ? t : 0;
+		return !getResearches(getInventory().getStackInSlot(0)).isEmpty() ? time : 0;
 	}
 
 	private void addProgress(EntityPlayer user) {

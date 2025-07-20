@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.TannerRecipeFactory;
 import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.TannerRecipeType;
@@ -29,7 +31,7 @@ public class CraftingManagerTanner extends CraftingManagerBase<TannerRecipeBase>
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> TANNER_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> TANNER_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerTanner() {
 		super(new TannerRecipeFactory(),
@@ -61,12 +63,12 @@ public class CraftingManagerTanner extends CraftingManagerBase<TannerRecipeBase>
 		}
 	}
 
-	public static TannerRecipeBase findMatchingRecipe(ItemStack input, Set<String> knownResearches) {
+	public static TannerRecipeBase findMatchingRecipe(ItemStack input, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (TannerRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
@@ -104,7 +106,7 @@ public class CraftingManagerTanner extends CraftingManagerBase<TannerRecipeBase>
 		return TANNER_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getTannerResearches() {
+	public static Set<ResearchBase> getTannerResearches() {
 		return TANNER_RESEARCHES;
 	}
 }

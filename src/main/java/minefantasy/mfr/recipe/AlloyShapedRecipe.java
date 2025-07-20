@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,7 +13,7 @@ public class AlloyShapedRecipe extends AlloyRecipeBase{
 	protected int width;
 
 	public AlloyShapedRecipe(ItemStack output, NonNullList<Ingredient> inputs, int tier,
-			String requiredResearch, Skill skill, int skillXp, float xp,
+			ResearchBase requiredResearch, Skill skill, int skillXp, float xp,
 			int height, int width) {
 		super(output, inputs, tier, requiredResearch, skill, skillXp, xp);
 		this.height = height;

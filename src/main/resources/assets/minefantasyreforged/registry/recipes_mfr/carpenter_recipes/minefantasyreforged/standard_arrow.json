@@ -1,7 +1,6 @@
 {
   "type": "carpenter_shaped_custom_material_recipe",
   "skill": "artisanry",
-  "research": "arrows",
   "tool_type": "hands",
   "block_tier": -1,
   "craft_time": 1,

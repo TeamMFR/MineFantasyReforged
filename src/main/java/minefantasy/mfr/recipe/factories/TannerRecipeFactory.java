@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.recipe.types.TannerRecipeType;
 import net.minecraft.item.ItemStack;
@@ -36,7 +38,8 @@ public class TannerRecipeFactory implements IRecipeMFRFactory<TannerRecipeBase> 
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tanner_tier = JsonUtils.getInt(json, "tanner_tier", 0);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);

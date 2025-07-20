@@ -2,7 +2,8 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.tile.TileEntityTanningRack;
@@ -86,9 +87,9 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> imp
 	}
 
 	protected static void setTileResearches(EntityPlayer player, TileEntityTanningRack tile) {
-		Set<String> playerResearches = new HashSet<>();
-		for (String tannerResearch : CraftingManagerTanner.getTannerResearches()) {
-			if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(tannerResearch))) {
+		Set<ResearchBase> playerResearches = new HashSet<>();
+		for (ResearchBase tannerResearch : CraftingManagerTanner.getTannerResearches()) {
+			if (ResearchLogic.getResearchCheck(player, tannerResearch)) {
 				playerResearches.add(tannerResearch);
 			}
 		}

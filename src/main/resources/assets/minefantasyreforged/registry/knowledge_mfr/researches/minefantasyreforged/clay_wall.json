@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "clay_wall",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:nail"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "construction",
+      "required_skill_level": 5
+    }
+  ]
+}

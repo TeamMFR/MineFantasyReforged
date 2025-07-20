@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -11,14 +12,14 @@ public class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> i
 	protected NonNullList<Ingredient> inputs;
 	protected NonNullList<Ingredient> potInputs;
 	protected boolean consumePot;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
 
 	public QuernRecipeBase(ItemStack output, NonNullList<Ingredient> inputs,
 			NonNullList<Ingredient> potInputs, boolean consumePot,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.potInputs = potInputs;
@@ -65,7 +66,7 @@ public class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> i
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

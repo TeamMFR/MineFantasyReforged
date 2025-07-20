@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.RoastRecipeBase;
 import minefantasy.mfr.recipe.types.RoastRecipeType;
 import net.minecraft.item.ItemStack;
@@ -48,7 +50,8 @@ public class RoastRecipeFactory implements IRecipeMFRFactory<RoastRecipeBase> {
 		int burn_time = JsonUtils.getInt(json, "burn_time", 0);
 		boolean can_burn = JsonUtils.getBoolean(json, "can_burn", false);
 		boolean is_oven_recipe = JsonUtils.getBoolean(json, "is_oven_recipe", false);
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);

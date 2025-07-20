@@ -3,7 +3,9 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.SalvageRecipeFactory;
 import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.SalvageRecipeType;
@@ -63,9 +65,9 @@ public class CraftingManagerSalvage extends CraftingManagerBase<SalvageRecipeBas
 
 		for (SalvageRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				String requiredResearch = rec.getRequiredResearch();
-				if (requiredResearch.equals("none") ||
-						ResearchLogic.getResearchCheck(user, ResearchLogic.getResearch(requiredResearch))) {
+				ResearchBase requiredResearch = rec.getRequiredResearch();
+				if (requiredResearch == KnowledgeManagerResearch.NONE ||
+						ResearchLogic.getResearchCheck(user, requiredResearch)) {
 					return rec;
 				}
 			}

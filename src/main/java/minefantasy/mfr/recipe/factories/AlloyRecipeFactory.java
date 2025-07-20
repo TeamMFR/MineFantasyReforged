@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.AlloyRatioRecipe;
 import minefantasy.mfr.recipe.AlloyRecipeBase;
 import minefantasy.mfr.recipe.AlloyShapedRecipe;
@@ -39,7 +41,8 @@ public class AlloyRecipeFactory implements IRecipeMFRFactory<AlloyRecipeBase> {
 	private AlloyRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		int crucible_tier = JsonUtils.getInt(json, "crucible_tier", 0);
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
@@ -72,7 +75,8 @@ public class AlloyRecipeFactory implements IRecipeMFRFactory<AlloyRecipeBase> {
 					"\n If that functionality is important to you, use alloy shaped recipe instead.");
 		}
 
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);

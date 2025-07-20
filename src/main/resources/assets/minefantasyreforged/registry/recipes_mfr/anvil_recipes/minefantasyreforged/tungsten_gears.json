@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "engineering",
-  "research": "tungsten",
+  "research": "minefantasyreforged:tungsten",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 3,

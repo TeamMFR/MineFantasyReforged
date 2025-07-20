@@ -39,7 +39,9 @@ import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class CustomMaterialRegistry extends DataLoader {
 
@@ -192,6 +194,21 @@ public class CustomMaterialRegistry extends DataLoader {
 		else {
 			return material;
 		}
+	}
+
+	public static List<CustomMaterial> getMaterialsForItemStack(ItemStack stack) {
+		if (stack.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		List<CustomMaterial> materials = new ArrayList<>();
+		for (CustomMaterial material : getValues()) {
+			if (material.getMaterialIngredient().apply(stack)) {
+				materials.add(material);
+			}
+		}
+
+		return !materials.isEmpty() ? materials : Collections.emptyList();
 	}
 
 	/**

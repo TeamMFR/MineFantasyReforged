@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -21,16 +22,15 @@ public abstract class KitchenBenchRecipeBase extends IForgeRegistryEntry.Impl<Ki
 	protected final int craftTime;
 	protected final Tool toolType;
 	protected final SoundEvent soundOfCraft;
-	protected final String research;
+	protected final ResearchBase research;
 	protected final Skill skillUsed;
 	protected Integer skillXp;
 	protected float vanillaXp;
 	protected final int dirtyProgressAmount;
 
 	public KitchenBenchRecipeBase(ItemStack output, NonNullList<Ingredient> inputs, int toolTier, int kitchenBenchTier,
-			int craftTime, String toolType,
-			SoundEvent soundOfCraft, String research, Skill skillUsed, int skillXp, float vanillaXp,
-			int dirtyProgressAmount) {
+			int craftTime, String toolType, SoundEvent soundOfCraft, ResearchBase research,
+			Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount) {
 		this.output = output;
 		this.inputs = inputs;
 		this.toolTier = toolTier;
@@ -95,7 +95,7 @@ public abstract class KitchenBenchRecipeBase extends IForgeRegistryEntry.Impl<Ki
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return research;
 	}
 

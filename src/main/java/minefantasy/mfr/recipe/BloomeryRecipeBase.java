@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -9,13 +10,13 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 public class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeBase> implements IRecipeMFR{
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
 
 	public BloomeryRecipeBase(ItemStack output, NonNullList<Ingredient> inputs,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.requiredResearch = requiredResearch;
@@ -42,7 +43,7 @@ public class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeB
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

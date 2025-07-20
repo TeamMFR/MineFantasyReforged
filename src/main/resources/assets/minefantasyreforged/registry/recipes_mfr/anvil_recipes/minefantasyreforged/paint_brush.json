@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "engineering",
-  "research": "paint_brush",
+  "research": "minefantasyreforged:paint_brush",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 0,

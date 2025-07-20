@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.recipe.factories.AnvilRecipeFactory;
 import minefantasy.mfr.recipe.types.AnvilRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -91,7 +92,7 @@ public class CraftingManagerAnvil extends CraftingManagerBase<AnvilRecipeBase> {
 				anvil.setRequiredAnvilTier(anvilTier);
 			}
 
-			if (!anvilRecipeBase.getRequiredResearch().equalsIgnoreCase("tier")){
+			if (anvilRecipeBase.getRequiredResearch() != KnowledgeManagerResearch.TIER){
 				anvil.setRequiredResearch(anvilRecipeBase.getRequiredResearch());
 			}
 

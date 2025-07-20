@@ -11,6 +11,7 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigIntegration;
 import minefantasy.mfr.config.ConfigItemRegistry;
 import minefantasy.mfr.config.ConfigMobs;
+import minefantasy.mfr.config.ConfigResearch;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
@@ -26,6 +27,8 @@ import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyOreDict;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
@@ -73,16 +76,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.docx4j.Docx4J;
-import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.Text;
-
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import java.io.File;
-import java.util.List;
 
 @Mod(modid = MineFantasyReforged.MOD_ID, name = MineFantasyReforged.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP + "required-after:mixinbooter;")
 public class MineFantasyReforged {
@@ -95,6 +88,7 @@ public class MineFantasyReforged {
 	@Mod.Instance
 	public static MineFantasyReforged INSTANCE;
 
+	public static final KnowledgeManagerResearch KNOWLEDGE_MANAGER_RESEARCH = new KnowledgeManagerResearch();
 	public static final BlockedRecipeManager BLOCKED_RECIPE_MANAGER = new BlockedRecipeManager();
 	public static final CraftingManagerAnvil CRAFTING_MANAGER_ANVIL = new CraftingManagerAnvil();
 	public static final CraftingManagerCarpenter CRAFTING_MANAGER_CARPENTER = new CraftingManagerCarpenter();
@@ -123,6 +117,7 @@ public class MineFantasyReforged {
 	private static ConfigFarming configFarming;
 	private static ConfigWorldGen configWorldGen;
 	public static ConfigCrafting configCrafting;
+	public static ConfigResearch configResearch;
 	private static ConfigMobs configMobs;
 
 	public static final Logger LOG = LogManager.getLogger(MOD_ID);
@@ -156,9 +151,11 @@ public class MineFantasyReforged {
 		configFarming = new ConfigFarming("Farming");
 		configWorldGen = new ConfigWorldGen("WorldGen");
 		configCrafting = new ConfigCrafting("Crafting");
+		configResearch = new ConfigResearch("Research");
 		configMobs = new ConfigMobs("Mobs");
 
 		PlayerData.register();
+		ResearchLogic.init();
 		CapabilityItemMultiUse.register();
 		MineFantasyItems.initEnumActions();
 
@@ -194,15 +191,16 @@ public class MineFantasyReforged {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
+		registerIngredients();
 		CustomMaterialRegistry.INSTANCE.addIngredients();
+		KNOWLEDGE_MANAGER_RESEARCH.loadResearches();
+		KNOWLEDGE_MANAGER_RESEARCH.addParentResearches();
 
 		MinecraftForge.EVENT_BUS.register(this);
 
 		GameRegistry.registerWorldGenerator(new WorldGenBiological(), 5);
 		GameRegistry.registerWorldGenerator(new WorldGenGeological(), 5);
 		GameRegistry.registerWorldGenerator(new WorldGenStructure(), 5);
-
-		registerIngredients();
 
 		BLOCKED_RECIPE_MANAGER.loadBlockedRecipes();
 
@@ -220,8 +218,6 @@ public class MineFantasyReforged {
 		CRAFTING_MANAGER_TRANSFORMATION.loadRecipes();
 		CRAFTING_MANAGER_SPECIAL.loadRecipes();
 
-		testLoadDocx();
-
 		PROXY.init();
 	}
 
@@ -236,7 +232,6 @@ public class MineFantasyReforged {
 		}
 
 		MineFantasyKnowledgeList.init();
-		MineFantasyKnowledgeList.ArtefactListMFR.init();
 		//Exporters go here
 		RecipeRemover.removeSmeltingRecipes();
 
@@ -260,6 +255,7 @@ public class MineFantasyReforged {
 		configFarming.save();
 		configWorldGen.save();
 		configCrafting.save();
+		configResearch.save();
 		configMobs.save();
 
 		PROXY.postInit(postEvent);
@@ -320,6 +316,7 @@ public class MineFantasyReforged {
 			configFarming.save();
 			configWorldGen.save();
 			configCrafting.save();
+			configResearch.save();
 			configMobs.save();
 		}
 	}
@@ -328,29 +325,6 @@ public class MineFantasyReforged {
 		if (WorldGenBiological.isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp,
 				ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
 			biome.addFlower(MineFantasyBlocks.BERRY_BUSH.getDefaultState(), 5);
-		}
-	}
-
-	private void testLoadDocx() {
-		try {
-			File doc = new File("C:\\Users\\user\\Desktop\\Coding\\MineFantasyReforged\\src\\main\\resources\\assets\\minefantasyreforged\\knowledge\\research_book\\entries\\iron_smelting\\test.docx");
-			WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage
-					.load(doc);
-			MainDocumentPart mainDocumentPart = wordMLPackage
-					.getMainDocumentPart();
-
-			mainDocumentPart.getContent();
-//			String textNodesXPath = "//w:t";
-//			List<Object> textNodes= mainDocumentPart
-//					.getJAXBNodesViaXPath(textNodesXPath, true);
-//			for (Object obj : textNodes) {
-//				Text text = (Text) ((JAXBElement) obj).getValue();
-//				String textValue = text.getValue();
-//				MineFantasyReforged.LOG.error(textValue);
-//			}
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
 		}
 	}
 }

@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "bombs",
+  "parent_researches": [
+    "minefantasyreforged:blackpowder"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:blackpowder"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 10
+    }
+  ]
+}

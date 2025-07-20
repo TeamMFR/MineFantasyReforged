@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
@@ -25,7 +26,7 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 	public AnvilDynamicRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill,
+			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp, boolean modifyOutput, boolean shouldModifyTiers,
 			int width, int height) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,

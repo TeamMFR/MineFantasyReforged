@@ -1,7 +1,7 @@
 {
   "type": "kitchen_bench_shaped_recipe",
   "skill": "provisioning",
-  "research": "black_forest_cake",
+  "research": "minefantasyreforged:black_forest_cake",
   "tool_type": "spoon",
   "block_tier": -1,
   "craft_time": 30,

@@ -1,0 +1,32 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_blue_steel",
+  "parent_researches": [
+    "minefantasyreforged:smelt_black_steel"
+  ],
+  "required_artifact_count": 5,
+  "artifacts": [
+    {
+      "item": "#BLACK_STEEL_ARTIFACTS"
+    },
+    {
+      "item": "#SILVER_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:flux_strong"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 65
+    }
+  ]
+}

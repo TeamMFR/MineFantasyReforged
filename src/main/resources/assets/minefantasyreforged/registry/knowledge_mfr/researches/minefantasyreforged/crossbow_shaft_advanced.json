@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "crossbow_shaft_advanced",
+  "parent_researches": [
+    "minefantasyreforged:crossbow"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:schematic_crossbow"
+    },
+    {
+      "item": "minefantasyreforged:tungsten_gears"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 40
+    }
+  ]
+}

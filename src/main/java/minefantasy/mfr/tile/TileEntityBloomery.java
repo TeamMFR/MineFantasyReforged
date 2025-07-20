@@ -9,6 +9,7 @@ import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.entity.EntityItemHeated;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
@@ -16,8 +17,8 @@ import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
-import minefantasy.mfr.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +47,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	private float progressMax;
 	private boolean hasBloom;
 	private boolean isActive;
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 	private final Random rand = new Random();
 
 	private final int OUT_SLOT = 2;
@@ -245,7 +246,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		}
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 	}
 
@@ -287,7 +288,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerBloomery.getRecipeByResourceLocation(resourceLocation));
 
-		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+		knownResearches = NbtUtils.deserializeResearches(nbt);
 
 		progress = nbt.getFloat("Progress");
 		progressMax = nbt.getFloat("ProgressMax");
@@ -309,7 +310,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
-		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
 
 		nbt.setFloat("Progress", progress);
 		nbt.setFloat("ProgressMax", progressMax);

@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "crossbow_ammo",
+  "parent_researches": [
+    "minefantasyreforged:crossbow"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:tungsten_gears"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 30
+    }
+  ]
+}

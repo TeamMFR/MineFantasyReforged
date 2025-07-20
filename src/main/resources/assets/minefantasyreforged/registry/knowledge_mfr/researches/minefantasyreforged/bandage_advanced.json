@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "bandage_advanced",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    },
+    {
+      "item": "minecraft:leather"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 40
+    }
+  ]
+}

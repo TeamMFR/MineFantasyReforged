@@ -1,7 +1,6 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
-  "research": "craft_armour_light",
   "tool_type": "needle",
   "block_tier": -1,
   "craft_time": 80,

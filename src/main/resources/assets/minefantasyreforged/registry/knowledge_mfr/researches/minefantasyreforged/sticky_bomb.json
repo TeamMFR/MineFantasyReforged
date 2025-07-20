@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "sticky_bomb",
+  "parent_researches": [
+    "minefantasyreforged:bombs"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 50
+    }
+  ]
+}

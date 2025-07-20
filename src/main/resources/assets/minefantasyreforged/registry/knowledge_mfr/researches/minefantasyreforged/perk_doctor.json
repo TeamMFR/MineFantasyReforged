@@ -1,0 +1,13 @@
+{
+  "type": "perk_research",
+  "name": "doctor",
+  "parent_researches": [
+    "minefantasyreforged:first_aid"
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 50
+    }
+  ]
+}

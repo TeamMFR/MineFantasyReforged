@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "big_box",
+  "parent_researches": [
+    "minefantasyreforged:ammo_box"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:chest"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "construction",
+      "required_skill_level": 25
+    }
+  ]
+}

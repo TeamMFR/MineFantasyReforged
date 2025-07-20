@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "bomb_press",
+  "parent_researches": [
+    "minefantasyreforged:bombs"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:bronze_gears"
+    },
+    {
+      "item": "minecraft:lever"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 30
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
-  "research": "firebrick_crucible",
+  "research": "minefantasyreforged:firebrick_crucible",
   "tool_type": "hands",
   "block_tier": -1,
   "craft_time": 40,

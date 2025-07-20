@@ -1,0 +1,23 @@
+{
+  "type": "artifact_research",
+  "name": "advanced_forge",
+  "parent_researches": [
+    "minefantasyreforged:advanced_crucible"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:schematic_forge"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 75
+    },
+    {
+      "skill": "artisanry",
+      "required_skill_level": 50
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -18,7 +19,7 @@ public class AnvilCraftMatrix extends InventoryCrafting {
 		anvil.setProgressMax(craftTime);
 	}
 
-	public void modifyResearch(String name) {
-		anvil.setRequiredResearch(name);
+	public void modifyResearch(ResearchBase research) {
+		anvil.setRequiredResearch(research);
 	}
 }

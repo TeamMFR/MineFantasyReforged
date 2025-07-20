@@ -1,9 +1,6 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.mechanics.knowledge.InformationBase;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-
 public class ConfigHardcore extends ConfigurationBaseMF {
 	public static final String CATEGORY_CRAFTING = "1: HARDCORE CRAFTING";
 	public static final String CATEGORY_RESEARCH = "2: Research";
@@ -66,12 +63,6 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 				"Skill books recipes will be disabled, but you still can find them it the world.").getString());
 		HCCRemoveTalismansCraft = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Remove Talismans Recipes", false,
 				"Research talismans recipes will be disabled, but you still can find them it the world.").getString());
-		ResearchLogic.knowledgelyr = Integer.parseInt(config.get(CATEGORY_RESEARCH, "###CHANGE RESEARCH ID###", 0,
-				"This changes the research ID, removing all entries").getString());
-		InformationBase.unlockAll = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Unlock entries", false,
-				"If you don't want to research, this will unlock all entries.").getString());
-		InformationBase.easyResearch = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Baby-Mode Research", false,
-				"This removes the process of examining artefacts, research is unlocked by clicking entries in the book.").getString());
 
 		hunterKnife = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Restrict to hunting weapon", false,
 				"This option means animals ONLY drop meat and hide when killed with a hunting weapon such as a knife, only the killing blow counts").getString());

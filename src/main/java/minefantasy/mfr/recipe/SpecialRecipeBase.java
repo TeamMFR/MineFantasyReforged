@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -9,10 +10,10 @@ public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBa
 	protected Ingredient input;
 	protected Ingredient specialInput;
 	protected ItemStack output;
-	protected String research;
+	protected ResearchBase research;
 	protected String design;
 
-	public SpecialRecipeBase(Ingredient input, Ingredient specialInput, ItemStack output, String research, String design) {
+	public SpecialRecipeBase(Ingredient input, Ingredient specialInput, ItemStack output, ResearchBase research, String design) {
 		this.input = input;
 		this.specialInput = specialInput;
 		this.output = output;
@@ -36,7 +37,7 @@ public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBa
 		return output;
 	}
 
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return research;
 	}
 

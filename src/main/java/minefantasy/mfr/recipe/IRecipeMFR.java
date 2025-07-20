@@ -1,13 +1,14 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 
 public interface IRecipeMFR {
 	String getResourceLocation();
-	String getRequiredResearch();
+	ResearchBase getRequiredResearch();
 
 	Skill getSkill();
 

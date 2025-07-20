@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "shrapnel",
+  "parent_researches": [
+    "minefantasyreforged:bombs"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 25
+    }
+  ]
+}

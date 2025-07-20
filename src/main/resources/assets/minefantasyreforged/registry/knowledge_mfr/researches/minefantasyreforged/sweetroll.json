@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "sweetroll",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:berries"
+    },
+    {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 15
+    }
+  ]
+}

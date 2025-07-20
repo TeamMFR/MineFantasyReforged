@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
-  "research": "smelt_master",
+  "research": "minefantasyreforged:smelt_master",
   "tool_type": "hands",
   "block_tier": -1,
   "craft_time": 1,

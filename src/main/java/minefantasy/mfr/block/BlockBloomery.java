@@ -4,7 +4,8 @@ import minefantasy.mfr.api.crafting.IIgnitable;
 import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighter;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
@@ -105,9 +106,9 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> implement
 		TileEntityBloomery tile = (TileEntityBloomery) getTile(world, pos);
 		if (tile != null) {
 			// Handle Researches
-			Set<String> playerResearches = new HashSet<>();
-			for (String bloomeryResearch : CraftingManagerBloomery.getBloomeryResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(bloomeryResearch))) {
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase bloomeryResearch : CraftingManagerBloomery.getBloomeryResearches()) {
+				if (ResearchLogic.getResearchCheck(player, bloomeryResearch)) {
 					playerResearches.add(bloomeryResearch);
 				}
 			}

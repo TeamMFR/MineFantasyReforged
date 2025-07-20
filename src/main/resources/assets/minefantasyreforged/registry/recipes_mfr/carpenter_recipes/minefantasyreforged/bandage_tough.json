@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "provisioning",
-  "research": "bandage_advanced",
+  "research": "minefantasyreforged:bandage_advanced",
   "tool_type": "needle",
   "block_tier": -1,
   "craft_time": 20,

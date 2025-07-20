@@ -1,0 +1,26 @@
+{
+  "type": "artifact_research",
+  "name": "chocolate_cake",
+  "parent_researches": [
+    "minefantasyreforged:cake"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:flour"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 3
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 40
+    }
+  ]
+}

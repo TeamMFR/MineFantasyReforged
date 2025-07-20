@@ -6,13 +6,14 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.InventoryUtils;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
-import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -40,7 +41,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	public String tex = "";
 	public float acTime;
 	private final Random rand = new Random();
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 
 	public TileEntityTanningRack() {
 
@@ -205,7 +206,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		return false;
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 	}
 
@@ -293,7 +294,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerTanner.getRecipeByResourceLocation(resourceLocation));
 
-		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+		knownResearches = NbtUtils.deserializeResearches(nbt);
 	}
 
 	@Nonnull
@@ -313,7 +314,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
-		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
 
 		return nbt;
 	}

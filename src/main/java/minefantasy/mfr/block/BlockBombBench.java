@@ -1,8 +1,9 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityBombBench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -60,7 +61,9 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 	 */
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.bombs)) {
+		ResearchBase bombResearch = KnowledgeManagerResearch
+				.getResearchByKey("minefantasyreforged:bombs", true);
+		if (!ResearchLogic.getResearchCheck(player, bombResearch)) {
 			if (!world.isRemote && hand == player.getActiveHand()) {
 				player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
 			}
@@ -77,7 +80,9 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
-		if (ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.bombs)) {
+		ResearchBase bombResearch = KnowledgeManagerResearch
+				.getResearchByKey("minefantasyreforged:bombs", true);
+		if (ResearchLogic.getResearchCheck(player, bombResearch)) {
 			TileEntityBombBench tile = (TileEntityBombBench) getTile(world, pos);
 			if (tile != null) {
 				tile.tryCraft(player, false);

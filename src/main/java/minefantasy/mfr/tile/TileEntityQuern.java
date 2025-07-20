@@ -3,11 +3,12 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerQuern;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.recipe.QuernRecipeBase;
-import minefantasy.mfr.util.Utils;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -31,7 +32,7 @@ import java.util.Set;
 public class TileEntityQuern extends TileEntityBase implements ITickable {
 	private int postUseTicks;
 	private int turnAngle;
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 
 	public static int getMaxRevs() {
 		return 100;
@@ -92,7 +93,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 		return !inputPot.isEmpty() && CraftingManagerQuern.findMatchingPotInputs(inputPot, knownResearches);
 	}
 
-	private QuernRecipeBase getResult(ItemStack input, ItemStack potInput, Set<String> knownResearches) {
+	private QuernRecipeBase getResult(ItemStack input, ItemStack potInput, Set<ResearchBase> knownResearches) {
 		QuernRecipeBase quernRecipe = CraftingManagerQuern.findMatchingRecipe(input, potInput, knownResearches);
 		setRecipe(quernRecipe);
 		return quernRecipe;
@@ -160,7 +161,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 		return turnAngle;
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 	}
 
@@ -182,7 +183,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerQuern.getRecipeByResourceLocation(resourceLocation));
 
-		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+		knownResearches = NbtUtils.deserializeResearches(nbt);
 	}
 
 	@Nonnull
@@ -197,7 +198,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
 
-		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
 		return nbt;
 	}
 

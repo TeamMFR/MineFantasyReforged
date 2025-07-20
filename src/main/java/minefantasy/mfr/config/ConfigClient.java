@@ -35,7 +35,6 @@ public class ConfigClient extends ConfigurationBaseMF {
 	public static int CF_yOrient;
 	public static int CF_xPos;
 	public static int CF_yPos;
-	public static boolean displayOreDict;
 
 	public ConfigClient(String name) {
 		super(name);
@@ -127,9 +126,6 @@ public class ConfigClient extends ConfigurationBaseMF {
 						.getString());
 		CF_yPos = Integer.parseInt(config
 				.get(CATEGORY_GUI_COGWORK_ARMOR_FUEL, "Y Position", -4, "The Offset value away from the orient (-)up, (+)down").getString());
-
-		displayOreDict = Boolean.parseBoolean(config.get(CATEGORY_DEBUG, "Show Debug OreDict", false,
-				"Displays a list of Ore Dictionary entries to tooltips").getString());
 	}
 
 }

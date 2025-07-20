@@ -5,7 +5,8 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
@@ -100,9 +101,9 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityBigFurnace tile = (TileEntityBigFurnace) getTile(world, pos);
 		if (tile != null) {
-			Set<String> playerResearches = new HashSet<>();
-			for (String bigFurnaceResearch : CraftingManagerBigFurnace.getBigFurnaceResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(bigFurnaceResearch))) {
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase bigFurnaceResearch : CraftingManagerBigFurnace.getBigFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, bigFurnaceResearch)) {
 					playerResearches.add(bigFurnaceResearch);
 				}
 			}

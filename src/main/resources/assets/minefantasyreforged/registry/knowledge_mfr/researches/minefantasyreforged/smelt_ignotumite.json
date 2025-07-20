@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_ignotumite",
+  "parent_researches": [
+    "minefantasyreforged:smelt_master"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#ADAMANTIUM_ARTIFACTS"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:emerald"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 100
+    }
+  ]
+}

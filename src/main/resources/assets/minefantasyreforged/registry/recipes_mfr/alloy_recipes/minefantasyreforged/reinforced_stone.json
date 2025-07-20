@@ -1,7 +1,6 @@
 {
     "type": "alloy_shaped_recipe",
     "crucible_tier": 1,
-    "research": "reinforced_stone",
     "skill": "construction",
     "skill_xp": 1,
     "vanilla_xp": 0.2,

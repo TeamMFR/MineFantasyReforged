@@ -1,6 +1,8 @@
 package minefantasy.mfr.recipe.factories;
 
 import com.google.gson.JsonObject;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.SpecialRecipeBase;
 import minefantasy.mfr.recipe.types.SpecialRecipeType;
 import net.minecraft.item.ItemStack;
@@ -30,8 +32,9 @@ public class SpecialRecipeFactory implements IRecipeMFRFactory<SpecialRecipeBase
 
 		ItemStack output = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 
-		return new SpecialRecipeBase(input, specialInput, output, research, design);
+		return new SpecialRecipeBase(input, specialInput, output, requiredResearch, design);
 	}
 }

@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "tungsten",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "#TUNGSTEN_ORE"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 20
+    },
+    {
+      "skill": "engineering",
+      "required_skill_level": 20
+    }
+  ]
+}

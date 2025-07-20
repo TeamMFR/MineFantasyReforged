@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "repair_ornate",
+  "parent_researches": [
+    "minefantasyreforged:repair_advanced"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#GOLD_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:repair_kit_advanced"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 50
+    }
+  ]
+}

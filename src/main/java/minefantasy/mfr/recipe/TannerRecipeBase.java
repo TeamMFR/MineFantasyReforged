@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -13,13 +14,13 @@ public class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase>
 	protected Tool toolType;
 	protected int tannerTier;
 	protected int craftTime;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
 
 	public TannerRecipeBase(ItemStack output, NonNullList<Ingredient> inputs, String toolType, int tannerTier,
-			int craftTime, String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			int craftTime, ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.toolType = Tool.fromName(toolType);
@@ -61,7 +62,7 @@ public class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase>
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

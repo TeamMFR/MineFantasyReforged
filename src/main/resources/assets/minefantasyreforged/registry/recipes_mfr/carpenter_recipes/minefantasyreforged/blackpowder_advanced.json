@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "engineering",
-  "research": "advanced_blackpowder",
+  "research": "minefantasyreforged:advanced_blackpowder",
   "tool_type": "hands",
   "block_tier": -1,
   "craft_time": 10,

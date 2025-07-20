@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "engineering",
-  "research": "crossbow_heads",
+  "research": "minefantasyreforged:crossbow",
   "tool_type": "hammer",
   "block_tier": -1,
   "craft_time": 200,

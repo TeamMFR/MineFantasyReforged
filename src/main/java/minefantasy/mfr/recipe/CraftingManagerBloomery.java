@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.BloomeryRecipeFactory;
 import minefantasy.mfr.recipe.types.BloomeryRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -29,7 +31,7 @@ public class CraftingManagerBloomery extends CraftingManagerBase<BloomeryRecipeB
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> BLOOMERY_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> BLOOMERY_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerBloomery() {
 		super(new BloomeryRecipeFactory(),
@@ -56,20 +58,20 @@ public class CraftingManagerBloomery extends CraftingManagerBase<BloomeryRecipeB
 			if (subItems.stream().anyMatch(s -> recipe.getBloomeryRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !BLOOMERY_RECIPES.containsKey(recipe.getRegistryName()))) {
 				BLOOMERY_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					BLOOMERY_RESEARCHES.add(requiredResearch);
 				}
 			}
 		}
 	}
 
-	public static BloomeryRecipeBase findMatchingRecipe(ItemStack input, Set<String> knownResearches) {
+	public static BloomeryRecipeBase findMatchingRecipe(ItemStack input, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (BloomeryRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
@@ -107,7 +109,7 @@ public class CraftingManagerBloomery extends CraftingManagerBase<BloomeryRecipeB
 		return BLOOMERY_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getBloomeryResearches() {
+	public static Set<ResearchBase> getBloomeryResearches() {
 		return BLOOMERY_RESEARCHES;
 	}
 }

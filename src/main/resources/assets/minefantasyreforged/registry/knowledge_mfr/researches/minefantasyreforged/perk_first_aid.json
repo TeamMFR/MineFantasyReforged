@@ -1,0 +1,10 @@
+{
+  "type": "perk_research",
+  "name": "first_aid",
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 25
+    }
+  ]
+}

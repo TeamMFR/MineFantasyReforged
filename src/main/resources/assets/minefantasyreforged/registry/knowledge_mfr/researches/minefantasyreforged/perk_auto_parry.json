@@ -1,0 +1,13 @@
+{
+  "type": "perk_research",
+  "name": "auto_parry",
+  "parent_researches": [
+    "minefantasyreforged:parry_pro"
+  ],
+  "skill_requirements": [
+    {
+      "skill": "combat",
+      "required_skill_level": 50
+    }
+  ]
+}

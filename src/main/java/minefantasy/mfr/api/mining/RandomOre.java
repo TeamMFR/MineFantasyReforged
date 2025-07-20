@@ -1,6 +1,7 @@
 package minefantasy.mfr.api.mining;
 
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +22,13 @@ public class RandomOre {
 	private final int minHeight;
 	private final int maxHeight;
 	private final boolean doesSilktouchDisable;
-	private final String research;
+	private final ResearchBase research;
 
 	public RandomOre(ItemStack drop, float chance, Block base, int harvestLevel, int min, int max, boolean silkDisable) {
 		this(drop, chance, base, harvestLevel, min, max, silkDisable, null);
 	}
 
-	public RandomOre(ItemStack drop, float chance, Block base, int harvestLevel, int min, int max, boolean silkDisable, String research) {
+	public RandomOre(ItemStack drop, float chance, Block base, int harvestLevel, int min, int max, boolean silkDisable, ResearchBase research) {
 		doesSilktouchDisable = silkDisable;
 		minHeight = min;
 		maxHeight = max;
@@ -53,7 +54,7 @@ public class RandomOre {
 	}
 
 	public static void addOre(ItemStack drop, float chance, String oreDict, int harvestLevel, int min, int max,
-			boolean silkDisable, String research) {
+			boolean silkDisable, ResearchBase research) {
 		for (ItemStack stack : OreDictionary.getOres(oreDict)) {
 			Block block = Block.getBlockFromItem(stack.getItem());
 			if (block != Blocks.AIR) {
@@ -63,7 +64,7 @@ public class RandomOre {
 	}
 
 	public static void addOre(ItemStack drop, float chance, Block block, int harvestLevel, int min, int max,
-			boolean silkDisable, String research) {
+			boolean silkDisable, ResearchBase research) {
 		drops.add(new RandomOre(drop, chance / 100F, block, harvestLevel, min, max,
 				silkDisable, research));
 	}
@@ -90,7 +91,7 @@ public class RandomOre {
 			return false;
 		}
 		if (user instanceof EntityPlayer && ore.research != null) {
-			if (!ResearchLogic.hasInfoUnlocked((EntityPlayer) user, ore.research)) {
+			if (!ResearchLogic.getResearchCheck((EntityPlayer) user, ore.research)) {
 				return false;
 			}
 		}

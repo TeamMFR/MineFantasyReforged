@@ -1,0 +1,10 @@
+{
+  "type": "perk_research",
+  "name": "toughness",
+  "skill_requirements": [
+    {
+      "skill": "combat",
+      "required_skill_level": 10
+    }
+  ]
+}

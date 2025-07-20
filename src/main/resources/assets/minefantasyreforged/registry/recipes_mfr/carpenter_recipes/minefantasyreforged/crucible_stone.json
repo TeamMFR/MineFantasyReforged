@@ -1,7 +1,6 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
-  "research": "crucible",
   "tool_type": "hammer",
   "block_tier": -1,
   "craft_time": 20,

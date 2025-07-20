@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
 import minefantasy.mfr.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.recipe.CarpenterShapedCustomMaterialRecipe;
@@ -45,7 +47,8 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 	private CarpenterRecipeBase parseDynamic(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
@@ -60,7 +63,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterDynamicRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), requiredResearch, skill,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 
@@ -75,7 +78,8 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		}
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
@@ -93,13 +97,14 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapelessCustomMaterialRecipe(
 				result, ingredients, tool_tier, block_tier, craft_time,
 				skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount);
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), requiredResearch, skill, tierModifyOutputCount);
 	}
 
 	private CarpenterRecipeBase parseShapedCustomMaterial(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
@@ -115,7 +120,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapedCustomMaterialRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), requiredResearch, skill, tierModifyOutputCount,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 
@@ -130,7 +135,8 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		}
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
@@ -147,13 +153,14 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapelessRecipe(
 				result, ingredients,
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill);
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), requiredResearch, skill);
 	}
 
 	private CarpenterRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
@@ -170,7 +177,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapedRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, shouldMirror,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), requiredResearch, skill, shouldMirror,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 

@@ -2,7 +2,7 @@
     "type": "alloy_ratio_recipe",
     "crucible_tier": 1,
     "repeat_amount": 1,
-    "research": "smelt_red_steel",
+    "research": "minefantasyreforged:smelt_red_steel",
     "skill": "artisanry",
     "skill_xp": 3,
     "vanilla_xp": 0.7,

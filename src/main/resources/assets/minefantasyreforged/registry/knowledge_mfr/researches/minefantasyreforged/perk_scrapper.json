@@ -1,0 +1,10 @@
+{
+  "type": "perk_research",
+  "name": "scrapper",
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 35
+    }
+  ]
+}

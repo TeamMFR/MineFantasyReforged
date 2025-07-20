@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "construction",
-  "research": "decorated_stone",
+  "research": "minefantasyreforged:decorated_stone",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 1,

@@ -5,7 +5,8 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.item.ItemArmourMFR;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CarpenterCraftMatrix;
 import minefantasy.mfr.recipe.CarpenterRecipeBase;
@@ -361,10 +362,10 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
 		IRecipeMFR recipe = getRecipe();
 		if (!(recipe instanceof CarpenterRecipeBase)
-				|| recipe.getRequiredResearch().equals("none")) {
+				|| recipe.getRequiredResearch() == KnowledgeManagerResearch.NONE) {
 			return true;
 		}
-		return ResearchLogic.getResearchCheck(user, ResearchLogic.getResearch(recipe.getRequiredResearch()));
+		return ResearchLogic.getResearchCheck(user, recipe.getRequiredResearch());
 	}
 
 	private void addXP(EntityPlayer player, CarpenterRecipeBase carpenterRecipe) {

@@ -5,7 +5,6 @@
 	"cook_time": 5,
 	"can_burn": false,
 	"is_oven_recipe": true,
-	"research": "crucible",
 	"vanilla_xp": 0.1,
 	"ingredients": [
 		{

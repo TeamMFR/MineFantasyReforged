@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.BigFurnaceRecipeFactory;
 import minefantasy.mfr.recipe.types.BigFurnaceRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -30,7 +32,7 @@ public class CraftingManagerBigFurnace extends CraftingManagerBase<BigFurnaceRec
 					.allowModification()
 					.create();
 
-	private static final Set<String> BIG_FURNACE_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> BIG_FURNACE_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerBigFurnace() {
 		super(new BigFurnaceRecipeFactory(),
@@ -58,21 +60,20 @@ public class CraftingManagerBigFurnace extends CraftingManagerBase<BigFurnaceRec
 			if (subItems.stream().anyMatch(s -> recipe.getBigFurnaceRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !BIG_FURNACE_RECIPES.containsKey(recipe.getRegistryName()))) {
 				BIG_FURNACE_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					BIG_FURNACE_RESEARCHES.add(requiredResearch);
 				}
 			}
 		}
 	}
 
-	public static BigFurnaceRecipeBase findMatchingRecipe(ItemStack input, Set<String> knownResearches) {
+	public static BigFurnaceRecipeBase findMatchingRecipe(ItemStack input, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (BigFurnaceRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				if (rec.getRequiredResearch().equals("none")
-						|| knownResearches.contains(rec.getRequiredResearch())) {
+				if (rec.getRequiredResearch() == null || knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
 			}
@@ -109,7 +110,7 @@ public class CraftingManagerBigFurnace extends CraftingManagerBase<BigFurnaceRec
 		return BIG_FURNACE_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getBigFurnaceResearches() {
+	public static Set<ResearchBase> getBigFurnaceResearches() {
 		return BIG_FURNACE_RESEARCHES;
 	}
 }

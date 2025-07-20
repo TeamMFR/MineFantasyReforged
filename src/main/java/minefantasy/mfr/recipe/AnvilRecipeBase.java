@@ -4,6 +4,8 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import net.minecraft.item.ItemStack;
@@ -20,7 +22,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected Skill requiredSkill;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected int skillXp;
 	protected float vanillaXp;
 	protected Tool toolType;
@@ -31,7 +33,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	protected boolean hotOutput;
 
 	public AnvilRecipeBase(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
-			int craftTime, int toolTier, int anvilTier, boolean hotOutput, String requiredResearch,
+			int craftTime, int toolTier, int anvilTier, boolean hotOutput, ResearchBase requiredResearch,
 			Skill requiredSkill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
@@ -71,7 +73,9 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 			int newAnvil = anvilTier < 0 ? material.getCrafterAnvilTier() : anvilTier;
 			matrix.modifyTier(newTier, newAnvil, (int) (craftTime * material.getCraftTimeModifier()));
 			if (isMain) {
-				matrix.modifyResearch("smelt_" + material.getName());
+				String materialModId = material.getRegistryName().getNamespace();
+				String research = "smelt_" + material.getName();
+				matrix.modifyResearch(KnowledgeManagerResearch.getResearchByName(materialModId, research, true));
 			}
 			return true;
 		}
@@ -119,7 +123,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

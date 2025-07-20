@@ -1,0 +1,34 @@
+{
+  "type": "artifact_research",
+  "name": "blast_furnace",
+  "parent_researches": [
+    "minefantasyreforged:smelt_iron"
+  ],
+  "required_artifact_count": 5,
+  "artifacts": [
+    {
+      "item": "#IRON_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:bloomery"
+    },
+    {
+      "item": "minefantasyreforged:kaolinite"
+    },
+    {
+      "item": "minefantasyreforged:limestone"
+    },
+    {
+      "item": "minecraft:iron_ore"
+    },
+    {
+      "item": "minecraft:furnace"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 25
+    }
+  ]
+}

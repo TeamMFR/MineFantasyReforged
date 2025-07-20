@@ -1,0 +1,29 @@
+{
+  "type": "artifact_research",
+  "name": "big_furnace",
+  "parent_researches": [
+    "minefantasyreforged:smelt_iron"
+  ],
+  "required_artifact_count": 4,
+  "artifacts": [
+    {
+      "item": "#IRON_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:bloomery"
+    },
+    {
+      "item": "minefantasyreforged:kaolinite"
+    },
+    {
+      "item": "minecraft:coal",
+      "data": 0
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 10
+    }
+  ]
+}

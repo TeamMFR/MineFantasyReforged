@@ -1,0 +1,28 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_mithium",
+  "parent_researches": [
+    "minefantasyreforged:smelt_master"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#MITHRIL_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:ancient_jewel_adamant"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 100
+    }
+  ]
+}

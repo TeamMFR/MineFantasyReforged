@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "construction",
-  "research": "smelt_bronze",
+  "research": "minefantasyreforged:smelt_bronze",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 1,

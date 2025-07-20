@@ -7,7 +7,9 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
@@ -408,9 +410,7 @@ public class StaminaBar {
 			return 0F;
 		}
 		float value = getDecayModifier(player.world);
-		float AM = 1.0F;
 		value *= getBasePerkStaminaModifier(value, player);
-		AM = getPerkArmModifier(value, player);
 		if (TacticalManager.isImmuneToWeight(player)) {
 			return value * 0.5F;
 		}
@@ -550,14 +550,16 @@ public class StaminaBar {
 	}
 
 	private static float getPerkArmModifier(float value, EntityPlayer user) {
-		if (ResearchLogic.hasInfoUnlocked(user, "armour_pro")) {
+		ResearchBase armourProResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:armour_pro", true);
+		if (ResearchLogic.getResearchCheck(user, armourProResearch)) {
 			value *= 0.5F;
 		}
 		return value;
 	}
 
 	private static float getBasePerkStaminaModifier(float value, EntityPlayer user) {
-		if (ResearchLogic.hasInfoUnlocked(user, "fitness")) {
+		ResearchBase fitnessResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:fitness", true);
+		if (ResearchLogic.getResearchCheck(user, fitnessResearch)) {
 			value *= 0.75F;
 		}
 		return value;

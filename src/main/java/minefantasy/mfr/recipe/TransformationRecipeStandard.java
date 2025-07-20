@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
@@ -32,7 +33,7 @@ public class TransformationRecipeStandard extends TransformationRecipeBase {
 			boolean shouldDropOnProgress,
 			Ingredient offhandStack,
 			Skill skill,
-			String research,
+			ResearchBase research,
 			int skillXp,
 			float vanillaXp,
 			int maxProgress,

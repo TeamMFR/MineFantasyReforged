@@ -4,11 +4,11 @@ import codechicken.lib.texture.TextureUtils;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchRequestPacket;
 import minefantasy.mfr.util.GuiHelper;
@@ -64,7 +64,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	private InformationBase selected = null;
 	private InformationBase highlighted = null;
 	private GuiButton button;
-	private LinkedList<InformationBase> informationList = new LinkedList<InformationBase>();
+	private LinkedList<InformationBase> informationList = new LinkedList<>();
 	private EntityPlayer player;
 	private boolean hasScroll = false;
 	private boolean canPurchase = false;
@@ -76,13 +76,13 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = MineFantasyKnowledgeList.getting_started.displayColumn * 24 - short1 / 2 - 12;
 		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = MineFantasyKnowledgeList.getting_started.displayRow * 24 - short2 / 2;
 		informationList.clear();
-		for (Object achievement : InformationList.knowledgeList) {
-			if (!InformationPage.isInfoInPages((InformationBase) achievement)) {
-				informationList.add((InformationBase) achievement);
+		for (InformationBase achievement : InformationList.knowledgeList) {
+			if (!InformationPage.isInfoInPages(achievement)) {
+				informationList.add(achievement);
 			}
 		}
-		for (Object base : InformationList.knowledgeList.toArray()) {
-			if (!ResearchLogic.hasInfoUnlocked(user, (InformationBase) base)) {
+		for (InformationBase base : InformationList.knowledgeList) {
+			if (!ResearchLogic.hasResearchUnlocked(user, base.getResearch())) {
 				allDiscovered = false;
 				break;
 			}
@@ -104,16 +104,20 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		int purchasex = i1 + (informationWidth - buyWidth) / 2;
 		int purchasey = j1 + (informationHeight - buyHeight) / 2;
 		// PURCHASE SCREEN
-		this.buttonList.add(new GuiButton(3, purchasex + 19, purchasey + 47, 81, 20, I18n.format("gui.purchase")));
-		this.buttonList.add(new GuiButton(4, purchasex + 125, purchasey + 47, 81, 20, I18n.format("gui.cancel")));
+		GuiButton purchaseButton = new GuiButton(3, purchasex + 19, purchasey + 47, 81, 20, I18n.format("gui.purchase"));
+		purchaseButton.visible = false;
+		GuiButton purchaseCancelButton = new GuiButton(4, purchasex + 125, purchasey + 47, 81, 20, I18n.format("gui.cancel"));
+		purchaseCancelButton.visible = false;
+		this.buttonList.add(purchaseButton);
+		this.buttonList.add(purchaseCancelButton);
 	}
 
 	@Override
 	protected void mouseClicked(int x, int y, int button) throws IOException {
 		if (selected == null && button == 0 && highlighted != null) {
-			if (ResearchLogic.getResearchCheck(player, highlighted) && !highlighted.getPages().isEmpty()) {
+			if (ResearchLogic.getResearchCheck(player, highlighted.getResearch()) && !highlighted.getPages().isEmpty()) {
 				player.openGui(MineFantasyReforged.INSTANCE, NetworkHandler.GUI_RESEARCH_BOOK, player.world, 0, highlighted.ID, 0);
-			} else if (highlighted.isEasy() && ResearchLogic.canPurchase(player, highlighted)) {
+			} else if (highlighted.isEasy() && ResearchLogic.canResearch(player, highlighted.getResearch())) {
 				selected = highlighted;
 				setPurchaseAvailable(player);
 			}
@@ -235,9 +239,9 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			this.drawOverlay();
 		}
 		if (buttonList.get(2) != null) {
-			((GuiButton) buttonList.get(2)).visible = selected != null;
-			((GuiButton) buttonList.get(2)).enabled = selected != null && canPurchase;
-			((GuiButton) buttonList.get(3)).visible = selected != null;
+			buttonList.get(2).visible = selected != null;
+			buttonList.get(2).enabled = selected != null && canPurchase;
+			buttonList.get(3).visible = selected != null;
 		}
 	}
 
@@ -340,9 +344,9 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				k3 = achievement1.displayRow * 24 - l + 11;
 				l4 = achievement1.parentInfo.displayColumn * 24 - k + 11;
 				int l3 = achievement1.parentInfo.displayRow * 24 - l + 11;
-				boolean flag5 = ResearchLogic.getResearchCheck(player, achievement1);
-				boolean flag6 = ResearchLogic.getResearchCheck(player, achievement1);
-				researchVisibility = ResearchLogic.getResearchVisibility(player, achievement1);
+				boolean flag5 = ResearchLogic.getResearchCheck(player, achievement1.getResearch());
+				boolean flag6 = ResearchLogic.getResearchCheck(player, achievement1.getResearch());
+				researchVisibility = InformationBase.getResearchVisibility(player, achievement1);
 				j4 = -16777216;
 
 				if (flag5) {
@@ -384,13 +388,13 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			j5 = achievement2.displayRow * 24 - l;
 
 			if (i5 >= -24 && j5 >= -24 && i5 <= 224.0F * GuiKnowledgeMenu.scaleMultiplier && j5 <= 155.0F * GuiKnowledgeMenu.scaleMultiplier) {
-				researchVisibility = ResearchLogic.getResearchVisibility(player, achievement2);
+				researchVisibility = InformationBase.getResearchVisibility(player, achievement2);
 				float f6;
 
-				if (ResearchLogic.getResearchCheck(player, achievement2)) {
+				if (ResearchLogic.getResearchCheck(player, achievement2.getResearch())) {
 					f6 = 0.75F;
 					GlStateManager.color(f6, f6, f6, 1.0F);
-				} else if (ResearchLogic.canUnlockInfo(player, achievement2)) {
+				} else if (ResearchLogic.canUnlockResearch(player, achievement2.getResearch())) {
 					f6 = 1.0F;
 					GlStateManager.color(0.5F, 1.0F, 0.5F, 1.0F);
 				} else if (researchVisibility < getVisibleRange()[1]) {
@@ -421,7 +425,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				}
 				GlStateManager.disableBlend(); // Forge: Cleanup states we set.
 
-				if (!ResearchLogic.canUnlockInfo(player, achievement2)) {
+				if (!ResearchLogic.canUnlockResearch(player, achievement2.getResearch())) {
 					f6 = 0.1F;
 					GlStateManager.color(f6, f6, f6, 1.0F);
 				}
@@ -464,9 +468,9 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			String s2 = achievement.getDescription();
 			i5 = mx + 12;
 			j5 = my - 4;
-			researchVisibility = ResearchLogic.getResearchVisibility(player, achievement);
+			researchVisibility = InformationBase.getResearchVisibility(player, achievement);
 
-			if (!ResearchLogic.canUnlockInfo(player, achievement)) {
+			if (achievement.parentInfo != null && !ResearchLogic.canUnlockResearch(player, achievement.getResearch())) {
 				String tooltipString;
 				int k4;
 
@@ -491,18 +495,18 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
 				int k5 = this.fontRenderer.getWordWrappedHeight(s2, j4);
 
-				if (ResearchLogic.getResearchCheck(player, achievement)
-						|| ResearchLogic.canUnlockInfo(player, achievement)) {
+				if (ResearchLogic.getResearchCheck(player, achievement.getResearch())
+						|| ResearchLogic.canUnlockResearch(player, achievement.getResearch())) {
 					k5 += 12;
 				}
 
 				this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k5 + 3 + 12, -1073741824, -1073741824);
 				this.fontRenderer.drawSplitString(s2, i5, j5 + 12, j4, -6250336);
 
-				if (ResearchLogic.getResearchCheck(player, achievement)) {
+				if (ResearchLogic.getResearchCheck(player, achievement.getResearch())) {
 					this.fontRenderer.drawStringWithShadow(I18n.format("information.discovered"), i5,
 							j5 + k5 + 4, -7302913);
-				} else if (InformationBase.easyResearch && ResearchLogic.canUnlockInfo(player, achievement)) {
+				} else if (InformationBase.easyResearch && ResearchLogic.canUnlockResearch(player, achievement.getResearch())) {
 					this.fontRenderer.drawStringWithShadow(
 							I18n.format("information.buy"), i5,
 							j5 + k5 + 4, -7302913);
@@ -511,7 +515,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 
 			if (s1 != null) {
 				this.fontRenderer.drawStringWithShadow(s1, i5, j5,
-						ResearchLogic.canUnlockInfo(player, achievement) ? (achievement.getSpecial() ? -128 : -1)
+						ResearchLogic.canUnlockResearch(player, achievement.getResearch()) ? (achievement.getSpecial() ? -128 : -1)
 								: (achievement.getSpecial() ? -8355776 : -8355712));
 			}
 		}
@@ -579,7 +583,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 
 	private void setPurchaseAvailable(EntityPlayer user) {
 		if (selected != null) {
-			canPurchase = selected.hasSkillsUnlocked(user);
+			canPurchase = selected.getResearch().hasSkillsUnlocked(user);
 		} else {
 			canPurchase = false;
 		}

@@ -1,0 +1,16 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_iron",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:iron_ore"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 10
+    }
+  ]
+}

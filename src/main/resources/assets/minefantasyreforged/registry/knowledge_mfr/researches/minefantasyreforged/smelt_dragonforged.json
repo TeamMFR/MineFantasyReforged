@@ -1,0 +1,16 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_dragonforged",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:dragon_heart"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 50
+    }
+  ]
+}

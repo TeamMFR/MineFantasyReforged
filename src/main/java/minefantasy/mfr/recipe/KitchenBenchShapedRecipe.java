@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public class KitchenBenchShapedRecipe extends KitchenBenchRecipeBase {
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int kitchenBenchTier, int craftTime,
 			String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount,
+			ResearchBase research, Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount,
 			boolean shouldMirror, int width, int height) {
 		super(output, inputs, toolTier, kitchenBenchTier, craftTime,
 				toolType, soundOfCraft,

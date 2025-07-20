@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "mine_ceramic",
+  "parent_researches": [
+    "minefantasyreforged:bombs"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:blackpowder"
+    },
+    {
+      "item": "minecraft:stone_pressure_plate"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 15
+    }
+  ]
+}

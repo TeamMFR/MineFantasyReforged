@@ -6,6 +6,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +35,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	protected Ingredient offhandStack;
 	protected int maxProgress;
 	protected SoundEvent sound;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
@@ -47,7 +48,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 			boolean shouldDropOnProgress,
 			Ingredient offhandStack,
 			Skill skill,
-			String research,
+			ResearchBase research,
 			int skillXp,
 			float vanillaXp,
 			int maxProgress,
@@ -208,7 +209,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

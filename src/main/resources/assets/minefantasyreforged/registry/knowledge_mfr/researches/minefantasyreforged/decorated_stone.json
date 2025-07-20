@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "decorated_stone",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "#IRON_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:reinforced_stone"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "construction",
+      "required_skill_level": 15
+    }
+  ]
+}

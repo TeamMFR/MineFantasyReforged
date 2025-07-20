@@ -1,8 +1,9 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import net.minecraft.block.Block;
@@ -92,17 +93,19 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		final TileEntityBlastHeater tile = (TileEntityBlastHeater) getTile(world, pos);
 		if (tile != null) {
-			if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.blast_furnace)) {
+			ResearchBase blastFurnaceResearch = KnowledgeManagerResearch
+					.getResearchByKey("minefantasyreforged:blast_furnace", true);
+			if (!ResearchLogic.getResearchCheck(player, blastFurnaceResearch)) {
 				if (!world.isRemote && hand == player.getActiveHand()) {
 					player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
 				}
 				return false;
 			}
 
-			Set<String> playerResearches = new HashSet<>();
-			for (String blastFurnaceResearch : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(blastFurnaceResearch))) {
-					playerResearches.add(blastFurnaceResearch);
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase research : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, research)) {
+					playerResearches.add(research);
 				}
 			}
 			tile.setKnownResearches(playerResearches);

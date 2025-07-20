@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "construction",
-  "research": "clay_wall",
+  "research": "minefantasyreforged:clay_wall",
   "tool_type": "saw",
   "block_tier": -1,
   "craft_time": 2,

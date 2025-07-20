@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;

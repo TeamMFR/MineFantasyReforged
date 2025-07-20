@@ -1,7 +1,6 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "artisanry",
-  "research": "craft_armour_light",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

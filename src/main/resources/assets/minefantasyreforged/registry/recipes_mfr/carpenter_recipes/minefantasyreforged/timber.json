@@ -1,7 +1,6 @@
 {
   "type": "carpenter_dynamic_recipe",
   "skill": "construction",
-  "research": "commodities",
   "tool_type": "saw",
   "block_tier": -1,
   "craft_time": 10,

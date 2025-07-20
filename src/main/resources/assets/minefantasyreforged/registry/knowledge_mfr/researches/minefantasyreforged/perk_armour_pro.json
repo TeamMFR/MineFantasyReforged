@@ -1,0 +1,13 @@
+{
+  "type": "perk_research",
+  "name": "armour_pro",
+  "parent_researches": [
+    "minefantasyreforged:fitness"
+  ],
+  "skill_requirements": [
+    {
+      "skill": "combat",
+      "required_skill_level": 60
+    }
+  ]
+}

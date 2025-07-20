@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "paint_brush",
+  "parent_researches": [
+    "minefantasyreforged:refined_planks"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "construction",
+      "required_skill_level": 10
+    }
+  ]
+}

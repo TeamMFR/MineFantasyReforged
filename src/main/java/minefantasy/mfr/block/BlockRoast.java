@@ -1,7 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.tile.TileEntityRoast;
 import net.minecraft.block.BlockHorizontal;
@@ -56,9 +57,9 @@ public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRoast tile = (TileEntityRoast) getTile(world, pos);
 		if (tile != null) {
-			Set<String> playerResearches = new HashSet<>();
-			for (String roastResearch : CraftingManagerRoast.getRoastResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(roastResearch))) {
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase roastResearch : CraftingManagerRoast.getRoastResearches()) {
+				if (ResearchLogic.getResearchCheck(player, roastResearch)) {
 					playerResearches.add(roastResearch);
 				}
 			}

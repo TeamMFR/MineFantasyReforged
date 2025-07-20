@@ -1,6 +1,5 @@
 {
 	"type": "bloomery_recipe",
-	"research": "smelt_copper",
 	"skill": "artisanry",
 	"skill_xp": 1,
 	"vanilla_xp": 0.1,

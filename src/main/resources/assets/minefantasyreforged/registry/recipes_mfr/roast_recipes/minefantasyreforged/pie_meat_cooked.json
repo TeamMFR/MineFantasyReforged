@@ -6,7 +6,7 @@
 	"burn_time": 90,
 	"can_burn": true,
 	"is_oven_recipe": true,
-	"research": "meatpie",
+	"research": "minefantasyreforged:meatpie",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.2,

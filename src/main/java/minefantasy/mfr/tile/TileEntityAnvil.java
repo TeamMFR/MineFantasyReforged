@@ -12,9 +12,10 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
-import minefantasy.mfr.mechanics.knowledge.InformationBase;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
@@ -48,7 +49,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -83,7 +83,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	private float itemRotation = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private String requiredResearch = "";
+	private ResearchBase requiredResearch = KnowledgeManagerResearch.NONE;
 	private int requiredToolTier;
 	private int requiredAnvilTier;
 	private int ticksExisted;
@@ -256,9 +256,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
-		if (StringUtils.isNotBlank(requiredResearch) && !requiredResearch.equalsIgnoreCase("none")) {
-			InformationBase research = ResearchLogic.getResearch(requiredResearch);
-			return requiredResearch.isEmpty() || ResearchLogic.getResearchCheck(user, research);
+		if (requiredResearch != KnowledgeManagerResearch.NONE) {
+			return ResearchLogic.getResearchCheck(user, requiredResearch);
 		}
 		else {
 			return true;
@@ -365,7 +364,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			String design = recipe.getDesign();
 
 			if (design.equals("dragonforged") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
+					.getResearchCheck(player, recipe.getRequiredResearch())) {
 
 				// DRAGONFORGE
 				float totalTemp = 0;
@@ -403,8 +402,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				}
 			}
 
-			if (design.equals("ornate") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
+			if (design.equals("ornate") && ResearchLogic.getResearchCheck(player, recipe.getRequiredResearch())) {
 
 				// Ornate
 				NBTBase nbt = !(recipeResultStack.hasTagCompound())
@@ -735,7 +733,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	@Override
-	public void setRequiredResearch(String research) {
+	public void setRequiredResearch(ResearchBase research) {
 		this.requiredResearch = research;
 	}
 
@@ -811,7 +809,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		resultStackSpecial = new ItemStack(nbt.getCompoundTag(RESULT_STACK_SPECIAL_TAG));
 		requiredAnvilTier = nbt.getInteger(REQUIRED_ANVIL_TIER_TAG);
 		requiredToolTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
-		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
+		requiredResearch = KnowledgeManagerResearch.getResearchByKey(nbt.getString(RESEARCH_REQUIRED_TAG), true);
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerAnvil.getRecipeByResourceLocation(resourceLocation));
 		textureName = nbt.getString(TEXTURE_NAME_TAG);
@@ -831,7 +829,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		nbt.setTag(RESULT_STACK_SPECIAL_TAG, resultStackSpecial.writeToNBT(new NBTTagCompound()));
 		nbt.setInteger(REQUIRED_ANVIL_TIER_TAG, requiredAnvilTier);
 		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredToolTier);
-		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
+		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch.getRegistryName().toString());
 		if (getRecipe() != null) {
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
 		}

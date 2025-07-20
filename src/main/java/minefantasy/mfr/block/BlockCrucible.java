@@ -3,10 +3,11 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFilledMould;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.tile.TileEntityCrucible;
@@ -80,17 +81,19 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 	@Override
 	public boolean onBlockActivated(final World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		TileEntityCrucible tile = (TileEntityCrucible) getTile(world, pos);
+		ResearchBase bronzeResearch = KnowledgeManagerResearch
+				.getResearchByKey("minefantasyreforged:smelt_bronze", true);
 		if (tile != null) {
-			if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.smelt_bronze)) {
+			if (!ResearchLogic.getResearchCheck(player, bronzeResearch)) {
 				if (!world.isRemote && hand == player.getActiveHand()) {
 					player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
 				}
 				return false;
 			}
 
-			Set<String> playerResearches = new HashSet<>();
-			for (String alloyResearch : CraftingManagerAlloy.getAlloyResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(alloyResearch))) {
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase alloyResearch : CraftingManagerAlloy.getAlloyResearches()) {
+				if (ResearchLogic.getResearchCheck(player, alloyResearch)) {
 					playerResearches.add(alloyResearch);
 				}
 			}

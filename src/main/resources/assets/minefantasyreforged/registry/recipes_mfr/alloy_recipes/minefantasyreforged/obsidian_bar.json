@@ -1,7 +1,7 @@
 {
     "type": "alloy_shaped_recipe",
     "crucible_tier": 1,
-    "research": "smelt_obsidian",
+    "research": "minefantasyreforged:smelt_obsidian",
     "skill": "artisanry",
     "skill_xp": 2,
     "vanilla_xp": 0.5,

@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "construction",
-  "research": "refined_planks",
+  "research": "minefantasyreforged:refined_planks",
   "tool_type": "hammer",
   "block_tier": -1,
   "craft_time": 5,

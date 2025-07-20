@@ -1,7 +1,7 @@
 {
 	"type": "quern_recipe",
 	"consume_pot": true,
-	"research": "shrapnel",
+	"research": "minefantasyreforged:shrapnel",
 	"skill": "engineering",
 	"skill_xp": 1,
 	"vanilla_xp": 0.2,

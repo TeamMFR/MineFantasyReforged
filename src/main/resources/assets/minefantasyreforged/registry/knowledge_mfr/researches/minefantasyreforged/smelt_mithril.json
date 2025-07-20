@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_mithril",
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#SILVER_ARTIFACTS"
+    },
+    {
+      "item": "minefantasyreforged:mythic_ore"
+    },
+    {
+      "item": "minefantasyreforged:ancient_jewel_mithril"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 75
+    }
+  ]
+}

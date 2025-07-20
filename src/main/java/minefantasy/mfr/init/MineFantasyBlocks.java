@@ -582,12 +582,12 @@ public class MineFantasyBlocks {
 		SCHEMATIC_COGWORK = new BlockSchematic("schematic_cogwork");
 		SCHEMATIC_GEARS = new BlockSchematic("schematic_gears");
 
-		SCHEMATIC_ALLOY_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_BOMB,"bomb_obsidian", "mine_obsidian");
-		SCHEMATIC_BOMB_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_CROSSBOW,"crossbow_shaft_advanced", "crossbow_head_advanced");
-		SCHEMATIC_CROSSBOW_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_FORGE, "advanced_forge", "advanced_crucible");
-		SCHEMATIC_FORGE_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_GEARS,"cogwork_armour");
+		SCHEMATIC_BOMB_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_BOMB,"bomb_obsidian", "mine_obsidian");
+		SCHEMATIC_CROSSBOW_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_CROSSBOW,"crossbow_shaft_advanced", "crossbow_head_advanced");
+		SCHEMATIC_FORGE_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_FORGE, "advanced_forge", "advanced_crucible");
+		SCHEMATIC_GEARS_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_GEARS,"cogwork_armour");
 		SCHEMATIC_COGWORK_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_COGWORK, "cogwork_armour");
-		SCHEMATIC_GEARS_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_ALLOY,"composite_alloy");
+		SCHEMATIC_ALLOY_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_ALLOY,"composite_alloy");
 	}
 
 	@SubscribeEvent

@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "cheese_roll",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:cheese_slice"
+    },
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 15
+    }
+  ]
+}

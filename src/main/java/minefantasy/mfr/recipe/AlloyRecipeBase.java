@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -15,13 +16,13 @@ public abstract class AlloyRecipeBase extends IForgeRegistryEntry.Impl<AlloyReci
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected int tier;
-	protected String requiredResearch;
+	protected ResearchBase requiredResearch;
 	protected Skill skill;
 	protected Integer skillXp;
 	protected float vanillaXp;
 
 	public AlloyRecipeBase(ItemStack output, NonNullList<Ingredient> inputs, int tier,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.tier = tier;
@@ -54,7 +55,7 @@ public abstract class AlloyRecipeBase extends IForgeRegistryEntry.Impl<AlloyReci
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return requiredResearch;
 	}
 

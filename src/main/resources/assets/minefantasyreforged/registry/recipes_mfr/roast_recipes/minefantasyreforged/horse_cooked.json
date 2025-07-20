@@ -6,7 +6,6 @@
 	"burn_time": 60,
 	"can_burn": true,
 	"is_oven_recipe": false,
-	"research": "wild_meat",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.2,

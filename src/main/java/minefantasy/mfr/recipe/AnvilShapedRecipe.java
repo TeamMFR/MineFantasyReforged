@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -17,7 +18,7 @@ public class AnvilShapedRecipe extends AnvilRecipeBase {
 
 	public AnvilShapedRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
 			int craftTime, int hammerTier, int anvilTier,
-			boolean hotOutput, String requiredResearch, Skill requiredSkill,
+			boolean hotOutput, ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			int width, int height) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,

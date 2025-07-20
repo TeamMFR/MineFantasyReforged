@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "cogwork_armour",
+  "parent_researches": [
+    "minefantasyreforged:tungsten"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:schematic_gears"
+    },
+    {
+      "item": "minefantasyreforged:schematic_cogwork"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 60
+    }
+  ]
+}

@@ -1,8 +1,9 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import net.minecraft.block.Block;
@@ -71,7 +72,9 @@ public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		final TileEntityBlastChamber tileEntity = (TileEntityBlastChamber) getTile(world, pos);
 
-		if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.blast_furnace)) {
+		ResearchBase blastFurnaceResearch = KnowledgeManagerResearch
+				.getResearchByKey("minefantasyreforged:blast_furnace", true);
+		if (!ResearchLogic.getResearchCheck(player, blastFurnaceResearch)) {
 			if (!world.isRemote && hand == player.getActiveHand()) {
 				player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
 			}
@@ -79,10 +82,10 @@ public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 		}
 
 		if (tileEntity != null) {
-			Set<String> playerResearches = new HashSet<>();
-			for (String blastFurnaceResearch : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(blastFurnaceResearch))) {
-					playerResearches.add(blastFurnaceResearch);
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase research : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, research)) {
+					playerResearches.add(research);
 				}
 			}
 			tileEntity.setKnownResearches(playerResearches);

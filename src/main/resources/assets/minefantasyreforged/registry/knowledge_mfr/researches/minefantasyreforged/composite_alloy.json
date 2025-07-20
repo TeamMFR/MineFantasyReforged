@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "composite_alloy",
+  "parent_researches": [
+    "minefantasyreforged:tungsten"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:schematic_alloy"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 50
+    }
+  ]
+}

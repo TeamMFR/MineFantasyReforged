@@ -5,7 +5,8 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.tile.TileEntityQuern;
@@ -79,9 +80,9 @@ public class BlockQuern extends BlockTileEntity<TileEntityQuern> implements ICli
 		TileEntityQuern tile = (TileEntityQuern) getTile(world, pos);
 		if (tile != null) {
 			// Handle Researches
-			Set<String> playerResearches = new HashSet<>();
-			for (String quernResearch : CraftingManagerQuern.getQuernResearches()) {
-				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(quernResearch))) {
+			Set<ResearchBase> playerResearches = new HashSet<>();
+			for (ResearchBase quernResearch : CraftingManagerQuern.getQuernResearches()) {
+				if (ResearchLogic.getResearchCheck(player, quernResearch)) {
 					playerResearches.add(quernResearch);
 				}
 			}

@@ -28,10 +28,12 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
@@ -679,7 +681,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		if (user instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) user;
 			if (getParry(item) > 0 && item.getItem() instanceof ItemWeaponMFR) {
-				if (ResearchLogic.hasInfoUnlocked(player, "counter_attack") && ((ItemWeaponMFR)item.getItem()).canCounter()) {
+				ResearchBase counterAttackResearch = KnowledgeManagerResearch
+						.getResearchByKey("minefantasyreforged:counter_attack", true);
+				if (ResearchLogic.getResearchCheck(player, counterAttackResearch)
+						&& ((ItemWeaponMFR)item.getItem()).canCounter()) {
 					return 1;// Can
 				}
 				return 0;// Cannot

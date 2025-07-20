@@ -1,0 +1,220 @@
+[
+    {
+        "name": "TUNGSTEN_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreTungsten"
+            },
+            {
+                "item": "minefantasyreforged:ore_tungsten"
+            }
+        ]
+    },
+    {
+        "name": "GENERIC_MEAT_UNCOOKED",
+        "ingredient": [
+            {
+                "item": "minefantasyreforged:generic_meat_uncooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_strip_uncooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_chunk_uncooked"
+            }
+        ]
+    },
+    {
+        "name": "ALL_TIMBERS_EXCEPT_SCRAP",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber",
+            "material_type": "wood_material",
+            "excluded_materials": ["scrap_wood"]
+        }
+    },
+    {
+        "name": "LIST_ALL_INGOTS",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "listAllIngots"
+        }
+    },
+    {
+        "name": "COPPER_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotCopper"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"copper\"}}"
+            }
+        ]
+    },
+    {
+        "name": "TIN_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotTin"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"tin\"}}"
+            }
+        ]
+    },
+    {
+        "name": "GOLD_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotGold"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"gold\"}}"
+            }
+        ]
+    },
+    {
+        "name": "SILVER_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotSilver"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"silver\"}}"
+            }
+        ]
+    },
+    {
+        "name": "IRON_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotIron"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+            }
+        ]
+    },
+    {
+        "name": "IRON_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotIron"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+            }
+        ]
+    },
+    {
+        "name": "BRONZE_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotBronze"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}"
+            }
+        ]
+    },
+    {
+        "name": "PIG_IRON_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotPigIron"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}"
+            }
+        ]
+    },
+    {
+        "name": "STEEL_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotSteel"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+            }
+        ]
+    },
+    {
+        "name": "BLACK_STEEL_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotBlackSteel"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}"
+            }
+        ]
+    },
+    {
+        "name": "MITHRIL_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotMithril"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"mithril\"}}"
+            }
+        ]
+    },
+    {
+        "name": "ADAMANTIUM_ARTIFACTS",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "ingotAdamantium"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"adamantium\"}}"
+            }
+        ]
+    },
+    {
+        "name": "ALL_PLATES",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:plate",
+            "material_type": "metal_material"
+        }
+    }
+]

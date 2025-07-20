@@ -1,6 +1,6 @@
 {
   "type": "carpenter_shaped_recipe",
-  "research": "firebomb",
+  "research": "minefantasyreforged:firebomb",
   "tool_type": "spoon",
   "block_tier": -1,
   "craft_time": 10,

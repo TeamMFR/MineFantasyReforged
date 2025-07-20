@@ -1,6 +1,6 @@
 {
 	"type": "special_recipe_dragonforged",
-	"research": "smelt_dragonforged",
+	"research": "minefantasyreforged:smelt_dragonforged",
 	"input": {
 		"item": "minefantasyreforged:standard_spanner"
 	},

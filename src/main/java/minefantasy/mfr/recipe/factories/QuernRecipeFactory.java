@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.QuernRecipeBase;
 import minefantasy.mfr.recipe.types.QuernRecipeType;
 import net.minecraft.item.ItemStack;
@@ -43,7 +45,8 @@ public class QuernRecipeFactory implements IRecipeMFRFactory<QuernRecipeBase> {
 			throw new JsonParseException("No pot ingredients for quern recipe");
 		}
 
-		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);

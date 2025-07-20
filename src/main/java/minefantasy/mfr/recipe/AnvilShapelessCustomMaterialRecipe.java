@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
@@ -22,7 +23,7 @@ public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
 	protected boolean tierModifyOutputCount;
 	public AnvilShapelessCustomMaterialRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill,
+			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			boolean tierModifyOutputCount) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,

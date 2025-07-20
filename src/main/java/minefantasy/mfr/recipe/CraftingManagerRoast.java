@@ -5,6 +5,8 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.RoastRecipeFactory;
 import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.RoastRecipeType;
@@ -36,7 +38,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> ROAST_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> ROAST_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerRoast() {
 		super(new RoastRecipeFactory(),
@@ -63,20 +65,20 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 			if (subItems.stream().anyMatch(s -> recipe.getRoastRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !ROAST_RECIPES.containsKey(recipe.getRegistryName()))) {
 				ROAST_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					ROAST_RESEARCHES.add(requiredResearch);
 				}
 			}
 		}
 	}
 
-	public static RoastRecipeBase findMatchingRecipe(ItemStack input, boolean isOven, Set<String> knownResearches) {
+	public static RoastRecipeBase findMatchingRecipe(ItemStack input, boolean isOven, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (RoastRecipeBase rec : getRecipes()) {
 			if (rec.matches(input, isOven)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
@@ -94,7 +96,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 				RoastRecipeBase vanillaRecipe = new RoastRecipeBase(
 						output, ingredients, new ItemStack(MineFantasyItems.BURNT_FOOD),
 						100, 300, 20, 80,true, false,
-						"none", Skill.PROVISIONING, 1, 0.3F);
+						KnowledgeManagerResearch.NONE, Skill.PROVISIONING, 1, 0.3F);
 
 				addToRegistry(vanillaRecipe, output);
 
@@ -141,7 +143,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 		return ROAST_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getRoastResearches() {
+	public static Set<ResearchBase> getRoastResearches() {
 		return ROAST_RESEARCHES;
 	}
 }

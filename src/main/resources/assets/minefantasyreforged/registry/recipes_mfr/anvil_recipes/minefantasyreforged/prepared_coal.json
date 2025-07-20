@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "engineering",
-  "research": "coke",
+  "research": "minefantasyreforged:coke",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

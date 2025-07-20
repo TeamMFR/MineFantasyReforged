@@ -1,6 +1,6 @@
 {
 	"type": "blast_furnace_recipe",
-	"research": "smelt_pig_iron",
+	"research": "minefantasyreforged:blast_furnace",
 	"skill": "artisanry",
 	"skill_xp": 0.5,
 	"vanilla_xp": 0.4,

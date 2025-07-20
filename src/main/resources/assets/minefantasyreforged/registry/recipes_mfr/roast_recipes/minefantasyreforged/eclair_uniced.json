@@ -6,7 +6,7 @@
 	"burn_time": 30,
 	"can_burn": true,
 	"is_oven_recipe": true,
-	"research": "eclair",
+	"research": "minefantasyreforged:eclair",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.3,

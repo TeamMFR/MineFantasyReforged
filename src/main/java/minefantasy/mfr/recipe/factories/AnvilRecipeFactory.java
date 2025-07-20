@@ -4,6 +4,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.AnvilDynamicRecipe;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
@@ -43,7 +45,8 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 	private AnvilRecipeBase parseDynamic(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
@@ -55,7 +58,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		boolean shouldModifyTiers = JsonUtils.getBoolean(json, "should_modify_tiers", true);
 
 		return new AnvilDynamicRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp, modifyOutput, shouldModifyTiers,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
@@ -71,7 +74,8 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		}
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
@@ -84,14 +88,15 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new AnvilShapelessCustomMaterialRecipe(ingredients, result,
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, skillXp, vanillaXp,
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill, skillXp, vanillaXp,
 				tierModifyOutputCount);
 	}
 
 	private AnvilRecipeBase parseShapedCustomMaterial(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
@@ -102,7 +107,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		return new AnvilShapedCustomMaterialRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight(), tierModifyOutputCount);
 	}
@@ -118,7 +123,8 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		}
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
@@ -130,13 +136,14 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new AnvilShapelessRecipe(ingredients, result, tool_type,
-				recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, skillXp, vanillaXp);
+				recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill, skillXp, vanillaXp);
 	}
 
 	private AnvilRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
+		ResearchBase requiredResearch = KnowledgeManagerResearch
+				.getResearchByKey(JsonUtils.getString(json, "research", "none"), true);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
@@ -146,7 +153,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
 		return new AnvilShapedRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}

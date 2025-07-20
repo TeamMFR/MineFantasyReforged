@@ -1,0 +1,16 @@
+{
+  "type": "artifact_research",
+  "name": "jerky",
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "#GENERIC_MEAT_UNCOOKED"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 10
+    }
+  ]
+}

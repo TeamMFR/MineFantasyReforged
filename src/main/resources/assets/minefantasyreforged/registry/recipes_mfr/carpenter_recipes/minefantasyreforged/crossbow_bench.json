@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "engineering",
-  "research": "crossbows",
+  "research": "minefantasyreforged:crossbow",
   "tool_type": "spanner",
   "block_tier": -1,
   "craft_time": 200,

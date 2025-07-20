@@ -6,7 +6,7 @@
 	"burn_time": 40,
 	"can_burn": true,
 	"is_oven_recipe": true,
-	"research": "sweetroll",
+	"research": "minefantasyreforged:sweetroll",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.2,

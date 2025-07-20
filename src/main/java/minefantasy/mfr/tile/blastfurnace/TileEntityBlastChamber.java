@@ -6,13 +6,14 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBlastChamber;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
-import minefantasy.mfr.util.Utils;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	protected int tempUses;
 	protected int smokeStorage;
 	protected Random rand = new Random();
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -149,7 +150,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		}
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 		this.contentsChanged = true;
 	}
@@ -240,7 +241,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, getRecipe().getResourceLocation());
 		}
 
-		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
 
 		return nbt;
 	}
@@ -261,7 +262,8 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 			this.setRecipe(CraftingManagerBlastFurnace.getRecipeByResourceLocation(resourceLocation));
 		}
 
-		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+		knownResearches = NbtUtils.deserializeResearches(NbtUtils
+				.mapNbtTagListToList(nbt.getTagList(KNOWN_RESEARCHES_TAG, 8), String.class));
 	}
 
 	@Override

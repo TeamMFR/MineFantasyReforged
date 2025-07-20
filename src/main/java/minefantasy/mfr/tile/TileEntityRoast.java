@@ -7,8 +7,10 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.item.ItemBurntFood;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.RoastRecipeBase;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -44,7 +46,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	private RoastRecipeBase lastRecipe;
 
 	public ItemStackHandler inventory = createInventory();
-	private Set<String> knownResearches = new HashSet<>();
+	private Set<ResearchBase> knownResearches = new HashSet<>();
 
 	public TileEntityRoast() {
 	}
@@ -174,7 +176,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		return false;
 	}
 
-	public void setKnownResearches(Set<String> knownResearches) {
+	public void setKnownResearches(Set<ResearchBase> knownResearches) {
 		this.knownResearches = knownResearches;
 	}
 
@@ -231,6 +233,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		this.setRecipe(CraftingManagerRoast.getRecipeByResourceLocation(resourceLocation));
 		ResourceLocation lastRecipeResourceLocation = new ResourceLocation(nbt.getString(LAST_RECIPE_RESOURCE_LOCATION_TAG));
 		this.lastRecipe = CraftingManagerRoast.getRecipeByResourceLocation(lastRecipeResourceLocation);
+		this.knownResearches = NbtUtils.deserializeResearches(nbt);
 	}
 
 	@Override
@@ -251,6 +254,9 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		else {
 			nbt.setString(LAST_RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
+
+		nbt.setTag(KNOWN_RESEARCHES_TAG, NbtUtils.serializeResearches(knownResearches));
+
 		return nbt;
 	}
 

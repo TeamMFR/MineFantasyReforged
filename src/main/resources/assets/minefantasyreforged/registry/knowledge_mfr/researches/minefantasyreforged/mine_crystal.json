@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "mine_crystal",
+  "parent_researches": [
+    "minefantasyreforged:mine_obsidian"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 40
+    }
+  ]
+}

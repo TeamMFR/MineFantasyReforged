@@ -1,0 +1,14 @@
+{
+  "type": "artifact_research",
+  "name": "coke",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    {
+      "item": "minecraft:redstone"
+    }
+  ]
+}

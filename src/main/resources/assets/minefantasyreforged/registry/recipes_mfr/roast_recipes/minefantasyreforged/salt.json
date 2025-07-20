@@ -5,7 +5,6 @@
 	"cook_time": 2,
 	"can_burn": false,
 	"is_oven_recipe": false,
-	"research": "salt",
 	"skill": "provisioning",
 	"skill_xp": 1,
 	"vanilla_xp": 0.1,

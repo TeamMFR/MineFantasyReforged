@@ -1,0 +1,26 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_master",
+  "parent_researches": [
+    "minefantasyreforged:smelt_mithril",
+    "minefantasyreforged:smelt_adamantium"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:ancient_jewel_adamant"
+    },
+    {
+      "item": "minefantasyreforged:ancient_jewel_mithril"
+    },
+    {
+      "item": "minefantasyreforged:ancient_jewel_master"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 100
+    }
+  ]
+}

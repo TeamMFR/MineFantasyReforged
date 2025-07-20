@@ -1,7 +1,7 @@
 {
   "type": "kitchen_bench_shaped_recipe",
   "skill": "provisioning",
-  "research": "eclair",
+  "research": "minefantasyreforged:eclair",
   "tool_type": "hands",
   "block_tier": -1,
   "craft_time": 8,

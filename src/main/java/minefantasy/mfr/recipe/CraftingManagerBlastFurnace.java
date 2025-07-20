@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.BlastFurnaceRecipeFactory;
 import minefantasy.mfr.recipe.types.BlastFurnaceRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -29,7 +31,7 @@ public class CraftingManagerBlastFurnace extends CraftingManagerBase<BlastFurnac
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> BLAST_FURNACE_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> BLAST_FURNACE_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerBlastFurnace() {
 		super(new BlastFurnaceRecipeFactory(),
@@ -56,20 +58,20 @@ public class CraftingManagerBlastFurnace extends CraftingManagerBase<BlastFurnac
 			if (subItems.stream().anyMatch(s -> recipe.getBlastFurnaceRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !BLAST_FURNACE_RECIPES.containsKey(recipe.getRegistryName()))) {
 				BLAST_FURNACE_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					BLAST_FURNACE_RESEARCHES.add(requiredResearch);
 				}
 			}
 		}
 	}
 
-	public static BlastFurnaceRecipeBase findMatchingRecipe(ItemStack input, Set<String> knownResearches) {
+	public static BlastFurnaceRecipeBase findMatchingRecipe(ItemStack input, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (BlastFurnaceRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
@@ -107,7 +109,7 @@ public class CraftingManagerBlastFurnace extends CraftingManagerBase<BlastFurnac
 		return BLAST_FURNACE_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getBlastFurnaceResearches() {
+	public static Set<ResearchBase> getBlastFurnaceResearches() {
 		return BLAST_FURNACE_RESEARCHES;
 	}
 }

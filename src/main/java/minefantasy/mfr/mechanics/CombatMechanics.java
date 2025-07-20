@@ -18,15 +18,16 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemBattleaxe;
 import minefantasy.mfr.item.ItemDagger;
 import minefantasy.mfr.item.ItemKatana;
 import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.DodgeCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ParryPacket;
@@ -769,7 +770,8 @@ public class CombatMechanics {
 	private static boolean canEvade(EntityLivingBase user) {
 		float stamModifier = 1.0F;
 		if (user instanceof EntityPlayer) {
-			if (!ResearchLogic.hasInfoUnlocked((EntityPlayer) user, "parry_pro")) {
+			ResearchBase parryProResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:parry_pro", true);
+			if (!ResearchLogic.getResearchCheck((EntityPlayer) user, parryProResearch)) {
 				return false;
 			}
 
@@ -915,7 +917,8 @@ public class CombatMechanics {
 	}
 
 	private static float modifyPlayerDamage(EntityPlayer hit, float dam) {
-		if (ResearchLogic.hasInfoUnlocked(hit, MineFantasyKnowledgeList.toughness)) {
+		ResearchBase toughness = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:toughness", true);
+		if (ResearchLogic.getResearchCheck(hit, toughness)) {
 			dam *= 0.9F;// 10% Resist
 		}
 		return dam;

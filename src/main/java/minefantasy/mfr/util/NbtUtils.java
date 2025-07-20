@@ -1,10 +1,29 @@
 package minefantasy.mfr.util;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.tile.TileEntityBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagByte;
+import net.minecraft.nbt.NBTTagByteArray;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagDouble;
+import net.minecraft.nbt.NBTTagFloat;
+import net.minecraft.nbt.NBTTagInt;
+import net.minecraft.nbt.NBTTagIntArray;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagLong;
+import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class NbtUtils {
 
@@ -63,5 +82,100 @@ public class NbtUtils {
 		}
 
 		return false;
+	}
+
+	public static Set<ResearchBase> deserializeResearches(NBTTagCompound nbt) {
+		Collection<String> researches = NbtUtils
+				.mapNbtTagListToList(nbt.getTagList(TileEntityBase.KNOWN_RESEARCHES_TAG, 8), String.class);
+		return deserializeResearches(researches);
+	}
+
+	public static Set<ResearchBase> deserializeResearches(Collection<String> researches) {
+		return researches.stream()
+				.map(researchKey -> KnowledgeManagerResearch
+						.getResearchByKey(new ResourceLocation(researchKey), true))
+				.collect(Collectors.toSet());
+	}
+
+	public static NBTTagList serializeResearches(Collection<ResearchBase> knownResearches) {
+		return NbtUtils.mapListToNbtTagList(knownResearches
+				.stream()
+				.map(research -> research.getRegistryName().toString())
+				.collect(Collectors.toSet()), 8);
+
+	}
+
+	public static <T> List<T> mapNbtTagListToList(NBTTagList tagList, Class<T> type) {
+		List<T> list = new ArrayList<>();
+		for (int i = 0; i < tagList.tagCount(); i++) {
+			list.add(create(tagList.get(i), type));
+		}
+		return list;
+	}
+
+	public static <T> NBTTagList mapListToNbtTagList(Collection<T> list, int type) {
+		NBTTagList tagList = new NBTTagList();
+		for (T object : list) {
+			NBTBase nbt = create(object, type);
+			if (nbt != null) {
+				tagList.appendTag(nbt);
+			}
+			else {
+				throw new IllegalArgumentException("Could not convert value to NBT");
+			}
+		}
+		return tagList;
+	}
+
+	private static <T> NBTBase create(T value, int type) {
+		switch (type)
+		{
+			case 1:
+				return new NBTTagByte((Byte) value);
+			case 2:
+				return new NBTTagShort((Short) value);
+			case 3:
+				return new NBTTagInt((Integer) value);
+			case 4:
+				return new NBTTagLong((Long) value);
+			case 5:
+				return new NBTTagFloat((Float) value);
+			case 6:
+				return new NBTTagDouble((Double) value);
+			case 7:
+				return new NBTTagByteArray((byte[]) value);
+			case 8:
+				return new NBTTagString((String) value);
+			case 11:
+				return new NBTTagIntArray((int[]) value);
+			default:
+				return null;
+		}
+	}
+
+	private static <T> T create(NBTBase value, Class<T> type) {
+		switch (value.getId())
+		{
+			case 1:
+				return type.cast(((NBTTagByte) value).getByte());
+			case 2:
+				return type.cast(((NBTTagShort) value).getShort());
+			case 3:
+				return type.cast(((NBTTagInt) value).getInt());
+			case 4:
+				return type.cast(((NBTTagLong) value).getLong());
+			case 5:
+				return type.cast(((NBTTagFloat) value).getFloat());
+			case 6:
+				return type.cast(((NBTTagDouble) value).getDouble());
+			case 7:
+				return type.cast(((NBTTagByteArray) value).getByteArray());
+			case 8:
+				return type.cast(((NBTTagString) value).getString());
+			case 11:
+				return type.cast(((NBTTagIntArray) value).getIntArray());
+			default:
+				return null;
+		}
 	}
 }

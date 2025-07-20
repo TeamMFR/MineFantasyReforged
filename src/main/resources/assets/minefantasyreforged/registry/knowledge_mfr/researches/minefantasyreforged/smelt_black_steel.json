@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_black_steel",
+  "parent_researches": [
+    "minefantasyreforged:smelt_steel"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#STEEL_ARTIFACTS"
+    },
+    {
+      "item": "#BRONZE_ARTIFACTS"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 50
+    }
+  ]
+}

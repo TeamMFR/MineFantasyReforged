@@ -7,7 +7,9 @@ import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -98,7 +100,8 @@ public class ItemBandage extends ItemBaseMFR {
 		}
 		if (player instanceof EntityPlayer){
 			int time = 0;
-			if (ResearchLogic.hasInfoUnlocked((EntityPlayer) player, "first_aid")) {
+			ResearchBase firstAidResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:first_aid", true);
+			if (ResearchLogic.getResearchCheck((EntityPlayer) player, firstAidResearch)) {
 				time = getMaxItemUseDuration(stack) / 3;
 			}
 			if (count == time){
@@ -130,7 +133,8 @@ public class ItemBandage extends ItemBaseMFR {
 
 				if (!player.world.isRemote) {
 					float power = healPower;
-					if (ResearchLogic.hasInfoUnlocked(player, "doctor")) {
+					ResearchBase doctorResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:doctor", true);
+					if (ResearchLogic.getResearchCheck(player, doctorResearch)) {
 						power *= 1.5F;
 					}
 					toHeal.heal(power);
@@ -153,7 +157,8 @@ public class ItemBandage extends ItemBaseMFR {
 
 	public boolean isReadyToHeal(EntityPlayer player, EntityLivingBase patient) {
 		int time = getUserHealTime(patient) + 1;
-		if (ResearchLogic.hasInfoUnlocked(player, "first_aid")) {
+		ResearchBase firstAidResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:first_aid", true);
+		if (ResearchLogic.getResearchCheck(player, firstAidResearch)) {
 			time += 3;
 		}
 		patient.playSound(SoundEvents.BLOCK_CLOTH_BREAK, 1F, 0.005F);

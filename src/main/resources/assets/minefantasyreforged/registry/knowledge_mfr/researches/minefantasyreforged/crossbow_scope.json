@@ -1,0 +1,20 @@
+{
+  "type": "artifact_research",
+  "name": "crossbow_scope",
+  "parent_researches": [
+    "minefantasyreforged:crossbow"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:spyglass",
+      "data": 0
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 20
+    }
+  ]
+}

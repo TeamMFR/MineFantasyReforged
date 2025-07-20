@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "crossbow_bayonet",
+  "parent_researches": [
+    "minefantasyreforged:crossbow"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:standard_dagger"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 10
+    }
+  ]
+}

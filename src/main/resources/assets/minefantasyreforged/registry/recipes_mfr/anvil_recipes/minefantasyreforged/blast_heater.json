@@ -1,7 +1,7 @@
 {
   "type": "anvil_shaped_recipe",
   "skill": "artisanry",
-  "research": "blast_furnace",
+  "research": "minefantasyreforged:blast_furnace",
   "tool_type": "heavy_hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

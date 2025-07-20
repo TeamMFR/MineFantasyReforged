@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_encrusted",
+  "parent_researches": [
+    "minefantasyreforged:smelt_steel"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "#STEEL_ARTIFACTS"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 35
+    }
+  ]
+}

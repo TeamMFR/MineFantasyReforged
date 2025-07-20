@@ -3,7 +3,9 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.TransformationRecipeFactory;
 import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.TransformationRecipeType;
@@ -133,9 +135,9 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 
 		// Check Player can change block and has Recipe Research unlocked
 		if (player.canPlayerEdit(pos, facing, tool)) {
-			String requiredResearch = recipe.getRequiredResearch();
-			if (requiredResearch.equals("none")
-					|| ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(requiredResearch))) {
+			ResearchBase requiredResearch = recipe.getRequiredResearch();
+			if (requiredResearch == KnowledgeManagerResearch.NONE
+					|| ResearchLogic.getResearchCheck(player, requiredResearch)) {
 				Ingredient offhand = recipe.getOffhandStack();
 				// Check if the offhand stack is in the offhand slot or bypass if empty
 				if (offhand == Ingredient.EMPTY || offhand.apply(player.getHeldItemOffhand())) {

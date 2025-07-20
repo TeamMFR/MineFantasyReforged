@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "firebomb",
+  "parent_researches": [
+    "minefantasyreforged:shrapnel"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:dragon_heart"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 85
+    }
+  ]
+}

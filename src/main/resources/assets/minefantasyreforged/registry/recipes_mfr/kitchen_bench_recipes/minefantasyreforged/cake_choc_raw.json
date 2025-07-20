@@ -1,7 +1,7 @@
 {
   "type": "kitchen_bench_shaped_recipe",
   "skill": "provisioning",
-  "research": "chocolate_cake",
+  "research": "minefantasyreforged:chocolate_cake",
   "tool_type": "spoon",
   "block_tier": -1,
   "craft_time": 25,

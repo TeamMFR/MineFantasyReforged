@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import net.minecraft.item.ItemStack;
@@ -25,13 +26,13 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 	protected float vanillaXp;
 	protected final Tool toolType;
 	protected final SoundEvent soundOfCraft;
-	protected final String research;
+	protected final ResearchBase research;
 	protected final Skill skillUsed;
 
 	public CarpenterRecipeBase(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float recipeExperience, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed) {
+			ResearchBase research, Skill skillUsed) {
 		this.output = output;
 		this.inputs = inputs;
 		this.toolTier = toolTier;
@@ -115,7 +116,7 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 	}
 
 	@Override
-	public String getRequiredResearch() {
+	public ResearchBase getRequiredResearch() {
 		return research;
 	}
 

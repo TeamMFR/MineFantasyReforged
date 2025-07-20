@@ -88,6 +88,8 @@ import minefantasy.mfr.item.ItemWashCloth;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
@@ -1403,7 +1405,8 @@ public class MineFantasyItems {
 		RandomOre.addOre(new ItemStack(ORE_SILVER), 1.5F, "stone", 0, 0, 32, false);
 		RandomOre.addOre(new ItemStack(ORE_GOLD), 1F, "stone", 0, 0, 32, false);
 
-		RandomOre.addOre(new ItemStack(ORE_TUNGSTEN), 2F, "stone", 3, 0, 16, false, "tungsten");
+		ResearchBase tungstenResearch = KnowledgeManagerResearch.getResearchByKey("minefantasyreforged:tungsten", true);
+		RandomOre.addOre(new ItemStack(ORE_TUNGSTEN), 2F, "stone", 3, 0, 16, false, tungstenResearch);
 	}
 
 	public static ItemStack bar(String material) {

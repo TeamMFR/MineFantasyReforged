@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public class CarpenterShapedRecipe extends CarpenterRecipeBase {
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, boolean shouldMirror,
+			ResearchBase research, Skill skillUsed, boolean shouldMirror,
 			int width, int height) {
 		super(output, inputs, toolTier, carpenterTier, craftTime,
 				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);

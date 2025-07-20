@@ -1,0 +1,19 @@
+{
+  "type": "artifact_research",
+  "name": "smelt_bronze",
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "#TIN_ARTIFACTS"
+    },
+    {
+      "item": "#COPPER_ARTIFACTS"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 5
+    }
+  ]
+}

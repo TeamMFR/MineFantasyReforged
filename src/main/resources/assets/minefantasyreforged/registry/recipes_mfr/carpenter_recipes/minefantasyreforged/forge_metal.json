@@ -1,7 +1,7 @@
 {
   "type": "carpenter_shaped_recipe",
   "skill": "engineering",
-  "research": "advanced_forge",
+  "research": "minefantasyreforged:advanced_forge",
   "tool_type": "spanner",
   "is_tool_recipe": false,
   "block_tier": -1,

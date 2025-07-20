@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "shepard_pie",
+  "parent_researches": [
+    "minefantasyreforged:meatpie"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#GENERIC_MEAT_UNCOOKED"
+    },
+    {
+      "item": "minefantasyreforged:pastry"
+    },
+    {
+      "item": "minecraft:potato"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 80
+    }
+  ]
+}

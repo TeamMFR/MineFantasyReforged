@@ -1,6 +1,6 @@
 {
 	"type": "blast_furnace_recipe",
-	"research": "smelt_red_steel",
+	"research": "minefantasyreforged:smelt_red_steel",
 	"skill": "artisanry",
 	"skill_xp": 1,
 	"vanilla_xp": 0.7,

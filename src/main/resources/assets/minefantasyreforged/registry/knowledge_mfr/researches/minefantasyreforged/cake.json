@@ -1,0 +1,22 @@
+{
+  "type": "artifact_research",
+  "name": "cake",
+  "parent_researches": [
+    "minefantasyreforged:sweetroll"
+  ],
+  "required_artifact_count": 2,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:flour"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "provisioning",
+      "required_skill_level": 25
+    }
+  ]
+}

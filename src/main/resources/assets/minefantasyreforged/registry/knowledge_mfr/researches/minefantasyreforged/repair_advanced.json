@@ -1,0 +1,25 @@
+{
+  "type": "artifact_research",
+  "name": "repair_advanced",
+  "parent_researches": [
+    "minefantasyreforged:repair_basic"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:repair_kit_basic"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "minecraft:string"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 25
+    }
+  ]
+}

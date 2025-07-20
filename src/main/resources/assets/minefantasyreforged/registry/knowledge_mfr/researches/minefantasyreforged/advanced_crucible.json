@@ -1,0 +1,23 @@
+{
+  "type": "artifact_research",
+  "name": "advanced_crucible",
+  "parent_researches": [
+    "minefantasyreforged:engineering_tanner"
+  ],
+  "required_artifact_count": 1,
+  "artifacts": [
+    {
+      "item": "minefantasyreforged:schematic_forge"
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "engineering",
+      "required_skill_level": 50
+    },
+    {
+      "skill": "artisanry",
+      "required_skill_level": 35
+    }
+  ]
+}

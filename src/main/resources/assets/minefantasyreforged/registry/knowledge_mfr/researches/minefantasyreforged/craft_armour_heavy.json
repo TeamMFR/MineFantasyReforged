@@ -1,0 +1,26 @@
+{
+  "type": "artifact_research",
+  "name": "craft_armour_heavy",
+  "parent_researches": [
+    "minefantasyreforged:craft_armour_medium"
+  ],
+  "required_artifact_count": 3,
+  "artifacts": [
+    {
+      "item": "#ALL_PLATES"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  ],
+  "skill_requirements": [
+    {
+      "skill": "artisanry",
+      "required_skill_level": 15
+    }
+  ]
+}

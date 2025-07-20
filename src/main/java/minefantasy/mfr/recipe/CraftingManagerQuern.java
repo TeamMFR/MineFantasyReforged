@@ -3,6 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.knowledge.ResearchBase;
 import minefantasy.mfr.recipe.factories.QuernRecipeFactory;
 import minefantasy.mfr.recipe.types.QuernRecipeType;
 import minefantasy.mfr.recipe.types.RecipeType;
@@ -29,7 +31,7 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 					.disableSaving()
 					.allowModification()
 					.create();
-	private static final Set<String> QUERN_RESEARCHES = new HashSet<>();
+	private static final Set<ResearchBase> QUERN_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerQuern() {
 		super(new QuernRecipeFactory(),
@@ -56,20 +58,20 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 			if (subItems.stream().anyMatch(s -> recipe.getQuernRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !QUERN_RECIPES.containsKey(recipe.getRegistryName()))) {
 				QUERN_RECIPES.register(recipe);
-				String requiredResearch = recipe.getRequiredResearch();
-				if (!requiredResearch.equals("none")) {
+				ResearchBase requiredResearch = recipe.getRequiredResearch();
+				if (requiredResearch != KnowledgeManagerResearch.NONE) {
 					QUERN_RESEARCHES.add(requiredResearch);
 				}
 			}
 		}
 	}
 
-	public static QuernRecipeBase findMatchingRecipe(ItemStack input, ItemStack potInput, Set<String> knownResearches) {
+	public static QuernRecipeBase findMatchingRecipe(ItemStack input, ItemStack potInput, Set<ResearchBase> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (QuernRecipeBase rec : getRecipes()) {
 			if (rec.matches(input, potInput)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return rec;
 				}
@@ -78,10 +80,10 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 		return null;
 	}
 
-	public static boolean findMatchingInputs(ItemStack input, Set<String> knownResearches) {
+	public static boolean findMatchingInputs(ItemStack input, Set<ResearchBase> knownResearches) {
 		for (QuernRecipeBase rec : getRecipes()) {
 			if (rec.inputMatches(input)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return true;
 				}
@@ -90,10 +92,10 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 		return false;
 	}
 
-	public static boolean findMatchingPotInputs(ItemStack potInputs, Set<String> knownResearches) {
+	public static boolean findMatchingPotInputs(ItemStack potInputs, Set<ResearchBase> knownResearches) {
 		for (QuernRecipeBase rec : getRecipes()) {
 			if (rec.inputPotMatches(potInputs)) {
-				if (rec.getRequiredResearch().equals("none")
+				if (rec.getRequiredResearch() == KnowledgeManagerResearch.NONE
 						|| knownResearches.contains(rec.getRequiredResearch())) {
 					return true;
 				}
@@ -131,7 +133,7 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 		return QUERN_RECIPES.getValue(resourceLocation);
 	}
 
-	public static Set<String> getQuernResearches() {
+	public static Set<ResearchBase> getQuernResearches() {
 		return QUERN_RESEARCHES;
 	}
 }
