@@ -7,7 +7,8 @@
         {
             "name": "willow_wood",
             "materialIngredient": {
-                "item": "pvj:planks_willow"
+                "item": "pvj:planks_willow",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -29,7 +30,8 @@
         {
             "name": "mangrove_wood",
             "materialIngredient": {
-                "item": "pvj:planks_mangrove"
+                "item": "pvj:planks_mangrove",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -51,7 +53,8 @@
         {
             "name": "palm_wood",
             "materialIngredient": {
-                "item": "pvj:planks_palm"
+                "item": "pvj:planks_palm",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -73,7 +76,8 @@
         {
             "name": "redwood_wood",
             "materialIngredient": {
-                "item": "pvj:planks_redwood"
+                "item": "pvj:planks_redwood",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -95,7 +99,8 @@
         {
             "name": "fir_wood",
             "materialIngredient": {
-                "item": "pvj:planks_fir"
+                "item": "pvj:planks_fir",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -117,7 +122,8 @@
         {
             "name": "pine_wood",
             "materialIngredient": {
-                "item": "pvj:planks_pine"
+                "item": "pvj:planks_pine",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -139,7 +145,8 @@
         {
             "name": "aspen_wood",
             "materialIngredient": {
-                "item": "pvj:planks_aspen"
+                "item": "pvj:planks_aspen",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -161,7 +168,8 @@
         {
             "name": "maple_wood",
             "materialIngredient": {
-                "item": "pvj:planks_maple"
+                "item": "pvj:planks_maple",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -183,7 +191,8 @@
         {
             "name": "baobab_wood",
             "materialIngredient": {
-                "item": "pvj:planks_baobab"
+                "item": "pvj:planks_baobab",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -205,7 +214,8 @@
         {
             "name": "cottonwood_wood",
             "materialIngredient": {
-                "item": "pvj:planks_cottonwood"
+                "item": "pvj:planks_cottonwood",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -227,7 +237,8 @@
         {
             "name": "pale_juniper_wood",
             "materialIngredient": {
-                "item": "pvj:planks_juniper"
+                "item": "pvj:planks_juniper",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -249,7 +260,8 @@
         {
             "name": "pale_cherry_wood",
             "materialIngredient": {
-                "item": "pvj:planks_cherry_blossom"
+                "item": "pvj:planks_cherry_blossom",
+                "data": 0
             },
             "properties": {
                 "tier": 1,
@@ -271,7 +283,8 @@
         {
             "name": "jacaranda_wood",
             "materialIngredient": {
-                "item": "pvj:planks_jacaranda"
+                "item": "pvj:planks_jacaranda",
+                "data": 0
             },
             "properties": {
                 "tier": 1,

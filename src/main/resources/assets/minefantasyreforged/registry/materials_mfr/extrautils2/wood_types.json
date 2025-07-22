@@ -53,7 +53,8 @@
         {
             "name": "magical_wood",
             "materialIngredient": {
-                "item": "extrautils2:decorativesolidwood"
+                "item": "extrautils2:decorativesolidwood",
+                "data": 0
             },
             "properties": {
                 "tier": 2,

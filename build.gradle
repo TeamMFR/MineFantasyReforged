@@ -8,11 +8,10 @@ buildscript {
             name 'MinecraftForge'
             url 'https://maven.minecraftforge.net/'
         }
-        maven {
-            name 'Garden of Fancy'
-            url 'https://maven.gofancy.wtf/releases'
-        }
         //fallback for fancygradle maven
+        maven {
+            url 'https://gitlab.com/api/v4/projects/70917004/packages/maven'
+        }
         //mavenLocal()
         maven {
             name 'Sponge'

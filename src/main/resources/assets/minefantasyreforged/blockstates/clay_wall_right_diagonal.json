@@ -2,9 +2,9 @@
     "forge_marker": 1,
     "defaults": {
         "textures": {
-            "all": "minefantasyreforged:blocks/clay_wall_right_diagonal"
+            "texture": "minefantasyreforged:blocks/clay_wall_right_diagonal"
         },
-        "model": "cube_all"
+        "model": "minefantasyreforged:opposite_sides_mirrored"
     },
     "variants": {
         "normal": [{}]

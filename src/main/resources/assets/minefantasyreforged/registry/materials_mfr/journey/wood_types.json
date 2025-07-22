@@ -26,7 +26,7 @@
         {
             "name": "golden_euca_wood",
             "materialIngredient": {
-                "item": "journey:goldeneucaplank"
+                "item": "journey:goldeucaplank"
             },
             "properties": {
                 "tier": 3,
@@ -35,7 +35,7 @@
                 "flexibility": 3.5,
                 "resistance": 50,
                 "density": 0.9,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 3,
                 "craft_time_modifier": 5.0
             },
