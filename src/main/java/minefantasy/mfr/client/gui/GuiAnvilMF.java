@@ -3,7 +3,7 @@ package minefantasy.mfr.client.gui;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.recipe.AnvilRecipeBase;
+import minefantasy.mfr.registry.recipe.AnvilRecipeBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;

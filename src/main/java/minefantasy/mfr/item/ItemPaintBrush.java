@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.item.ItemStack;

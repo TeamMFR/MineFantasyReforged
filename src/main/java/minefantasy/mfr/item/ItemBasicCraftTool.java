@@ -11,7 +11,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;

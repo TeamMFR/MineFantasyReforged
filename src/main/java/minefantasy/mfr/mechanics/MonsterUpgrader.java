@@ -4,7 +4,7 @@ import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.EntityLivingBase;

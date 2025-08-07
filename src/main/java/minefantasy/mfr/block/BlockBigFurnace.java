@@ -7,7 +7,7 @@ import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
+import minefantasy.mfr.registry.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;

@@ -6,6 +6,7 @@ import minefantasy.mfr.commands.CommandMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigCrafting;
+import minefantasy.mfr.config.ConfigCustomMaterial;
 import minefantasy.mfr.config.ConfigFarming;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigIntegration;
@@ -26,28 +27,28 @@ import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyOreDict;
-import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
-import minefantasy.mfr.recipe.BlockedRecipeManager;
-import minefantasy.mfr.recipe.CraftingManagerAlloy;
-import minefantasy.mfr.recipe.CraftingManagerAnvil;
-import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
-import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
-import minefantasy.mfr.recipe.CraftingManagerBloomery;
-import minefantasy.mfr.recipe.CraftingManagerCarpenter;
-import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
-import minefantasy.mfr.recipe.CraftingManagerQuern;
-import minefantasy.mfr.recipe.CraftingManagerRoast;
-import minefantasy.mfr.recipe.CraftingManagerSalvage;
-import minefantasy.mfr.recipe.CraftingManagerSpecial;
-import minefantasy.mfr.recipe.CraftingManagerTanner;
-import minefantasy.mfr.recipe.CraftingManagerTransformation;
-import minefantasy.mfr.recipe.RecipeRemover;
-import minefantasy.mfr.recipe.ingredients.IngredientCount;
-import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
-import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.MetalMaterial;
+import minefantasy.mfr.registry.recipe.BlockedRecipeManager;
+import minefantasy.mfr.registry.recipe.CraftingManagerAlloy;
+import minefantasy.mfr.registry.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.registry.recipe.CraftingManagerBigFurnace;
+import minefantasy.mfr.registry.recipe.CraftingManagerBlastFurnace;
+import minefantasy.mfr.registry.recipe.CraftingManagerBloomery;
+import minefantasy.mfr.registry.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.registry.recipe.CraftingManagerKitchenBench;
+import minefantasy.mfr.registry.recipe.CraftingManagerQuern;
+import minefantasy.mfr.registry.recipe.CraftingManagerRoast;
+import minefantasy.mfr.registry.recipe.CraftingManagerSalvage;
+import minefantasy.mfr.registry.recipe.CraftingManagerSpecial;
+import minefantasy.mfr.registry.recipe.CraftingManagerTanner;
+import minefantasy.mfr.registry.recipe.CraftingManagerTransformation;
+import minefantasy.mfr.registry.recipe.RecipeRemover;
+import minefantasy.mfr.registry.recipe.ingredients.IngredientCount;
+import minefantasy.mfr.registry.recipe.ingredients.IngredientMaterial;
+import minefantasy.mfr.registry.recipe.ingredients.IngredientOreCount;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenGeological;
 import minefantasy.mfr.world.gen.structure.WorldGenStructure;
@@ -113,6 +114,7 @@ public class MineFantasyReforged {
 	private static ConfigFarming configFarming;
 	private static ConfigWorldGen configWorldGen;
 	public static ConfigCrafting configCrafting;
+	public static ConfigCustomMaterial configCustomMaterial;
 	private static ConfigMobs configMobs;
 
 	public static final Logger LOG = LogManager.getLogger(MOD_ID);
@@ -146,6 +148,7 @@ public class MineFantasyReforged {
 		configFarming = new ConfigFarming("Farming");
 		configWorldGen = new ConfigWorldGen("WorldGen");
 		configCrafting = new ConfigCrafting("Crafting");
+		configCustomMaterial = new ConfigCustomMaterial("Custom_Materials");
 		configMobs = new ConfigMobs("Mobs");
 
 		PlayerData.register();
@@ -248,6 +251,7 @@ public class MineFantasyReforged {
 		configFarming.save();
 		configWorldGen.save();
 		configCrafting.save();
+		configCustomMaterial.save();
 		configMobs.save();
 
 		PROXY.postInit(postEvent);
@@ -308,6 +312,7 @@ public class MineFantasyReforged {
 			configFarming.save();
 			configWorldGen.save();
 			configCrafting.save();
+			configCustomMaterial.save();
 			configMobs.save();
 		}
 	}

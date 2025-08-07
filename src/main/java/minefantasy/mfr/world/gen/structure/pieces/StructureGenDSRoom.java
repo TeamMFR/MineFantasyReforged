@@ -10,7 +10,7 @@ import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemMine;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import minefantasy.mfr.world.gen.structure.WorldGenDwarvenStronghold;

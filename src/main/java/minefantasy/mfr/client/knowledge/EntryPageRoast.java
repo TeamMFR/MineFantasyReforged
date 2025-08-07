@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.RoastRecipeBase;
+import minefantasy.mfr.registry.recipe.RoastRecipeBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

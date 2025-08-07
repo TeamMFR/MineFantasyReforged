@@ -5,7 +5,7 @@ import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.recipe.CraftingManagerBloomery;
+import minefantasy.mfr.registry.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

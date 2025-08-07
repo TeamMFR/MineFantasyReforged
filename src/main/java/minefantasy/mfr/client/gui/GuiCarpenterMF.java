@@ -2,7 +2,7 @@ package minefantasy.mfr.client.gui;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.registry.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;

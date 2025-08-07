@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.constants.Rarity;
-import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.registry.material.BaseMaterial;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

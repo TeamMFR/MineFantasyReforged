@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
-import minefantasy.mfr.recipe.TannerRecipeBase;
+import minefantasy.mfr.registry.recipe.TannerRecipeBase;
 import minefantasy.mfr.util.GuiHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

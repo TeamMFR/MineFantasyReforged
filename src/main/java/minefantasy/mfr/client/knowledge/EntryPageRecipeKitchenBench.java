@@ -1,9 +1,9 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
-import minefantasy.mfr.recipe.KitchenBenchShapedRecipe;
-import minefantasy.mfr.recipe.KitchenBenchShapelessRecipe;
+import minefantasy.mfr.registry.recipe.KitchenBenchRecipeBase;
+import minefantasy.mfr.registry.recipe.KitchenBenchShapedRecipe;
+import minefantasy.mfr.registry.recipe.KitchenBenchShapelessRecipe;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;

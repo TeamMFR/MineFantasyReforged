@@ -1,10 +1,10 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.constants.Rarity;
-import minefantasy.mfr.material.BaseMaterial;
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.BaseMaterial;
+import minefantasy.mfr.registry.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import net.minecraft.item.crafting.Ingredient;
 
 public class MineFantasyMaterials {

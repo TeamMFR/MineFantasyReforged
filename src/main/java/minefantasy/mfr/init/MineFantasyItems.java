@@ -88,7 +88,7 @@ import minefantasy.mfr.item.ItemWashCloth;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
-import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.registry.material.BaseMaterial;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;

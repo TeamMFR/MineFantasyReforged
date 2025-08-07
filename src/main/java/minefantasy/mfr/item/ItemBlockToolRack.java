@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;

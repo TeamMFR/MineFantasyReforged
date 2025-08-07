@@ -1,5 +1,5 @@
 {
     "conditions": {
-        "hccremovebookcrafts": "minefantasy.mfr.recipe.factories.HCCremoveBookCrafts"
+        "hccremovebookcrafts": "minefantasy.mfr.registry.recipe.factories.HCCremoveBookCrafts"
     }
 }

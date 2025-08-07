@@ -4,7 +4,7 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
-import minefantasy.mfr.recipe.RoastRecipeBase;
+import minefantasy.mfr.registry.recipe.RoastRecipeBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 

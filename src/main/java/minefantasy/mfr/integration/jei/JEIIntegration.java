@@ -18,7 +18,7 @@ import mezz.jei.startup.StackHelper;
 import minefantasy.mfr.config.ConfigIntegration;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
+import minefantasy.mfr.registry.recipe.ingredients.IngredientMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

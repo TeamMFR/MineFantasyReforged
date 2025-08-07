@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.recipe.CraftingManagerTanner;
+import minefantasy.mfr.registry.recipe.CraftingManagerTanner;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

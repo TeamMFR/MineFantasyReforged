@@ -1,7 +1,7 @@
 package minefantasy.mfr.api.heating;
 
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.item.ItemStack;

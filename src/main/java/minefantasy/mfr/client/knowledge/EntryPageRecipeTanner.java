@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.TannerRecipeBase;
+import minefantasy.mfr.registry.recipe.TannerRecipeBase;
 import minefantasy.mfr.util.GuiHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;

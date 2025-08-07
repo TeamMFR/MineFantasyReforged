@@ -1,8 +1,8 @@
 package minefantasy.mfr.commands;
 
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;

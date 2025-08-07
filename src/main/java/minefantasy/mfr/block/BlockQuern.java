@@ -7,7 +7,7 @@ import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.registry.recipe.CraftingManagerQuern;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -3,8 +3,8 @@ package minefantasy.mfr.integration.jei;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IStackHelper;
-import minefantasy.mfr.recipe.AlloyRatioRecipe;
-import minefantasy.mfr.recipe.AlloyRecipeBase;
+import minefantasy.mfr.registry.recipe.AlloyRatioRecipe;
+import minefantasy.mfr.registry.recipe.AlloyRecipeBase;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.item.ItemStack;
 

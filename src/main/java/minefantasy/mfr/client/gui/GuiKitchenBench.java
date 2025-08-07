@@ -3,7 +3,7 @@ package minefantasy.mfr.client.gui;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
+import minefantasy.mfr.registry.recipe.KitchenBenchRecipeBase;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;
