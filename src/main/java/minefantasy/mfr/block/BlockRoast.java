@@ -1,9 +1,9 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.knowledge.ResearchBase;
-import minefantasy.mfr.knowledge.ResearchLogic;
-import minefantasy.mfr.recipe.CraftingManagerRoast;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.knowledge.ResearchLogic;
+import minefantasy.mfr.registry.recipe.CraftingManagerRoast;
 import minefantasy.mfr.tile.TileEntityRoast;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.knowledge.ResearchLogic;
+import minefantasy.mfr.registry.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.BlockHorizontal;

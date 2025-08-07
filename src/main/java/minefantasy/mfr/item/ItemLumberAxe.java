@@ -4,8 +4,8 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.constants.Rarity;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaMechanics;
+import minefantasy.mfr.registry.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -39,7 +39,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
+import static minefantasy.mfr.registry.material.CustomMaterialRegistry.DECIMAL_FORMAT;
 
 public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	private final Random rand = new Random();

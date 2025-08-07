@@ -7,7 +7,7 @@ import minefantasy.mfr.client.model.block.ModelAmmoBox;
 import minefantasy.mfr.client.model.block.ModelFoodBox;
 import minefantasy.mfr.client.model.block.ModelSmallCrate;
 import minefantasy.mfr.item.ItemBlockAmmoBox;
-import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.state.IBlockState;

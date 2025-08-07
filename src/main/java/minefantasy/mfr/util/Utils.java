@@ -17,11 +17,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
 public class Utils {
+
+	@SuppressWarnings("rawtypes")
+	private static final LinkedList EMPTY_LIST = new LinkedList();
 
 	public Utils() {
 		throw new IllegalStateException("Util class cannot be instantiated");
@@ -29,6 +33,10 @@ public class Utils {
 
 	public static <T> T nullValue() {
 		return null;
+	}
+
+	public static <T> LinkedList<T> emptyLinkedList() {
+		return (LinkedList<T>) EMPTY_LIST;
 	}
 
 	public static boolean doesMatch(ItemStack item1, ItemStack item2) {

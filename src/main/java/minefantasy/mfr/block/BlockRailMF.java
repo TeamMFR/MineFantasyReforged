@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.registry.material.BaseMaterial;
 import net.minecraft.block.BlockRail;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.EntityMinecart;

@@ -2,12 +2,12 @@ package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.recipe.AnvilDynamicRecipe;
-import minefantasy.mfr.recipe.AnvilRecipeBase;
-import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
-import minefantasy.mfr.recipe.AnvilShapedRecipe;
-import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
-import minefantasy.mfr.recipe.AnvilShapelessRecipe;
+import minefantasy.mfr.registry.recipe.AnvilDynamicRecipe;
+import minefantasy.mfr.registry.recipe.AnvilRecipeBase;
+import minefantasy.mfr.registry.recipe.AnvilShapedCustomMaterialRecipe;
+import minefantasy.mfr.registry.recipe.AnvilShapedRecipe;
+import minefantasy.mfr.registry.recipe.AnvilShapelessCustomMaterialRecipe;
+import minefantasy.mfr.registry.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;

@@ -2,8 +2,8 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.init.MineFantasyMaterials;
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterial;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 

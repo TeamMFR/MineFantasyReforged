@@ -1,6 +1,6 @@
 package minefantasy.mfr.container.slots;
 
-import minefantasy.mfr.recipe.IRecipeMFR;
+import minefantasy.mfr.registry.recipe.IRecipeMFR;
 import minefantasy.mfr.tile.TileEntityBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

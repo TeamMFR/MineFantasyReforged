@@ -1,7 +1,7 @@
 package minefantasy.mfr.api.mining;
 
-import minefantasy.mfr.knowledge.ResearchBase;
-import minefantasy.mfr.knowledge.ResearchLogic;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.knowledge.ResearchLogic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

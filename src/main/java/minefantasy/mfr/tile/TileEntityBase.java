@@ -2,7 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.recipe.IRecipeMFR;
+import minefantasy.mfr.registry.recipe.IRecipeMFR;
 import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

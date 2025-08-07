@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityComponent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

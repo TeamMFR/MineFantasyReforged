@@ -5,7 +5,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
+import minefantasy.mfr.registry.recipe.BlastFurnaceRecipeBase;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 

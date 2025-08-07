@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.AlloyRatioRecipe;
-import minefantasy.mfr.recipe.AlloyRecipeBase;
+import minefantasy.mfr.registry.recipe.AlloyRatioRecipe;
+import minefantasy.mfr.registry.recipe.AlloyRecipeBase;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;

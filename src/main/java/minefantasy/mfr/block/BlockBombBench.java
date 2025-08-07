@@ -1,9 +1,9 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
-import minefantasy.mfr.knowledge.ResearchBase;
-import minefantasy.mfr.knowledge.ResearchLogic;
+import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityBombBench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

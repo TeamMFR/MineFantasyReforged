@@ -50,6 +50,7 @@ import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.mechanics.ExtendedReach;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
+import minefantasy.mfr.registry.knowledge.KnowledgeManagerKnowledgeBook;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityBellows;
@@ -89,6 +90,8 @@ import java.util.Map;
  */
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends ClientProxyBase {
+
+	public static final KnowledgeManagerKnowledgeBook KNOWLEDGE_MANAGER_KNOWLEDGE_BOOK = new KnowledgeManagerKnowledgeBook();
 
 	/** Static particle factory map */
 	private static final Map<ResourceLocation, CustomParticle.ICustomParticleFactory> factories = new HashMap<>();
@@ -144,6 +147,9 @@ public class ClientProxy extends ClientProxyBase {
 		super.postInit(e);
 		MineFantasyReforgedAPI.init();
 		KnowledgePageRegistry.registerPages();
+		KNOWLEDGE_MANAGER_KNOWLEDGE_BOOK.loadKnowledgeBookCategories();
+		KNOWLEDGE_MANAGER_KNOWLEDGE_BOOK.loadKnowledgeBookEntries();
+		KNOWLEDGE_MANAGER_KNOWLEDGE_BOOK.addKnowledgeBookParentEntries();
 	}
 
 	@Override

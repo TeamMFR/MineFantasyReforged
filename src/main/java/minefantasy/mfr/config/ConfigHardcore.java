@@ -3,8 +3,7 @@ package minefantasy.mfr.config;
 import minefantasy.mfr.api.heating.Heatable;
 public class ConfigHardcore extends ConfigurationBaseMF {
 	public static final String CATEGORY_CRAFTING = "1: HARDCORE CRAFTING";
-	public static final String CATEGORY_RESEARCH = "2: Research";
-	public static final String CATEGORY_FOOD = "3: Cooking and Hunting";
+	public static final String CATEGORY_FOOD = "2: Cooking and Hunting";
 	public static boolean HCCreduceIngots = true;
 	public static boolean HCChotBurn = true;
 	public static boolean HCCWeakItems = true;
@@ -33,7 +32,6 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	@Override
 	protected void initializeCategories() {
 		config.addCustomCategoryComment(CATEGORY_CRAFTING, "Controls Hardcore crafting settings. (NO LONGER HANDLES MFR RECIPE DISABLING, SEE CRAFTING CONFIG");
-		config.addCustomCategoryComment(CATEGORY_RESEARCH, "Controls Research settings");
 		config.addCustomCategoryComment(CATEGORY_FOOD, "Controls Food and Hunting settings");
 	}
 

@@ -1,8 +1,8 @@
 package minefantasy.mfr.util;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.knowledge.KnowledgeManagerResearch;
-import minefantasy.mfr.knowledge.ResearchBase;
+import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
 import minefantasy.mfr.tile.TileEntityBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;

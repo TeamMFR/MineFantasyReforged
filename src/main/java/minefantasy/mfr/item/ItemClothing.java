@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.constants.Rarity;
-import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.registry.material.BaseMaterial;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

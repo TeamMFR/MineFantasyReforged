@@ -5,7 +5,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
 import minefantasy.mfr.client.knowledge.EntryPageCrucible;
-import minefantasy.mfr.recipe.AlloyRecipeBase;
+import minefantasy.mfr.registry.recipe.AlloyRecipeBase;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;

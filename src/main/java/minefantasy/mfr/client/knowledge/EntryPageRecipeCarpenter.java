@@ -1,12 +1,12 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
-import minefantasy.mfr.recipe.CarpenterRecipeBase;
-import minefantasy.mfr.recipe.CarpenterShapedCustomMaterialRecipe;
-import minefantasy.mfr.recipe.CarpenterShapedRecipe;
-import minefantasy.mfr.recipe.CarpenterShapelessCustomMaterialRecipe;
-import minefantasy.mfr.recipe.CarpenterShapelessRecipe;
+import minefantasy.mfr.registry.recipe.CarpenterDynamicRecipe;
+import minefantasy.mfr.registry.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.registry.recipe.CarpenterShapedCustomMaterialRecipe;
+import minefantasy.mfr.registry.recipe.CarpenterShapedRecipe;
+import minefantasy.mfr.registry.recipe.CarpenterShapelessCustomMaterialRecipe;
+import minefantasy.mfr.registry.recipe.CarpenterShapelessRecipe;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;

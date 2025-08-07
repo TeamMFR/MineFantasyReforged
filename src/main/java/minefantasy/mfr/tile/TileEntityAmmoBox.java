@@ -11,7 +11,7 @@ import minefantasy.mfr.item.ItemSyringe;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.network.AmmoBoxCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

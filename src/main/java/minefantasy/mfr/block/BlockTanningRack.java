@@ -2,10 +2,10 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.knowledge.ResearchBase;
-import minefantasy.mfr.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.recipe.CraftingManagerTanner;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.knowledge.ResearchLogic;
+import minefantasy.mfr.registry.recipe.CraftingManagerTanner;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;

@@ -34,7 +34,7 @@ public class ConfigResearch extends ConfigurationBaseMF{
 	}
 
 	public static boolean isResearchEnabled(ResourceLocation key) {
-		//Checks if the given Recipe should load default researches.
+		//Checks if the given Research should be loaded by default.
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = String.valueOf(key);
 		return get().getBoolean(name, CATEGORY_RESEARCH, true, "");
