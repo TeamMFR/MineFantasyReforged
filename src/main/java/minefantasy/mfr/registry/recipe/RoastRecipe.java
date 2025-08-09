@@ -1,6 +1,7 @@
 package minefantasy.mfr.registry.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.registry.knowledge.ResearchBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -10,7 +11,7 @@ public class RoastRecipe extends RoastRecipeBase {
 			ItemStack output, NonNullList<Ingredient> inputs,
 			ItemStack burntOutput, int minTemperature, int maxTemperature,
 			int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe,
-			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		super(output, inputs, burntOutput, minTemperature, maxTemperature, cookTime, burnTime,
 				canBurn, isOvenRecipe, requiredResearch, skill, skillXp, vanillaXp);
 	}

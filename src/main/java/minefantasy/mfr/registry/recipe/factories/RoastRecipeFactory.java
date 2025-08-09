@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.recipe.RoastRecipe;
 import minefantasy.mfr.registry.recipe.RoastRecipeBase;
 import minefantasy.mfr.registry.recipe.types.RoastRecipeType;
 import net.minecraft.item.ItemStack;

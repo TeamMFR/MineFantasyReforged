@@ -6,6 +6,7 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.registry.knowledge.ResearchBase;
+import minefantasy.mfr.registry.recipe.BigFurnaceRecipe;
 import minefantasy.mfr.registry.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.registry.recipe.types.BigFurnaceRecipeType;
 import net.minecraft.item.ItemStack;
