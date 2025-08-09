@@ -8,7 +8,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase> implements IRecipeMFR{
+public abstract class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase> implements IRecipeMFR{
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected Tool toolType;
@@ -32,9 +32,7 @@ public class TannerRecipeBase extends IForgeRegistryEntry.Impl<TannerRecipeBase>
 		this.vanillaXp = vanillaXp;
 	}
 
-	public boolean matches(ItemStack input) {
-		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input));
-	}
+	public abstract boolean matches(ItemStack input);
 
 	@Override
 	public String getResourceLocation() {

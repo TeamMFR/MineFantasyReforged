@@ -57,7 +57,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		boolean modifyOutput = JsonUtils.getBoolean(json, "modify_output", false);
 		boolean shouldModifyTiers = JsonUtils.getBoolean(json, "should_modify_tiers", true);
 
-		return new AnvilDynamicRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
+		return new AnvilDynamicRecipe(recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp, modifyOutput, shouldModifyTiers,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
@@ -87,7 +87,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new AnvilShapelessCustomMaterialRecipe(ingredients, result,
+		return new AnvilShapelessCustomMaterialRecipe(result, ingredients,
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill, skillXp, vanillaXp,
 				tierModifyOutputCount);
 	}
@@ -106,7 +106,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
-		return new AnvilShapedCustomMaterialRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
+		return new AnvilShapedCustomMaterialRecipe(recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight(), tierModifyOutputCount);
@@ -135,7 +135,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new AnvilShapelessRecipe(ingredients, result, tool_type,
+		return new AnvilShapelessRecipe(result, ingredients, tool_type,
 				recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill, skillXp, vanillaXp);
 	}
 
@@ -152,7 +152,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
-		return new AnvilShapedRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
+		return new AnvilShapedRecipe(recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, requiredResearch, skill,
 				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());

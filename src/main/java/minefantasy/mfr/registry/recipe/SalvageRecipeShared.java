@@ -14,13 +14,13 @@ import java.util.List;
 public class SalvageRecipeShared extends SalvageRecipeBase {
 	protected NonNullList<ItemStack> shared;
 
-	public SalvageRecipeShared(ItemStack input, NonNullList<Ingredient> outputs, NonNullList<ItemStack> shared,
+	public SalvageRecipeShared(NonNullList<Ingredient> outputs, ItemStack input, NonNullList<ItemStack> shared,
 			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
-		super(input, outputs, requiredResearch, skill, skillXp, vanillaXp);
+		super(outputs, input, requiredResearch, skill, skillXp, vanillaXp);
 		this.shared = shared;
 	}
 
-	boolean matches(ItemStack stack) {
+	public boolean matches(ItemStack stack) {
 		List<Boolean> matches = new java.util.ArrayList<>(Collections.nCopies(shared.size(), false));
 
 		if (findMatch(input, stack)) {

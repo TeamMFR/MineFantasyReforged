@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class BigFurnaceRecipeBase extends IForgeRegistryEntry.Impl<BigFurnaceRecipeBase> implements IRecipeMFR {
+public abstract class BigFurnaceRecipeBase extends IForgeRegistryEntry.Impl<BigFurnaceRecipeBase> implements IRecipeMFR {
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected int tier;
@@ -27,9 +27,7 @@ public class BigFurnaceRecipeBase extends IForgeRegistryEntry.Impl<BigFurnaceRec
 		this.vanillaXp = vanillaXp;
 	}
 
-	public boolean matches(ItemStack input) {
-		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input));
-	}
+	public abstract boolean matches(ItemStack input);
 
 	@Override
 	public String getResourceLocation() {

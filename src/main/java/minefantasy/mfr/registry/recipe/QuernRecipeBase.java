@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> implements IRecipeMFR {
+public abstract class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> implements IRecipeMFR {
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected NonNullList<Ingredient> potInputs;
@@ -31,10 +31,7 @@ public class QuernRecipeBase extends IForgeRegistryEntry.Impl<QuernRecipeBase> i
 	}
 
 
-	public boolean matches(ItemStack input, ItemStack potInput) {
-		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input))
-				&& potInputs.stream().anyMatch(ingredient -> ingredient.apply(potInput));
-	}
+	public abstract boolean matches(ItemStack input, ItemStack potInput);
 
 	public boolean inputMatches(ItemStack input) {
 		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input));

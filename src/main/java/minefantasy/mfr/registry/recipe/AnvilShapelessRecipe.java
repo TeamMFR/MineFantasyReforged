@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class AnvilShapelessRecipe extends AnvilRecipeBase {
 
-	public AnvilShapelessRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+	public AnvilShapelessRecipe(ItemStack output, NonNullList<Ingredient> inputs, String toolType,
 			int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
 			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+		super(output, inputs, toolType, craftTime, hammerTier, anvilTier, hotOutput,
 				requiredResearch, requiredSkill, skillXp, vanillaXp);
 	}
 
@@ -31,7 +31,7 @@ public class AnvilShapelessRecipe extends AnvilRecipeBase {
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world) {
+	public boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world) {
 		NonNullList<Ingredient> ingredients = getIngredients();
 		List<Boolean> ingredientsMatched = new ArrayList<>(Collections.nCopies(ingredients.size(), false));
 

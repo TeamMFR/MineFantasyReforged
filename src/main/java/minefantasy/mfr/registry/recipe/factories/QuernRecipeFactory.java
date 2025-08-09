@@ -7,6 +7,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.registry.knowledge.ResearchBase;
 import minefantasy.mfr.registry.recipe.QuernRecipeBase;
+import minefantasy.mfr.registry.recipe.QuernRecipe;
 import minefantasy.mfr.registry.recipe.types.QuernRecipeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -55,7 +56,7 @@ public class QuernRecipeFactory implements IRecipeMFRFactory<QuernRecipeBase> {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new QuernRecipeBase(result, ingredients, pot_ingredients, consume_pot,
+		return new QuernRecipe(result, ingredients, pot_ingredients, consume_pot,
 				requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> implements IRecipeMFR{
+public abstract class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> implements IRecipeMFR {
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected ItemStack burntOutput;
@@ -42,9 +42,7 @@ public class RoastRecipeBase extends IForgeRegistryEntry.Impl<RoastRecipeBase> i
 		this.vanillaXp = vanillaXp;
 	}
 
-	boolean matches(ItemStack input, boolean isOvenRecipe) {
-		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input)) && isOvenRecipe == isOvenRecipe();
-	}
+	public abstract boolean matches(ItemStack input, boolean isOvenRecipe);
 
 	public ItemStack getRoastRecipeOutput() {
 		return output;

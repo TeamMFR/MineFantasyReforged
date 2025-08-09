@@ -58,7 +58,7 @@ public class RoastRecipeFactory implements IRecipeMFRFactory<RoastRecipeBase> {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new RoastRecipeBase(result, ingredients, burnt_output, min_temperature, max_temperature,
+		return new RoastRecipe(result, ingredients, burnt_output, min_temperature, max_temperature,
 				cook_time, burn_time, can_burn, is_oven_recipe,
 				requiredResearch, skill, skillXp, vanillaXp);
 	}

@@ -6,6 +6,7 @@ import minefantasy.mfr.commands.CommandMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigCrafting;
+import minefantasy.mfr.config.ConfigCustomMaterial;
 import minefantasy.mfr.config.ConfigFarming;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigIntegration;
@@ -120,6 +121,7 @@ public class MineFantasyReforged {
 	public static ConfigCrafting configCrafting;
 	public static ConfigResearch configResearch;
 	public static ConfigKnowledgeBook configKnowledgeBook;
+	public static ConfigCustomMaterial configCustomMaterial;
 	private static ConfigMobs configMobs;
 
 	public static final Logger LOG = LogManager.getLogger(MOD_ID);
@@ -155,6 +157,7 @@ public class MineFantasyReforged {
 		configCrafting = new ConfigCrafting("Crafting");
 		configResearch = new ConfigResearch("Research");
 		configKnowledgeBook = new ConfigKnowledgeBook("Knowledge_Book");
+		configCustomMaterial = new ConfigCustomMaterial("Custom_Materials");
 		configMobs = new ConfigMobs("Mobs");
 
 		PlayerData.register();
@@ -260,6 +263,7 @@ public class MineFantasyReforged {
 		configCrafting.save();
 		configResearch.save();
 		configKnowledgeBook.save();
+		configCustomMaterial.save();
 		configMobs.save();
 
 		PROXY.postInit(postEvent);
@@ -322,6 +326,7 @@ public class MineFantasyReforged {
 			configCrafting.save();
 			configResearch.save();
 			configKnowledgeBook.save();
+			configCustomMaterial.save();
 			configMobs.save();
 		}
 	}

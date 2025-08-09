@@ -49,7 +49,7 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	abstract boolean matches(CarpenterCraftMatrix matrix, @Nonnull World world);
+	public abstract boolean matches(CarpenterCraftMatrix matrix, @Nonnull World world);
 
 	protected boolean modifyTiers(CarpenterCraftMatrix matrix, String tier) {
 		CustomMaterial material = CustomMaterialRegistry.getMaterial(tier);

@@ -15,7 +15,7 @@ public abstract class SalvageRecipeBase extends IForgeRegistryEntry.Impl<Salvage
 	protected Integer skillXp;
 	protected float vanillaXp;
 
-	public SalvageRecipeBase(ItemStack input, NonNullList<Ingredient> outputs,
+	public SalvageRecipeBase(NonNullList<Ingredient> outputs, ItemStack input,
 			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
 		this.input = input;
 		this.outputs = outputs;
@@ -25,7 +25,7 @@ public abstract class SalvageRecipeBase extends IForgeRegistryEntry.Impl<Salvage
 		this.vanillaXp = vanillaXp;
 	}
 
-	abstract boolean matches(ItemStack stack);
+	public abstract boolean matches(ItemStack stack);
 
 	public ItemStack getInput() {
 		return input;

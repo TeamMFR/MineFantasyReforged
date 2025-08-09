@@ -6,14 +6,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBase> implements IRecipeMFR {
+public abstract class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBase> implements IRecipeMFR {
 	protected Ingredient input;
 	protected Ingredient specialInput;
 	protected ItemStack output;
 	protected ResearchBase research;
 	protected String design;
 
-	public SpecialRecipeBase(Ingredient input, Ingredient specialInput, ItemStack output, ResearchBase research, String design) {
+	public SpecialRecipeBase(ItemStack output, Ingredient input, Ingredient specialInput, ResearchBase research, String design) {
 		this.input = input;
 		this.specialInput = specialInput;
 		this.output = output;
@@ -21,9 +21,7 @@ public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBa
 		this.design = design;
 	}
 
-	public boolean matches(ItemStack recipeInput, ItemStack specialInput) {
-		return input.apply(recipeInput) && this.specialInput.apply(specialInput);
-	}
+	public abstract boolean matches(ItemStack recipeInput, ItemStack specialInput);
 
 	public Ingredient getInput() {
 		return input;

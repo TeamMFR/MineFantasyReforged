@@ -93,7 +93,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 				NonNullList<Ingredient> ingredients= NonNullList.create();
 				ingredients.add(ingredient);
 
-				RoastRecipeBase vanillaRecipe = new RoastRecipeBase(
+				RoastRecipeBase vanillaRecipe = new RoastRecipe(
 						output, ingredients, new ItemStack(MineFantasyItems.BURNT_FOOD),
 						100, 300, 20, 80,true, false,
 						KnowledgeManagerResearch.NONE, Skill.PROVISIONING, 1, 0.3F);

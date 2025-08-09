@@ -43,6 +43,6 @@ public class BlastFurnaceRecipeFactory implements IRecipeMFRFactory<BlastFurnace
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new BlastFurnaceRecipeBase(result, ingredients, requiredResearch, skill, skillXp, vanillaXp);
+		return new BlastFurnaceRecipe(result, ingredients, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

@@ -32,7 +32,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	protected int craftTime;
 	protected boolean hotOutput;
 
-	public AnvilRecipeBase(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+	public AnvilRecipeBase(ItemStack output, NonNullList<Ingredient> inputs, String toolType,
 			int craftTime, int toolTier, int anvilTier, boolean hotOutput, ResearchBase requiredResearch,
 			Skill requiredSkill, int skillXp, float vanillaXp) {
 		this.output = output;
@@ -48,7 +48,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		this.vanillaXp = vanillaXp;
 	}
 
-	abstract boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world);
+	public abstract boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world);
 
 	protected ItemStack getHotItem(ItemStack item) {
 		if (item.isEmpty())

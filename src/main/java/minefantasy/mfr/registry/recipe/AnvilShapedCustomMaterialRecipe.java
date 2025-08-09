@@ -14,16 +14,18 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class AnvilShapedCustomMaterialRecipe extends AnvilRecipeBase {
 	protected int width;
 	protected int height;
 	protected boolean tierModifyOutputCount;
-	public AnvilShapedCustomMaterialRecipe(NonNullList<Ingredient> inputs, ItemStack output,
+	public AnvilShapedCustomMaterialRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
 			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			int width, int height, boolean tierModifyOutputCount) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+		super(output, inputs, toolType, craftTime, hammerTier, anvilTier, hotOutput,
 				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
@@ -31,7 +33,7 @@ public class AnvilShapedCustomMaterialRecipe extends AnvilRecipeBase {
 	}
 
 	@Override
-	public boolean matches(AnvilCraftMatrix matrix, World worldIn) {
+	public boolean matches(@Nonnull AnvilCraftMatrix matrix, @Nonnull World worldIn) {
 		for (int i = 0; i <= matrix.getWidth() - this.width; ++i) {
 			for (int j = 0; j <= matrix.getHeight() - this.height; ++j) {
 				if (this.checkMatch(matrix, i, j, true)) {

@@ -43,6 +43,6 @@ public class BloomeryRecipeFactory implements IRecipeMFRFactory<BloomeryRecipeBa
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
-		return new BloomeryRecipeBase(result, ingredients, requiredResearch, skill, skillXp, vanillaXp);
+		return new BloomeryRecipe(result, ingredients, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

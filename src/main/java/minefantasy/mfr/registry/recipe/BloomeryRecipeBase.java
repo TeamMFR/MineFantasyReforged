@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeBase> implements IRecipeMFR{
+public abstract class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeBase> implements IRecipeMFR{
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected ResearchBase requiredResearch;
@@ -25,9 +25,7 @@ public class BloomeryRecipeBase extends IForgeRegistryEntry.Impl<BloomeryRecipeB
 		this.vanillaXp = vanillaXp;
 	}
 
-	public boolean matches(ItemStack input) {
-		return inputs.stream().anyMatch(ingredient -> ingredient.apply(input));
-	}
+	public abstract boolean matches(ItemStack input);
 
 	@Override
 	public String getResourceLocation() {

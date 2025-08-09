@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.config.ConfigCustomMaterial;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.registry.material.factories.CustomMaterialFactory;
@@ -74,6 +75,8 @@ public class CustomMaterialRegistry {
 
 	public void preInit() {
 		FileUtils.createCustomDataDirectory(CUSTOM_MATERIAL_DIRECTORY);
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m, String.format(DEFAULT_MATERIAL_DIRECTORY, m.getModId()), CraftingHelper.CONDITIONS));
 		for (CustomMaterialType type : CustomMaterialType.values()) {
 			loadRegistry(type.getName(), DEFAULT_MATERIAL_DIRECTORY, CUSTOM_MATERIAL_DIRECTORY);
 		}
@@ -143,9 +146,11 @@ public class CustomMaterialRegistry {
 		JsonArray materials = JsonUtils.getJsonArray(json, type);
 
 		for (JsonElement e : materials) {
-			CustomMaterial customMaterial = FACTORY.parse(context, JsonUtils.getJsonObject(e, ""), type);
+			if (CraftingHelper.processConditions(e.getAsJsonObject(), "conditions", context)) {
+				CustomMaterial customMaterial = FACTORY.parse(context, JsonUtils.getJsonObject(e, ""), type);
 
-			addMaterial(customMaterial);
+				addMaterial(customMaterial);
+			}
 		}
 	}
 
@@ -153,13 +158,15 @@ public class CustomMaterialRegistry {
 		ResourceLocation key = new ResourceLocation(MineFantasyReforged.MOD_ID, customMaterial.getName());
 		customMaterial.setRegistryName(key);
 
-		if (!CUSTOM_MATERIALS.containsKey(key)) {
-			CUSTOM_MATERIALS.register(customMaterial);
-			getList(customMaterial.getType()).add(customMaterial);
-		}
-		else {
-			MineFantasyReforged.LOG.info(String
-					.format("Material with key %s already registered, skipping second instance", key));
+		if (ConfigCustomMaterial.isCustomMaterialEnabled(key)) {
+			if (!CUSTOM_MATERIALS.containsKey(key)) {
+				CUSTOM_MATERIALS.register(customMaterial);
+				getList(customMaterial.getType()).add(customMaterial);
+			}
+			else {
+				MineFantasyReforged.LOG.info(String
+						.format("Material with key %s already registered, skipping second instance", key));
+			}
 		}
 	}
 

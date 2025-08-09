@@ -70,7 +70,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		PlayerData.registerStoredVariables(TRANSFORMATION_BLOCK);
 	}
 
-	abstract boolean matches(ItemStack tool, ItemStack input, IBlockState state);
+	public abstract boolean matches(ItemStack tool, ItemStack input, IBlockState state);
 
 	@Override
 	public String getResourceLocation() {

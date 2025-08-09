@@ -21,12 +21,12 @@ import java.util.List;
 
 public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
 	protected boolean tierModifyOutputCount;
-	public AnvilShapelessCustomMaterialRecipe(NonNullList<Ingredient> inputs, ItemStack output,
+	public AnvilShapelessCustomMaterialRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
 			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			boolean tierModifyOutputCount) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+		super(output, inputs, toolType, craftTime, hammerTier, anvilTier, hotOutput,
 				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.tierModifyOutputCount = tierModifyOutputCount;
 	}
@@ -35,7 +35,7 @@ public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	boolean matches(@Nonnull AnvilCraftMatrix matrix, @Nonnull World world) {
+	public boolean matches(@Nonnull AnvilCraftMatrix matrix, @Nonnull World world) {
 		String wood = null;
 		String metal = null;
 		NonNullList<Ingredient> ingredients = getIngredients();

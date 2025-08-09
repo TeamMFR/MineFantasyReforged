@@ -10,12 +10,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class SalvageRecipeStandard extends SalvageRecipeBase {
 
-	public SalvageRecipeStandard(ItemStack input, NonNullList<Ingredient> outputs,
+	public SalvageRecipeStandard(NonNullList<Ingredient> outputs, ItemStack input,
 			ResearchBase requiredResearch, Skill skill, int skillXp, float vanillaXp) {
-		super(input, outputs, requiredResearch, skill, skillXp, vanillaXp);
+		super(outputs, input, requiredResearch, skill, skillXp, vanillaXp);
 	}
 
-	boolean matches(ItemStack stack) {
+	public boolean matches(ItemStack stack) {
 		ItemStack salvageInput = stack.copy();
 		if (!CustomToolHelper.doesMatchForRecipe(input, salvageInput)) {
 			return false;

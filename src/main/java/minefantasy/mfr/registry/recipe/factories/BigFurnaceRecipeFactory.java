@@ -45,6 +45,6 @@ public class BigFurnaceRecipeFactory implements IRecipeMFRFactory<BigFurnaceReci
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
-		return new BigFurnaceRecipeBase(result, ingredients, tier, requiredResearch, skill, skillXp, vanillaXp);
+		return new BigFurnaceRecipe(result, ingredients, tier, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

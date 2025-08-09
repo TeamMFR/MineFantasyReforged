@@ -7,6 +7,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.registry.knowledge.ResearchBase;
 import minefantasy.mfr.registry.recipe.TannerRecipeBase;
+import minefantasy.mfr.registry.recipe.TannerRecipe;
 import minefantasy.mfr.registry.recipe.types.TannerRecipeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -46,7 +47,7 @@ public class TannerRecipeFactory implements IRecipeMFRFactory<TannerRecipeBase> 
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new TannerRecipeBase(result, ingredients, tool_type, tanner_tier, craft_time,
+		return new TannerRecipe(result, ingredients, tool_type, tanner_tier, craft_time,
 				requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

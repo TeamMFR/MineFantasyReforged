@@ -1,7 +1,7 @@
 {
 	"type": "salvage_recipe",
 	"input": {
-		"item": "minecraft:piston"
+		"item": "minecraft:sticky_piston"
 	},
 	"outputs": [
 		{

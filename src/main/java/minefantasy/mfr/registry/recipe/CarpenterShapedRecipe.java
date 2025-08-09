@@ -55,8 +55,8 @@ public class CarpenterShapedRecipe extends CarpenterRecipeBase {
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
 	private boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
-		for (int matrixX = 0; matrixX < CarpenterRecipeBase.MAX_WIDTH; ++matrixX) {
-			for (int matrixY = 0; matrixY < CarpenterRecipeBase.MAX_HEIGHT; ++matrixY) {
+		for (int matrixX = 0; matrixX < MAX_WIDTH; ++matrixX) {
+			for (int matrixY = 0; matrixY < MAX_HEIGHT; ++matrixY) {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
 				Ingredient ingredient = Ingredient.EMPTY;

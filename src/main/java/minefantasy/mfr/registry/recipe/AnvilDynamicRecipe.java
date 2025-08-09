@@ -14,6 +14,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,12 +25,12 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 	public boolean modifyOutput;
 	protected boolean shouldModifyTiers;
 
-	public AnvilDynamicRecipe(NonNullList<Ingredient> inputs, ItemStack output,
+	public AnvilDynamicRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
 			ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp, boolean modifyOutput, boolean shouldModifyTiers,
 			int width, int height) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+		super(output, inputs, toolType, craftTime, hammerTier, anvilTier, hotOutput,
 				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
@@ -41,7 +42,7 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	public boolean matches(AnvilCraftMatrix matrix, World worldIn) {
+	public boolean matches(@Nonnull AnvilCraftMatrix matrix, @Nonnull World world) {
 		for (int i = 0; i <= matrix.getWidth() - width; ++i) {
 			for (int j = 0; j <= matrix.getHeight() - height; ++j) {
 				if (this.checkMatch(matrix, i, j, true)) {

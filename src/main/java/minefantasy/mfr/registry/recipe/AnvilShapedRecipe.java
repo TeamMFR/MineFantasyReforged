@@ -9,6 +9,8 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author AnonymousProductions
  */
@@ -16,12 +18,12 @@ public class AnvilShapedRecipe extends AnvilRecipeBase {
 	protected int width;
 	protected int height;
 
-	public AnvilShapedRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+	public AnvilShapedRecipe(ItemStack output, NonNullList<Ingredient> inputs, String toolType,
 			int craftTime, int hammerTier, int anvilTier,
 			boolean hotOutput, ResearchBase requiredResearch, Skill requiredSkill,
 			int skillXp, float vanillaXp,
 			int width, int height) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+		super(output, inputs, toolType, craftTime, hammerTier, anvilTier, hotOutput,
 				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
@@ -31,7 +33,7 @@ public class AnvilShapedRecipe extends AnvilRecipeBase {
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	public boolean matches(AnvilCraftMatrix inv, World worldIn) {
+	public boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World worldIn) {
 		for (int i = 0; i <= inv.getWidth() - width; ++i) {
 			for (int j = 0; j <= inv.getHeight() - height; ++j) {
 				if (this.checkMatch(inv, i, j, true)) {

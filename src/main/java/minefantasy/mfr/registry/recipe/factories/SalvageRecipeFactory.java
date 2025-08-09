@@ -59,7 +59,7 @@ public class SalvageRecipeFactory implements IRecipeMFRFactory<SalvageRecipeBase
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
-		return new SalvageRecipeShared(input, outputs, shared, requiredResearch, skill, skillXp, vanillaXp);
+		return new SalvageRecipeShared(outputs, input, shared, requiredResearch, skill, skillXp, vanillaXp);
 	}
 
 	private SalvageRecipeBase parseStandard(JsonContext context, JsonObject json) {
@@ -81,6 +81,6 @@ public class SalvageRecipeFactory implements IRecipeMFRFactory<SalvageRecipeBase
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
-		return new SalvageRecipeStandard(input, outputs, requiredResearch, skill, skillXp, vanillaXp);
+		return new SalvageRecipeStandard(outputs, input, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }
