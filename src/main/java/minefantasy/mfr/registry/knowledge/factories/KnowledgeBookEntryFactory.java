@@ -26,6 +26,8 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class KnowledgeBookEntryFactory {
 
+	KnowledgeBookEntryPageFactory entryPageFactory = new KnowledgeBookEntryPageFactory();
+
 	public KnowledgeBookEntryBase parse(JsonContext ctx, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		KnowledgeBookEntryType entryType = KnowledgeBookEntryType.deserialize(type);
@@ -51,12 +53,31 @@ public class KnowledgeBookEntryFactory {
 		String description = JsonUtils.getString(json, "description", "");
 		List<Object> descriptionParameters = parseDescriptionParameters(json);
 		List<ResearchBase> researches = parseResearches(json, name);
-		List<EntryPage> pages = new ArrayList<>();
+		List<EntryPage> pages = parsePages(ctx, json, name);
 		boolean is_unlocked = JsonUtils.getBoolean(json, "is_unlocked", true);
 		boolean is_special = JsonUtils.getBoolean(json, "is_special", false);
 
 		return new KnowledgeBookEntryBase(name, category, display_column, display_row, display_stack, description,
 				descriptionParameters, Collections.emptyList(), researches, pages, is_unlocked, is_special);
+	}
+
+	private List<EntryPage> parsePages(JsonContext context, JsonObject json, String name) {
+		List<EntryPage> pages = new ArrayList<>();
+		for (JsonElement element : JsonUtils.getJsonArray(json, "pages")) {
+			if (element.isJsonObject()) {
+				EntryPage page = entryPageFactory.parse(context, element.getAsJsonObject());
+				pages.add(page);
+			}
+			else {
+				throw new JsonParseException("Invalid format for an Entry Page when parsing Knowledge Book Entry: " + name);
+			}
+		}
+
+		if (pages.isEmpty()) {
+			throw new JsonParseException(String.format("Knowledge Book Entry %s does not have any Entry Pages!", name));
+		}
+
+		return pages;
 	}
 
 	private List<ResearchBase> parseResearches(JsonObject json, String name) {

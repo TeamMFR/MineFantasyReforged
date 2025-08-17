@@ -10,6 +10,7 @@ import minefantasy.mfr.registry.material.CustomMaterial;
 import minefantasy.mfr.registry.material.CustomMaterialRegistry;
 import minefantasy.mfr.registry.material.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.JsonUtilsMFR;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
@@ -135,18 +136,18 @@ public class IngredientMaterial extends Ingredient implements IIngredientCount{
 		public Ingredient parse(JsonContext context, JsonObject json) {
 			ItemStack stack = CraftingHelper.getItemStack(json, context);
 			CustomMaterialType type = CustomMaterialType.deserialize(JsonUtils.getString(json, "material_type"));
-			Float required_hardness = nullableFloat(JsonUtils.getFloat(json, "required_hardness", -1));
-			Float required_durability = nullableFloat(JsonUtils.getFloat(json, "required_durability",-1));
-			Float required_flexibility = nullableFloat(JsonUtils.getFloat(json, "required_flexibility",-1));
-			Float required_sharpness = nullableFloat(JsonUtils.getFloat(json, "required_sharpness",-1));
-			Float required_resistance = nullableFloat(JsonUtils.getFloat(json, "required_resistance",-1));
-			Float required_density = nullableFloat(JsonUtils.getFloat(json, "required_density",-1));
-			Integer required_tier = nullableInteger(JsonUtils.getInt(json, "required_tier",-1));
-			Integer required_enchantability = nullableInteger(JsonUtils.getInt(json, "required_enchantability",-1));
-			Integer required_crafter_tier = nullableInteger(JsonUtils.getInt(json, "required_crafter_tier",-1));
-			Integer required_crafter_anvil_tier = nullableInteger(JsonUtils.getInt(json, "required_crafter_anvil_tier",-1));
-			Float required_craft_time_modifier = nullableFloat(JsonUtils.getFloat(json, "required_craft_time_modifier",-1));
-			Integer required_melting_point = nullableInteger(JsonUtils.getInt(json, "required_melting_point",-1));
+			Float required_hardness = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_hardness", -1));
+			Float required_durability = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_durability",-1));
+			Float required_flexibility = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_flexibility",-1));
+			Float required_sharpness = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_sharpness",-1));
+			Float required_resistance = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_resistance",-1));
+			Float required_density = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_density",-1));
+			Integer required_tier = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "required_tier",-1));
+			Integer required_enchantability = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "required_enchantability",-1));
+			Integer required_crafter_tier = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "required_crafter_tier",-1));
+			Integer required_crafter_anvil_tier = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "required_crafter_anvil_tier",-1));
+			Float required_craft_time_modifier = JsonUtilsMFR.nullableFloat(JsonUtils.getFloat(json, "required_craft_time_modifier",-1));
+			Integer required_melting_point = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "required_melting_point",-1));
 			int count = JsonUtils.getInt(json, "count", 1);
 
 			String required_rarity_string = JsonUtils.getString(json, "required_rarity","");
@@ -197,24 +198,6 @@ public class IngredientMaterial extends Ingredient implements IIngredientCount{
 			}
 
 			return new IngredientMaterial(requiredMaterial, excludedMaterials, count, matchingStacks.toArray(new ItemStack[0]));
-		}
-
-		private Float nullableFloat(float nullableFloat) {
-			if (nullableFloat == -1) {
-				return null;
-			}
-			else {
-				return nullableFloat;
-			}
-		}
-
-		private Integer nullableInteger(int nullableInt) {
-			if (nullableInt == -1) {
-				return null;
-			}
-			else {
-				return nullableInt;
-			}
 		}
 	}
 }

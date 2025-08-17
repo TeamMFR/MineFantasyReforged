@@ -31,6 +31,7 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
+import minefantasy.mfr.registry.knowledge.KnowledgeManagerKnowledgeBook;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerResearch;
 import minefantasy.mfr.registry.knowledge.ResearchLogic;
 import minefantasy.mfr.registry.material.CustomMaterialRegistry;
@@ -171,6 +172,7 @@ public class MineFantasyReforged {
 		MineFantasyMaterials.initBaseMaterials();
 		CustomMaterialRegistry.INSTANCE.preInit();
 		MineFantasyMaterials.initLeatherMaterials();
+		KnowledgeManagerResearch.preInit();
 
 		MineFantasyLoot.load();
 
@@ -284,6 +286,8 @@ public class MineFantasyReforged {
 	@SubscribeEvent
 	public void createRegistry(RegistryEvent.NewRegistry evt) {
 		CustomMaterialRegistry.init();
+		KnowledgeManagerResearch.init();
+		KnowledgeManagerKnowledgeBook.init();
 		CraftingManagerAnvil.init();
 		CraftingManagerCarpenter.init();
 		CraftingManagerBigFurnace.init();

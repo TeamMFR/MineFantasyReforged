@@ -5,6 +5,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.registry.knowledge.KnowledgeBookCategoryBase;
 import minefantasy.mfr.registry.knowledge.KnowledgeManagerKnowledgeBook;
 import minefantasy.mfr.registry.knowledge.types.KnowledgeBookCategoryType;
+import minefantasy.mfr.util.JsonUtilsMFR;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,8 +25,9 @@ public class KnowledgeBookCategoryFactory {
 
 	private KnowledgeBookCategoryBase parseCategory(JsonObject json) {
 		String name = JsonUtils.getString(json, "name", "");
+		Integer order = JsonUtilsMFR.nullableInteger(JsonUtils.getInt(json, "order",-1));
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 
-		return new KnowledgeBookCategoryBase(Collections.emptyList(), skill, name);
+		return new KnowledgeBookCategoryBase(Collections.emptyList(), skill, name, order);
 	}
 }

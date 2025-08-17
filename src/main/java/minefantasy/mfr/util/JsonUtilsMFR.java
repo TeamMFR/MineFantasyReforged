@@ -33,6 +33,24 @@ public class JsonUtilsMFR {
 		}
 	}
 
+	public static Float nullableFloat(float nullableFloat) {
+		if (nullableFloat == -1) {
+			return null;
+		}
+		else {
+			return nullableFloat;
+		}
+	}
+
+	public static Integer nullableInteger(int nullableInt) {
+		if (nullableInt == -1) {
+			return null;
+		}
+		else {
+			return nullableInt;
+		}
+	}
+
 	public static ItemStack getItemStack(JsonElement json) {
 		return getItemStack(json, (i, c, m, t, n) -> {
 			ItemStack stack = new ItemStack(i, c, m);

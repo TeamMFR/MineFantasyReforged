@@ -44,7 +44,11 @@ public class KnowledgeManagerResearch {
 	public static final ResearchBase NONE = new ResearchBase("none", Collections.emptyList(), 0,Collections.emptyList(), false);
 	public static final ResearchBase TIER = new ResearchBase("tier", Collections.emptyList(), 0, Collections.emptyList(), false);
 
-	public void init() {
+	public static void preInit() {
+		NONE.setRegistryName(MineFantasyReforged.MOD_ID, "none");
+	}
+
+	public static void init() {
 		//call this so that the static final gets initialized at proper time
 	}
 

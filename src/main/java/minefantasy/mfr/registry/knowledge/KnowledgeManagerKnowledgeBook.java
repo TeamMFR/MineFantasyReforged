@@ -54,12 +54,12 @@ public class KnowledgeManagerKnowledgeBook {
 	private final KnowledgeBookCategoryFactory knowledgeBookCategoryFactory = new KnowledgeBookCategoryFactory();
 	private final KnowledgeBookEntryFactory knowledgeBookEntryFactory = new KnowledgeBookEntryFactory();
 
-	public void init() {
+	public static void init() {
 		//call this so that the static final gets initialized at proper time
 	}
 
 	public static final KnowledgeBookCategoryBase CATEGORY_NONE =
-			new KnowledgeBookCategoryBase(Utils.emptyLinkedList(), Skill.NONE, "");
+			new KnowledgeBookCategoryBase(Utils.emptyLinkedList(), Skill.NONE, "", null);
 
 	private static final IForgeRegistry<KnowledgeBookCategoryBase> KNOWLEDGE_BOOK_CATEGORIES = (new RegistryBuilder<KnowledgeBookCategoryBase>())
 			.setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "research_book_categories"))

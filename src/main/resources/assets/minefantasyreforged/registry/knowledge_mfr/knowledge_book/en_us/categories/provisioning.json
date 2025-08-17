@@ -1,0 +1,6 @@
+{
+    "type": "knowledge_book_category",
+    "name": "Provisioning",
+    "skill": "provisioning",
+    "order": 3
+}

@@ -12,11 +12,13 @@ public class KnowledgeBookCategoryBase extends IForgeRegistryEntry.Impl<Knowledg
 	protected List<KnowledgeBookEntryBase> entries;
 	protected Skill baseSkill;
 	protected String name;
+	protected Integer order;
 
-	public KnowledgeBookCategoryBase(List<KnowledgeBookEntryBase> entries, Skill baseSkill, String name) {
+	public KnowledgeBookCategoryBase(List<KnowledgeBookEntryBase> entries, Skill baseSkill, String name, Integer order) {
 		this.entries = entries;
 		this.baseSkill = baseSkill;
 		this.name = name;
+		this.order = order;
 	}
 
 	public List<KnowledgeBookEntryBase> getEntries() {
@@ -29,5 +31,9 @@ public class KnowledgeBookCategoryBase extends IForgeRegistryEntry.Impl<Knowledg
 
 	public String getName() {
 		return name;
+	}
+
+	public Integer getOrder() {
+		return order;
 	}
 }
