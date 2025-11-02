@@ -11,6 +11,7 @@ import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.registry.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.registry.recipe.SalvageRecipeBase;
+import minefantasy.mfr.registry.recipe.ingredients.IngredientMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.XSTRandom;
@@ -95,7 +96,7 @@ public class BlockSalvage extends BasicBlockMF{
 		return false;
 	}
 
-	private boolean salvageItem(World world, EntityPlayer user, ItemStack junk, BlockPos pos) {
+	private boolean salvageItem(World world, EntityPlayer user, ItemStack inputStack, BlockPos pos) {
 		float modifier = 0.5F;
 		ItemStack held = user.getHeldItemMainhand();
 		Tool tool = ToolHelper.getToolTypeFromStack(held);
@@ -109,10 +110,10 @@ public class BlockSalvage extends BasicBlockMF{
 			world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 2F, 1F);
 		}
 
-		List<ItemStack> salvage = salvage(user, junk, dropLevel * getPlayerDropLevel(user) * modifier);
+		List<ItemStack> salvage = salvage(user, inputStack, dropLevel * getPlayerDropLevel(user) * modifier);
 
 		if (salvage != null) {
-			dropSalvage(world, pos, salvage, junk);
+			dropSalvage(world, pos, salvage);
 			world.playSound(user, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1F, 1F);
 			world.playSound(user, pos, SoundEvents.ENTITY_ZOMBIE_BREAK_DOOR_WOOD, SoundCategory.AMBIENT, 0.5F, 1.5F);
 			world.playSound(user, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.AMBIENT, 1.0F, 0.5F);
@@ -121,7 +122,7 @@ public class BlockSalvage extends BasicBlockMF{
 		return false;
 	}
 
-	private void dropSalvage(World world, BlockPos pos, List<ItemStack> salvage, ItemStack junk) {
+	private void dropSalvage(World world, BlockPos pos, List<ItemStack> salvage) {
 		for (ItemStack drop : salvage) {
 			if (!drop.isEmpty())// && !user.inventory.addItemStackToInventory(drop))
 			{
@@ -150,30 +151,30 @@ public class BlockSalvage extends BasicBlockMF{
 		return null;
 	}
 
-	public static List<ItemStack> salvage(EntityPlayer user, ItemStack item, float dropRate) {
-		SalvageRecipeBase salvageRecipe = CraftingManagerSalvage.findMatchingRecipe(item, user);
-		if ((salvageRecipe == null || item.isEmpty()) && !(item.getItem() instanceof ISpecialSalvage)) {
+	public static List<ItemStack> salvage(EntityPlayer user, ItemStack inputStack, float dropRate) {
+		SalvageRecipeBase salvageRecipe = CraftingManagerSalvage.findMatchingRecipe(inputStack, user);
+		if ((salvageRecipe == null || inputStack.isEmpty()) && !(inputStack.getItem() instanceof ISpecialSalvage)) {
 			return null;
 		}
 
 		float durability = 1F;
-		if (item.isItemDamaged()) {
-			durability = (float) (item.getMaxDamage() - item.getItemDamage()) / (float) item.getMaxDamage();
+		if (inputStack.isItemDamaged()) {
+			durability = (float) (inputStack.getMaxDamage() - inputStack.getItemDamage()) / (float) inputStack.getMaxDamage();
 		}
 
 		float chanceModifier = 1.25F;// 80% Succcess rate
 		float chance = dropRate * durability;// Modifier for skill and durability
 
-		return dropItems(item, user, salvageRecipe, chanceModifier, chance);
+		return dropItems(inputStack, user, salvageRecipe, chanceModifier, chance);
 	}
 
-	private static List<ItemStack> dropItems(ItemStack mainItem, EntityPlayer user, SalvageRecipeBase salvageRecipe,
+	private static List<ItemStack> dropItems(ItemStack inputStack, EntityPlayer user, SalvageRecipeBase salvageRecipe,
 			float chanceModifier, float chance) {
 		List<ItemStack> items = new ArrayList<>();
 
 		//Special
-		if (mainItem.getItem() instanceof ISpecialSalvage) {
-			List<ItemStack> special = ((ISpecialSalvage) mainItem.getItem()).getSalvage(mainItem);
+		if (inputStack.getItem() instanceof ISpecialSalvage) {
+			List<ItemStack> special = ((ISpecialSalvage) inputStack.getItem()).getSalvage(inputStack);
 			if (special != null) {
 				return special;
 			}
@@ -182,7 +183,7 @@ public class BlockSalvage extends BasicBlockMF{
 		//Normal
 		for (Ingredient ingredient : salvageRecipe.getOutputs()) {
 
-			items.addAll(dropItemStack(mainItem, user, ingredient.getMatchingStacks()[0], chanceModifier, chance));
+			items.addAll(dropItemStack(inputStack, user, ingredient, chanceModifier, chance));
 		}
 
 		//Grant XP
@@ -195,23 +196,24 @@ public class BlockSalvage extends BasicBlockMF{
 		return items;
 	}
 
-	private static List<ItemStack> dropItemStack(ItemStack mainItem, EntityPlayer user,
-			ItemStack entry, float chanceModifier, float chance) {
+	private static List<ItemStack> dropItemStack(ItemStack inputStack, EntityPlayer user,
+			Ingredient outputIngredient, float chanceModifier, float chance) {
 
 		List<ItemStack> items = new ArrayList<>();
 
-		for (int a = 0; a < entry.getCount(); a++) {
+		ItemStack outputStack = outputIngredient.getMatchingStacks()[0];
+		for (int a = 0; a < outputStack.getCount(); a++) {
 			if (random.nextFloat() * chanceModifier < chance) {
 				boolean canSalvage = true;
 
-				if (entry.getItem() instanceof ISalvageDrop) {
-					canSalvage = ((ISalvageDrop) entry.getItem()).canSalvage(user, entry);
+				if (outputStack.getItem() instanceof ISalvageDrop) {
+					canSalvage = ((ISalvageDrop) outputStack.getItem()).canSalvage(user, outputStack);
 				}
 				if (canSalvage) {
-					ItemStack newItem = entry.copy();
+					ItemStack newItem = outputStack.copy();
 					newItem.setCount(1);
-					if (CustomToolHelper.hasAnyMaterial(newItem)) {
-						CustomToolHelper.tryDeconstruct(newItem, mainItem);
+					if (outputIngredient instanceof IngredientMaterial) {
+						CustomToolHelper.tryDeconstruct(newItem, inputStack);
 					}
 					items.add(newItem);
 				}

@@ -248,6 +248,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 
 			if (somethingChanged) {
 				forge.sendUpdates();
+				this.sendUpdates();
 			}
 		}
 	}

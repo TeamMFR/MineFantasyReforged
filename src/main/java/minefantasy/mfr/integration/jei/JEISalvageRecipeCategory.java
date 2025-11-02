@@ -107,7 +107,7 @@ public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecip
 
 				List<ItemStack> modifiedStacks = new ArrayList<>();
 				for (ItemStack stack : slotStacks) {
-					if (stack.getItem() instanceof IMaterialComponent && CustomToolHelper.hasAnyMaterial(stack)) {
+					if (shouldApplyMaterial(stack, slotStacks)) {
 						ItemStack stackCopy = stack.copy();
 						CustomToolHelper.tryDeconstruct(stackCopy, inputFocus.getValue());
 						stackCopy.setCount(stack.getCount());
@@ -126,7 +126,7 @@ public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecip
 
 			List<ItemStack> modifiedStacks = new ArrayList<>();
 			for (ItemStack stack : slotStacks) {
-				if (stack.getItem() instanceof IMaterialComponent && CustomToolHelper.hasAnyMaterial(stack)) {
+				if (shouldApplyMaterial(stack, slotStacks)) {
 					ItemStack stackCopy = stack.copy();
 					CustomToolHelper.tryDeconstruct(stackCopy, outputFocus.getValue());
 					stackCopy.setCount(stack.getCount());
@@ -153,6 +153,12 @@ public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecip
 				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getOutputs(),
 						slotStack, tooltip, inputFocus,
 						recipeWrapper.getRecipe().getInput()));
+	}
+
+	private static boolean shouldApplyMaterial(ItemStack stack, List<ItemStack> slotStacks) {
+		return stack.getItem() instanceof IMaterialComponent
+				&& CustomToolHelper.hasAnyMaterial(stack)
+				&& slotStacks.size() > 1;
 	}
 
 	/**
