@@ -159,7 +159,9 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> implements IIgn
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tile != null) {
 			setActiveState(false, tile.hasBlockAbove(), world, pos);
-			tile.setTextureAngle(TileEntityForgeRenderer.ANGLES.get(tile.getRand().nextInt(4)));
+			if (world.isRemote) {
+				tile.setTextureAngle(TileEntityForgeRenderer.ANGLES.get(tile.getRand().nextInt(4)));
+			}
 		}
 	}
 

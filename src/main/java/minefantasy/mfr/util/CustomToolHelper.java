@@ -721,21 +721,21 @@ public class CustomToolHelper {
 		return (getCustomPrimaryMaterial(item) != null && getCustomPrimaryMaterial(item) != CustomMaterialRegistry.NONE) || (getCustomSecondaryMaterial(item) != null && getCustomSecondaryMaterial(item) != CustomMaterialRegistry.NONE);
 	}
 
-	public static void tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
+	public static void tryDeconstruct(ItemStack outputItem, ItemStack inputItem) {
 		CustomMaterialType type = null;
-		if (!newitem.isEmpty() && newitem.getItem() instanceof IMaterialSingleComponent) {
-			type = ((IMaterialSingleComponent) newitem.getItem()).getMaterialType();
+		if (!outputItem.isEmpty() && outputItem.getItem() instanceof IMaterialSingleComponent) {
+			type = ((IMaterialSingleComponent) outputItem.getItem()).getMaterialType();
 		}
 
 		if (type != null) {
-			CustomMaterial primary = CustomToolHelper.getCustomPrimaryMaterial(mainItem);
-			CustomMaterial secondary = CustomToolHelper.getCustomSecondaryMaterial(mainItem);
+			CustomMaterial primary = CustomToolHelper.getCustomPrimaryMaterial(inputItem);
+			CustomMaterial secondary = CustomToolHelper.getCustomSecondaryMaterial(inputItem);
 
 			if (primary != null && primary != CustomMaterialRegistry.NONE && primary.getType() == type) {
-				CustomMaterialRegistry.addMaterial(newitem, slot_main, primary.getName());
+				CustomMaterialRegistry.addMaterial(outputItem, slot_main, primary.getName());
 			} else {
 				if (secondary != null && secondary != CustomMaterialRegistry.NONE && secondary.getType() == type) {
-					CustomMaterialRegistry.addMaterial(newitem, slot_main, secondary.getName());
+					CustomMaterialRegistry.addMaterial(outputItem, slot_main, secondary.getName());
 				}
 			}
 		}
